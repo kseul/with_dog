@@ -1,15 +1,13 @@
 import styled from 'styled-components';
 import 탐험가형 from 'assets/svg/탐험가형.svg';
+import { ChatListProp } from 'types/type';
 
-const ChatListLeft = () => {
+const ChatListLeft = ({ title, description }: ChatListProp) => {
   return (
     <ChatListLeftContainer>
       <DogIcon src={탐험가형} />
-      <DogType>탐험가</DogType>
-      <Introduce>
-        소심하지만 세상이 궁금한 댕댕이, 츤데레 댕댕이, 몽상을 즐기는 탐험적
-        댕댕이들을 위한 채팅방 입니다!
-      </Introduce>
+      <DogType>{title}</DogType>
+      <Introduce>{description}</Introduce>
     </ChatListLeftContainer>
   );
 };

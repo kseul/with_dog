@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import ChatListLeft from './ChatListLeft';
 import ChatListRight from './ChatListRight';
+import { ChatListProp } from 'types/type';
 
-const ChatList = () => {
+const ChatList = ({ title, description }: ChatListProp) => {
   return (
     <ChatListContainer>
-      <ChatListLeft />
+      <ChatListLeft title={title} description={description} />
       <ChatListRight />
     </ChatListContainer>
   );
