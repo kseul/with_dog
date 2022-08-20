@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import ChatList from './components/ChatList';
+import ChatListBox from './components/ChatListBox';
 
 const Chatting = () => {
   return (
     <ChattingContainer>
       {CHATLIST_DATA.map(({ id, title, description }) => {
-        return <ChatList key={id} title={title} description={description} />;
+        return <ChatListBox key={id} title={title} description={description} />;
       })}
     </ChattingContainer>
   );
