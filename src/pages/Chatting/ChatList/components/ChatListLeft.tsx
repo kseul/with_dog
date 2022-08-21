@@ -19,11 +19,6 @@ const ChatListLeftContainer = styled.div`
   padding: 25px;
 `;
 
-const Image = styled.img`
-  width: 60px;
-  margin-right: 20px;
-`;
-
 const DogType = styled.div`
   &:after {
     content: '';
