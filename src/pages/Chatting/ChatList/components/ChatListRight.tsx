@@ -3,17 +3,17 @@ import ArrowRight from 'assets/svg/arrow-right.svg';
 
 const ChatListRight = () => {
   return (
-    <GoChatRightContainer>
+    <ChatListRightContainer>
       <GoChatIntro> 살펴보개 </GoChatIntro>
       <GoChatIntroIcon src={ArrowRight} />
-    </GoChatRightContainer>
+    </ChatListRightContainer>
   );
 };
 
-const GoChatRightContainer = styled.div`
+const ChatListRightContainer = styled.div`
   position: relative;
   ${props => props.theme.flex.flexBox('row', 'center', 'center')}
-  width: 210px;
+  min-width: 140px;
   height: 100px;
   background-color: ${props => props.theme.colors.purple};
   border-radius: 0 20px 20px 0;

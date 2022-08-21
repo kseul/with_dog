@@ -3,7 +3,7 @@ import ChatListLeft from './ChatListLeft';
 import ChatListRight from './ChatListRight';
 import { ChatListProp } from 'types/type';
 
-const ChatList = ({ title, description }: ChatListProp) => {
+const ChatListBox = ({ title, description }: ChatListProp) => {
   return (
     <ChatListContainer>
       <ChatListLeft title={title} description={description} />
@@ -19,4 +19,4 @@ const ChatListContainer = styled.div`
   border-radius: 15px;
 `;
 
-export default ChatList;
+export default ChatListBox;
