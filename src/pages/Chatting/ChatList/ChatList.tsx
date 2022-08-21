@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import ChatListBox from './components/ChatListBox';
 import { ReactComponent as Icon1 } from 'assets/svg/탐험가형.svg';
-import { ReactComponent as Icon2 } from 'assets/svg/전략가형.svg';
-import { ReactComponent as Icon3 } from 'assets/svg/꾸러기형.svg';
+import { ReactComponent as Icon2 } from 'assets/svg/꾸러기형.svg';
+import { ReactComponent as Icon3 } from 'assets/svg/전략가형.svg';
 import { ReactComponent as Icon4 } from 'assets/svg/활동가형.svg';
 
 const ChatList = () => {
