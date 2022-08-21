@@ -7,29 +7,44 @@ const AdminContainer = () => {
   return (
     <AdminPageContainer>
       <AdminHeader />
-      <AdminLeftSection>
-        {LEFTSIDE_DB.map(list => (
-          <LeftSideList list={list} key={list.id} />
-        ))}
-      </AdminLeftSection>
-      <AdminRightSection></AdminRightSection>
+      <SectionContainer>
+        <AdminLeftSection>
+          <ListWrapper>
+            {LEFTSIDE_DB.map(list => (
+              <LeftSideList list={list} key={list.id} />
+            ))}
+          </ListWrapper>
+        </AdminLeftSection>
+        <AdminRightSection></AdminRightSection>
+      </SectionContainer>
     </AdminPageContainer>
   );
 };
 
 const AdminPageContainer = styled.div`
-  width: 800px;
-  height: 100%;
+  width: 100%;
+  height: 100vh;
+`;
+
+const SectionContainer = styled.div`
+  ${props => props.theme.flex.flexBox('row')}
 `;
 
 const AdminLeftSection = styled.div`
+  ${props => props.theme.flex.flexBox('column', 'center', 'start')}
+  padding-top : 20px;
   width: 200px;
-  height: 100%;
+  height: calc(100vh - 100px);
+  background-color: ${props => props.theme.colors.lightGray};
+`;
+
+const ListWrapper = styled.ul`
+  list-style: none;
 `;
 
 const AdminRightSection = styled.div`
-  width: 600px;
-  height: 100%;
+  width: calc(100vw - 200px);
+  height: calc(100vh - 100px);
 `;
 
 export default AdminContainer;

@@ -10,20 +10,20 @@ const AdminHeader = () => {
 };
 
 const AdminHeaderContainer = styled.div`
-  ${props => props.theme.flex.flexBox('row')}
+  ${props => props.theme.flex.flexBox('row', 'center', 'space-between')}
   width: 100%;
-  height: 40px;
-  background-color: ${props => props.theme.colors.darkGray};
+  height: 100px;
+  background-color: ${props => props.theme.colors.gray};
 `;
 
 const AdminHeaderTitle = styled.p`
-  width: 40px;
-  height: 100%;
+  margin-left: 20px;
+  font-size: 25px;
 `;
 
 const AdminLoginBox = styled.div`
-  width: 40px;
-  height: 100%;
+  margin-right: 20px;
+  font-size: 25px;
 `;
 
 export default AdminHeader;
