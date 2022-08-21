@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-import 탐험가형 from 'assets/svg/탐험가형.svg';
 import { ChatListProp } from 'types/type';
 
-const ChatListLeft = ({ title, description }: ChatListProp) => {
+const ChatListLeft = ({ Image, title, description }: ChatListProp) => {
   return (
     <ChatListLeftContainer>
-      <DogIcon src={탐험가형} />
+      <Image style={{ width: '100px', marginRight: '16px' }} />
       <DogType>{title}</DogType>
       <Introduce>{description}</Introduce>
     </ChatListLeftContainer>
@@ -20,7 +19,7 @@ const ChatListLeftContainer = styled.div`
   padding: 25px;
 `;
 
-const DogIcon = styled.img`
+const Image = styled.img`
   width: 60px;
   margin-right: 20px;
 `;

@@ -5,7 +5,7 @@ const ChatListRight = () => {
   return (
     <ChatListRightContainer>
       <GoChatIntro> 살펴보개 </GoChatIntro>
-      <GoChatIntroIcon src={ArrowRight} />
+      <GoChatEntryIcon src={ArrowRight} />
     </ChatListRightContainer>
   );
 };
@@ -31,7 +31,7 @@ const GoChatIntro = styled.div`
   font-size: 18px;
 `;
 
-const GoChatIntroIcon = styled.img`
+const GoChatEntryIcon = styled.img`
   position: absolute;
   top: 39px;
   right: 22px;

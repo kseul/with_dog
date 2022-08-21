@@ -3,10 +3,10 @@ import ChatListLeft from './ChatListLeft';
 import ChatListRight from './ChatListRight';
 import { ChatListProp } from 'types/type';
 
-const ChatListBox = ({ title, description }: ChatListProp) => {
+const ChatListBox = ({ Image, title, description }: ChatListProp) => {
   return (
     <ChatListContainer>
-      <ChatListLeft title={title} description={description} />
+      <ChatListLeft Image={Image} title={title} description={description} />
       <ChatListRight />
     </ChatListContainer>
   );
