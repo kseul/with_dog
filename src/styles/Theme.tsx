@@ -13,6 +13,7 @@ const colors = {
   selectBlue: '#4a97e6',
   noneGray: '#cfd4d9',
   mint: '#7CCCC7',
+  selectMint: '#48c0b8',
   purple: '#CFB6D7',
 };
 
