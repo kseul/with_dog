@@ -14,9 +14,9 @@ const ChatListBox = ({ Image, title, description }: ChatListProp) => {
 
 const ChatListContainer = styled.div`
   ${props => props.theme.flex.flexBox('row')}
-  max-width: 700px;
-  margin-bottom: 25px;
-  border-radius: 15px;
+  width: 70%;
+  margin-bottom: 1.8rem;
+  border-radius: 0.05rem;
 `;
 
 export default ChatListBox;

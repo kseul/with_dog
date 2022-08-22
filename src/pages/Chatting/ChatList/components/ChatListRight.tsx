@@ -13,10 +13,11 @@ const ChatListRight = () => {
 const ChatListRightContainer = styled.div`
   position: relative;
   ${props => props.theme.flex.flexBox('row', 'center', 'center')}
-  min-width: 140px;
-  height: 100px;
+  flex-basis: 13%;
+  min-width: 8.8rem;
+  height: 7rem;
   background-color: ${props => props.theme.colors.purple};
-  border-radius: 0 20px 20px 0;
+  border-radius: 0 1.2rem 1.2rem 0;
   transition: background-color 200ms ease-in-out;
   &:hover {
     cursor: pointer;
@@ -25,17 +26,17 @@ const ChatListRightContainer = styled.div`
 `;
 
 const GoChatIntro = styled.div`
-  margin-right: 22px;
+  margin-right: 1.4rem;
   color: ${props => props.theme.colors.white};
   font-weight: 500;
-  font-size: 18px;
+  font-size: 1.1rem;
 `;
 
 const GoChatEntryIcon = styled.img`
   position: absolute;
-  top: 39px;
-  right: 22px;
-  width: 20px;
+  top: 2.75rem;
+  right: 1.7rem;
+  width: 1.25rem;
 `;
 
 export default ChatListRight;
