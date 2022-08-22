@@ -1,5 +1,4 @@
-import React from 'react';
-import Dog from '../../assets/svg/Btn_DogPaw_Gray.svg';
+import Dog from 'assets/svg/Btn_DogPaw_Gray.svg';
 import styled from 'styled-components';
 
 const Main = () => {
