@@ -1,14 +1,16 @@
 import styled from 'styled-components';
-import signInbg from 'assets/images/signin-bg.jpg';
+import signInbg from 'assets/images/bg1.jpg';
 import googleIcon from 'assets/svg/google-logo.svg';
 import kakaoIcon from 'assets/svg/kakao-logo.svg';
 import InputForm from '../components/inputForm/InputForm';
 import LoginButton from '../components/loginButton/LoginButton';
 import SNSButton from '../components/SNSButton/SNSButton';
+import character from 'assets/images/LoginBgCharacter.png';
 
 const SignIn = () => {
   return (
     <SignInContainer>
+      <Character src={character} />
       <LoginForm>
         <LoginTitle>로그인</LoginTitle>
         <LoginSubTitle>함께하러 가시개!</LoginSubTitle>
@@ -29,12 +31,15 @@ const SignIn = () => {
 };
 const SignInContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-around;
   align-items: center;
   height: 100vh;
   background-image: url(${signInbg});
   background-size: cover;
   background-repeat: no-repeat;
+`;
+const Character = styled.img`
+  height: 34.375rem;
 `;
 const LoginForm = styled.div`
   display: flex;
@@ -42,7 +47,6 @@ const LoginForm = styled.div`
   align-items: center;
   max-width: 40rem;
   height: 40rem;
-  margin-right: 8rem;
   padding: 3.5rem;
   border-radius: 1.25rem;
   background-color: white;
