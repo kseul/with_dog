@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import LeftSideList from 'pages/Admin/components/LeftSideList';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
 import AdminHeader from 'pages/Admin/components/AdminHeader';
+import AdminRightHeader from 'pages/Admin/components/AdminRightHeader';
 
 const AdminContainer = () => {
   return (
@@ -15,7 +16,9 @@ const AdminContainer = () => {
             ))}
           </ListWrapper>
         </AdminLeftSection>
-        <AdminRightSection></AdminRightSection>
+        <AdminRightSection>
+          <AdminRightHeader />
+        </AdminRightSection>
       </SectionContainer>
     </AdminPageContainer>
   );
@@ -43,7 +46,7 @@ const ListWrapper = styled.ul`
 `;
 
 const AdminRightSection = styled.div`
-  width: calc(100vw - 200px);
+  width: calc(100% - 200px);
   height: calc(100vh - 100px);
 `;
 
