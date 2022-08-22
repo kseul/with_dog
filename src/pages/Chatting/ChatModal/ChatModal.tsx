@@ -30,11 +30,11 @@ const ChatModal = ({
 
 const ChatModalContainer = styled.div`
   ${props => props.theme.flex.flexBox('column')}
-  position: absolute;
-  top: -10rem;
+  position: fixed;
+  top: 50%;
   width: 30rem;
   height: 40rem;
-  transform: translateY(50%);
+  transform: translateY(-49%);
   background-color: white;
   box-shadow: 1px 1px 15px 2px rgba(0, 0, 0, 0.1);
   border-radius: 1.2rem;
