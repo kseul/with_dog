@@ -13,7 +13,6 @@ const MainRouter = () => {
       <Nav />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/signin" element={<SignIn />} />
         <Route path="/chatting-list" element={<ChatList />} />
         <Route path="/mbti" element={<MBTI />} />
         <Route path="/mypage" element={<Mypage />} />
