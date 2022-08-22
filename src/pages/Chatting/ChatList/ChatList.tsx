@@ -12,6 +12,7 @@ const ChatList = () => {
         return (
           <ChatListBox
             key={id}
+            id={id}
             Image={Image}
             title={title}
             description={description}
