@@ -3,6 +3,8 @@ export interface ChatListProp {
   Image?: any;
   title?: string;
   description?: string;
+  modalDescription?: string;
+  type?: string;
 }
 
 export interface IdPwInputProp {
@@ -23,6 +25,10 @@ export interface SNSButtonProp {
 export interface ChatModalProp {
   onClickToggleModal: () => void;
   currentModal: idProp;
+  Image: any;
+  modalDescription: string | undefined;
+  type: string | undefined;
+  title: string | undefined;
 }
 
 export type idProp = number | undefined;

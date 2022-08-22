@@ -3,11 +3,24 @@ import ChatListLeft from './ChatListLeft';
 import ChatListRight from './ChatListRight';
 import { ChatListProp } from 'types/type';
 
-const ChatListBox = ({ Image, title, description, id }: ChatListProp) => {
+const ChatListBox = ({
+  id,
+  Image,
+  title,
+  description,
+  modalDescription,
+  type,
+}: ChatListProp) => {
   return (
     <ChatListContainer>
       <ChatListLeft Image={Image} title={title} description={description} />
-      <ChatListRight id={id} />
+      <ChatListRight
+        id={id}
+        Image={Image}
+        title={title}
+        modalDescription={modalDescription}
+        type={type}
+      />
     </ChatListContainer>
   );
 };

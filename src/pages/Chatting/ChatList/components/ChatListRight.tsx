@@ -4,7 +4,13 @@ import { ChatListProp, idProp } from 'types/type';
 import { useState } from 'react';
 import ChatModal from 'pages/Chatting/ChatModal/ChatModal';
 
-const ChatListRight = ({ id }: ChatListProp) => {
+const ChatListRight = ({
+  id,
+  Image,
+  title,
+  modalDescription,
+  type,
+}: ChatListProp) => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [currentModal, setCurrentModal] = useState<number | undefined>();
 
@@ -31,6 +37,10 @@ const ChatListRight = ({ id }: ChatListProp) => {
         <ChatModal
           onClickToggleModal={onClickToggleModal}
           currentModal={currentModal}
+          Image={Image}
+          title={title}
+          modalDescription={modalDescription}
+          type={type}
         />
       )}
     </>
