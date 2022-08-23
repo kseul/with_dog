@@ -80,5 +80,5 @@ const PAGE_LIST = [
   { id: 1, title: 'MBTI 검사', moveTo: '/mbti' },
   { id: 2, title: '채팅방', moveTo: '/chatting-list' },
   { id: 3, title: '게시판', moveTo: '/noticeboard' },
-  { id: 4, title: '산책하개' },
+  { id: 4, title: '산책하개', moveTo: '/' },
 ];
