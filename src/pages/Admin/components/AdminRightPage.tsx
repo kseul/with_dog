@@ -1,17 +1,17 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
 import ListHeaderBox from 'pages/Admin/components/ListHeaderBox';
 import ListContentsBox from 'pages/Admin/components/ListContentsBox';
-import axios from 'axios';
+import useAxios from 'hooks/useAxios';
 
 const AdminRightHeader = () => {
-  const [userData, setData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get('/Users/sozzln/Desktop/with_dog/src/pages/Admin/DATA/userData.json')
-      .then(res => setData(res.data));
-  }, []);
+  const { response } = useAxios({
+    method: 'GET',
+    url: `https://pokeapi.co/api/v2/pokemon?limit=151&offset=0`,
+    headers: {
+      accept: '*/*',
+    },
+  });
+  console.log(response?.data.results);
 
   return (
     <AdminRightContainer>
@@ -39,11 +39,10 @@ const AdminRightHeader = () => {
       <UserListContainer>
         <UserListHeader>
           <ListHeaderBox />
-          (userData &&
-          {userData.map(data => (
-            <ListContentsBox data={data} />
-          ))}
-          )
+          {response?.data?.results &&
+            response?.data?.results.map(data => (
+              <ListContentsBox data={data} />
+            ))}
         </UserListHeader>
       </UserListContainer>
     </AdminRightContainer>

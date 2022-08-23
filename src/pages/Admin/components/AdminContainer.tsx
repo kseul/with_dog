@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import LeftSideList from 'pages/Admin/components/LeftSideList';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
 import AdminHeader from 'pages/Admin/components/AdminHeader';
-import AdminRightHeader from 'pages/Admin/components/AdminRightHeader';
+import AdminRightHeader from 'pages/Admin/components/AdminRightPage';
 
 const AdminContainer = () => {
   return (
