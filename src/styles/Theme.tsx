@@ -1,10 +1,20 @@
 const colors = {
-  backgroundColor: '#F4F4F4',
-  mint: '#7DCBC6',
-  purple: '#D5B8EE',
-  darkGray: '#333333',
-  lightGray: '#ECEDEF',
-  gray: '#666666',
+  white: '#FFFFFF',
+  kakaoYellow: '#F7E318',
+  kakaoBrown: '#341F20',
+  lineLightGray: '#E3E3E3',
+  lightGray: '#AEB5BC',
+  gray: '#676D74',
+  boldGray: '#353A3F',
+  blue: '#3FA5F7',
+  boxBlue: '#2b96ed',
+  hoverBlue: '#4A97E6',
+  underlineBlue: '#88BEF0',
+  selectBlue: '#4a97e6',
+  noneGray: '#cfd4d9',
+  mint: '#7CCCC7',
+  selectMint: '#48c0b8',
+  purple: '#CFB6D7',
 };
 
 const flex = {

@@ -1,12 +1,12 @@
 import styled from 'styled-components/macro';
 import Answer from './Answer';
-import { TEST_DB } from './constants/Test';
+import { ENERGY_TEST_DB } from './constants/Test';
 
 const TestDetail = () => {
   return (
     <TestDetailContainer>
       <TestList>
-        {TEST_DB.map(({ id, testList }) => (
+        {ENERGY_TEST_DB.map(({ id, testList }) => (
           <Questions key={id}>
             {testList} <Answer />
           </Questions>

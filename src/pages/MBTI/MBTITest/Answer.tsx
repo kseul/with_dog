@@ -5,7 +5,12 @@ import { ANSWER_DB } from './constants/Test';
 const Answer = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [chekced, setChecked] = useState<string>();
-  const [saveScore, setSaveScore] = useState();
+
+  const test_check = null; // 문제가 모두 체크 됐는가
+  const num_of_test = 20; // 문제의 총 개수 저장
+
+  const checkedArray: any = [];
+  const newArray = checkedArray.of(chekced);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setChecked(e.target.value);
@@ -17,7 +22,7 @@ const Answer = () => {
 
   return (
     <AnswerList>
-      {ANSWER_DB.map(({ id, name, score }) => (
+      {ANSWER_DB.map(({ id, name }) => (
         <AnswerLabel key={id}>
           <Answers
             type="radio"
