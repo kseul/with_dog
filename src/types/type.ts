@@ -22,6 +22,11 @@ export interface SNSButtonProp {
   icon: string;
 }
 
+export interface PageBoxProp {
+  title: string;
+  moveTo: string;
+}
+
 export interface ChatModalProp {
   onClickToggleModal: () => void;
   currentModal: idProp;
