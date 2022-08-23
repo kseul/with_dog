@@ -1,37 +1,28 @@
 import styled from 'styled-components';
 import logo from 'assets/svg/with-dog-logo.svg';
-import test from 'assets/images/dog3.png';
-import { useState } from 'react';
-const Nav = () => {
-  const [underLine, setUnderLine] = useState(false);
+import userImg from 'assets/images/dog3.png';
+import PageBox from './PageBox';
+import { useNavigate } from 'react-router-dom';
 
+const Nav = () => {
+  const navigate = useNavigate();
+  const goToMain = () => {
+    navigate('/');
+  };
   return (
     <NavContainer>
       <PageContainer>
-        {PAGE_LIST.map(({ id, title }) => {
-          return (
-            <PageBox
-              key={id}
-              onMouseEnter={() => {
-                setUnderLine(true);
-              }}
-              onMouseLeave={() => {
-                setUnderLine(false);
-              }}
-            >
-              {title}
-              {underLine && <PageHover />}
-            </PageBox>
-          );
+        {PAGE_LIST.map(({ id, title, moveTo }) => {
+          return <PageBox key={id} title={title} moveTo={moveTo} />;
         })}
       </PageContainer>
-      <LogoContainer>
+      <LogoContainer onClick={goToMain}>
         <Logo src={logo} />
         <LogoText>함께하개</LogoText>
       </LogoContainer>
       <ProfileContainer>
         <UserImgWrapper>
-          <UserImg src={test} />
+          <UserImg src={userImg} />
         </UserImgWrapper>
         <UserNickName>안론머스크</UserNickName>
       </ProfileContainer>
@@ -42,39 +33,27 @@ const NavContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
-  height: 80px;
-  box-shadow: 3px 3px 3px #ecedef;
+  padding: 0 2.5rem;
+  height: 5rem;
+  border-bottom: 2px solid #e1e2e3;
 `;
 const PageContainer = styled.div`
   display: flex;
-  padding-left: 30px;
-`;
-const PageBox = styled.div`
-  position: relative;
-  padding-left: 30px;
-  font-size: 19px;
-`;
-const PageHover = styled.div`
-  position: absolute;
-  left: 40%;
-  bottom: -160%;
-  background-color: ${props => props.theme.colors.mint};
-  height: 3px;
-  width: 45px;
+  padding-left: 1.875rem;
 `;
 const LogoContainer = styled.div`
   position: relative;
-  padding-right: 140px;
+  padding-right: 8.5rem;
+  cursor: pointer;
 `;
 const Logo = styled.img`
   position: absolute;
   top: -40%;
   left: -28%;
-  width: 60px;
+  width: 3.75rem;
 `;
 const LogoText = styled.div`
-  font-size: 27px;
+  font-size: 1.69rem;
   font-weight: 600;
 `;
 const ProfileContainer = styled.div`
@@ -82,8 +61,8 @@ const ProfileContainer = styled.div`
   align-items: center;
 `;
 const UserImgWrapper = styled.div`
-  width: 44px;
-  height: 44px;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: 70%;
   overflow: hidden;
 `;
@@ -93,13 +72,13 @@ const UserImg = styled.img`
   object-fit: cover;
 `;
 const UserNickName = styled.div`
-  padding-left: 10px;
+  padding-left: 0.625rem;
 `;
 export default Nav;
 
 const PAGE_LIST = [
-  { id: 1, title: 'MBTI 검사' },
-  { id: 2, title: '채팅방' },
-  { id: 3, title: '게시판' },
+  { id: 1, title: 'MBTI 검사', moveTo: '/mbti' },
+  { id: 2, title: '채팅방', moveTo: '/chatting-list' },
+  { id: 3, title: '게시판', moveTo: '/noticeboard' },
   { id: 4, title: '산책하개' },
 ];

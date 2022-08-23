@@ -19,3 +19,8 @@ export interface SNSButtonProp {
   title: string;
   icon: string;
 }
+
+export interface PageBoxProp {
+  title: string;
+  moveTo: any;
+}
