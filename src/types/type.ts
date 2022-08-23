@@ -22,5 +22,5 @@ export interface SNSButtonProp {
 
 export interface PageBoxProp {
   title: string;
-  moveTo: any;
+  moveTo: string;
 }
