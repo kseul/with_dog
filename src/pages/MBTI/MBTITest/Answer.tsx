@@ -9,8 +9,8 @@ const Answer = () => {
   const test_check = null; // 문제가 모두 체크 됐는가
   const num_of_test = 20; // 문제의 총 개수 저장
 
-  const checkedArray: any = [];
-  const newArray = checkedArray.of(chekced);
+  //   const checkedArray: any = [];
+  //   const newArray = checkedArray.of(chekced);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setChecked(e.target.value);
