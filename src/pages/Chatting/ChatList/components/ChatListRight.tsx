@@ -50,7 +50,6 @@ const ChatListRight = ({
 const ChatListRightContainer = styled.div`
   position: relative;
   ${props => props.theme.flex.flexBox('row', 'center', 'center')}
-  flex-basis: 13%;
   min-width: 8.8rem;
   height: 7rem;
   background-color: ${props => props.theme.colors.purple};
