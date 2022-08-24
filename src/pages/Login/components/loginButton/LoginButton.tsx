@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import { LoginButtonProp } from 'types/type';
 
-const LoginButton = ({ title, color }: LoginButtonProp) => {
-  return <Button color={color}>{title}</Button>;
+const LoginButton = ({ title, color, size }: LoginButtonProp) => {
+  return (
+    <Button color={color} style={{ width: `${size}rem` }}>
+      {title}
+    </Button>
+  );
 };
 const Button = styled.button`
   display: block;
-  width: 22rem;
   margin-bottom: 1.25rem;
   padding: 0.6rem 0;
   border: none;
