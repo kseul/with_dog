@@ -14,6 +14,10 @@ const ListBox = styled.li`
   height: 60px;
   font-size: 20px;
   cursor: pointer;
+
+  :hover {
+    color: yellow;
+  }
 `;
 
 export default LeftSideList;

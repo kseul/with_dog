@@ -1,26 +1,30 @@
 import styled from 'styled-components';
 
-const UserListHeaderContents = ({ data }: any) => {
+const ListContentsBox = ({ data, openModal }: any) => {
   return (
-    <UserListHeader>
-      <UserName>{data.userName}</UserName>
-      <UserEmail>{data.email}</UserEmail>
-      <UserMbti>{data.mbti}</UserMbti>
-      <UserSignDate>{data.signUpDate}</UserSignDate>
-    </UserListHeader>
+    <ListContents onClick={openModal}>
+      <UserName>{data.name}</UserName>
+      <UserEmail>{data.name}</UserEmail>
+      <UserMbti>{data.name}</UserMbti>
+      <UserSignDate>{data.name}</UserSignDate>
+    </ListContents>
   );
 };
 
-const UserListHeader = styled.div`
+const ListContents = styled.div`
   display: grid;
   align-items: center;
   grid-template-columns: auto 1fr 1fr 1fr;
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  margin-bottom: -1px;
   width: 90%;
   height: 30px;
-  background-color: ${props => props.theme.colors.lightGray};
+  border: 1px solid #cac8c8;
+  cursor: pointer;
+
+  :hover {
+    background-color: rgb(202, 200, 200, 0.3);
+  }
 `;
 
 const UserName = styled.span`
@@ -44,4 +48,4 @@ const UserSignDate = styled.span`
   vertical-align: middle;
 `;
 
-export default UserListHeaderContents;
+export default ListContentsBox;

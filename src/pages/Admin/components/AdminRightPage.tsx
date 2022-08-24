@@ -1,9 +1,14 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import ListHeaderBox from 'pages/Admin/components/ListHeaderBox';
 import ListContentsBox from 'pages/Admin/components/ListContentsBox';
+import UserModal from 'pages/Admin/components/UserModal';
+import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import useAxios from 'hooks/useAxios';
 
-const AdminRightHeader = () => {
+const AdminRightSection = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { response } = useAxios({
     method: 'GET',
     url: `https://pokeapi.co/api/v2/pokemon?limit=151&offset=0`,
@@ -11,7 +16,14 @@ const AdminRightHeader = () => {
       accept: '*/*',
     },
   });
-  console.log(response?.data.results);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <AdminRightContainer>
@@ -27,7 +39,9 @@ const AdminRightHeader = () => {
           <DateTitle>
             <DateText>날짜</DateText>
           </DateTitle>
-          <DateFilter></DateFilter>
+          <DateFilter>
+            <DatePickerComponent />
+          </DateFilter>
         </SortByDate>
         <SortByUser>
           <UserTitle>
@@ -37,13 +51,18 @@ const AdminRightHeader = () => {
         </SortByUser>
       </SortBox>
       <UserListContainer>
-        <UserListHeader>
-          <ListHeaderBox />
+        <ListHeaderBox />
+        <ListContentsSection>
           {response?.data?.results &&
             response?.data?.results.map(data => (
-              <ListContentsBox data={data} />
+              <ListContentsBox
+                data={data}
+                key={data.url}
+                openModal={openModal}
+              />
             ))}
-        </UserListHeader>
+          {isModalOpen && <UserModal closeModal={closeModal} />}
+        </ListContentsSection>
       </UserListContainer>
     </AdminRightContainer>
   );
@@ -139,6 +158,6 @@ const UserInput = styled.input``;
 
 const UserListContainer = styled.div``;
 
-const UserListHeader = styled.div``;
+const ListContentsSection = styled.div``;
 
-export default AdminRightHeader;
+export default AdminRightSection;
