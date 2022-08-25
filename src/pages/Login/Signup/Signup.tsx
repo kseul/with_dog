@@ -46,31 +46,32 @@ const SignupForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 50px;
+  padding: 0 3.125rem;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   box-shadow: 1px 1px 15px 2px rgba(0, 0, 0, 0.1);
 `;
 const Title = styled.div`
   margin-top: 2.5rem;
   margin-bottom: 3.3rem;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 600;
 `;
 const UserDataInputContainer = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 2.5rem;
 `;
 const UserDataInput = styled.input`
   width: 18rem;
   padding-left: 0;
-  padding-bottom: 4px;
+  padding-bottom: 0.3rem;
   margin-bottom: 2.7rem;
   border: none;
   border-bottom: 1px solid lightgray;
-  font-size: 14.5px;
+  font-size: 0.9rem;
 `;
 const UserLocationContainer = styled.div`
   display: flex;
+  position: relative;
 `;
 const ChooseText = styled.div`
   flex: 7;
@@ -79,13 +80,16 @@ const ChooseText = styled.div`
 `;
 
 const UserLocation = styled.select`
-  width: 100px;
-  border-radius: 5px;
+  position: absolute;
+  top: -25%;
+  right: 0%;
+  width: 6.25rem;
+  border-radius: 0.3rem;
   border-color: darkgray;
 `;
 const Location = styled.option``;
 const ButtonWrapper = styled.div`
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.25rem;
 `;
 export default Signup;
 
