@@ -4,10 +4,13 @@ import ListHeaderBox from 'pages/Admin/components/ListHeaderBox';
 import ListContentsBox from 'pages/Admin/components/ListContentsBox';
 import UserModal from 'pages/Admin/components/UserModal';
 import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
+import PageNation from 'pages/Admin/components/PageNation';
 import useAxios from 'hooks/useAxios';
 
 const AdminRightSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
 
   const { response } = useAxios({
     method: 'GET',
@@ -16,14 +19,24 @@ const AdminRightSection = () => {
       accept: '*/*',
     },
   });
+  const userData = response?.data?.results;
 
-  const openModal = () => {
+  const openModal = (): void => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setIsModalOpen(false);
   };
+
+  const indexOfLast = currentPage * perPage;
+  const indexOfFirst = indexOfLast - perPage;
+  const currentPost = userData => {
+    if (userData) {
+      return userData.slice(indexOfFirst, indexOfLast);
+    }
+  };
+  const pagenatedData = currentPost(userData);
 
   return (
     <AdminRightContainer>
@@ -53,14 +66,22 @@ const AdminRightSection = () => {
       <UserListContainer>
         <ListHeaderBox />
         <ListContentsSection>
-          {response?.data?.results &&
-            response?.data?.results.map(data => (
+          {userData &&
+            pagenatedData.map(data => (
               <ListContentsBox
                 data={data}
                 key={data.url}
                 openModal={openModal}
+                currentPost={currentPost}
               />
             ))}
+          {userData && (
+            <PageNation
+              perPage={perPage}
+              totalPost={userData.length}
+              setCurrentPage={setCurrentPage}
+            />
+          )}
           {isModalOpen && <UserModal closeModal={closeModal} />}
         </ListContentsSection>
       </UserListContainer>

@@ -4,7 +4,7 @@ const AdminHeader = () => {
   return (
     <AdminHeaderContainer>
       <AdminHeaderTitle>함께하개</AdminHeaderTitle>
-      <AdminLoginBox>로그인</AdminLoginBox>
+      <AdminLoginBox>로그아웃</AdminLoginBox>
     </AdminHeaderContainer>
   );
 };
