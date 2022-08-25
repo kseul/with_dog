@@ -27,7 +27,7 @@ const FooterContainer = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 16rem;
+  height: 10rem;
   background-color: ${props => props.theme.colors.lineLightGray};
 `;
 const ContentSection = styled.div`
@@ -35,7 +35,7 @@ const ContentSection = styled.div`
   align-items: center;
 `;
 const Logo = styled.img`
-  height: 5.625rem;
+  height: 4.5rem;
 `;
 const TextContainer = styled.div`
   margin-left: 1.25rem;
@@ -44,7 +44,7 @@ const TextTop = styled.div`
   display: flex;
 `;
 const RightText = styled.div`
-  font-size: 2.6rem;
+  font-size: 2rem;
   font-weight: 600;
 `;
 const LeftText = styled.div`
@@ -59,7 +59,7 @@ const LeftText = styled.div`
 `;
 const TextBottom = styled.div`
   margin-top: 0.6rem;
-  font-size: 1.125rem;
+  font-size: 1rem;
   color: ${props => props.theme.colors.gray};
 `;
 const CopyRightContainer = styled.div`
@@ -68,7 +68,7 @@ const CopyRightContainer = styled.div`
   right: 2%;
 `;
 const CopyRightText = styled.div`
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: ${props => props.theme.colors.gray};
 `;
 export default Footer;
