@@ -17,24 +17,22 @@ const PagiNation = ({ perPage, totalPost, setCurrentPage }) => {
 };
 
 const PageUl = styled.ul`
-  width: 100%;
   margin-top: 0.5rem;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
   float: left;
   list-style: none;
   text-align: center;
-  border-radius: 3px;
-  padding: 1px;
 `;
 
 const PageLi = styled.li`
   display: inline-block;
-  font-size: 17px;
+  font-size: 1rem;
   font-weight: 600;
   padding: 5px;
   border-radius: 5px;
-  width: 25px;
+  width: 1.5rem;
   &:hover {
     cursor: pointer;
     color: white;

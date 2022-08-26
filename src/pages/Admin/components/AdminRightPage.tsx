@@ -3,6 +3,7 @@ import { useState } from 'react';
 import ListHeaderBox from 'pages/Admin/components/ListHeaderBox';
 import ListContentsBox from 'pages/Admin/components/ListContentsBox';
 import UserModal from 'pages/Admin/components/UserModal';
+import PostModal from 'pages/Admin/components/PostModal';
 import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/PageNation';
 import useAxios from 'hooks/useAxios';
@@ -82,7 +83,7 @@ const AdminRightSection = () => {
               setCurrentPage={setCurrentPage}
             />
           )}
-          {isModalOpen && <UserModal closeModal={closeModal} />}
+          {isModalOpen && <PostModal closeModal={closeModal} />}
         </ListContentsSection>
       </UserListContainer>
     </AdminRightContainer>
