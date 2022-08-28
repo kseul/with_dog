@@ -37,4 +37,17 @@ export interface ChatModalProp {
   title: string | undefined;
 }
 
+export interface ToMbtiButtonProp {
+  title: string;
+  icon: string;
+  textColor: string;
+  buttonColor: string;
+  buttonSize: number;
+  textSize: number;
+}
+
+export interface MainPagesProp {
+  backGroundImage: string;
+}
+
 export type idProp = number | undefined;
