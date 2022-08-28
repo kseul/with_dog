@@ -3,10 +3,21 @@ import { ListData } from '/Users/sozzln/Desktop/with_dog/src/pages/Admin/DATA/LE
 
 interface ListProps {
   list: ListData;
+  setClick: any;
+  clicked: string;
 }
 
-const LeftSideList = ({ list }: ListProps) => {
-  return <ListBox>{list.listName}</ListBox>;
+const LeftSideList = ({ list, setClick, clicked }: ListProps) => {
+  return (
+    <ListBox
+      onClick={() => {
+        setClick(list);
+      }}
+      className={clicked === list.listName ? 'selected' : ''}
+    >
+      {list.listName}
+    </ListBox>
+  );
 };
 
 const ListBox = styled.li`
@@ -14,6 +25,10 @@ const ListBox = styled.li`
   height: 60px;
   font-size: 20px;
   cursor: pointer;
+
+  &.selected {
+    color: yellow;
+  }
 
   :hover {
     color: yellow;

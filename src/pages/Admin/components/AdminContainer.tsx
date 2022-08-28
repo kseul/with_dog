@@ -1,10 +1,17 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import LeftSideList from 'pages/Admin/components/LeftSideList';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
 import AdminHeader from 'pages/Admin/components/AdminHeader';
 import AdminRightHeader from 'pages/Admin/components/AdminRightPage';
 
 const AdminContainer = () => {
+  const [clicked, setClicked] = useState('');
+
+  const setClick = list => {
+    setClicked(list.listName);
+  };
+
   return (
     <AdminPageContainer>
       <AdminHeader />
@@ -12,7 +19,12 @@ const AdminContainer = () => {
         <AdminLeftSection>
           <ListWrapper>
             {LEFTSIDE_DB.map(list => (
-              <LeftSideList list={list} key={list.id} />
+              <LeftSideList
+                list={list}
+                key={list.id}
+                setClick={setClick}
+                clicked={clicked}
+              />
             ))}
           </ListWrapper>
         </AdminLeftSection>
