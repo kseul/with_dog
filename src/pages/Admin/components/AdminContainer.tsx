@@ -47,9 +47,9 @@ const SectionContainer = styled.div`
 
 const AdminLeftSection = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'start')}
-  padding-top : 20px;
-  width: 200px;
-  height: calc(100vh - 100px);
+  padding-top : 1px;
+  width: 12.5rem;
+  height: calc(100vh - 6.25rem);
   background-color: ${props => props.theme.colors.lightGray};
 `;
 
@@ -58,8 +58,8 @@ const ListWrapper = styled.ul`
 `;
 
 const AdminRightSection = styled.div`
-  width: calc(100% - 200px);
-  height: calc(100vh - 100px);
+  width: calc(100% - 12.5rem);
+  height: calc(100vh - 6.25rem);
 `;
 
 export default AdminContainer;

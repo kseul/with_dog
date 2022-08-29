@@ -13,7 +13,7 @@ const DatePickerComponent = () => {
       selected={startDate}
       onChange={date => setStartDate(date)}
       dateFormat="yyyy/MM/dd"
-      customInput={<Form.Control style={{ height: '30px' }} />}
+      customInput={<Form.Control style={{ height: '1.875rem' }} />}
     />
   );
 };

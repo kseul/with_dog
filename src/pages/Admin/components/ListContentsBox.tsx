@@ -18,7 +18,7 @@ const ListContents = styled.div`
   margin: 0 auto;
   margin-bottom: -1px;
   width: 90%;
-  height: 30px;
+  height: 1.875rem;
   border: 1px solid #cac8c8;
   cursor: pointer;
 
@@ -28,7 +28,7 @@ const ListContents = styled.div`
 `;
 
 const UserName = styled.span`
-  width: 100px;
+  width: 6.25rem;
   text-align: center;
   vertical-align: middle;
 `;

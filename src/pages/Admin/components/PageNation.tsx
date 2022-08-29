@@ -46,8 +46,8 @@ const PageLi = styled.li`
   display: inline-block;
   font-size: 1rem;
   font-weight: 600;
-  padding: 5px;
-  border-radius: 5px;
+  padding: 0.313rem;
+  border-radius: 0.313rem;
   width: 1.5rem;
 
   &.indexClicked {

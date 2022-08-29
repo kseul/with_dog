@@ -111,20 +111,20 @@ const AdminRightContainer = styled.div`
 `;
 
 const AdminRightTitle = styled.div`
-  padding-left: 20px;
-  padding-top: 20px;
-  margin-bottom: 20px;
-  height: 50px;
-  font-size: 30px;
+  padding-left: 1.25rem;
+  padding-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  height: 3.125rem;
+  font-size: 1.875rem;
 `;
 
 const FilterBox = styled.div``;
 
 const CheckAll = styled.button`
-  margin-left: 20px;
-  margin-right: 10px;
-  width: 20px;
-  height: 20px;
+  margin-left: 1.25rem;
+  margin-right: 0.625rem;
+  width: 1.25rem;
+  height: 1.25rem;
   border: 1px solid black;
   background-color: transparent;
 
@@ -138,14 +138,14 @@ const CheckAll = styled.button`
 `;
 
 const CheckAllText = styled.span`
-  font-size: 20px;
+  font-size: 1.25rem;
 `;
 
 const ThreeBanned = styled.button`
-  margin-left: 20px;
-  margin-right: 10px;
-  width: 20px;
-  height: 20px;
+  margin-left: 1.25rem;
+  margin-right: 0.625rem;
+  width: 1.25rem;
+  height: 1.25rem;
   border: 1px solid black;
   background-color: transparent;
 
@@ -159,24 +159,24 @@ const ThreeBanned = styled.button`
 `;
 
 const ThreeBannedText = styled.span`
-  font-size: 20px;
+  font-size: 1.25rem;
 `;
 
 const SortBox = styled.div`
   ${props => props.theme.flex.flexBox('row', '', 'left')}
-  margin-left : 20px;
-  margin-top: 20px;
+  margin-left : 1.25rem;
+  margin-top: 1.25rem;
 `;
 
 const SortByDate = styled.div`
   ${props => props.theme.flex.flexBox('row', '', 'left')}
-  width: 300px;
+  width: 18.75rem;
 `;
 
 const DateTitle = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', 'center')}
-  width: 80px;
-  height: 30px;
+  width: 5rem;
+  height: 1.875rem;
   background-color: ${props => props.theme.colors.gray};
 `;
 
@@ -188,12 +188,12 @@ const DateFilter = styled.div`
 
 const SortByUser = styled.div`
   ${props => props.theme.flex.flexBox('row', '', 'left')}
-  width: 300px;
+  width: 18.75rem;
 `;
 
 const UserTitle = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', 'center')}
-  width: 80px;
+  width: 5rem;
   background-color: ${props => props.theme.colors.gray};
 `;
 

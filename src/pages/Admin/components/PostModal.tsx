@@ -189,8 +189,8 @@ const PostImageTitle = styled.p`
 `;
 
 const PostImageContent = styled.div`
-  width: 150px;
-  height: 150px;
+  width: 9.375rem;
+  height: 9.375rem;
   border: 1px solid black;
 `;
 

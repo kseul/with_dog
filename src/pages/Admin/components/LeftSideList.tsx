@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ListData } from '/Users/sozzln/Desktop/with_dog/src/pages/Admin/DATA/LEFTSIDE_LIST';
+import { ListData } from 'pages/Admin/DATA/LEFTSIDE_LIST';
 
 interface ListProps {
   list: ListData;
@@ -22,8 +22,8 @@ const LeftSideList = ({ list, setClick, clicked }: ListProps) => {
 
 const ListBox = styled.li`
   width: 100%;
-  height: 60px;
-  font-size: 20px;
+  height: 3.75rem;
+  font-size: 1.25rem;
   cursor: pointer;
 
   &.selected {

@@ -12,18 +12,18 @@ const AdminHeader = () => {
 const AdminHeaderContainer = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', 'space-between')}
   width: 100%;
-  height: 100px;
+  height: 6.25rem;
   background-color: ${props => props.theme.colors.gray};
 `;
 
 const AdminHeaderTitle = styled.p`
-  margin-left: 20px;
-  font-size: 25px;
+  margin-left: 1.25rem;
+  font-size: 1.563rem;
 `;
 
 const AdminLoginBox = styled.div`
-  margin-right: 20px;
-  font-size: 25px;
+  margin-right: 1.25rem;
+  font-size: 1.563rem;
 `;
 
 export default AdminHeader;
