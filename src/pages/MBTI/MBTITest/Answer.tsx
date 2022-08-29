@@ -1,3 +1,4 @@
+import console from 'console';
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import { ANSWER_DB } from './constants/Test';
