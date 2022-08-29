@@ -18,8 +18,8 @@ const SignIn = () => {
           <InputForm placeholder="아이디 입력" type="text" />
           <InputForm placeholder="비밀번호 입력" type="password" />
         </IdPwInputContainer>
-        <LoginButton title="로그인" color="#7CCCC7" />
-        <LoginButton title="회원가입" color="#CFB6D7" />
+        <LoginButton title="로그인" color="#7CCCC7" size={21} />
+        <LoginButton title="회원가입" color="#CFB6D7" size={21} />
         <SnsLoginContainer>
           <SnsTitle>⏤ SNS 로그인 ⏤</SnsTitle>
           <SNSButton title="구글" icon={googleIcon} />
