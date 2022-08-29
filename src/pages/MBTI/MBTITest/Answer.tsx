@@ -4,20 +4,19 @@ import { ANSWER_DB } from './constants/Test';
 
 const Answer = () => {
   const [isChecked, setIsChecked] = useState(false);
-  const [chekced, setChecked] = useState<string>();
-
-  const test_check = null; // 문제가 모두 체크 됐는가
-  const num_of_test = 20; // 문제의 총 개수 저장
-
-  //   const checkedArray: any = [];
-  //   const newArray = checkedArray.of(chekced);
+  const [checked, setChecked] = useState<string | undefined>();
+  const [nameList, setNameList] = useState<string[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setChecked(e.target.value);
   };
 
-  const onClickCheck = () => {
+  const onClickCheck = (): void => {
     setIsChecked(!isChecked);
+  };
+
+  const handleSetName = (value: string): void => {
+    setNameList([value, ...nameList]);
   };
 
   return (
@@ -27,9 +26,14 @@ const Answer = () => {
           <Answers
             type="radio"
             value={name}
-            onClick={onClickCheck}
-            checked={chekced === name}
-            onChange={e => handleChange(e)}
+            onClick={() => {
+              onClickCheck();
+            }}
+            checked={checked === name}
+            onChange={e => {
+              handleChange(e);
+              handleSetName(e.target.value);
+            }}
           />
           {name}
         </AnswerLabel>
