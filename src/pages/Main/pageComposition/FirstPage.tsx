@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 import ToMbtiButton from '../components/toMbtiButton/ToMbtiButton';
-import dogPaw from 'assets/svg/dog-paws2.svg';
 import { MainPagesProp } from 'types/type';
+import dogPaw from 'assets/svg/dog-paws2.svg';
 
 const FirstPage = ({ backGroundImage }: MainPagesProp) => {
   return (
-    <FirstPageContainer style={{ backgroundImage: `url(${backGroundImage})` }}>
+    <FirstPageContainer
+      style={{ backgroundImage: `url(${backGroundImage})` }}
+      id="section1"
+    >
       <TextContainer>
         <Title>반려견에게 다가가는 순간 우리 함께하개</Title>
         <SubTitle>
@@ -34,6 +37,7 @@ const FirstPage = ({ backGroundImage }: MainPagesProp) => {
     </FirstPageContainer>
   );
 };
+
 const FirstPageContainer = styled.div`
   height: 100vh;
   background-size: cover;
@@ -49,7 +53,7 @@ const Title = styled.div`
   font-weight: 600;
 `;
 const SubTitle = styled.div`
-  padding-top: 15px;
+  padding-top: 0.9rem;
   font-size: 3vmin;
 `;
 const DescriptionContainer = styled.div`
@@ -68,4 +72,5 @@ const DescriptionSubTitle = styled.div`
 const ButtonWrapper = styled.div`
   margin-top: 1.5rem;
 `;
+
 export default FirstPage;
