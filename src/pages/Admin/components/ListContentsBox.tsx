@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ListContentsBox = ({ data, openModal }: any) => {
+const ListContentsBox = ({ data, openModal }) => {
   return (
     <ListContents onClick={openModal}>
       <UserName>{data.name}</UserName>

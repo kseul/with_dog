@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-const PagiNation = ({ perPage, totalPost, setCurrentPage }) => {
+const PageNation = ({
+  perPage,
+  totalPost,
+  setCurrentPage,
+  indexClicked,
+  setIndexClicked,
+}) => {
   const pageNumbers: number[] = [];
   for (let i = 1; i <= Math.ceil(totalPost / perPage); i++) {
     pageNumbers.push(i);
@@ -8,8 +14,18 @@ const PagiNation = ({ perPage, totalPost, setCurrentPage }) => {
   return (
     <PageUl>
       {pageNumbers.map(number => (
-        <PageLi key={number}>
-          <PageSpan onClick={() => setCurrentPage(number)}>{number}</PageSpan>
+        <PageLi
+          key={number}
+          className={number === indexClicked ? 'indexClicked' : ' '}
+        >
+          <PageSpan
+            onClick={() => {
+              setCurrentPage(number);
+              setIndexClicked(number);
+            }}
+          >
+            {number}
+          </PageSpan>
         </PageLi>
       ))}
     </PageUl>
@@ -33,6 +49,12 @@ const PageLi = styled.li`
   padding: 5px;
   border-radius: 5px;
   width: 1.5rem;
+
+  &.indexClicked {
+    color: white;
+    background-color: #263a6c;
+  }
+
   &:hover {
     cursor: pointer;
     color: white;
@@ -53,4 +75,4 @@ const PageSpan = styled.span`
   }
 `;
 
-export default PagiNation;
+export default PageNation;

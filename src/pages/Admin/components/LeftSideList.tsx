@@ -3,7 +3,7 @@ import { ListData } from '/Users/sozzln/Desktop/with_dog/src/pages/Admin/DATA/LE
 
 interface ListProps {
   list: ListData;
-  setClick: any;
+  setClick: (list: ListData) => void;
   clicked: string;
 }
 

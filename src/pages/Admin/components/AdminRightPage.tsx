@@ -8,10 +8,18 @@ import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/PageNation';
 import useAxios from 'hooks/useAxios';
 
-const AdminRightSection = () => {
+interface PagenatedData {
+  name: string;
+  url: string;
+}
+
+const AdminRightPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
+  const [indexClicked, setIndexClicked] = useState('');
+  const [allToggle, setAllToggle] = useState(false);
+  const [banToggle, setBanToggle] = useState(false);
 
   const { response } = useAxios({
     method: 'GET',
@@ -37,15 +45,21 @@ const AdminRightSection = () => {
       return userData.slice(indexOfFirst, indexOfLast);
     }
   };
-  const pagenatedData = currentPost(userData);
+  const pagenatedData: PagenatedData[] = currentPost(userData);
 
   return (
     <AdminRightContainer>
       <AdminRightTitle>관리자 페이지</AdminRightTitle>
       <FilterBox>
-        <CheckAll />
+        <CheckAll
+          onClick={() => setAllToggle(prev => !prev)}
+          className={allToggle ? 'active' : ''}
+        />
         <CheckAllText>전체</CheckAllText>
-        <ThreeBanned />
+        <ThreeBanned
+          onClick={() => setBanToggle(prev => !prev)}
+          className={banToggle ? 'active' : ''}
+        />
         <ThreeBannedText>신고 3회 이상</ThreeBannedText>
       </FilterBox>
       <SortBox>
@@ -73,7 +87,6 @@ const AdminRightSection = () => {
                 data={data}
                 key={data.url}
                 openModal={openModal}
-                currentPost={currentPost}
               />
             ))}
           {userData && (
@@ -81,6 +94,8 @@ const AdminRightSection = () => {
               perPage={perPage}
               totalPost={userData.length}
               setCurrentPage={setCurrentPage}
+              setIndexClicked={setIndexClicked}
+              indexClicked={indexClicked}
             />
           )}
           {isModalOpen && <PostModal closeModal={closeModal} />}
@@ -113,6 +128,10 @@ const CheckAll = styled.button`
   border: 1px solid black;
   background-color: transparent;
 
+  &.active {
+    background-color: yellow;
+  }
+
   :hover {
     background-color: yellow;
   }
@@ -129,6 +148,10 @@ const ThreeBanned = styled.button`
   height: 20px;
   border: 1px solid black;
   background-color: transparent;
+
+  &.active {
+    background-color: yellow;
+  }
 
   :hover {
     background-color: yellow;
@@ -182,4 +205,4 @@ const UserListContainer = styled.div``;
 
 const ListContentsSection = styled.div``;
 
-export default AdminRightSection;
+export default AdminRightPage;

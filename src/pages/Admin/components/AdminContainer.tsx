@@ -3,7 +3,7 @@ import { useState } from 'react';
 import LeftSideList from 'pages/Admin/components/LeftSideList';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
 import AdminHeader from 'pages/Admin/components/AdminHeader';
-import AdminRightHeader from 'pages/Admin/components/AdminRightPage';
+import AdminRightPage from 'pages/Admin/components/AdminRightPage';
 
 const AdminContainer = () => {
   const [clicked, setClicked] = useState('');
@@ -29,7 +29,7 @@ const AdminContainer = () => {
           </ListWrapper>
         </AdminLeftSection>
         <AdminRightSection>
-          <AdminRightHeader />
+          <AdminRightPage />
         </AdminRightSection>
       </SectionContainer>
     </AdminPageContainer>
