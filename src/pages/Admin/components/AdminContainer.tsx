@@ -1,12 +1,26 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import LeftSideList from 'pages/Admin/components/LeftSideList';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
 import AdminHeader from 'pages/Admin/components/AdminHeader';
 import AdminRightPage from 'pages/Admin/components/AdminRightPage';
+import useAxios from 'hooks/useAxios';
 
 const AdminContainer = () => {
   const [clicked, setClicked] = useState('');
+
+  const navigate = useNavigate();
+  const params = useParams();
+
+  const { response } = useAxios({
+    method: 'GET',
+    url: `https://togedog-dj.herokuapp.com/${params.value}`,
+    headers: {
+      accept: '*/*',
+      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2MTg1ODgzNCwiaWF0IjoxNjYxNzcyNDM0fQ.x4yHATpFZYWfY5HXRfH49X3CjV5E4lG-GjSK9Tn5PTQ`,
+    },
+  });
 
   const setClick = list => {
     setClicked(list.listName);
@@ -24,12 +38,13 @@ const AdminContainer = () => {
                 key={list.id}
                 setClick={setClick}
                 clicked={clicked}
+                navigate={navigate}
               />
             ))}
           </ListWrapper>
         </AdminLeftSection>
         <AdminRightSection>
-          <AdminRightPage />
+          <AdminRightPage response={response} />
         </AdminRightSection>
       </SectionContainer>
     </AdminPageContainer>

@@ -4,9 +4,9 @@ const ListContentsBox = ({ data, openModal }) => {
   return (
     <ListContents onClick={openModal}>
       <UserName>{data.name}</UserName>
-      <UserEmail>{data.name}</UserEmail>
-      <UserMbti>{data.name}</UserMbti>
-      <UserSignDate>{data.name}</UserSignDate>
+      <UserEmail>{data.email}</UserEmail>
+      <UserMbti>{data.mbti}</UserMbti>
+      <UserSignDate>{data.email}</UserSignDate>
     </ListContents>
   );
 };

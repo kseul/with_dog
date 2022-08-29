@@ -6,14 +6,20 @@ import UserModal from 'pages/Admin/components/UserModal';
 import PostModal from 'pages/Admin/components/PostModal';
 import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/PageNation';
-import useAxios from 'hooks/useAxios';
 
 interface PagenatedData {
+  account_type: string;
+  email: string;
+  id: number;
+  mbti: string;
   name: string;
-  url: string;
+  nickname: string;
+  status: string;
+  thumbnail_url: string;
+  user_type: string;
 }
 
-const AdminRightPage = () => {
+const AdminRightPage = ({ response }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
@@ -21,14 +27,7 @@ const AdminRightPage = () => {
   const [allToggle, setAllToggle] = useState(false);
   const [banToggle, setBanToggle] = useState(false);
 
-  const { response } = useAxios({
-    method: 'GET',
-    url: `https://pokeapi.co/api/v2/pokemon?limit=151&offset=0`,
-    headers: {
-      accept: '*/*',
-    },
-  });
-  const userData = response?.data?.results;
+  const userData = response?.data;
 
   const openModal = (): void => {
     setIsModalOpen(true);
@@ -85,7 +84,7 @@ const AdminRightPage = () => {
             pagenatedData.map(data => (
               <ListContentsBox
                 data={data}
-                key={data.url}
+                key={data.id}
                 openModal={openModal}
               />
             ))}
