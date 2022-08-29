@@ -3,20 +3,33 @@ import ChatListLeft from './ChatListLeft';
 import ChatListRight from './ChatListRight';
 import { ChatListProp } from 'types/type';
 
-const ChatListBox = ({ Image, title, description }: ChatListProp) => {
+const ChatListBox = ({
+  id,
+  Image,
+  title,
+  description,
+  modalDescription,
+  type,
+}: ChatListProp) => {
   return (
     <ChatListContainer>
       <ChatListLeft Image={Image} title={title} description={description} />
-      <ChatListRight />
+      <ChatListRight
+        id={id}
+        Image={Image}
+        title={title}
+        modalDescription={modalDescription}
+        type={type}
+      />
     </ChatListContainer>
   );
 };
 
 const ChatListContainer = styled.div`
   ${props => props.theme.flex.flexBox('row')}
-  max-width: 700px;
-  margin-bottom: 25px;
-  border-radius: 15px;
+  width: 70%;
+  margin-bottom: 1.8rem;
+  border-radius: 0.05rem;
 `;
 
 export default ChatListBox;
