@@ -1,25 +1,25 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import ListHeaderBox from 'pages/Admin/components/ListHeaderBox';
-import ListContentsBox from 'pages/Admin/components/ListContentsBox';
-import UserModal from 'pages/Admin/components/UserModal';
+import PostHeaderBox from 'pages/Admin/components/PostHeaderBox';
+import ListPostContentsBox from 'pages/Admin/components/ListPostContentBox';
 import PostModal from 'pages/Admin/components/PostModal';
 import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/PageNation';
 
 interface PagenatedData {
-  account_type: string;
-  email: string;
   id: number;
-  mbti: string;
-  name: string;
-  nickname: string;
-  status: string;
-  thumbnail_url: string;
-  user_type: string;
+  created_at: string;
+  updated_at: string;
+  subject: string;
+  content: string;
+  image_url: string;
+  user_id: number;
+  user_name: string;
+  user_mbti: string;
+  user_signup_time: string;
 }
 
-const AdminRightPage = ({ response }) => {
+const AdminRightPagePost = ({ response }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
@@ -78,11 +78,11 @@ const AdminRightPage = ({ response }) => {
         </SortByUser>
       </SortBox>
       <UserListContainer>
-        <ListHeaderBox />
+        <PostHeaderBox />
         <ListContentsSection>
           {userData &&
             pagenatedData.map(data => (
-              <ListContentsBox
+              <ListPostContentsBox
                 data={data}
                 key={data.id}
                 openModal={openModal}
@@ -204,4 +204,4 @@ const UserListContainer = styled.div``;
 
 const ListContentsSection = styled.div``;
 
-export default AdminRightPage;
+export default AdminRightPagePost;

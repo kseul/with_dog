@@ -4,7 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import LeftSideList from 'pages/Admin/components/LeftSideList';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
 import AdminHeader from 'pages/Admin/components/AdminHeader';
-import AdminRightPage from 'pages/Admin/components/AdminRightPage';
+import AdminRightPageUser from 'pages/Admin/components/AdminRightPageUser';
+import AdminRightPagePost from 'pages/Admin/components/AdminRightPagePost';
 import useAxios from 'hooks/useAxios';
 
 const AdminContainer = () => {
@@ -18,7 +19,7 @@ const AdminContainer = () => {
     url: `https://togedog-dj.herokuapp.com/${params.value}`,
     headers: {
       accept: '*/*',
-      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2MTg1ODgzNCwiaWF0IjoxNjYxNzcyNDM0fQ.x4yHATpFZYWfY5HXRfH49X3CjV5E4lG-GjSK9Tn5PTQ`,
+      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2MTkzMjQ3MiwiaWF0IjoxNjYxODQ2MDcyfQ.4sZDdEt11wNtcY9LReYGouDU4EU_F3mbRDrCRa_SSFw`,
     },
   });
 
@@ -44,7 +45,15 @@ const AdminContainer = () => {
           </ListWrapper>
         </AdminLeftSection>
         <AdminRightSection>
-          <AdminRightPage response={response} />
+          {params.value === 'users' ? (
+            <AdminRightPageUser response={response} />
+          ) : params.value === 'posts' ? (
+            <AdminRightPagePost response={response} />
+          ) : params.value === 'deleted' ? (
+            <AdminRightPagePost response={response} />
+          ) : (
+            <AdminRightPageUser response={response} />
+          )}
         </AdminRightSection>
       </SectionContainer>
     </AdminPageContainer>
@@ -69,6 +78,7 @@ const AdminLeftSection = styled.div`
 `;
 
 const ListWrapper = styled.ul`
+  padding-top: 1.5rem;
   list-style: none;
 `;
 
