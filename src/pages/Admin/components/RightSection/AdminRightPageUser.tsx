@@ -1,25 +1,24 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import PostHeaderBox from 'pages/Admin/components/PostHeaderBox';
-import ListPostContentsBox from 'pages/Admin/components/ListPostContentBox';
-import PostModal from 'pages/Admin/components/PostModal';
+import ListHeaderBox from 'pages/Admin/components/RightSection/ListHeaderBox';
+import ListContentsBox from 'pages/Admin/components/RightSection/ListContentsBox';
+import UserModal from 'pages/Admin/components/Modal/UserModal';
 import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/PageNation';
 
 interface PagenatedData {
+  account_type: string;
+  email: string;
   id: number;
-  created_at: string;
-  updated_at: string;
-  subject: string;
-  content: string;
-  image_url: string;
-  user_id: number;
-  user_name: string;
-  user_mbti: string;
-  user_signup_time: string;
+  mbti: string;
+  name: string;
+  nickname: string;
+  status: string;
+  thumbnail_url: string;
+  user_type: string;
 }
 
-const AdminRightPagePost = ({ response }) => {
+const AdminRightPageUser = ({ response }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
@@ -78,11 +77,11 @@ const AdminRightPagePost = ({ response }) => {
         </SortByUser>
       </SortBox>
       <UserListContainer>
-        <PostHeaderBox />
+        <ListHeaderBox />
         <ListContentsSection>
           {userData &&
             pagenatedData.map(data => (
-              <ListPostContentsBox
+              <ListContentsBox
                 data={data}
                 key={data.id}
                 openModal={openModal}
@@ -97,7 +96,7 @@ const AdminRightPagePost = ({ response }) => {
               indexClicked={indexClicked}
             />
           )}
-          {isModalOpen && <PostModal closeModal={closeModal} />}
+          {isModalOpen && <UserModal closeModal={closeModal} />}
         </ListContentsSection>
       </UserListContainer>
     </AdminRightContainer>
@@ -204,4 +203,4 @@ const UserListContainer = styled.div``;
 
 const ListContentsSection = styled.div``;
 
-export default AdminRightPagePost;
+export default AdminRightPageUser;

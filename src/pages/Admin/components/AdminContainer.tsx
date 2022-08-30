@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import LeftSideList from 'pages/Admin/components/LeftSideList';
+import LeftSideList from 'pages/Admin/components/LeftSideMenu/LeftSideList';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
 import AdminHeader from 'pages/Admin/components/AdminHeader';
-import AdminRightPageUser from 'pages/Admin/components/AdminRightPageUser';
-import AdminRightPagePost from 'pages/Admin/components/AdminRightPagePost';
+import AdminRightPageUser from 'pages/Admin/components/RightSection/AdminRightPageUser';
+import AdminRightPagePost from 'pages/Admin/components/RightSection/AdminRightPagePost';
 import useAxios from 'hooks/useAxios';
 
 const AdminContainer = () => {

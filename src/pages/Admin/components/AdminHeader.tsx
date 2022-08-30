@@ -10,7 +10,7 @@ const AdminHeader = () => {
 };
 
 const AdminHeaderContainer = styled.div`
-  ${props => props.theme.flex.flexBox('row', 'center', 'space-between')}
+  ${props => props.theme.flex.flexBox('row', 'center', 'space-between')};
   width: 100%;
   height: 6.25rem;
   background-color: ${props => props.theme.colors.gray};

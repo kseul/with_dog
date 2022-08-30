@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { AiOutlineClose } from 'react-icons/ai';
-import UserInfoBox from 'pages/Admin/components/UserInfoBox';
+import UserInfoBox from 'pages/Admin/components/RightSection/UserInfoBox';
 
 const PostModal = ({ closeModal }) => {
   return (
