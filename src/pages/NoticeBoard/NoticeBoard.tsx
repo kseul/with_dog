@@ -14,7 +14,6 @@ const NoticeBoard = () => {
 
 const NoticeBoardContainer = styled.div`
   padding: 2.5rem 15rem;
-  height: 100vh;
 `;
 
 export default NoticeBoard;

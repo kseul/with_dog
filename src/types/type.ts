@@ -37,3 +37,7 @@ export interface ChatModalProp {
 }
 
 export type idProp = number | undefined;
+
+export interface BoardModalProp {
+  clickCard: () => void;
+}

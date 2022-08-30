@@ -15,6 +15,7 @@ const BoardButton = () => {
           );
         })}
       </BoardButtonWrapper>
+
       <BoardWriteButton>
         <BoardBtnIcon src={pawsIcon} />
         새글쓰기

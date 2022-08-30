@@ -1,26 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import BoardModal from './BoardModal';
 import BOARD_DATA from '../DATA/BOARD_DATA';
 
 const BoardList = () => {
+  const [activateModal, setActivateModal] = useState(false);
+
+  const clickCard = () => {
+    setActivateModal(!activateModal);
+  };
+
   return (
     <BoardListWrapper>
-      {BOARD_DATA.map(({ id, title, image, date, writer, views }) => {
-        return (
-          <BoardCard key={id}>
-            <CardImage src={image} />
-            <CardDate>{date}</CardDate>
-            <CardTitle>{title}</CardTitle>
-            <CardBottom>
-              <WriterProfile>
-                <WriterPhoto src={image} />
-                <WriterName>{writer}</WriterName>
-              </WriterProfile>
-              <CardViews>{views}</CardViews>
-            </CardBottom>
-          </BoardCard>
-        );
-      })}
+      <>
+        {BOARD_DATA.map(({ id, title, image, date, writer, views }) => {
+          return (
+            <BoardCard
+              key={id}
+              onClick={() => {
+                clickCard();
+              }}
+            >
+              <CardImage src={image} />
+              <CardDate>{date}</CardDate>
+              <CardTitle>{title}</CardTitle>
+              <CardBottom>
+                <WriterProfile>
+                  <WriterPhoto src={image} />
+                  <WriterName>{writer}</WriterName>
+                </WriterProfile>
+                <CardViews>{views}</CardViews>
+              </CardBottom>
+            </BoardCard>
+          );
+        })}
+        {activateModal && <BoardModal clickCard={clickCard} />}
+      </>
     </BoardListWrapper>
   );
 };
