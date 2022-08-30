@@ -15,6 +15,7 @@ export interface IdPwInputProp {
 export interface LoginButtonProp {
   title: string;
   color: string;
+  size: number;
 }
 
 export interface SNSButtonProp {
