@@ -1,32 +1,29 @@
+import React from 'react';
 import styled from 'styled-components';
 import { ContentPagesProp } from 'types/type';
 
-const ContentPages = ({
-  title,
-  subTitle,
-  backGroundImage,
-  reverse,
-  id,
-}: ContentPagesProp) => {
-  return (
-    <ContentPagesContainer
-      style={{ backgroundImage: `url(${backGroundImage})` }}
-      id={'section' + id}
-    >
-      {reverse ? (
-        <ReverseTextContainer>
-          <ReverseTitle>{title}</ReverseTitle>
-          <SubTitle>{subTitle}</SubTitle>
-        </ReverseTextContainer>
-      ) : (
-        <TextContainer>
-          <Title>{title}</Title>
-          <SubTitle>{subTitle}</SubTitle>
-        </TextContainer>
-      )}
-    </ContentPagesContainer>
-  );
-};
+const ContentPages = React.forwardRef<HTMLDivElement, ContentPagesProp>(
+  ({ title, subTitle, backGroundImage, reverse }, ref) => {
+    return (
+      <ContentPagesContainer
+        style={{ backgroundImage: `url(${backGroundImage})` }}
+        ref={ref}
+      >
+        {reverse ? (
+          <ReverseTextContainer>
+            <ReverseTitle>{title}</ReverseTitle>
+            <SubTitle>{subTitle}</SubTitle>
+          </ReverseTextContainer>
+        ) : (
+          <TextContainer>
+            <Title>{title}</Title>
+            <SubTitle>{subTitle}</SubTitle>
+          </TextContainer>
+        )}
+      </ContentPagesContainer>
+    );
+  }
+);
 
 const ContentPagesContainer = styled.div`
   height: 100vh;

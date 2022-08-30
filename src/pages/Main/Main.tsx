@@ -1,26 +1,43 @@
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Nav from 'pages/components/Nav/Nav';
 import FirstPage from './pageComposition/FirstPage';
 import ContentPages from './pageComposition/ContentPages';
 import LastPage from './pageComposition/LastPage';
+import PAGES_DATA from './DATA/PAGES_DATA';
 import Page1Bg from 'assets/images/mainPage1.jpeg';
-import Page2Bg from 'assets/images/mainPage2.jpeg';
-import Page3Bg from 'assets/images/mainPage3.jpeg';
-import Page4Bg from 'assets/images/mainPage4.jpeg';
 import Page5Bg from 'assets/images/mainPage5.jpeg';
-import { useState } from 'react';
 
 const Main = () => {
-  const [currentPageNum, setCurrentPageNum] = useState(1);
-  const checkPageNum = (i: number) => {
-    setCurrentPageNum(i);
-  };
+  const pageRef = useRef<any>([]);
+  const [currentPage, setCurrentPage] = useState<unknown>();
+
+  useEffect(() => {
+    const pageObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setCurrentPage(entry.target);
+          }
+        });
+      },
+      { rootMargin: '-2% 0px', threshold: 0 }
+    );
+    pageRef.current.forEach((page: HTMLDivElement) =>
+      pageObserver.observe(page)
+    );
+    return () => pageObserver.disconnect();
+  }, []);
+
   return (
     <>
       <Nav />
       <MainContainer>
-        <FirstPage backGroundImage={Page1Bg} data-anchor="section1" />
-        {PAGE_DATA.map(({ id, title, subTitle, reverse, backGroundImage }) => {
+        <FirstPage
+          backGroundImage={Page1Bg}
+          ref={(el: HTMLDivElement) => (pageRef.current[0] = el)}
+        />
+        {PAGES_DATA.map(({ id, title, subTitle, reverse, backGroundImage }) => {
           return (
             <ContentPages
               key={id}
@@ -29,6 +46,7 @@ const Main = () => {
               reverse={reverse}
               backGroundImage={backGroundImage}
               id={id}
+              ref={(el: HTMLDivElement) => (pageRef.current[id] = el)}
             />
           );
         })}
@@ -36,12 +54,20 @@ const Main = () => {
           title="내 반려견에 대해 더 알아가고 싶으시나요?"
           subTitle="지금 바로 반려견 MBTI 검사하러 가개!"
           backGroundImage={Page5Bg}
+          ref={(el: HTMLDivElement) => (pageRef.current[4] = el)}
         />
-        <DotsContainer>
+        <DotsWrapper>
           {Array.from({ length: 5 }).map((_, i) => (
-            <Dots href={'#section' + (i + 1)} key={i} />
+            <Dots
+              key={i}
+              onClick={() => {
+                pageRef.current[i].scrollIntoView({ behavior: 'smooth' });
+                setCurrentPage(pageRef.current[i]);
+              }}
+              selected={pageRef.current[i] === currentPage}
+            />
           ))}
-        </DotsContainer>
+        </DotsWrapper>
       </MainContainer>
     </>
   );
@@ -51,57 +77,28 @@ const MainContainer = styled.div`
   height: 100vh;
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
-  scroll-behavior: smooth;
   ::-webkit-scrollbar {
     display: none;
   }
 `;
-
-const DotsContainer = styled.div`
+const DotsWrapper = styled.div`
   position: absolute;
   top: 50%;
   right: 2.5%;
 `;
-
-const Dots = styled.a`
-  display: block;
-  width: 15px;
-  height: 15px;
+const Dots = styled.div<{
+  selected: unknown;
+}>`
+  width: 0.87rem;
+  height: 0.87rem;
+  margin-bottom: 0.9rem;
   border-radius: 50%;
-  border: 1.5px solid gray;
-  margin-bottom: 13px;
-  /* background-color: gray; */
-  /* &.active {
-    background-color: gray;
-  } */
+  border: 1.7px solid gray;
+  background-color: ${props => (props.selected ? 'gray' : '')};
   cursor: pointer;
+  :hover {
+    transform: scale(1.4);
+  }
 `;
 
 export default Main;
-
-const PAGE_DATA = [
-  {
-    id: 2,
-    title: '내 반려견과 잘 맞는\nMBTI 친구는 누굴까요?',
-    subTitle:
-      '채팅을 통해서 비슷한 성향의 친구들과\n교류하며 정보를 공유해보세요.',
-    reverse: false,
-    backGroundImage: Page2Bg,
-  },
-  {
-    id: 3,
-    title: '내 반려견과 잘 맞는\nMBTI 친구는 누굴까요?',
-    subTitle:
-      '채팅을 통해서 비슷한 성향의 친구들과\n교류하며 정보를 공유해보세요.',
-    reverse: true,
-    backGroundImage: Page3Bg,
-  },
-  {
-    id: 4,
-    title: '내 반려견과 잘 맞는\nMBTI 친구는 누굴까요?',
-    subTitle:
-      '채팅을 통해서 비슷한 성향의 친구들과\n교류하며 정보를 공유해보세요.',
-    reverse: false,
-    backGroundImage: Page4Bg,
-  },
-];

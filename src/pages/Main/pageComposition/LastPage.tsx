@@ -1,31 +1,34 @@
+import React from 'react';
 import styled from 'styled-components';
 import ToMbtiButton from '../components/toMbtiButton/ToMbtiButton';
 import { LastPageProp } from 'types/type';
 import dogBlackPaw from 'assets/svg/dog-paws1.svg';
 
-const LastPage = ({ title, subTitle, backGroundImage }: LastPageProp) => {
-  return (
-    <LastPageContainer
-      style={{ backgroundImage: `url(${backGroundImage})` }}
-      id="section5"
-    >
-      <TextContainer>
-        <Title>{title}</Title>
-        <SubTitle>{subTitle}</SubTitle>
-        <ButtonWrapper>
-          <ToMbtiButton
-            title="검사하개"
-            icon={dogBlackPaw}
-            textColor="black"
-            buttonColor="#E3E3E3"
-            buttonSize={13}
-            textSize={25}
-          />
-        </ButtonWrapper>
-      </TextContainer>
-    </LastPageContainer>
-  );
-};
+const LastPage = React.forwardRef<HTMLDivElement, LastPageProp>(
+  ({ title, subTitle, backGroundImage }, ref) => {
+    return (
+      <LastPageContainer
+        style={{ backgroundImage: `url(${backGroundImage})` }}
+        ref={ref}
+      >
+        <TextContainer>
+          <Title>{title}</Title>
+          <SubTitle>{subTitle}</SubTitle>
+          <ButtonWrapper>
+            <ToMbtiButton
+              title="검사하개"
+              icon={dogBlackPaw}
+              textColor="black"
+              buttonColor="#E3E3E3"
+              buttonSize={13}
+              textSize={25}
+            />
+          </ButtonWrapper>
+        </TextContainer>
+      </LastPageContainer>
+    );
+  }
+);
 
 const LastPageContainer = styled.div`
   height: 100vh;
