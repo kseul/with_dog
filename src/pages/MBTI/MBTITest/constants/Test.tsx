@@ -103,19 +103,19 @@ export const JUDEGEMENT_TEST_DB: TestData[] = [
 
 export const ANSWER_DB: AnswerData[] = [
   {
-    id: 1,
+    id: 0,
     name: '그렇다',
   },
   {
-    id: 2,
+    id: 1,
     name: '매우 그렇다',
   },
   {
-    id: 3,
+    id: 2,
     name: '아니다',
   },
   {
-    id: 4,
+    id: 3,
     name: '매우 아니다',
   },
 ];

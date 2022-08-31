@@ -1,23 +1,14 @@
-import console from 'console';
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import { ANSWER_DB } from './constants/Test';
+import { Iprops } from './TestDetail';
 
-const Answer = () => {
+const Answer = ({ handleChange, handleSetName }: Iprops) => {
   const [isChecked, setIsChecked] = useState(false);
   const [checked, setChecked] = useState<string | undefined>();
-  const [nameList, setNameList] = useState<string[]>([]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setChecked(e.target.value);
-  };
 
   const onClickCheck = (): void => {
     setIsChecked(!isChecked);
-  };
-
-  const handleSetName = (value: string): void => {
-    setNameList([value, ...nameList]);
   };
 
   return (
@@ -33,7 +24,7 @@ const Answer = () => {
             checked={checked === name}
             onChange={e => {
               handleChange(e);
-              handleSetName(e.target.value);
+              handleSetName(e.target.value, id);
             }}
           />
           {name}

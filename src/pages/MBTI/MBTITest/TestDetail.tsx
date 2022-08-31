@@ -1,14 +1,32 @@
+import { useState } from 'react';
 import styled from 'styled-components/macro';
 import Answer from './Answer';
 import { ENERGY_TEST_DB } from './constants/Test';
+export interface Iprops {
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSetName: (value: string, id: number) => void;
+}
 
 const TestDetail = () => {
+  const [checked, setChecked] = useState<string | undefined>();
+  const [nameList, setNameList] = useState<string[]>([]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setChecked(e.target.value);
+  };
+
+  const handleSetName = (value: string, id: number): void => {
+    const addAnswer = [...nameList];
+  };
+
+  console.log({ nameList });
   return (
     <TestDetailContainer>
       <TestList>
         {ENERGY_TEST_DB.map(({ id, testList }) => (
           <Questions key={id}>
-            {testList} <Answer />
+            {testList}
+            <Answer handleChange={handleChange} handleSetName={handleSetName} />
           </Questions>
         ))}
       </TestList>
