@@ -1,5 +1,3 @@
-import { useResolvedPath } from 'react-router-dom';
-
 export interface ListData {
   id: number;
   listName: string;

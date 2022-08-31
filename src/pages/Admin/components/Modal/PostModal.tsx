@@ -1,45 +1,59 @@
 import styled from 'styled-components';
+import useAxios from 'hooks/useAxios';
 import { AiOutlineClose } from 'react-icons/ai';
 import UserInfoBox from 'pages/Admin/components/RightSection/UserInfoBox';
 
-const PostModal = ({ closeModal }) => {
+const PostModal = ({ closeModal, modalId }) => {
+  const { response } = useAxios({
+    method: 'GET',
+    url: `https://togedog-dj.herokuapp.com/posts/${modalId}`,
+    headers: {
+      accept: '*/*',
+      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2MTkzMjQ3MiwiaWF0IjoxNjYxODQ2MDcyfQ.4sZDdEt11wNtcY9LReYGouDU4EU_F3mbRDrCRa_SSFw`,
+    },
+  });
+
   return (
     <ModalBackground onClick={closeModal}>
-      <ModalContainer onClick={e => e.stopPropagation()}>
-        <ModalTop>
-          <DeleteIconButton onClick={closeModal}>
-            <AiOutlineClose />
-          </DeleteIconButton>
-        </ModalTop>
-        <ModalTitle>게시글 관리</ModalTitle>
-        <ModalContentsWrapper>
-          <UserInfo>
-            <UserInfoTitle>사용자 정보</UserInfoTitle>
-            <UserInfoBox />
-          </UserInfo>
-          <PostContent>
-            <PostContentTitle>
-              <PostTitleIndex>게시글 제목</PostTitleIndex>
-              <PostTitleBox>제목이 들어올 자리</PostTitleBox>
-            </PostContentTitle>
-            <PostText>
-              <PostTextIndex>게시글 내용</PostTextIndex>
-              <PostTextBox>게시된 내용이 들어올 자리</PostTextBox>
-            </PostText>
-          </PostContent>
-          <PostImage>
-            <PostImageTitle>게시글 사진</PostImageTitle>
-            <PostImageContent>사진 들어가유</PostImageContent>
-          </PostImage>
-          <ReasonToBan>
-            <ReasonToBanTitle>사유</ReasonToBanTitle>
-            <ReasonToBanContent />
-            <BtnWrapper>
-              <CancelBtn onClick={closeModal}>게시글 삭제</CancelBtn>
-            </BtnWrapper>
-          </ReasonToBan>
-        </ModalContentsWrapper>
-      </ModalContainer>
+      {response?.data && (
+        <ModalContainer onClick={e => e.stopPropagation()}>
+          <ModalTop>
+            <DeleteIconButton onClick={closeModal}>
+              <AiOutlineClose />
+            </DeleteIconButton>
+          </ModalTop>
+          <ModalTitle>게시글 관리</ModalTitle>
+          <ModalContentsWrapper>
+            <UserInfo>
+              <UserInfoTitle>사용자 정보</UserInfoTitle>
+              <UserInfoBox data={response.data} />
+            </UserInfo>
+            <PostContent>
+              <PostContentTitle>
+                <PostTitleIndex>게시글 제목</PostTitleIndex>
+                <PostTitleBox>{response.data.subject}</PostTitleBox>
+              </PostContentTitle>
+              <PostText>
+                <PostTextIndex>게시글 내용</PostTextIndex>
+                <PostTextBox>{response.data.content}</PostTextBox>
+              </PostText>
+            </PostContent>
+            <PostImage>
+              <PostImageTitle>게시글 사진</PostImageTitle>
+              <PostImageContent>
+                <PostImg src={response.data.image_url} alt="게시글 이미지" />
+              </PostImageContent>
+            </PostImage>
+            <ReasonToBan>
+              <ReasonToBanTitle>사유</ReasonToBanTitle>
+              <ReasonToBanContent />
+              <BtnWrapper>
+                <CancelBtn onClick={closeModal}>게시글 삭제</CancelBtn>
+              </BtnWrapper>
+            </ReasonToBan>
+          </ModalContentsWrapper>
+        </ModalContainer>
+      )}
     </ModalBackground>
   );
 };
@@ -189,9 +203,18 @@ const PostImageTitle = styled.p`
 `;
 
 const PostImageContent = styled.div`
+  position: relative;
   width: 9.375rem;
   height: 9.375rem;
-  border: 1px solid black;
+  border: 1px solid white;
+`;
+
+const PostImg = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 `;
 
 export default PostModal;

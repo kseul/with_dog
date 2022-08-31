@@ -26,6 +26,7 @@ const AdminRightPagePost = ({ response }) => {
   const [indexClicked, setIndexClicked] = useState('');
   const [allToggle, setAllToggle] = useState(false);
   const [banToggle, setBanToggle] = useState(false);
+  const [modalId, setModalId] = useState<number | undefined>();
 
   const userData = response?.data;
 
@@ -35,6 +36,10 @@ const AdminRightPagePost = ({ response }) => {
 
   const closeModal = (): void => {
     setIsModalOpen(false);
+  };
+
+  const onCurrentModal = id => {
+    setModalId(id);
   };
 
   const indexOfLast = currentPage * perPage;
@@ -86,6 +91,7 @@ const AdminRightPagePost = ({ response }) => {
                 data={data}
                 key={data.id}
                 openModal={openModal}
+                onCurrentModal={onCurrentModal}
               />
             ))}
           {userData && (
@@ -97,7 +103,9 @@ const AdminRightPagePost = ({ response }) => {
               indexClicked={indexClicked}
             />
           )}
-          {isModalOpen && <PostModal closeModal={closeModal} />}
+          {isModalOpen && (
+            <PostModal closeModal={closeModal} modalId={modalId} />
+          )}
         </ListContentsSection>
       </UserListContainer>
     </AdminRightContainer>
