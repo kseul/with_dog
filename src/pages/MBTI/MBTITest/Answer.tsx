@@ -1,9 +1,13 @@
-import { useState } from 'react';
 import styled from 'styled-components/macro';
 import { ANSWER_DB } from './constants/Test';
-import { Iprops } from './EnergyTest';
+import { NewType } from './EnergyTest';
 
-const Answer = ({ handleSetName, onClickCheck, labelName, testId }: Iprops) => {
+const Answer = ({
+  handleSetName,
+  onClickCheck,
+  testId,
+  labelName,
+}: NewType) => {
   return (
     <AnswerList>
       {ANSWER_DB.map(({ id, name }) => (
