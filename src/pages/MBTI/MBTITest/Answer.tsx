@@ -1,30 +1,21 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components/macro';
 import { ANSWER_DB } from './constants/Test';
-import { Iprops } from './TestDetail';
+import { Iprops } from './EnergyTest';
 
-const Answer = ({ handleChange, handleSetName }: Iprops) => {
-  const [isChecked, setIsChecked] = useState(false);
-  const [checked, setChecked] = useState<string | undefined>();
-
-  const onClickCheck = (): void => {
-    setIsChecked(!isChecked);
-  };
-
+const Answer = ({ handleSetName, onClickCheck, labelName, testId }: Iprops) => {
   return (
     <AnswerList>
       {ANSWER_DB.map(({ id, name }) => (
         <AnswerLabel key={id}>
           <Answers
+            key={testId}
             type="radio"
             value={name}
-            onClick={() => {
-              onClickCheck();
-            }}
-            checked={checked === name}
+            name={labelName}
+            onClick={onClickCheck}
             onChange={e => {
-              handleChange(e);
-              handleSetName(e.target.value, id);
+              handleSetName(e.target.value, testId);
             }}
           />
           {name}
@@ -34,7 +25,7 @@ const Answer = ({ handleChange, handleSetName }: Iprops) => {
   );
 };
 
-const AnswerList = styled.li`
+const AnswerList = styled.div`
   ${props => props.theme.flex.flexBox('row', '', 'center')};
   margin-top: 10px;
 `;

@@ -1,12 +1,12 @@
 import styled from 'styled-components/macro';
 import ProgressBar from './ProgressBar';
-import TestDetail from './TestDetail';
+import EnergyTest from './EnergyTest';
 
 const MBTITest = () => {
   return (
     <MBTITestContainer>
       <ProgressBar />
-      <TestDetail />
+      <EnergyTest />
     </MBTITestContainer>
   );
 };
