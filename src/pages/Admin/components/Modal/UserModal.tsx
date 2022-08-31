@@ -1,28 +1,39 @@
 import styled from 'styled-components';
+import useAxios from 'hooks/useAxios';
 import { AiOutlineClose } from 'react-icons/ai';
 
-const UserModal = ({ closeModal }) => {
+const UserModal = ({ closeModal, modalId }) => {
+  const { response } = useAxios({
+    method: 'GET',
+    url: `https://togedog-dj.herokuapp.com/users/${modalId}`,
+    headers: {
+      accept: '*/*',
+      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2MTkzMjQ3MiwiaWF0IjoxNjYxODQ2MDcyfQ.4sZDdEt11wNtcY9LReYGouDU4EU_F3mbRDrCRa_SSFw`,
+    },
+  });
   return (
     <ModalBackground onClick={closeModal}>
-      <ModalContainer onClick={e => e.stopPropagation()}>
-        <ModalTop>
-          <DeleteIconButton onClick={closeModal}>
-            <AiOutlineClose />
-          </DeleteIconButton>
-        </ModalTop>
-        <ModalContents>
-          <ProfileImage></ProfileImage>
-          <UserName>안성주</UserName>
-          <UserNickName>안론머스크</UserNickName>
-          <Mbti>ENFJ</Mbti>
-          <MbtiText>활기찬 강아지</MbtiText>
-          <UserEmail>sungjubabo@gmail.com</UserEmail>
-          <UserAddress>경기도 서울시 부산구 대구동 73</UserAddress>
-          <BtnContainer>
-            <CancelBtn onClick={closeModal}>계정 삭제</CancelBtn>
-          </BtnContainer>
-        </ModalContents>
-      </ModalContainer>
+      {response?.data && (
+        <ModalContainer onClick={e => e.stopPropagation()}>
+          <ModalTop>
+            <DeleteIconButton onClick={closeModal}>
+              <AiOutlineClose />
+            </DeleteIconButton>
+          </ModalTop>
+          <ModalContents>
+            <ProfileImage></ProfileImage>
+            <UserName>{response.data.name}</UserName>
+            <UserNickName>{response.data.nickname}</UserNickName>
+            <Mbti>{response.data.mbti}</Mbti>
+            <MbtiText>{response.data.mbti}</MbtiText>
+            <UserEmail>{response.data.email}</UserEmail>
+            <UserAddress>경기도 서울시 부산구 대구동 73</UserAddress>
+            <BtnContainer>
+              <CancelBtn onClick={closeModal}>계정 삭제</CancelBtn>
+            </BtnContainer>
+          </ModalContents>
+        </ModalContainer>
+      )}
     </ModalBackground>
   );
 };

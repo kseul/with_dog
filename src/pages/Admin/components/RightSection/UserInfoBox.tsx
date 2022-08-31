@@ -1,27 +1,30 @@
 import styled from 'styled-components';
 
-const UserInfoBox = () => {
+const UserInfoBox = ({ data }) => {
+  const date = new Date(data.user_signup_time);
+  const convertedDate = date.toISOString().substring(0, 10);
+
   return (
     <UserInfoContainer>
       <UserInfoWrapper>
         <UserCategory>이름</UserCategory>
-        <CategoryText>김철회</CategoryText>
+        <CategoryText>{data.user_name}</CategoryText>
       </UserInfoWrapper>
       <UserInfoWrapper>
         <UserCategory>닉네임</UserCategory>
-        <CategoryText>홱홱홱홱</CategoryText>
+        <CategoryText>{data.user_name}</CategoryText>
       </UserInfoWrapper>
       <UserInfoWrapper>
         <UserCategory>이메일</UserCategory>
-        <CategoryText>kc8@naver.com</CategoryText>
+        <CategoryText>{data.user_name}</CategoryText>
       </UserInfoWrapper>
       <UserInfoWrapper>
         <UserCategory>강아지MBTI</UserCategory>
-        <CategoryText>INFP</CategoryText>
+        <CategoryText>{data.user_mbti}</CategoryText>
       </UserInfoWrapper>
       <UserInfoWrapper>
         <UserCategory>가입일</UserCategory>
-        <CategoryText>2022.08.20</CategoryText>
+        <CategoryText>{convertedDate}</CategoryText>
       </UserInfoWrapper>
     </UserInfoContainer>
   );

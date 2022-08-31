@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 
-const ListContentsBox = ({ data, openModal }) => {
+const ListContentsBox = ({ data, openModal, onCurrentModal }) => {
   return (
-    <ListContents onClick={openModal}>
+    <ListContents
+      onClick={() => {
+        openModal();
+        onCurrentModal(data.id);
+      }}
+    >
       <UserName>{data.name}</UserName>
-      <UserEmail>{data.name}</UserEmail>
-      <UserMbti>{data.name}</UserMbti>
-      <UserSignDate>{data.name}</UserSignDate>
+      <UserEmail>{data.email}</UserEmail>
+      <UserMbti>{data.mbti}</UserMbti>
+      <UserSignDate>{data.email}</UserSignDate>
     </ListContents>
   );
 };

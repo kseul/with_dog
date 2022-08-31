@@ -1,34 +1,22 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import ListHeaderBox from 'pages/Admin/components/ListHeaderBox';
-import ListContentsBox from 'pages/Admin/components/ListContentsBox';
-import UserModal from 'pages/Admin/components/UserModal';
-import PostModal from 'pages/Admin/components/PostModal';
+import ListHeaderBox from 'pages/Admin/components/RightSection/ListHeaderBox';
+import ListContentsBox from 'pages/Admin/components/RightSection/ListContentsBox';
+import UserModal from 'pages/Admin/components/Modal/UserModal';
 import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/PageNation';
-import useAxios from 'hooks/useAxios';
+import { PagenatedData } from 'types/type';
 
-interface PagenatedData {
-  name: string;
-  url: string;
-}
-
-const AdminRightPage = () => {
+const AdminRightPageUser = ({ response }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [indexClicked, setIndexClicked] = useState('');
   const [allToggle, setAllToggle] = useState(false);
   const [banToggle, setBanToggle] = useState(false);
+  const [modalId, setModalId] = useState<number | undefined>();
 
-  const { response } = useAxios({
-    method: 'GET',
-    url: `https://pokeapi.co/api/v2/pokemon?limit=151&offset=0`,
-    headers: {
-      accept: '*/*',
-    },
-  });
-  const userData = response?.data?.results;
+  const userData = response?.data;
 
   const openModal = (): void => {
     setIsModalOpen(true);
@@ -36,6 +24,10 @@ const AdminRightPage = () => {
 
   const closeModal = (): void => {
     setIsModalOpen(false);
+  };
+
+  const onCurrentModal = id => {
+    setModalId(id);
   };
 
   const indexOfLast = currentPage * perPage;
@@ -85,8 +77,9 @@ const AdminRightPage = () => {
             pagenatedData.map(data => (
               <ListContentsBox
                 data={data}
-                key={data.url}
+                key={data.id}
                 openModal={openModal}
+                onCurrentModal={onCurrentModal}
               />
             ))}
           {userData && (
@@ -98,7 +91,9 @@ const AdminRightPage = () => {
               indexClicked={indexClicked}
             />
           )}
-          {isModalOpen && <PostModal closeModal={closeModal} />}
+          {isModalOpen && (
+            <UserModal closeModal={closeModal} modalId={modalId} />
+          )}
         </ListContentsSection>
       </UserListContainer>
     </AdminRightContainer>
@@ -205,4 +200,4 @@ const UserListContainer = styled.div``;
 
 const ListContentsSection = styled.div``;
 
-export default AdminRightPage;
+export default AdminRightPageUser;
