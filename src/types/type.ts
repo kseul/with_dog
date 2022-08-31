@@ -37,6 +37,29 @@ export interface ChatModalProp {
   title: string | undefined;
 }
 
+export interface ToMbtiButtonProp {
+  title: string;
+  icon: string;
+  textColor: string;
+  buttonColor: string;
+  buttonSize: number;
+  textSize: number;
+}
+
+export interface MainPagesProp {
+  backGroundImage: string;
+}
+
+export interface LastPageProp extends MainPagesProp {
+  title: string;
+  subTitle: string;
+}
+
+export interface ContentPagesProp extends LastPageProp {
+  reverse: boolean;
+  id: number;
+}
+
 export interface ListData {
   id: number;
   listName: string;
