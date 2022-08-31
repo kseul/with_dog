@@ -3,26 +3,26 @@ const COMMENT_DATA = [
     id: 1,
     commentProfile: '',
     commentWriter: '정날순',
-    commentContent:
-      '졸귀넹 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋdㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ',
+    commentContent: '많이 귀엽군요',
   },
   {
     id: 2,
     commentProfile: '',
     commentWriter: '유베리',
-    commentContent: '우와아아아아아아아아앙ㅇㅇㅇㅇㅇㅇㅇㅇㅇ',
+    commentContent: '저희 강아지랑 똑 닮았어요!',
   },
   {
     id: 3,
     commentProfile: '',
     commentWriter: '김유메',
-    commentContent: '월월월월월월월월월월월월월월월월월월월월월월',
+    commentContent: '저희 강아지랑 같이 산책 갈까요?',
   },
   {
     id: 4,
     commentProfile: '',
     commentWriter: '호돌이',
-    commentContent: '컹컹컹컹컹컹컹컹컹컹컹컹컹컹컹컹컹컹컹컹컹컹',
+    commentContent:
+      '테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트',
   },
   // {
   //   id: 5,

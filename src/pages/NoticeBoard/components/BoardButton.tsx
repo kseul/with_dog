@@ -38,6 +38,7 @@ const BOARD_FILTERING = [
 const BoardButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 100%;
 `;
 
 const BoardButtonWrapper = styled.div`

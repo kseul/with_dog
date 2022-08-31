@@ -24,7 +24,6 @@ const BoardModalButtonWrapper = styled.div`
   flex-direction: row;
   width: 100%;
   margin: 0.6rem;
-  background-color: mintcream;
 `;
 
 const BoardModalButtonElement = styled.div`

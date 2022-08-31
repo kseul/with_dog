@@ -31,7 +31,7 @@ const CommentContainer = styled.div`
 `;
 
 const CommentWrapper = styled.div`
-  ${props => props.theme.flex.flexBox};
+  ${props => props.theme.flex.flexBox('', '', '')};
   margin-top: 1rem;
 `;
 
@@ -46,6 +46,7 @@ const CommentProfile = styled.img`
 const CommentText = styled.div`
   ${props => props.theme.flex.flexBox('column', '')};
   width: 100%;
+  font-size: 0.9rem;
 `;
 
 const CommentWriter = styled.span`

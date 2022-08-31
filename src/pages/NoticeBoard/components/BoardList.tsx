@@ -42,9 +42,19 @@ const BoardList = () => {
 
 const BoardListWrapper = styled.div`
   display: grid;
-  gap: 3rem 5rem;
+  gap: 7rem 5rem;
   grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  width: 100%;
   margin-top: 1.5rem;
+
+  @media screen and (min-width: 1920px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media screen and (max-width: 1280px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const BoardCard = styled.div`
@@ -52,7 +62,7 @@ const BoardCard = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 16.35rem;
+  width: 100%;
   height: 22rem;
   border-radius: 10%;
   background-color: white;
