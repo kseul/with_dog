@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ListData } from 'pages/Admin/DATA/LEFTSIDE_LIST';
+import { ListData } from 'types/type';
 import { NavigateFunction } from 'react-router-dom';
 
 interface ListProps {

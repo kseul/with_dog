@@ -1,8 +1,4 @@
-export interface ListData {
-  id: number;
-  listName: string;
-  value: string;
-}
+import { ListData } from 'types/type';
 
 const LEFTSIDE_DB: ListData[] = [
   {

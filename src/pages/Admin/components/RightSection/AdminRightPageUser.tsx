@@ -5,18 +5,7 @@ import ListContentsBox from 'pages/Admin/components/RightSection/ListContentsBox
 import UserModal from 'pages/Admin/components/Modal/UserModal';
 import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/PageNation';
-
-interface PagenatedData {
-  account_type: string;
-  email: string;
-  id: number;
-  mbti: string;
-  name: string;
-  nickname: string;
-  status: string;
-  thumbnail_url: string;
-  user_type: string;
-}
+import { PagenatedData } from 'types/type';
 
 const AdminRightPageUser = ({ response }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
