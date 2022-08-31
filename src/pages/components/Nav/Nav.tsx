@@ -30,12 +30,15 @@ const Nav = () => {
   );
 };
 const NavContainer = styled.div`
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2.5rem;
+  width: 100%;
   height: 5rem;
   border-bottom: 2px solid #e1e2e3;
+  background-color: white;
 `;
 const PageContainer = styled.div`
   display: flex;
