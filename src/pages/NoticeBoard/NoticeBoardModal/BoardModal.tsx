@@ -1,26 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
-import BoardModalComment from './BoardModalComment';
-import BoardModalButton from './BoardModalButton';
-import BoardModalTyping from './BoardModalTyping';
-import dog1 from 'assets/images/dog1.jpg';
+import BoardModalComment from './components/BoardModalComment';
+import BoardModalButton from './components/BoardModalButton';
+import BoardModalTyping from './components/BoardModalTyping';
 import leftArrow from 'assets/svg/arrow-left.svg';
 import rightArrow from 'assets/svg/arrow-right.svg';
 import cancelButton from 'assets/svg/cancel.svg';
 import { BoardModalProp } from 'types/type';
 
-const BoardModal = ({ clickCard }: BoardModalProp) => {
+const BoardModal = ({
+  clickCard,
+  title,
+  date,
+  image,
+  like,
+}: BoardModalProp) => {
   return (
     <>
       <BoardModalContainer>
         <BoardModalImageWrapper>
-          <BoardImageBox src={dog1} />
+          <BoardImageBox src={image} />
         </BoardModalImageWrapper>
         <BoardModalContentWrapper>
-          <BoardModalTitle> 왜 우리 댕댕이는 최고인가? </BoardModalTitle>
-          <BoardModalDate> 2022년 1월 1일 </BoardModalDate>
+          <BoardModalTitle> {title} </BoardModalTitle>
+          <BoardModalDate> {date} </BoardModalDate>
           <BoardModalComment />
-          <BoardModalButton />
+          <BoardModalButton like={like} />
           <BoardModalTyping />
         </BoardModalContentWrapper>
       </BoardModalContainer>

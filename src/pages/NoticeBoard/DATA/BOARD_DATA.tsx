@@ -11,7 +11,7 @@ const BOARD_DATA = [
     title: '우리 강아지',
     date: '2020-01-01',
     writer: 'choi',
-    views: 19000,
+    like: 19000,
     image: dog1,
   },
   {
@@ -19,7 +19,7 @@ const BOARD_DATA = [
     title: '복덩이',
     date: '2020-01-01',
     writer: 'kim',
-    views: 4250,
+    like: 4250,
     image: dog2,
   },
   {
@@ -27,7 +27,7 @@ const BOARD_DATA = [
     title: '신기하네요 글 길게쓰면?',
     date: '2020-01-01',
     writer: 'ahn',
-    views: 6500,
+    like: 6500,
     image: dog3,
   },
   {
@@ -35,7 +35,7 @@ const BOARD_DATA = [
     title: '도배도배도배도배도배도배도배도배',
     date: '2020-01-01',
     writer: 'kang',
-    views: 200,
+    like: 200,
     image: dog4,
   },
   {
@@ -43,7 +43,7 @@ const BOARD_DATA = [
     title: '우리 강아지5',
     date: '2020-01-01',
     writer: 'yoon',
-    views: 200,
+    like: 200,
     image: dog5,
   },
   {
@@ -51,7 +51,7 @@ const BOARD_DATA = [
     title: '우리 강아지6',
     date: '2020-01-01',
     writer: 'hwang',
-    views: 200,
+    like: 200,
     image: dog6,
   },
 ];

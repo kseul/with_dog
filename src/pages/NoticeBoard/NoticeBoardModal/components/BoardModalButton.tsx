@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import dogPaws from 'assets/svg/dog-paws1.svg';
 import cancelBtn from 'assets/svg/cancel.svg';
+import { BoardDataProp } from 'types/type';
 
-const BoardModalButton = () => {
+const BoardModalButton = ({ like }: BoardDataProp) => {
   return (
     <BoardModalButtonWrapper>
       <BoardModalButtonElement>
         <BoardModalImg src={dogPaws} />
-        <BoardModalText>2,200</BoardModalText>
+        <BoardModalText>{like} </BoardModalText>
       </BoardModalButtonElement>
 
       <BoardModalButtonElement>
