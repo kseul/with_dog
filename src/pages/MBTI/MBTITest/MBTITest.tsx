@@ -3,6 +3,7 @@ import ProgressBar from './ProgressBar';
 import EnergyTest from './EnergyTest';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import RelationTest from './RelationTest';
 export interface Iprops {
   handleSetName: (value: string, testId: number) => void;
   onClickCheck: () => void;
@@ -10,7 +11,7 @@ export interface Iprops {
 
 export interface AnswerType {
   testId: number;
-  answerValue: any;
+  answerValue: string;
 }
 
 const MBTITest = () => {
@@ -36,7 +37,14 @@ const MBTITest = () => {
   return (
     <MBTITestContainer>
       <ProgressBar />
-      <EnergyTest handleSetName={handleSetName} onClickCheck={onClickCheck} />
+      {nameList.length === 5 ? (
+        <RelationTest
+          handleSetName={handleSetName}
+          onClickCheck={onClickCheck}
+        />
+      ) : (
+        <EnergyTest handleSetName={handleSetName} onClickCheck={onClickCheck} />
+      )}
     </MBTITestContainer>
   );
 };
