@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import useAxios from 'hooks/useAxios';
+import axios from 'axios';
 import { AiOutlineClose } from 'react-icons/ai';
 
 const UserModal = ({ closeModal, modalId }) => {
@@ -8,9 +9,17 @@ const UserModal = ({ closeModal, modalId }) => {
     url: `https://togedog-dj.herokuapp.com/users/${modalId}`,
     headers: {
       accept: '*/*',
-      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2MTkzMjQ3MiwiaWF0IjoxNjYxODQ2MDcyfQ.4sZDdEt11wNtcY9LReYGouDU4EU_F3mbRDrCRa_SSFw`,
+      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
     },
   });
+
+  const deleteUser = () => {
+    axios.delete(`https://togedog-dj.herokuapp.com/users/${modalId}`, {
+      headers: {
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
+      },
+    });
+  };
   return (
     <ModalBackground onClick={closeModal}>
       {response?.data && (
@@ -21,7 +30,7 @@ const UserModal = ({ closeModal, modalId }) => {
             </DeleteIconButton>
           </ModalTop>
           <ModalContents>
-            <ProfileImage></ProfileImage>
+            <ProfileImage />
             <UserName>{response.data.name}</UserName>
             <UserNickName>{response.data.nickname}</UserNickName>
             <Mbti>{response.data.mbti}</Mbti>
@@ -29,7 +38,14 @@ const UserModal = ({ closeModal, modalId }) => {
             <UserEmail>{response.data.email}</UserEmail>
             <UserAddress>경기도 서울시 부산구 대구동 73</UserAddress>
             <BtnContainer>
-              <CancelBtn onClick={closeModal}>계정 삭제</CancelBtn>
+              <CancelBtn
+                onClick={() => {
+                  closeModal();
+                  deleteUser();
+                }}
+              >
+                계정 삭제
+              </CancelBtn>
             </BtnContainer>
           </ModalContents>
         </ModalContainer>

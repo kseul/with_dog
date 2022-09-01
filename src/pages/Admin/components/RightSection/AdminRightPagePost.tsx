@@ -10,7 +10,7 @@ import { PagenatedData } from 'types/type';
 const AdminRightPagePost = ({ response }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage, setPerPage] = useState(10);
+  const perPage = 10;
   const [indexClicked, setIndexClicked] = useState('');
   const [allToggle, setAllToggle] = useState(false);
   const [banToggle, setBanToggle] = useState(false);
