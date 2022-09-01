@@ -19,7 +19,7 @@ const AdminContainer = () => {
     url: `https://togedog-dj.herokuapp.com/${params.value}`,
     headers: {
       accept: '*/*',
-      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2MTkzMjQ3MiwiaWF0IjoxNjYxODQ2MDcyfQ.4sZDdEt11wNtcY9LReYGouDU4EU_F3mbRDrCRa_SSFw`,
+      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
     },
   });
 

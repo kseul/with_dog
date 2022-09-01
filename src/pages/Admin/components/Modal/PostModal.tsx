@@ -1,17 +1,37 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import useAxios from 'hooks/useAxios';
+import axios from 'axios';
 import { AiOutlineClose } from 'react-icons/ai';
 import UserInfoBox from 'pages/Admin/components/RightSection/UserInfoBox';
 
 const PostModal = ({ closeModal, modalId }) => {
+  const [reason, setReason] = useState<string>('');
+
   const { response } = useAxios({
     method: 'GET',
     url: `https://togedog-dj.herokuapp.com/posts/${modalId}`,
     headers: {
       accept: '*/*',
-      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2MTkzMjQ3MiwiaWF0IjoxNjYxODQ2MDcyfQ.4sZDdEt11wNtcY9LReYGouDU4EU_F3mbRDrCRa_SSFw`,
+      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
     },
   });
+
+  const getReason = e => {
+    e.preventDefault();
+    setReason(e.target.value);
+  };
+
+  const deletePost = () => {
+    axios.delete(`https://togedog-dj.herokuapp.com/posts/${modalId}`, {
+      headers: {
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
+      },
+      data: {
+        ban: reason,
+      },
+    });
+  };
 
   return (
     <ModalBackground onClick={closeModal}>
@@ -46,9 +66,16 @@ const PostModal = ({ closeModal, modalId }) => {
             </PostImage>
             <ReasonToBan>
               <ReasonToBanTitle>사유</ReasonToBanTitle>
-              <ReasonToBanContent />
+              <ReasonToBanContent onChange={getReason} />
               <BtnWrapper>
-                <CancelBtn onClick={closeModal}>게시글 삭제</CancelBtn>
+                <CancelBtn
+                  onClick={() => {
+                    closeModal();
+                    deletePost();
+                  }}
+                >
+                  게시글 삭제
+                </CancelBtn>
               </BtnWrapper>
             </ReasonToBan>
           </ModalContentsWrapper>
