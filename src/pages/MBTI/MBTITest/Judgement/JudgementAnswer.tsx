@@ -1,13 +1,13 @@
 import styled from 'styled-components/macro';
 import { ANSWER_DB } from '../constants/Test';
-import { MBTIEnergyProps } from '../MBTITest';
+import { MBTIJudgdemnetProps } from '../MBTITest';
 
-const EnergyAnswer = ({
-  handleSetEnergyName,
+const RelationAnswer = ({
+  handleSetJudgementName,
   onClickCheck,
   testId,
   labelName,
-}: MBTIEnergyProps) => {
+}: MBTIJudgdemnetProps) => {
   return (
     <AnswerList>
       {ANSWER_DB.map(({ id, name }) => (
@@ -19,7 +19,7 @@ const EnergyAnswer = ({
             name={labelName}
             onClick={onClickCheck}
             onChange={e => {
-              handleSetEnergyName(e.target.value, testId!);
+              handleSetJudgementName(e.target.value, testId!);
             }}
           />
           {name}
@@ -45,4 +45,4 @@ const Answers = styled.input`
   margin-top: 10px;
 `;
 
-export default EnergyAnswer;
+export default RelationAnswer;

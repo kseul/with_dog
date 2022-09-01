@@ -1,23 +1,24 @@
 import styled from 'styled-components/macro';
-import { ENERGY_TEST_DB } from '../constants/Test';
-import { MBTIEnergyProps } from '../MBTITest';
-import EnergyAnswer from './EnergyAnswer';
+import { JUDEGEMENT_TEST_DB } from '../constants/Test';
+import { MBTIJudgdemnetProps } from '../MBTITest';
+import RelationAnswer from './JudgementAnswer';
 import MBTIButton from '../MBTIButton';
+import MBTIResultButton from '../MBTIResultButton';
 
-const EnergyTest = ({
-  handleSetEnergyName,
+const JudgementTest = ({
+  handleSetJudgementName,
   onClickCheck,
-  energyLength,
-  onEnergyCheck,
-}: MBTIEnergyProps) => {
+  judgementLength,
+  onJudgementCheck,
+}: MBTIJudgdemnetProps) => {
   return (
     <TestDetailContainer>
       <TestList>
-        {ENERGY_TEST_DB.map(({ testId, testList, labelName }) => (
+        {JUDEGEMENT_TEST_DB.map(({ testId, testList, labelName }) => (
           <Questions key={testId}>
             {testList}
-            <EnergyAnswer
-              handleSetEnergyName={handleSetEnergyName}
+            <RelationAnswer
+              handleSetJudgementName={handleSetJudgementName}
               onClickCheck={onClickCheck}
               labelName={labelName}
               testId={testId}
@@ -25,7 +26,7 @@ const EnergyTest = ({
           </Questions>
         ))}
       </TestList>
-      {energyLength === 5 && <MBTIButton onCheck={onEnergyCheck} />}
+      {judgementLength === 6 && <MBTIResultButton onCheck={onJudgementCheck} />}
     </TestDetailContainer>
   );
 };
@@ -48,4 +49,4 @@ const Questions = styled.li`
   text-align: center;
 `;
 
-export default EnergyTest;
+export default JudgementTest;

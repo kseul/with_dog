@@ -1,23 +1,23 @@
 import styled from 'styled-components/macro';
-import { ENERGY_TEST_DB } from '../constants/Test';
-import { MBTIEnergyProps } from '../MBTITest';
-import EnergyAnswer from './EnergyAnswer';
+import { REACTION_TEST_DB } from '../constants/Test';
 import MBTIButton from '../MBTIButton';
+import { MBTIReactionProps } from '../MBTITest';
+import ReactionAnswer from './ReactionAnswer';
 
-const EnergyTest = ({
-  handleSetEnergyName,
+const ReactionTest = ({
+  handleSetReactionName,
   onClickCheck,
-  energyLength,
-  onEnergyCheck,
-}: MBTIEnergyProps) => {
+  reactionLength,
+  onReactionCheck,
+}: MBTIReactionProps) => {
   return (
     <TestDetailContainer>
       <TestList>
-        {ENERGY_TEST_DB.map(({ testId, testList, labelName }) => (
+        {REACTION_TEST_DB.map(({ testId, testList, labelName }) => (
           <Questions key={testId}>
             {testList}
-            <EnergyAnswer
-              handleSetEnergyName={handleSetEnergyName}
+            <ReactionAnswer
+              handleSetReactionName={handleSetReactionName}
               onClickCheck={onClickCheck}
               labelName={labelName}
               testId={testId}
@@ -25,7 +25,7 @@ const EnergyTest = ({
           </Questions>
         ))}
       </TestList>
-      {energyLength === 5 && <MBTIButton onCheck={onEnergyCheck} />}
+      {reactionLength === 5 && <MBTIButton onCheck={onReactionCheck} />}
     </TestDetailContainer>
   );
 };
@@ -48,4 +48,4 @@ const Questions = styled.li`
   text-align: center;
 `;
 
-export default EnergyTest;
+export default ReactionTest;

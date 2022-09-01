@@ -1,23 +1,23 @@
 import styled from 'styled-components/macro';
-import { ENERGY_TEST_DB } from '../constants/Test';
-import { MBTIEnergyProps } from '../MBTITest';
-import EnergyAnswer from './EnergyAnswer';
+import { RELATION_TEST_DB } from '../constants/Test';
+import { MBTIRelationProps } from '../MBTITest';
+import RelationAnswer from './RelationAnswer';
 import MBTIButton from '../MBTIButton';
 
-const EnergyTest = ({
-  handleSetEnergyName,
+const RelationTest = ({
+  handleSetRelationName,
   onClickCheck,
-  energyLength,
-  onEnergyCheck,
-}: MBTIEnergyProps) => {
+  relationLength,
+  onRelationCheck,
+}: MBTIRelationProps) => {
   return (
     <TestDetailContainer>
       <TestList>
-        {ENERGY_TEST_DB.map(({ testId, testList, labelName }) => (
+        {RELATION_TEST_DB.map(({ testId, testList, labelName }) => (
           <Questions key={testId}>
             {testList}
-            <EnergyAnswer
-              handleSetEnergyName={handleSetEnergyName}
+            <RelationAnswer
+              handleSetRelationName={handleSetRelationName}
               onClickCheck={onClickCheck}
               labelName={labelName}
               testId={testId}
@@ -25,7 +25,7 @@ const EnergyTest = ({
           </Questions>
         ))}
       </TestList>
-      {energyLength === 5 && <MBTIButton onCheck={onEnergyCheck} />}
+      {relationLength === 5 && <MBTIButton onCheck={onRelationCheck} />}
     </TestDetailContainer>
   );
 };
@@ -48,4 +48,4 @@ const Questions = styled.li`
   text-align: center;
 `;
 
-export default EnergyTest;
+export default RelationTest;
