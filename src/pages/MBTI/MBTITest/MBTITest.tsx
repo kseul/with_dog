@@ -1,11 +1,10 @@
 import styled from 'styled-components/macro';
 import ProgressBar from './ProgressBar';
-import EnergyTest from './EnergyTest';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import RelationTest from './RelationTest';
-export interface Iprops {
-  handleSetName: (value: string, testId: number) => void;
+import EnergyTest from './Energy/EnergyTest';
+
+export interface MBTIEnergyprops {
+  handleSetEnergyName: (value: string, testId: number) => void;
   onClickCheck: () => void;
 }
 
@@ -15,36 +14,41 @@ export interface AnswerType {
 }
 
 const MBTITest = () => {
-  const [nameList, setNameList] = useState<AnswerType[]>([
+  const [energyNameList, setEnergyNameList] = useState<AnswerType[]>([
     { testId: 0, answerValue: '' },
   ]);
   const [isChecked, setIsChecked] = useState(false);
-  const navigate = useNavigate();
 
   const onClickCheck = (): void => {
     setIsChecked(!isChecked);
   };
 
-  const handleSetName = (value: string, id: number): void => {
-    setNameList(nameList.concat({ testId: id, answerValue: value }));
-    const inputItemsCopy = nameList;
+  const handleSetEnergyName = (value: string, id: number): void => {
+    setEnergyNameList(
+      energyNameList.concat({ testId: id, answerValue: value })
+    );
+    const inputItemsCopy = energyNameList;
     inputItemsCopy[id].answerValue = value;
-    setNameList(inputItemsCopy);
+    setEnergyNameList(inputItemsCopy);
   };
 
-  console.log({ nameList });
+  console.log({ energyNameList });
 
   return (
     <MBTITestContainer>
       <ProgressBar />
-      {nameList.length === 5 ? (
+      {/* {nameList.length === 5 ? (
         <RelationTest
           handleSetName={handleSetName}
           onClickCheck={onClickCheck}
         />
       ) : (
         <EnergyTest handleSetName={handleSetName} onClickCheck={onClickCheck} />
-      )}
+      )} */}
+      <EnergyTest
+        handleSetEnergyName={handleSetEnergyName}
+        onClickCheck={onClickCheck}
+      />
     </MBTITestContainer>
   );
 };

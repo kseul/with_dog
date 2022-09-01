@@ -1,13 +1,13 @@
 import styled from 'styled-components/macro';
-import { ANSWER_DB } from './constants/Test';
-import { NewType } from './EnergyTest';
+import { ANSWER_DB } from '../constants/Test';
+import { EnergyProps } from './EnergyTest';
 
-const Answer = ({
-  handleSetName,
+const EnergyAnswer = ({
+  handleSetEnergyName,
   onClickCheck,
   testId,
   labelName,
-}: NewType) => {
+}: EnergyProps) => {
   return (
     <AnswerList>
       {ANSWER_DB.map(({ id, name }) => (
@@ -19,7 +19,7 @@ const Answer = ({
             name={labelName}
             onClick={onClickCheck}
             onChange={e => {
-              handleSetName(e.target.value, testId);
+              handleSetEnergyName(e.target.value, testId);
             }}
           />
           {name}
@@ -45,4 +45,4 @@ const Answers = styled.input`
   margin-top: 10px;
 `;
 
-export default Answer;
+export default EnergyAnswer;

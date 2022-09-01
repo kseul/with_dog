@@ -1,22 +1,22 @@
 import styled from 'styled-components/macro';
-import Answer from './Answer';
-import { ENERGY_TEST_DB } from './constants/Test';
-import { Iprops } from './MBTITest';
+import { ENERGY_TEST_DB } from '../constants/Test';
+import { MBTIEnergyprops } from '../MBTITest';
+import EnergyAnswer from './EnergyAnswer';
 
-export interface NewType extends Iprops {
+export interface EnergyProps extends MBTIEnergyprops {
   testId: number;
   labelName: string;
 }
 
-const EnergyTest = ({ handleSetName, onClickCheck }: Iprops) => {
+const EnergyTest = ({ handleSetEnergyName, onClickCheck }: EnergyProps) => {
   return (
     <TestDetailContainer>
       <TestList>
         {ENERGY_TEST_DB.map(({ testId, testList, labelName }) => (
           <Questions key={testId}>
             {testList}
-            <Answer
-              handleSetName={handleSetName}
+            <EnergyAnswer
+              handleSetEnergyName={handleSetEnergyName}
               onClickCheck={onClickCheck}
               labelName={labelName}
               testId={testId}
