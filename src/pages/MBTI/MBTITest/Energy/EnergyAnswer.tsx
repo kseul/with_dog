@@ -3,7 +3,7 @@ import { ANSWER_DB } from '../constants/Test';
 import { EnergyProps } from './EnergyTest';
 
 const EnergyAnswer = ({
-  handleSetEnergyName,
+  handleSetName,
   onClickCheck,
   testId,
   labelName,
@@ -19,7 +19,7 @@ const EnergyAnswer = ({
             name={labelName}
             onClick={onClickCheck}
             onChange={e => {
-              handleSetEnergyName(e.target.value, testId);
+              handleSetName(e.target.value, testId);
             }}
           />
           {name}

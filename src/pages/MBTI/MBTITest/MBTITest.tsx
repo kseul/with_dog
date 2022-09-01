@@ -3,14 +3,14 @@ import ProgressBar from './ProgressBar';
 import { useState } from 'react';
 import EnergyTest from './Energy/EnergyTest';
 
-export interface MBTIEnergyprops {
-  handleSetEnergyName: (value: string, testId: number) => void;
+export interface Iprops {
+  handleSetName: (value: string, testId: number) => void;
   onClickCheck: () => void;
 }
 
 export interface AnswerType {
   testId: number;
-  answerValue: string;
+  answerValue: any;
 }
 
 const MBTITest = () => {
@@ -23,7 +23,7 @@ const MBTITest = () => {
     setIsChecked(!isChecked);
   };
 
-  const handleSetEnergyName = (value: string, id: number): void => {
+  const handleSetName = (value: string, id: number): void => {
     setEnergyNameList(
       energyNameList.concat({ testId: id, answerValue: value })
     );
@@ -37,18 +37,7 @@ const MBTITest = () => {
   return (
     <MBTITestContainer>
       <ProgressBar />
-      {/* {nameList.length === 5 ? (
-        <RelationTest
-          handleSetName={handleSetName}
-          onClickCheck={onClickCheck}
-        />
-      ) : (
-        <EnergyTest handleSetName={handleSetName} onClickCheck={onClickCheck} />
-      )} */}
-      <EnergyTest
-        handleSetEnergyName={handleSetEnergyName}
-        onClickCheck={onClickCheck}
-      />
+      <EnergyTest handleSetName={handleSetName} onClickCheck={onClickCheck} />
     </MBTITestContainer>
   );
 };

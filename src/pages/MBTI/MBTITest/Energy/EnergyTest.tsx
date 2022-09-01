@@ -1,14 +1,14 @@
 import styled from 'styled-components/macro';
 import { ENERGY_TEST_DB } from '../constants/Test';
-import { MBTIEnergyprops } from '../MBTITest';
+import { Iprops } from '../MBTITest';
 import EnergyAnswer from './EnergyAnswer';
 
-export interface EnergyProps extends MBTIEnergyprops {
+export interface EnergyProps extends Iprops {
   testId: number;
   labelName: string;
 }
 
-const EnergyTest = ({ handleSetEnergyName, onClickCheck }: EnergyProps) => {
+const EnergyTest = ({ handleSetName, onClickCheck }: EnergyProps) => {
   return (
     <TestDetailContainer>
       <TestList>
@@ -16,7 +16,7 @@ const EnergyTest = ({ handleSetEnergyName, onClickCheck }: EnergyProps) => {
           <Questions key={testId}>
             {testList}
             <EnergyAnswer
-              handleSetEnergyName={handleSetEnergyName}
+              handleSetName={handleSetName}
               onClickCheck={onClickCheck}
               labelName={labelName}
               testId={testId}
