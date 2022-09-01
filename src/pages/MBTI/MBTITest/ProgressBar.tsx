@@ -1,16 +1,10 @@
 import styled from 'styled-components/macro';
-import { useEffect, useState } from 'react';
 
-interface Container {
-  filled: number;
-}
-
-const ProgressBar = () => {
-  const [percent, setPercent] = useState<number>(0);
+const ProgressBar = ({ abc }: { abc: number }) => {
   return (
     <ProgressBarContainer>
       <ProgressWrapper>
-        <ProgressPosition percent={percent} />
+        <ProgressPosition abc={abc} />
       </ProgressWrapper>
     </ProgressBarContainer>
   );
@@ -18,10 +12,10 @@ const ProgressBar = () => {
 
 const ProgressBarContainer = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', 'center')}
-  margin-top: 40px;
+  margin: 20px 0;
   width: 1200px;
   height: 50px;
-  background-color: red;
+  background-color: white;
   border-radius: 50px;
 `;
 
@@ -31,11 +25,11 @@ const ProgressWrapper = styled.div`
   border-radius: 30px;
 `;
 
-const ProgressPosition = styled.div<{ percent: number }>`
+const ProgressPosition = styled.div<{ abc: number }>`
   margin-right: auto;
-  width: ${({ percent }) => percent}%;
+  width: ${({ abc }) => abc * 5}%;
   height: 30px;
-  background-color: blue;
+  background-image: linear-gradient(to right, #8fefe6, #c3c8f3);
   border-radius: 30px;
   transition: width 0.5s ease-in-out;
 `;

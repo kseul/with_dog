@@ -40,6 +40,9 @@ export interface AnswerType {
   testId: number;
   answerValue: string;
 }
+export interface PercentType {
+  abc: number;
+}
 
 const MBTITest = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -47,7 +50,6 @@ const MBTITest = () => {
   const [nextRelationPage, setNextRelationPage] = useState(false);
   const [nextReactionPage, setNextReactionPage] = useState(false);
   const [nextJudgementPage, setNextJudgementPage] = useState(false);
-  const [percent, setPercent] = useState<number>(0);
 
   const [energyNameList, setEnergyNameList] = useState<AnswerType[]>([]);
   const [relationNameList, setRelationNameList] = useState<AnswerType[]>([]);
@@ -118,7 +120,7 @@ const MBTITest = () => {
 
   return (
     <MBTITestContainer>
-      <ProgressBar />
+      <ProgressBar abc={abc} />
       <TestBox>
         {nextPage === false && (
           <EnergyTest
@@ -172,7 +174,6 @@ const MBTITestContainer = styled.div`
 
 const TestBox = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
-  margin: 20px 0;
   width: 1200px;
   height: 100vh;
   background-color: white;

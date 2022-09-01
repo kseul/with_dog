@@ -8,15 +8,21 @@ const MBTIButton = ({ onCheck }) => {
   );
 };
 const MBTIButtonContainer = styled.div`
-  margin: 30px 0;
+  margin: 10px 0;
 `;
 
 const NextButton = styled.button`
   margin-bottom: 10px;
   width: 150px;
-  height: 30px;
-  background-color: red;
+  height: 40px;
+  background-color: #edeef0;
+  &:hover {
+    cursor: pointer;
+    background-color: #8fefe6;
+  }
   border-radius: 30px;
   border: none;
+  font-size: 15px;
+  font-weight: 500;
 `;
 export default MBTIButton;

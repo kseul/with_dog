@@ -8,15 +8,21 @@ const MBTIResultButton = ({ onCheck }) => {
   );
 };
 const MBTIResultButtonContainer = styled.div`
-  margin: 30px 0;
+  margin: 10px 0;
 `;
 
 const ResultButton = styled.button`
   margin-bottom: 10px;
   width: 150px;
-  height: 30px;
-  background-color: blue;
+  height: 40px;
+  background-color: #edeef0;
+  &:hover {
+    cursor: pointer;
+    background-color: #c3c8f3;
+  }
   border-radius: 30px;
   border: none;
+  font-size: 15px;
+  font-weight: 500;
 `;
 export default MBTIResultButton;
