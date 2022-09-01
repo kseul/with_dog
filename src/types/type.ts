@@ -79,3 +79,20 @@ export interface PagenatedData {
 }
 
 export type idProp = number | undefined;
+
+export interface BoardDataProp {
+  id?: number;
+  title?: string;
+  image?: string;
+  date?: string;
+  writer?: string;
+  like?: number;
+}
+
+export interface BoardModalProp {
+  clickCard?: () => void;
+  title?: string;
+  date?: string;
+  image?: string;
+  like?: number;
+}
