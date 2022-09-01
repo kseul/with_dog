@@ -1,13 +1,13 @@
 import styled from 'styled-components/macro';
 import { ANSWER_DB } from '../constants/Test';
-import { EnergyProps } from './EnergyTest';
+import { MBTIEnergyProps } from '../MBTITest';
 
 const EnergyAnswer = ({
   handleSetName,
   onClickCheck,
   testId,
   labelName,
-}: EnergyProps) => {
+}: MBTIEnergyProps) => {
   return (
     <AnswerList>
       {ANSWER_DB.map(({ id, name }) => (
@@ -19,7 +19,7 @@ const EnergyAnswer = ({
             name={labelName}
             onClick={onClickCheck}
             onChange={e => {
-              handleSetName(e.target.value, testId);
+              handleSetName(e.target.value, testId!);
             }}
           />
           {name}

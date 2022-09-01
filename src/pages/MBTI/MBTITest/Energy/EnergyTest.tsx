@@ -1,14 +1,14 @@
 import styled from 'styled-components/macro';
 import { ENERGY_TEST_DB } from '../constants/Test';
-import { Iprops } from '../MBTITest';
+import { MBTIEnergyProps } from '../MBTITest';
 import EnergyAnswer from './EnergyAnswer';
 
-export interface EnergyProps extends Iprops {
-  testId: number;
-  labelName: string;
-}
+// export interface EnergyProps extends Iprops {
+//   testId: number;
+//   labelName: string;
+// }
 
-const EnergyTest = ({ handleSetName, onClickCheck }: EnergyProps) => {
+const EnergyTest = ({ handleSetName, onClickCheck }: MBTIEnergyProps) => {
   return (
     <TestDetailContainer>
       <TestList>

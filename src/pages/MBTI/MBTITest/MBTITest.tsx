@@ -3,14 +3,16 @@ import ProgressBar from './ProgressBar';
 import { useState } from 'react';
 import EnergyTest from './Energy/EnergyTest';
 
-export interface Iprops {
+export interface MBTIEnergyProps {
   handleSetName: (value: string, testId: number) => void;
   onClickCheck: () => void;
+  testId?: number | undefined;
+  labelName?: string;
 }
 
 export interface AnswerType {
   testId: number;
-  answerValue: any;
+  answerValue: string;
 }
 
 const MBTITest = () => {
