@@ -37,13 +37,12 @@ const TestDetailContainer = styled.div`
 
 const TestList = styled.ul`
   ${props => props.theme.flex.flexBox('column', '', '')};
-  margin: 0 auto;
   width: 800px;
   list-style: none;
 `;
 
 const Questions = styled.li`
-  margin-top: 70px;
+  margin: 35px 0;
   font-size: 20px;
   text-align: center;
 `;

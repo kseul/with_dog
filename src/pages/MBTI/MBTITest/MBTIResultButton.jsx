@@ -12,6 +12,7 @@ const MBTIResultButtonContainer = styled.div`
 `;
 
 const ResultButton = styled.button`
+  margin-bottom: 10px;
   width: 150px;
   height: 30px;
   background-color: blue;

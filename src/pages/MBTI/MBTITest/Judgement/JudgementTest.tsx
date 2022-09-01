@@ -2,7 +2,6 @@ import styled from 'styled-components/macro';
 import { JUDEGEMENT_TEST_DB } from '../constants/Test';
 import { MBTIJudgdemnetProps } from '../MBTITest';
 import RelationAnswer from './JudgementAnswer';
-import MBTIButton from '../MBTIButton';
 import MBTIResultButton from '../MBTIResultButton';
 
 const JudgementTest = ({
@@ -26,7 +25,7 @@ const JudgementTest = ({
           </Questions>
         ))}
       </TestList>
-      {judgementLength === 6 && <MBTIResultButton onCheck={onJudgementCheck} />}
+      {judgementLength === 5 && <MBTIResultButton onCheck={onJudgementCheck} />}
     </TestDetailContainer>
   );
 };
@@ -44,7 +43,7 @@ const TestList = styled.ul`
 `;
 
 const Questions = styled.li`
-  margin-top: 70px;
+  margin: 35px 0;
   font-size: 20px;
   text-align: center;
 `;

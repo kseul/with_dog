@@ -43,7 +43,7 @@ const TestList = styled.ul`
 `;
 
 const Questions = styled.li`
-  margin-top: 70px;
+  margin: 35px 0;
   font-size: 20px;
   text-align: center;
 `;

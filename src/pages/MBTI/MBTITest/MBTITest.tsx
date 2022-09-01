@@ -47,18 +47,12 @@ const MBTITest = () => {
   const [nextRelationPage, setNextRelationPage] = useState(false);
   const [nextReactionPage, setNextReactionPage] = useState(false);
   const [nextJudgementPage, setNextJudgementPage] = useState(false);
-  const [energyNameList, setEnergyNameList] = useState<AnswerType[]>([
-    { testId: 0, answerValue: '' },
-  ]);
-  const [relationNameList, setRelationNameList] = useState<AnswerType[]>([
-    { testId: 0, answerValue: '' },
-  ]);
-  const [reactionNameList, setReactionNameList] = useState<AnswerType[]>([
-    { testId: 0, answerValue: '' },
-  ]);
-  const [judgementNameList, setJudgementNameList] = useState<AnswerType[]>([
-    { testId: 0, answerValue: '' },
-  ]);
+  const [percent, setPercent] = useState<number>(0);
+
+  const [energyNameList, setEnergyNameList] = useState<AnswerType[]>([]);
+  const [relationNameList, setRelationNameList] = useState<AnswerType[]>([]);
+  const [reactionNameList, setReactionNameList] = useState<AnswerType[]>([]);
+  const [judgementNameList, setJudgementNameList] = useState<AnswerType[]>([]);
 
   const onClickCheck = (): void => {
     setIsChecked(!isChecked);
@@ -120,6 +114,7 @@ const MBTITest = () => {
   const relationLength = relationNameList.length;
   const reactionLength = reactionNameList.length;
   const judgementLength = judgementNameList.length;
+  const abc = energyLength + relationLength + reactionLength + judgementLength;
 
   return (
     <MBTITestContainer>
