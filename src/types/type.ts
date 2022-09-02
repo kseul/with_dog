@@ -21,6 +21,7 @@ export interface LoginButtonProp {
 export interface SNSButtonProp {
   title: string;
   icon: string;
+  handleKakaoLogin: () => void;
 }
 
 export interface PageBoxProp {

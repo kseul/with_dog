@@ -8,6 +8,14 @@ import SNSButton from '../components/snsButton/SNSButton';
 import character from 'assets/images/LoginBgCharacter.png';
 
 const SignIn = () => {
+  const REST_API_KEY = `cea764c467cfdcf80407a08eefbcf5a4`;
+  const REDIRECT_URI = `http://localhost:3000/kakaoLogin`;
+  const KAKAO_AUTH_PATH = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+  const handleKakaoLogin = () => {
+    window.location.href = KAKAO_AUTH_PATH;
+  };
+
   return (
     <SignInContainer>
       <Character src={character} />
@@ -22,8 +30,16 @@ const SignIn = () => {
         <LoginButton title="회원가입" color="#CFB6D7" size={21} />
         <SnsLoginContainer>
           <SnsTitle>⏤ SNS 로그인 ⏤</SnsTitle>
-          <SNSButton title="구글" icon={googleIcon} />
-          <SNSButton title="카카오" icon={kakaoIcon} />
+          <SNSButton
+            title="구글"
+            icon={googleIcon}
+            handleKakaoLogin={handleKakaoLogin}
+          />
+          <SNSButton
+            title="카카오"
+            icon={kakaoIcon}
+            handleKakaoLogin={handleKakaoLogin}
+          />
         </SnsLoginContainer>
       </LoginForm>
     </SignInContainer>
