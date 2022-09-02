@@ -12,25 +12,25 @@ const ProgressBar = ({ abc }: { abc: number }) => {
 
 const ProgressBarContainer = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', 'center')}
-  margin: 20px 0;
-  width: 1200px;
-  height: 50px;
+  margin: 1.25rem 0;
+  width: 75rem;
+  height: 3.125rem;
   background-color: white;
-  border-radius: 50px;
+  border-radius: 3.125rem;
 `;
 
 const ProgressWrapper = styled.div`
-  width: 1180px;
-  height: 30px;
-  border-radius: 30px;
+  width: 73.75rem;
+  height: 1.875rem;
+  border-radius: 1.875rem;
 `;
 
 const ProgressPosition = styled.div<{ abc: number }>`
   margin-right: auto;
   width: ${({ abc }) => abc * 5}%;
-  height: 30px;
+  height: 1.875rem;
   background-image: linear-gradient(to right, #8fefe6, #c3c8f3);
-  border-radius: 30px;
+  border-radius: 1.875rem;
   transition: width 0.5s ease-in-out;
 `;
 

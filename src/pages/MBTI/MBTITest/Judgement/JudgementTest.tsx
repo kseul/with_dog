@@ -15,7 +15,7 @@ const JudgementTest = ({
       <TestList>
         {JUDEGEMENT_TEST_DB.map(({ testId, testList, labelName }) => (
           <Questions key={testId}>
-            {testList}
+            <TestListText>{testList}</TestListText>
             <RelationAnswer
               handleSetJudgementName={handleSetJudgementName}
               onClickCheck={onClickCheck}
@@ -38,13 +38,19 @@ const TestDetailContainer = styled.div`
 const TestList = styled.ul`
   ${props => props.theme.flex.flexBox('column', '', '')};
   margin: 0 auto;
-  width: 800px;
+  width: 50rem;
   list-style: none;
 `;
 
+const TestListText = styled.span`
+  ${props => props.theme.flex.flexBox('column', 'center', 'center')};
+  text-align: center;
+  margin-bottom: 1.25rem;
+`;
+
 const Questions = styled.li`
-  margin: 40px 0;
-  font-size: 20px;
+  margin: 1.875rem 0;
+  font-size: 1.25rem;
   text-align: center;
 `;
 

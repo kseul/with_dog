@@ -5,6 +5,7 @@ import { MBTIReactionProps } from '../MBTITest';
 const ReactionAnswer = ({
   handleSetReactionName,
   onClickCheck,
+
   testId,
   labelName,
 }: MBTIReactionProps) => {
@@ -22,7 +23,7 @@ const ReactionAnswer = ({
               handleSetReactionName(e.target.value, testId!);
             }}
           />
-          {name}
+          <AnswersText>{name}</AnswersText>
         </AnswerLabel>
       ))}
     </AnswerList>
@@ -31,18 +32,23 @@ const ReactionAnswer = ({
 
 const AnswerList = styled.div`
   ${props => props.theme.flex.flexBox('row', '', 'center')};
-  margin-top: 10px;
+  margin-top: 0.625rem;
 `;
 
 const AnswerLabel = styled.label`
   ${props => props.theme.flex.flexBox('column', '', '')};
-  margin: 0 20px;
-  font-size: 15px;
+  margin: 0 1.25rem;
+  font-size: 0.938rem;
   text-align: center;
 `;
 
 const Answers = styled.input`
-  margin-top: 10px;
+  margin-top: 0.625rem;
+`;
+
+const AnswersText = styled.span`
+  margin-top: 0.625rem;
+  width: 6.25rem;
 `;
 
 export default ReactionAnswer;

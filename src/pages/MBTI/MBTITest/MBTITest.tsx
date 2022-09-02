@@ -168,16 +168,17 @@ const MBTITestContainer = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
   margin: 0 auto;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-color: #edeef0;
 `;
 
 const TestBox = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
-  width: 1200px;
-  height: 100vh;
+  margin-bottom: 1.875rem;
+  width: 75rem;
+  height: 100%;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 1.25rem;
 `;
 
 export default MBTITest;
