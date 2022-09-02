@@ -12,16 +12,16 @@ const MBTIButtonContainer = styled.div`
 `;
 
 const NextButton = styled.button`
-  margin-bottom: 0.625rem;
   width: 9.375rem;
   height: 2.5rem;
+  margin-bottom: 0.625rem;
   background-color: #edeef0;
   &:hover {
     cursor: pointer;
     background-color: #8fefe6;
   }
-  border-radius: 1.875rem;
   border: none;
+  border-radius: 1.875rem;
   font-size: 0.938rem;
   font-weight: 500;
 `;

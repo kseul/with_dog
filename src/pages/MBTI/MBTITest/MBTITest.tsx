@@ -1,48 +1,11 @@
 import styled from 'styled-components/macro';
-import ProgressBar from './ProgressBar';
 import { useState } from 'react';
+import ProgressBar from './ProgressBar';
 import EnergyTest from './Energy/EnergyTest';
 import RelationTest from './Relation/RelationTest';
 import ReactionTest from './Reaction/ReactionTest';
 import JudgementTest from './Judgement/JudgementTest';
-
-export interface MBTIProps {
-  onClickCheck: () => void;
-  testId?: number | undefined;
-  labelName?: string;
-}
-
-export interface MBTIEnergyProps extends MBTIProps {
-  handleSetEnergyName: (value: string, testId: number) => void;
-  energyLength?: number;
-  onEnergyCheck?: () => void;
-}
-
-export interface MBTIRelationProps extends MBTIProps {
-  handleSetRelationName: (value: string, testId: number) => void;
-  relationLength?: number;
-  onRelationCheck?: () => void;
-}
-
-export interface MBTIReactionProps extends MBTIProps {
-  handleSetReactionName: (value: string, testId: number) => void;
-  reactionLength?: number;
-  onReactionCheck?: () => void;
-}
-
-export interface MBTIJudgdemnetProps extends MBTIProps {
-  handleSetJudgementName: (value: string, testId: number) => void;
-  judgementLength?: number;
-  onJudgementCheck?: () => void;
-}
-
-export interface AnswerType {
-  testId: number;
-  answerValue: string;
-}
-export interface PercentType {
-  abc: number;
-}
+import { AnswerType } from 'types/type';
 
 const MBTITest = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -116,11 +79,12 @@ const MBTITest = () => {
   const relationLength = relationNameList.length;
   const reactionLength = reactionNameList.length;
   const judgementLength = judgementNameList.length;
-  const abc = energyLength + relationLength + reactionLength + judgementLength;
+  const percentLength =
+    energyLength + relationLength + reactionLength + judgementLength;
 
   return (
     <MBTITestContainer>
-      <ProgressBar abc={abc} />
+      <ProgressBar percentLength={percentLength} />
       <TestBox>
         {nextPage === false && (
           <EnergyTest
@@ -166,17 +130,17 @@ const MBTITest = () => {
 
 const MBTITestContainer = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
-  margin: 0 auto;
   width: 100vw;
   height: 100%;
+  margin: 0 auto;
   background-color: #edeef0;
 `;
 
 const TestBox = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
-  margin-bottom: 1.875rem;
   width: 75rem;
   height: 100%;
+  margin-bottom: 1.875rem;
   background-color: white;
   border-radius: 1.25rem;
 `;

@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import { ANSWER_DB } from '../constants/Test';
-import { MBTIReactionProps } from '../MBTITest';
+import { MBTIReactionProps } from 'types/type';
 
 const ReactionAnswer = ({
   handleSetReactionName,
@@ -47,8 +47,8 @@ const Answers = styled.input`
 `;
 
 const AnswersText = styled.span`
-  margin-top: 0.625rem;
   width: 6.25rem;
+  margin-top: 0.625rem;
 `;
 
 export default ReactionAnswer;

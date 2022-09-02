@@ -1,8 +1,8 @@
 import styled from 'styled-components/macro';
-import { REACTION_TEST_DB } from '../constants/Test';
-import MBTIButton from '../MBTIButton';
-import { MBTIReactionProps } from '../MBTITest';
 import ReactionAnswer from './ReactionAnswer';
+import MBTIButton from '../MBTIButton';
+import { REACTION_TEST_DB } from '../constants/Test';
+import { MBTIReactionProps } from 'types/type';
 
 const ReactionTest = ({
   handleSetReactionName,
@@ -37,15 +37,15 @@ const TestDetailContainer = styled.div`
 
 const TestList = styled.ul`
   ${props => props.theme.flex.flexBox('column', '', '')};
-  margin: 0 auto;
-  width: 50rem;
   list-style: none;
+  width: 50rem;
+  margin: 0 auto;
 `;
 
 const TestListText = styled.span`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
-  text-align: center;
   margin-bottom: 1.25rem;
+  text-align: center;
 `;
 
 const Questions = styled.li`

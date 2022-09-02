@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import { ANSWER_DB } from '../constants/Test';
-import { MBTIEnergyProps } from '../MBTITest';
+import { MBTIEnergyProps } from 'types/type';
 
 const EnergyAnswer = ({
   handleSetEnergyName,
@@ -46,8 +46,8 @@ const Answers = styled.input`
 `;
 
 const AnswersText = styled.span`
-  margin-top: 0.625rem;
   width: 6.25rem;
+  margin-top: 0.625rem;
 `;
 
 export default EnergyAnswer;
