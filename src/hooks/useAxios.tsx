@@ -21,7 +21,7 @@ const useAxios = (axiosParams: AxiosRequestConfig) => {
 
   useEffect(() => {
     fetchData(axiosParams);
-  }, [axiosParams.url]);
+  }, [axiosParams]);
 
   return { response, error, loading };
 };

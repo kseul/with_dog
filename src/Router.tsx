@@ -5,6 +5,7 @@ import Signup from './pages/Login/Signup/Signup';
 import NoticeBoard from 'pages/NoticeBoard/NoticeBoard';
 import MainRouter from './pages/MainRouter/MainRouter';
 import Main from 'pages/Main/Main';
+import KakaoLogin from 'pages/Login/SignIn/KakaoLogin';
 
 const Router = () => {
   return (
@@ -16,6 +17,7 @@ const Router = () => {
         <Route path="/noticeboard" element={<NoticeBoard />} />
         <Route path="/*" element={<MainRouter />} />
         <Route path="/admin/:value" element={<Admin />} />
+        <Route path="/kakaoLogin" element={<KakaoLogin />} />
       </Routes>
     </BrowserRouter>
   );

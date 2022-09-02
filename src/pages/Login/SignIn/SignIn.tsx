@@ -6,12 +6,9 @@ import InputForm from '../components/inputForm/InputForm';
 import LoginButton from '../components/loginButton/LoginButton';
 import SNSButton from '../components/snsButton/SNSButton';
 import character from 'assets/images/LoginBgCharacter.png';
+import { KAKAO_AUTH_PATH } from './KakaoLoginData';
 
 const SignIn = () => {
-  const REST_API_KEY = `cea764c467cfdcf80407a08eefbcf5a4`;
-  const REDIRECT_URI = `http://localhost:3000/kakaoLogin`;
-  const KAKAO_AUTH_PATH = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-
   const handleKakaoLogin = () => {
     window.location.href = KAKAO_AUTH_PATH;
   };
