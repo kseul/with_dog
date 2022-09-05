@@ -1,27 +1,32 @@
 import styled from 'styled-components';
-import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import LeftSideList from 'pages/Admin/components/LeftSideMenu/LeftSideList';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
 import AdminHeader from 'pages/Admin/components/AdminHeader';
 import AdminRightPageUser from 'pages/Admin/components/RightSection/AdminRightPageUser';
 import AdminRightPagePost from 'pages/Admin/components/RightSection/AdminRightPagePost';
-import useAxios from 'hooks/useAxios';
+// import useAxios from 'hooks/useAxios';
 
 const AdminContainer = () => {
   const [clicked, setClicked] = useState('');
+  const [postData, setPostData] = useState();
 
   const navigate = useNavigate();
   const params = useParams();
+  const location = useLocation();
 
-  const { response } = useAxios({
-    method: 'GET',
-    url: `https://togedog-dj.herokuapp.com/${params.value}`,
-    headers: {
-      accept: '*/*',
-      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
-    },
-  });
+  useEffect(() => {
+    axios
+      .get(`https://togedog-dj.herokuapp.com/${location.pathname.slice(7)}`, {
+        headers: {
+          accept: '*/*',
+          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
+        },
+      })
+      .then(res => setPostData(res.data));
+  }, [location.pathname]);
 
   const setClick = list => {
     setClicked(list.listName);
@@ -46,13 +51,13 @@ const AdminContainer = () => {
         </AdminLeftSection>
         <AdminRightSection>
           {params.value === 'users' ? (
-            <AdminRightPageUser response={response} />
+            <AdminRightPageUser postData={postData} setPostData={setPostData} />
           ) : params.value === 'posts' ? (
-            <AdminRightPagePost response={response} />
-          ) : params.value === 'deleted' ? (
-            <AdminRightPagePost response={response} />
+            <AdminRightPagePost postData={postData} setPostData={setPostData} />
+          ) : params.value === 'posts/all/deleted' ? (
+            <AdminRightPagePost postData={postData} setPostData={setPostData} />
           ) : (
-            <AdminRightPageUser response={response} />
+            <AdminRightPageUser postData={postData} setPostData={setPostData} />
           )}
         </AdminRightSection>
       </SectionContainer>

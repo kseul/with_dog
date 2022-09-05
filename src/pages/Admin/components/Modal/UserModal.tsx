@@ -14,11 +14,15 @@ const UserModal = ({ closeModal, modalId }) => {
   });
 
   const deleteUser = () => {
-    axios.delete(`https://togedog-dj.herokuapp.com/users/${modalId}`, {
-      headers: {
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
-      },
-    });
+    if (window.confirm('계정을 삭제하시겠습니까')) {
+      axios.delete(`https://togedog-dj.herokuapp.com/users/${modalId}`, {
+        headers: {
+          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
+        },
+      });
+    } else {
+      alert('취소되었습니다.');
+    }
   };
   return (
     <ModalBackground onClick={closeModal}>
@@ -40,8 +44,8 @@ const UserModal = ({ closeModal, modalId }) => {
             <BtnContainer>
               <CancelBtn
                 onClick={() => {
-                  closeModal();
                   deleteUser();
+                  closeModal();
                 }}
               >
                 계정 삭제
