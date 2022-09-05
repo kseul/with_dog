@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_2" data-name="레이어 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1301.25 201.5">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #444;
+        stroke-miterlimit: 10;
+        stroke-width: 1.5px;
+      }
+
+      .cls-2 {
+        font-family: AppleSDGothicNeo-Regular-KSCpc-EUC-H, 'Apple SD Gothic Neo';
+        font-size: 13.43px;
+      }
+
+      .cls-2, .cls-3, .cls-4 {
+        fill: #333;
+      }
+
+      .cls-5 {
+        fill: #67cbb3;
+      }
+
+      .cls-6 {
+        fill: #e4a6ab;
+      }
+
+      .cls-7 {
+        fill: #fcd148;
+      }
+
+      .cls-8 {
+        fill: #ff89ae;
+      }
+
+      .cls-9 {
+        fill: #7ea296;
+      }
+
+      .cls-10 {
+        fill: #1d4260;
+      }
+
+      .cls-11 {
+        fill: #96aae0;
+      }
+
+      .cls-12 {
+        fill: #99babb;
+      }
+
+      .cls-3 {
+        font-family: AppleSDGothicNeo-SemiBold-KSCpc-EUC-H, 'Apple SD Gothic Neo';
+        font-size: 20px;
+      }
+
+      .cls-4 {
+        font-size: 30px;
+      }
+
+      .cls-4, .cls-13 {
+        font-family: AppleSDGothicNeo-Bold-KSCpc-EUC-H, 'Apple SD Gothic Neo';
+      }
+
+      .cls-14 {
+        letter-spacing: 0em;
+      }
+
+      .cls-15 {
+        letter-spacing: 0em;
+      }
+
+      .cls-13 {
+        fill: #fff;
+        font-size: 25px;
+      }
+    </style>
+  </defs>
+  <g id="_레이어_1-2" data-name="레이어 1">
+    <g>
+      <g>
+        <rect class="cls-1" x=".75" y=".75" width="280" height="200" rx="34.06" ry="34.06"/>
+        <text class="cls-4" transform="translate(102.98 47.25)"><tspan x="0" y="0">활동성</tspan></text>
+        <g>
+          <text class="cls-2" transform="translate(160.81 163.21)"><tspan x="0" y="0">Impe</tspan><tspan class="cls-14" x="28.3" y="0">r</tspan><tspan x="33.07" y="0">turbable</tspan></text>
+          <g>
+            <g>
+              <circle class="cls-6" cx="60.4" cy="97.63" r="20"/>
+              <text class="cls-13" transform="translate(53.22 107.23)"><tspan x="0" y="0">E</tspan></text>
+            </g>
+            <g>
+              <text class="cls-3" transform="translate(104.22 102.75)"><tspan x="0" y="0">외향적</tspan></text>
+              <text class="cls-2" transform="translate(160.81 102.98)"><tspan x="0" y="0">Energ</tspan><tspan class="cls-15" x="32.75" y="0">e</tspan><tspan x="39.53" y="0">tic </tspan></text>
+            </g>
+            <text class="cls-3" transform="translate(104.22 162.98)"><tspan x="0" y="0">내향적</tspan></text>
+            <g>
+              <circle class="cls-10" cx="60.4" cy="157.86" r="20"/>
+              <text class="cls-13" transform="translate(56.75 167.46)"><tspan x="0" y="0">I</tspan></text>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect class="cls-1" x="320.75" y=".75" width="280" height="200" rx="34.06" ry="34.06"/>
+        <text class="cls-4" transform="translate(435.96 47.25)"><tspan x="0" y="0">관계</tspan></text>
+        <g>
+          <g>
+            <circle class="cls-7" cx="380.4" cy="97.63" r="20"/>
+            <text class="cls-13" transform="translate(373.75 107.23)"><tspan x="0" y="0">S</tspan></text>
+          </g>
+          <g>
+            <text class="cls-3" transform="translate(424.22 102.75)"><tspan x="0" y="0">사교적</tspan></text>
+            <text class="cls-2" transform="translate(480.81 102.98)"><tspan x="0" y="0">Sociable</tspan></text>
+          </g>
+        </g>
+        <g>
+          <text class="cls-2" transform="translate(480.81 163.21)"><tspan x="0" y="0">iNdependent</tspan></text>
+          <text class="cls-3" transform="translate(424.22 162.98)"><tspan x="0" y="0">독립적</tspan></text>
+          <g>
+            <circle class="cls-12" cx="380.4" cy="157.86" r="20"/>
+            <text class="cls-13" transform="translate(371.7 167.46)"><tspan x="0" y="0">N</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect class="cls-1" x="700.65" y=".75" width="280" height="200" rx="34.06" ry="34.06"/>
+        <text class="cls-4" transform="translate(815.85 47.25)"><tspan x="0" y="0">반응</tspan></text>
+        <g>
+          <g>
+            <circle class="cls-8" cx="760.3" cy="97.63" r="20"/>
+            <text class="cls-13" transform="translate(753.16 107.23)"><tspan x="0" y="0">T</tspan></text>
+          </g>
+          <g>
+            <text class="cls-3" transform="translate(804.12 102.75)"><tspan x="0" y="0">민감한</tspan></text>
+            <text class="cls-2" transform="translate(860.71 102.98)"><tspan x="0" y="0">Touchy</tspan></text>
+          </g>
+        </g>
+        <g>
+          <text class="cls-2" transform="translate(860.71 163.21)"><tspan x="0" y="0">Flat</tspan></text>
+          <g>
+            <text class="cls-3" transform="translate(804.12 162.98)"><tspan x="0" y="0">무던한</tspan></text>
+            <g>
+              <circle class="cls-11" cx="760.3" cy="157.86" r="20"/>
+              <text class="cls-13" transform="translate(753.51 167.46)"><tspan x="0" y="0">F</tspan></text>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g>
+        <rect class="cls-1" x="1020.5" y=".75" width="280" height="200" rx="34.06" ry="34.06"/>
+        <text class="cls-4" transform="translate(1135.71 47.25)"><tspan x="0" y="0">판단</tspan></text>
+        <g>
+          <g>
+            <circle class="cls-9" cx="1080.15" cy="97.63" r="20"/>
+            <text class="cls-13" transform="translate(1072.7 107.23)"><tspan x="0" y="0">P</tspan></text>
+          </g>
+          <g>
+            <text class="cls-3" transform="translate(1123.97 102.75)"><tspan x="0" y="0">영리한</tspan></text>
+            <text class="cls-2" transform="translate(1180.56 102.98)"><tspan x="0" y="0">Politic</tspan></text>
+          </g>
+        </g>
+        <g>
+          <text class="cls-2" transform="translate(1180.56 163.21)"><tspan x="0" y="0">Curious</tspan></text>
+          <text class="cls-3" transform="translate(1123.97 162.98)"><tspan x="0" y="0">호기심</tspan></text>
+          <g>
+            <circle class="cls-5" cx="1080.15" cy="157.86" r="20"/>
+            <text class="cls-13" transform="translate(1072.82 167.46)"><tspan x="0" y="0">C</tspan></text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
