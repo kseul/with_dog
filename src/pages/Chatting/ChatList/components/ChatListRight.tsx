@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ArrowRight from 'assets/svg/arrow-right.svg';
 import { ChatListProp, idProp } from 'types/type';
 import { useState } from 'react';
-import ChatModal from 'pages/Chatting/ChatModal/ChatModal';
+import ChatModal from 'pages/Chatting/ChatModal';
 
 const ChatListRight = ({
   id,
