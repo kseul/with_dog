@@ -6,7 +6,7 @@ import InputForm from '../components/inputForm/InputForm';
 import LoginButton from '../components/loginButton/LoginButton';
 import SNSButton from '../components/snsButton/SNSButton';
 import character from 'assets/images/LoginBgCharacter.png';
-import { KAKAO_AUTH_PATH } from './KakaoLoginData';
+import { KAKAO_AUTH_PATH } from './kakaoLogin/KakaoLoginData';
 
 const SignIn = () => {
   const handleKakaoLogin = () => {

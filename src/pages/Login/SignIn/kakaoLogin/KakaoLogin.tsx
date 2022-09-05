@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Spinner from '../../components/spinner/Spinner';
 
 const KakaoLogin = () => {
   const navigate = useNavigate();
   const KAKAO_CODE = new URL(window.location.href).searchParams.get('code');
-  // location.search
 
-  const getKakaoToken = () => {
+  const getAndSendKakaoToken = () => {
     fetch('https://kauth.kakao.com/oauth/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -17,20 +17,30 @@ const KakaoLogin = () => {
         if (data.access_token) {
           const ACCESS_TOKEN = data.access_token;
           localStorage.setItem('token', ACCESS_TOKEN);
-          navigate('/');
-          alert('로그인 성공!');
+          fetch('https://togedog-dj.herokuapp.com/users/test/kakaotoken', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              token: ACCESS_TOKEN,
+            }),
+          })
+            .then(res => res.json())
+            .then(result => {
+              navigate('/');
+              console.log(result);
+            });
         } else {
-          alert('로그인에 실패하셨습니다!');
+          alert('카카오 로그인 실패하셨습니다!');
           navigate('/signin');
         }
       });
   };
 
   useEffect(() => {
-    getKakaoToken();
+    getAndSendKakaoToken();
   });
 
-  return <div>카카오 로그인이다 임마!</div>;
+  return <Spinner />;
 };
 
 export default KakaoLogin;
