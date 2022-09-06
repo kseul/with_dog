@@ -1,21 +1,24 @@
 import styled from 'styled-components';
 
 const ListPostContentsBox = ({ data, openModal, onCurrentModal }) => {
-  const date = new Date(data.updated_at);
-  const convertedDate = date.toISOString().substring(0, 10);
-
   return (
-    <ListContents
-      onClick={() => {
-        openModal();
-        onCurrentModal(data.id);
-      }}
-    >
-      <UserName>{data.user_name}</UserName>
-      <PostContent>{data.content}</PostContent>
-      <UserMbti>{data.user_mbti}</UserMbti>
-      <UserSignDate>{convertedDate}</UserSignDate>
-    </ListContents>
+    <div>
+      {data.updated_at && (
+        <ListContents
+          onClick={() => {
+            openModal();
+            onCurrentModal(data.id);
+          }}
+        >
+          <UserName>{data.user_name}</UserName>
+          <PostContent>{data.content}</PostContent>
+          <UserMbti>{data.user_mbti}</UserMbti>
+          <UserSignDate>
+            {new Date(data.updated_at).toISOString().substring(0, 10)}
+          </UserSignDate>
+        </ListContents>
+      )}
+    </div>
   );
 };
 

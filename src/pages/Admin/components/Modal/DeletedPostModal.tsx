@@ -1,39 +1,27 @@
 import axios from 'axios';
 import styled from 'styled-components';
-import { useState } from 'react';
 import useAxios from 'hooks/useAxios';
 import UserInfoBox from 'pages/Admin/components/RightSection/UserInfoBox';
 import { AiOutlineClose } from 'react-icons/ai';
 
-const PostModal = ({ closeModal, modalId }) => {
-  const [reason, setReason] = useState<string>('');
-
+const DeletedPostModal = ({ closeModal, modalId }) => {
   const { response } = useAxios({
     method: 'GET',
-    url: `https://togedog-dj.herokuapp.com/posts/${modalId}/admin/`,
+    url: `https://togedog-dj.herokuapp.com/posts/deleted/${modalId}/`,
     headers: {
       accept: '*/*',
       Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
     },
   });
 
-  const getReason = e => {
-    e.preventDefault();
-    setReason(e.target.value);
-  };
-
   const deletePost = () => {
-    if (window.confirm('게시글을 삭제하시겠습니까')) {
-      axios.post(
-        `https://togedog-dj.herokuapp.com/posts/${modalId}/delete/`,
-        { delete_reason: reason },
-        {
-          headers: {
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
-            'Content-type': 'application/x-www-form-urlencoded',
-          },
-        }
-      );
+    if (window.confirm('게시글을 완전히 삭제하시겠습니까')) {
+      axios.post(`https://togedog-dj.herokuapp.com/posts/${modalId}/delete/`, {
+        headers: {
+          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
+          'Content-type': 'application/x-www-form-urlencoded',
+        },
+      });
     } else {
       alert('취소되었습니다.');
     }
@@ -72,7 +60,9 @@ const PostModal = ({ closeModal, modalId }) => {
             </PostImage>
             <ReasonToBan>
               <ReasonToBanTitle>사유</ReasonToBanTitle>
-              <ReasonToBanContent onChange={getReason} />
+              <ReasonToBanContent>
+                {response.data.delete_reason}
+              </ReasonToBanContent>
               <BtnWrapper>
                 <CancelBtn
                   onClick={() => {
@@ -205,10 +195,12 @@ const ReasonToBanTitle = styled.p`
   padding-top: 1rem;
 `;
 
-const ReasonToBanContent = styled.textarea`
+const ReasonToBanContent = styled.div`
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
   width: 90%;
   height: 50%;
-  resize: none;
+  border: 1px solid black;
 `;
 
 const BtnWrapper = styled.div`
@@ -250,4 +242,4 @@ const PostImg = styled.img`
   height: 100%;
 `;
 
-export default PostModal;
+export default DeletedPostModal;

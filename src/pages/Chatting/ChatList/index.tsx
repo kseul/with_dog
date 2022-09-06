@@ -4,7 +4,7 @@ import CHATLIST_DATA from '../DATA/CHATLIST_DATA';
 
 const ChatList = () => {
   return (
-    <ChattingContainer>
+    <ChatListContainer>
       {CHATLIST_DATA.map(
         ({ id, Image, title, description, modalDescription, type }) => {
           return (
@@ -20,11 +20,11 @@ const ChatList = () => {
           );
         }
       )}
-    </ChattingContainer>
+    </ChatListContainer>
   );
 };
 
-const ChattingContainer = styled.div`
+const ChatListContainer = styled.div`
   ${props => props.theme.flex.flexBox('column')}
   height: 100vh;
   background-color: #ececed;
