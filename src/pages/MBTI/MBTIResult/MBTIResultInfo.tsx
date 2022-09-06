@@ -1,12 +1,11 @@
 import styled, { css } from 'styled-components/macro';
-// import ESFC_DOG from '../../../../src/assets/images/ESFC_DOG.png';
-import ESFC_DOG from '../../../../src/assets/svg/ESFC_DOG.svg';
-// import ResultNotice from '../../../../src/assets/images/ResultNotice.png';
-import ResultNotice from '../../../../src/assets/svg/ResultNoticePositoin.svg';
-// import ResultInfo from '../../../../src/assets/images/ResultInfo.png';
-import ResultInfo from '../../../../src/assets/svg/ResultInfoPositoin.svg';
-import ESFCPosition from '../../../../src/assets/svg/ESFCPosition.svg';
 import MBTIGraph from './Graph/MBTIGraph';
+import ChatroomRecommendation from './ChatroomRecommendation';
+import SNSshare from './SNSshare';
+import ESFC_DOG from '../../../../src/assets/svg/ESFC_DOG.svg';
+import ResultNotice from '../../../../src/assets/svg/ResultNoticePositoin.svg';
+import ResultInfo from '../../../../src/assets/svg/ResultInfoPositoin.svg';
+import ESFCPosition from '../../../../src/assets/svg/ESFCPositoin.svg';
 
 const MBTIResultInfo = () => {
   return (
@@ -24,6 +23,9 @@ const MBTIResultInfo = () => {
       <NoticeImage src={ResultNotice} />
       <GraphInfo src={ResultInfo} />
       <MBTIGraph />
+      <GraphSummary src={ESFCPosition} />
+      <ChatroomRecommendation />
+      <SNSshare />
     </MBTIResultInfoContainer>
   );
 };
@@ -34,42 +36,47 @@ const BasicText = css`
 
 const MBTIResultInfoContainer = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
+  margin: 0 auto;
   width: 100%;
-  height: 100%;
 `;
 
 const MBTIDOG = styled.img`
-  width: 560px;
+  width: 31.25rem;
 `;
 
 const MBTIResult = styled.span`
   margin-top: 3rem;
-  font-size: 50px;
+  font-size: 3.125rem;
   font-weight: 500;
   ${BasicText}
 `;
 
 const MBTICharacter = styled.span`
   margin-top: 1rem;
-  font-size: 18px;
+  font-size: 1.125rem;
   ${BasicText}
 `;
 
 const MBTIContent = styled.span`
-  margin: 3rem 10rem 0 10rem;
+  margin: 3rem 15rem 0 15rem;
   line-height: 2rem;
-  font-size: 20px;
+  font-size: 1.25rem;
   ${BasicText}
 `;
 
 const NoticeImage = styled.img`
-  width: 930px;
+  width: 58.125rem;
   margin-top: 5rem;
 `;
 
 const GraphInfo = styled.img`
-  width: 930px;
+  width: 60.625rem;
   margin-top: 5rem;
+`;
+
+const GraphSummary = styled.img`
+  width: 37.5rem;
+  margin-top: 9.375rem;
 `;
 
 export default MBTIResultInfo;

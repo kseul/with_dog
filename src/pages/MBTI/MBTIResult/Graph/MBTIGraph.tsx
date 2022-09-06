@@ -1,31 +1,36 @@
-import styled, { css } from 'styled-components/macro';
+import styled from 'styled-components/macro';
 import EnergyGraph from './EnergyGraph';
+import RelationGraph from './RelationGraph';
+import ReactionGraph from './ReactionGraph';
+import JudgementGraph from './JudgementGraph';
 
 const MBTIGraph = () => {
   return (
     <MBTIGraphContainer>
-      <PropensityText>활동성</PropensityText>
-      <EnergyGraph />
+      <HorizontalAlign>
+        <EnergyGraph />
+        <RelationGraph />
+      </HorizontalAlign>
+      <HorizontalAlign>
+        <ReactionGraph />
+        <JudgementGraph />
+      </HorizontalAlign>
     </MBTIGraphContainer>
   );
 };
 
 const MBTIGraphContainer = styled.div`
-  ${props => props.theme.flex.flexBox('column', 'center', 'center')};
-  width: 100%;
-  height: 100%;
-`;
-
-const PropensityText = styled.span`
-  font-size: 20px;
-  font-weight: 500;
-  text-align: center;
-  color: #333333;
+  ${props => props.theme.flex.flexBox('row', 'center', 'center')};
+  width: 75rem;
+  height: 18.75rem;
+  margin: 0 auto;
 `;
 
 const HorizontalAlign = styled.div`
-  ${props => props.theme.flex.flexBox('row', 'center', 'center')};
+  ${props => props.theme.flex.flexBox('row', 'center', 'space-between')};
+  width: 30.625rem;
+  height: 12.5rem;
+  margin: 0 auto;
 `;
 
-const GraphAlign = styled.div``;
 export default MBTIGraph;

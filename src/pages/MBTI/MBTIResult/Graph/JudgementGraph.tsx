@@ -1,16 +1,16 @@
 import styled, { css } from 'styled-components/macro';
 
-const EnergyGraph = () => {
+const JudgementGraph = () => {
   const percentLength = 4;
-  const mbtiResult = 'E';
+  const mbtiResult = 'C';
   return (
-    <EnergyGraphContainer>
-      <PropensityText>활동성</PropensityText>
-      {mbtiResult === 'E' ? (
+    <JudgementGraphContainer>
+      <PropensityText>판단</PropensityText>
+      {mbtiResult === 'C' ? (
         <>
-          <EnergyEGraphBox>
-            <EnergyEGraphPosition percentLength={percentLength} />
-          </EnergyEGraphBox>
+          <ReactionCGraphBox>
+            <ReactionCGraphPosition percentLength={percentLength} />
+          </ReactionCGraphBox>
           <TextBox>
             <GraphLeftText>70%</GraphLeftText>
             <GraphRightText>30%</GraphRightText>
@@ -18,16 +18,16 @@ const EnergyGraph = () => {
         </>
       ) : (
         <>
-          <EnergyIGraphBox>
-            <EnergyIGraphPosition percentLength={percentLength} />
-          </EnergyIGraphBox>
+          <ReactionPGraphBox>
+            <ReactionPGraphPosition percentLength={percentLength} />
+          </ReactionPGraphBox>
           <TextBox>
-            <GraphLeftIText>70%</GraphLeftIText>
+            <GraphLeftText>70%</GraphLeftText>
             <GraphRightText>30%</GraphRightText>
           </TextBox>
         </>
       )}
-    </EnergyGraphContainer>
+    </JudgementGraphContainer>
   );
 };
 
@@ -36,10 +36,11 @@ const BasicText = css`
   text-align: center;
 `;
 
-const EnergyGraphContainer = styled.div`
+const JudgementGraphContainer = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')}
   position: absolute;
   width: 25rem;
+  margin-top: 15rem;
 `;
 
 const PropensityText = styled.span`
@@ -49,7 +50,7 @@ const PropensityText = styled.span`
   font-weight: 500;
 `;
 
-const EnergyIGraphBox = styled.div`
+const ReactionPGraphBox = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', 'center')}
   width: 25rem;
   height: 2.188rem;
@@ -58,17 +59,17 @@ const EnergyIGraphBox = styled.div`
   border-radius: 5rem;
 `;
 
-const EnergyIGraphPosition = styled.div<{ percentLength: number }>`
+const ReactionPGraphPosition = styled.div<{ percentLength: number }>`
   position: relative;
   width: ${({ percentLength }) => 5 * (10 + percentLength)}%;
   height: 2.188rem;
   margin-right: auto;
-  background-color: #1d4260;
+  background-color: #7ea296;
   border-radius: 1.875rem 0 0 1.875rem;
   transition: width 0.5s ease-in-out;
 `;
 
-const EnergyEGraphBox = styled.div`
+const ReactionCGraphBox = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', 'center')}
   position: absolute;
   width: 25rem;
@@ -78,12 +79,12 @@ const EnergyEGraphBox = styled.div`
   border-radius: 5rem;
 `;
 
-const EnergyEGraphPosition = styled.div<{ percentLength: number }>`
+const ReactionCGraphPosition = styled.div<{ percentLength: number }>`
   position: relative;
   width: ${({ percentLength }) => 5 * (10 + percentLength)}%;
   height: 2.188rem;
   margin-right: auto;
-  background-color: #e4a6ab;
+  background-color: #67cbb3;
   border-radius: 1.875rem 0 0 1.875rem;
   transition: width 0.5s ease-in-out;
 `;
@@ -100,12 +101,8 @@ const GraphLeftText = styled.span`
   ${BasicText}
 `;
 
-const GraphLeftIText = styled.span`
-  color: white;
-`;
-
 const GraphRightText = styled.span`
   ${BasicText}
 `;
 
-export default EnergyGraph;
+export default JudgementGraph;
