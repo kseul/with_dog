@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 const UserInfoBox = ({ data }) => {
-  const date = new Date(data.user_signup_time);
-  const convertedDate = date.toISOString().substring(0, 10);
-
   return (
     <UserInfoContainer>
       <UserInfoWrapper>
@@ -12,11 +9,11 @@ const UserInfoBox = ({ data }) => {
       </UserInfoWrapper>
       <UserInfoWrapper>
         <UserCategory>닉네임</UserCategory>
-        <CategoryText>{data.user_name}</CategoryText>
+        <CategoryText>{data.user_nickname}</CategoryText>
       </UserInfoWrapper>
       <UserInfoWrapper>
         <UserCategory>이메일</UserCategory>
-        <CategoryText>{data.user_name}</CategoryText>
+        <CategoryText>{data.user_email}</CategoryText>
       </UserInfoWrapper>
       <UserInfoWrapper>
         <UserCategory>강아지MBTI</UserCategory>
@@ -24,7 +21,9 @@ const UserInfoBox = ({ data }) => {
       </UserInfoWrapper>
       <UserInfoWrapper>
         <UserCategory>가입일</UserCategory>
-        <CategoryText>{convertedDate}</CategoryText>
+        <CategoryText>
+          {new Date(data.user_created_at).toISOString().substring(0, 10)}
+        </CategoryText>
       </UserInfoWrapper>
     </UserInfoContainer>
   );
