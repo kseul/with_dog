@@ -6,8 +6,13 @@ import InputForm from '../components/inputForm/InputForm';
 import LoginButton from '../components/loginButton/LoginButton';
 import SNSButton from '../components/snsButton/SNSButton';
 import character from 'assets/images/LoginBgCharacter.png';
+import { KAKAO_AUTH_PATH } from './kakaoLogin/KakaoLoginData';
 
 const SignIn = () => {
+  const handleKakaoLogin = () => {
+    window.location.href = KAKAO_AUTH_PATH;
+  };
+
   return (
     <SignInContainer>
       <Character src={character} />
@@ -22,8 +27,16 @@ const SignIn = () => {
         <LoginButton title="회원가입" color="#CFB6D7" size={21} />
         <SnsLoginContainer>
           <SnsTitle>⏤ SNS 로그인 ⏤</SnsTitle>
-          <SNSButton title="구글" icon={googleIcon} />
-          <SNSButton title="카카오" icon={kakaoIcon} />
+          <SNSButton
+            title="구글"
+            icon={googleIcon}
+            handleKakaoLogin={handleKakaoLogin}
+          />
+          <SNSButton
+            title="카카오"
+            icon={kakaoIcon}
+            handleKakaoLogin={handleKakaoLogin}
+          />
         </SnsLoginContainer>
       </LoginForm>
     </SignInContainer>
