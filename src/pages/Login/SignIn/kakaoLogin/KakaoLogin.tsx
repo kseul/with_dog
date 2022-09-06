@@ -16,7 +16,6 @@ const KakaoLogin = () => {
       .then(data => {
         if (data.access_token) {
           const ACCESS_TOKEN = data.access_token;
-          localStorage.setItem('token', ACCESS_TOKEN);
           fetch('https://togedog-dj.herokuapp.com/users/test/kakaotoken', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -26,8 +25,8 @@ const KakaoLogin = () => {
           })
             .then(res => res.json())
             .then(result => {
+              localStorage.setItem('token', result.access_token);
               navigate('/');
-              console.log(result);
             });
         } else {
           alert('카카오 로그인 실패하셨습니다!');
