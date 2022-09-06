@@ -1,22 +1,40 @@
+import axios from 'axios';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import ListHeaderBox from 'pages/Admin/components/RightSection/ListHeaderBox';
 import ListContentsBox from 'pages/Admin/components/RightSection/ListContentsBox';
 import UserModal from 'pages/Admin/components/Modal/UserModal';
 import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/PageNation';
-import { PagenatedData } from 'types/type';
 
-const AdminRightPageUser = ({ response }) => {
+const AdminRightPageUser = ({ postData, setPostData }) => {
+  const location = useLocation();
+
+  // 모달창
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const perPage = 10;
-  const [indexClicked, setIndexClicked] = useState('');
-  const [allToggle, setAllToggle] = useState(false);
-  const [banToggle, setBanToggle] = useState(false);
   const [modalId, setModalId] = useState<number | undefined>();
 
-  const userData = response?.data;
+  // 상단 토글
+  const [allToggle, setAllToggle] = useState(false);
+  const [banToggle, setBanToggle] = useState(false);
+
+  //검색
+  const [search, setSearch] = useState<string>('');
+
+  // 페이지네이션
+  const [currentPage, setCurrentPage] = useState(1);
+  const [indexClicked, setIndexClicked] = useState('');
+  const [pagenatedData, setPagenatedData] = useState(postData);
+  const perPage = 10;
+  const indexOfLast = currentPage * perPage;
+  const indexOfFirst = indexOfLast - perPage;
+
+  useEffect(() => {
+    if (postData) {
+      setPagenatedData(postData.slice(indexOfFirst, indexOfLast));
+    }
+  }, [postData, indexOfFirst, indexOfLast]);
 
   const openModal = (): void => {
     setIsModalOpen(true);
@@ -30,18 +48,39 @@ const AdminRightPageUser = ({ response }) => {
     setModalId(id);
   };
 
-  const indexOfLast = currentPage * perPage;
-  const indexOfFirst = indexOfLast - perPage;
-  const currentPost = userData => {
-    if (userData) {
-      return userData.slice(indexOfFirst, indexOfLast);
-    }
+  const onChangeSearch = e => {
+    e.preventDefault();
+    setSearch(e.target.value);
   };
-  const pagenatedData: PagenatedData[] = currentPost(userData);
+
+  const onSearch = e => {
+    e.preventDefault();
+    if (search === null || search === '') {
+      axios
+        .get(`https://togedog-dj.herokuapp.com/${location.pathname.slice(7)}`, {
+          headers: {
+            accept: '*/*',
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
+          },
+        })
+        .then(res => {
+          setPostData(res.data);
+          setPagenatedData(res.data.slice(indexOfFirst, indexOfLast));
+        });
+    } else {
+      const filterData = pagenatedData.filter(data =>
+        data.name.includes(search)
+      );
+      setPostData(filterData);
+      setPagenatedData(filterData.slice(indexOfFirst, indexOfLast));
+      setCurrentPage(1);
+    }
+    setSearch('');
+  };
 
   return (
     <AdminRightContainer>
-      <AdminRightTitle>관리자 페이지</AdminRightTitle>
+      <AdminRightTitle />
       <FilterBox>
         <CheckAll
           onClick={() => setAllToggle(prev => !prev)}
@@ -63,17 +102,17 @@ const AdminRightPageUser = ({ response }) => {
             <DatePickerComponent />
           </DateFilter>
         </SortByDate>
-        <SortByUser>
+        <SortByUser onSubmit={e => onSearch(e)}>
           <UserTitle>
             <TitleText>사용자 검색</TitleText>
           </UserTitle>
-          <UserInput />
+          <UserInput type="text" value={search} onChange={onChangeSearch} />
         </SortByUser>
       </SortBox>
       <UserListContainer>
         <ListHeaderBox />
         <ListContentsSection>
-          {userData &&
+          {pagenatedData &&
             pagenatedData.map(data => (
               <ListContentsBox
                 data={data}
@@ -82,10 +121,10 @@ const AdminRightPageUser = ({ response }) => {
                 onCurrentModal={onCurrentModal}
               />
             ))}
-          {userData && (
+          {postData && (
             <PageNation
               perPage={perPage}
-              totalPost={userData.length}
+              totalPost={postData.length}
               setCurrentPage={setCurrentPage}
               setIndexClicked={setIndexClicked}
               indexClicked={indexClicked}
@@ -106,11 +145,7 @@ const AdminRightContainer = styled.div`
 `;
 
 const AdminRightTitle = styled.div`
-  padding-left: 1.25rem;
-  padding-top: 1.25rem;
-  margin-bottom: 1.25rem;
-  height: 3.125rem;
-  font-size: 1.875rem;
+  height: 1.5rem;
 `;
 
 const FilterBox = styled.div``;
@@ -181,7 +216,7 @@ const DateFilter = styled.div`
   background-color: ${props => props.theme.colors.gray};
 `;
 
-const SortByUser = styled.div`
+const SortByUser = styled.form`
   ${props => props.theme.flex.flexBox('row', '', 'left')}
   width: 18.75rem;
 `;

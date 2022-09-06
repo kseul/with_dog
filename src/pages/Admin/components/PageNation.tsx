@@ -6,7 +6,7 @@ const PageNation = ({
   setCurrentPage,
   indexClicked,
   setIndexClicked,
-}) => {
+}: any) => {
   const pageNumbers: number[] = [];
   for (let i = 1; i <= Math.ceil(totalPost / perPage); i++) {
     pageNumbers.push(i);

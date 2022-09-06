@@ -16,7 +16,7 @@ const Router = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/noticeboard" element={<NoticeBoard />} />
         <Route path="/*" element={<MainRouter />} />
-        <Route path="/admin/:value" element={<Admin />} />
+        <Route path="/admin/:value/*" element={<Admin />} />
         <Route path="/chat" element={<ChatRoom />} />
       </Routes>
     </BrowserRouter>
