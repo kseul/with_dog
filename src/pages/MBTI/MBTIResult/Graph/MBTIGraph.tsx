@@ -28,7 +28,7 @@ const MBTIGraphContainer = styled.div`
 
 const HorizontalAlign = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', 'space-between')};
-  width: 30.625rem;
+  width: 25rem;
   height: 12.5rem;
   margin: 0 auto;
 `;
