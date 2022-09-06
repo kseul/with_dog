@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ArrowLeft from 'assets/svg/arrow-left2.svg';
 
 const TitleBar = () => {
-  // room 가져오기
+  // TODO : room 가져오기
   return (
     <TitleBarContainer>
       <BackBox>

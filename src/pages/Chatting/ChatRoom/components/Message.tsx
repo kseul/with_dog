@@ -4,58 +4,54 @@ import testImg2 from 'assets/images/dog4.png';
 import ArrowLeft from 'assets/svg/siren.svg';
 
 const Message = () => {
-  // let isSentByCurrentUser = false;
+  let isSentByCurrentUser = true;
 
-  // return
-  // isSentByCurrentUser ? (
-  return (
-    <>
-      <MessageContainer>
-        <ProfileImg src={testImg} />
-        <MessageBox>
-          <UserBox>
-            <Nickname>날순이</Nickname>
-            <Mbti>INFP</Mbti>
-          </UserBox>
-          <TextContainer>
-            <TextBox>
-              <Text>이번주 한강 공놀이 ~~~~ ?</Text>
-            </TextBox>
-            <TextData>
-              <ReportIcon src={ArrowLeft} />
-              <Time>오후 2:00</Time>
-            </TextData>
-          </TextContainer>
-        </MessageBox>
-      </MessageContainer>
-      {/* ) : ( */}
-      <MessageContainer style={{ justifyContent: 'end' }}>
-        <MessageBox>
-          <TextContainer>
-            <TextData>
-              <Time>오후 2:02</Time>
-            </TextData>
-            <TextBox>
-              <Text>미루미코도 같이 놀자아아아</Text>
-            </TextBox>
-          </TextContainer>
-        </MessageBox>
-        <ProfileImg src={testImg2} />
-      </MessageContainer>
-    </>
+  return isSentByCurrentUser ? (
+    <MessageContainer currentUser={isSentByCurrentUser}>
+      <MessageBox>
+        <TextContainer>
+          <TextData>
+            <Time>오후 2:02</Time>
+          </TextData>
+          <TextBox currentUser={isSentByCurrentUser}>
+            <Text>미루미코도 같이 놀자아아아</Text>
+          </TextBox>
+        </TextContainer>
+      </MessageBox>
+      <ProfileImg src={testImg2} />
+    </MessageContainer>
+  ) : (
+    <MessageContainer currentUser={isSentByCurrentUser}>
+      <ProfileImg src={testImg} />
+      <MessageBox>
+        <UserBox>
+          <Nickname>날순이</Nickname>
+          <Mbti>INFP</Mbti>
+        </UserBox>
+        <TextContainer>
+          <TextBox currentUser={isSentByCurrentUser}>
+            <Text>이번주 한강 공놀이 ~~~~ ?</Text>
+          </TextBox>
+          <TextData>
+            <ReportIcon src={ArrowLeft} />
+            <Time>오후 2:00</Time>
+          </TextData>
+        </TextContainer>
+      </MessageBox>
+    </MessageContainer>
   );
 };
 
-const MessageContainer = styled.div`
+const MessageContainer = styled.div<{ currentUser: boolean }>`
   ${props => props.theme.flex.flexBox()}
-  justify-content: start;
+  justify-content: ${({ currentUser }) => (currentUser ? 'end' : 'start')};
   padding: 1.3rem 1rem 0rem 1rem;
 `;
 
 const ProfileImg = styled.img`
   margin: 0 0.8rem;
-  width: 4.5rem;
-  height: 4.5rem;
+  width: 4rem;
+  height: 4rem;
   border: 0.25rem solid white;
   border-radius: 50%;
   object-fit: cover;
@@ -72,7 +68,7 @@ const UserBox = styled.div`
 
 const Nickname = styled.div`
   margin-right: 0.3rem;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 500;
 `;
 
@@ -92,12 +88,14 @@ const TextContainer = styled.div`
   margin-top: 0.3rem;
 `;
 
-const TextBox = styled.div`
+const TextBox = styled.div<{ currentUser: boolean }>`
   max-width: 80%;
-  padding: 0.7rem 1rem;
+  padding: 0.6rem 0.9rem;
   display: inline-block;
   border-radius: 0.6rem;
   background: white;
+  background-color: ${({ currentUser }) => (currentUser ? 'gray' : 'white')};
+  color: ${({ currentUser }) => (currentUser ? 'white' : 'black')};
 `;
 
 const Text = styled.div`
