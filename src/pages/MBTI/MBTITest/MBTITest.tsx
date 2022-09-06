@@ -19,6 +19,36 @@ const MBTITest = () => {
   const [reactionNameList, setReactionNameList] = useState<AnswerType[]>([]);
   const [judgementNameList, setJudgementNameList] = useState<AnswerType[]>([]);
 
+  const answerValueResult: string[] = energyNameList.map(a => a.answerValue);
+
+  const numberArr = answerValueResult => {
+    const newArr = [0, 0, 0, 0, 0];
+    for (let i = 0; i < answerValueResult.length; i++) {
+      if (answerValueResult[i] === '매우 아니다') {
+        newArr[i] = -2;
+      } else if (answerValueResult[i] === '아니다') {
+        newArr[i] = -1;
+      } else if (answerValueResult[i] === '그렇다') {
+        newArr[i] = 1;
+      } else if (answerValueResult[i] === '매우 그렇다') {
+        newArr[i] = 2;
+      }
+    }
+    return newArr.reduce((a, b) => a + b);
+  };
+  const score = numberArr(answerValueResult);
+
+  const abc = score => {
+    if (score < 0) {
+      return 'E';
+    } else if (score > 0) {
+      return 'I';
+    }
+  };
+  const energyMBTI = abc(score);
+
+  console.log(energyMBTI);
+
   const onClickCheck = (): void => {
     setIsChecked(!isChecked);
   };
