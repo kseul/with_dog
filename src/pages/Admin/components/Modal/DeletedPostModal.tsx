@@ -1,8 +1,8 @@
+import axios from 'axios';
 import styled from 'styled-components';
 import useAxios from 'hooks/useAxios';
-import axios from 'axios';
-import { AiOutlineClose } from 'react-icons/ai';
 import UserInfoBox from 'pages/Admin/components/RightSection/UserInfoBox';
+import { AiOutlineClose } from 'react-icons/ai';
 
 const DeletedPostModal = ({ closeModal, modalId }) => {
   const { response } = useAxios({
@@ -60,7 +60,9 @@ const DeletedPostModal = ({ closeModal, modalId }) => {
             </PostImage>
             <ReasonToBan>
               <ReasonToBanTitle>사유</ReasonToBanTitle>
-              <ReasonToBanContent />
+              <ReasonToBanContent>
+                {response.data.delete_reason}
+              </ReasonToBanContent>
               <BtnWrapper>
                 <CancelBtn
                   onClick={() => {
@@ -193,10 +195,12 @@ const ReasonToBanTitle = styled.p`
   padding-top: 1rem;
 `;
 
-const ReasonToBanContent = styled.textarea`
+const ReasonToBanContent = styled.div`
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
   width: 90%;
   height: 50%;
-  resize: none;
+  border: 1px solid black;
 `;
 
 const BtnWrapper = styled.div`

@@ -1,9 +1,9 @@
+import axios from 'axios';
 import styled from 'styled-components';
 import { useState } from 'react';
 import useAxios from 'hooks/useAxios';
-import axios from 'axios';
-import { AiOutlineClose } from 'react-icons/ai';
 import UserInfoBox from 'pages/Admin/components/RightSection/UserInfoBox';
+import { AiOutlineClose } from 'react-icons/ai';
 
 const PostModal = ({ closeModal, modalId }) => {
   const [reason, setReason] = useState<string>('');

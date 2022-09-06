@@ -1,7 +1,7 @@
+import axios from 'axios';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
 import PostHeaderBox from 'pages/Admin/components/RightSection/PostHeaderBox';
 import DeletedPostModal from 'pages/Admin/components/Modal/DeletedPostModal';
 import ListPostContentsBox from 'pages/Admin/components/RightSection/ListPostContentBox';

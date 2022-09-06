@@ -1,6 +1,6 @@
+import axios from 'axios';
 import styled from 'styled-components';
 import useAxios from 'hooks/useAxios';
-import axios from 'axios';
 import { AiOutlineClose } from 'react-icons/ai';
 
 const UserModal = ({ closeModal, modalId }) => {

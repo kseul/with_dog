@@ -1,7 +1,7 @@
+import axios from 'axios';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
 import ListHeaderBox from 'pages/Admin/components/RightSection/ListHeaderBox';
 import ListContentsBox from 'pages/Admin/components/RightSection/ListContentsBox';
 import UserModal from 'pages/Admin/components/Modal/UserModal';
