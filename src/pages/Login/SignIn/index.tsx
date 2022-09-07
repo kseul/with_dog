@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { KAKAO_AUTH_PATH } from './kakaoLogin/KakaoLoginData';
+import { GOOGLE_AUTH_PATH } from './googleLogin/GoogleloginData';
 import signInbg from 'assets/images/bg1.jpg';
 import googleIcon from 'assets/svg/google-logo.svg';
 import kakaoIcon from 'assets/svg/kakao-logo.svg';
@@ -6,11 +8,13 @@ import InputForm from '../components/inputForm/InputForm';
 import LoginButton from '../components/loginButton/LoginButton';
 import SNSButton from '../components/snsButton/SNSButton';
 import character from 'assets/images/LoginBgCharacter.png';
-import { KAKAO_AUTH_PATH } from './kakaoLogin/KakaoLoginData';
 
 const SignIn = () => {
   const handleKakaoLogin = () => {
     window.location.href = KAKAO_AUTH_PATH;
+  };
+  const handleGoogleLogin = () => {
+    window.location.href = GOOGLE_AUTH_PATH;
   };
 
   return (
@@ -30,12 +34,12 @@ const SignIn = () => {
           <SNSButton
             title="구글"
             icon={googleIcon}
-            handleKakaoLogin={handleKakaoLogin}
+            handleSNSLogin={handleGoogleLogin}
           />
           <SNSButton
             title="카카오"
             icon={kakaoIcon}
-            handleKakaoLogin={handleKakaoLogin}
+            handleSNSLogin={handleKakaoLogin}
           />
         </SnsLoginContainer>
       </LoginForm>
