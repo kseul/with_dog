@@ -31,7 +31,7 @@ export interface PageBoxProp {
 
 export interface ChatModalProp {
   onClickToggleModal: () => void;
-  currentModal: idProp;
+  id?: number;
   Image: any;
   modalDescription: string | undefined;
   type: string | undefined;

@@ -28,6 +28,7 @@ const ChatListContainer = styled.div`
   ${props => props.theme.flex.flexBox('column')}
   height: 100vh;
   background-color: #ececed;
+  padding-top: 5rem;
 `;
 
 export default ChatList;

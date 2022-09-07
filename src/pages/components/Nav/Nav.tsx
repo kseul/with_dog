@@ -39,6 +39,7 @@ const NavContainer = styled.div`
   height: 5rem;
   border-bottom: 2px solid #e1e2e3;
   background-color: white;
+  z-index: 1;
 `;
 const PageContainer = styled.div`
   display: flex;

@@ -18,7 +18,7 @@ const Router = () => {
         <Route path="/noticeboard" element={<NoticeBoard />} />
         <Route path="/*" element={<MainRouter />} />
         <Route path="/admin/:value/*" element={<Admin />} />
-        <Route path="/chat" element={<ChatRoom />} />
+        <Route path="/chat/:id" element={<ChatRoom />} />
         <Route path="/kakaoLogin" element={<KakaoLogin />} />
       </Routes>
     </BrowserRouter>

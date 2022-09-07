@@ -1,15 +1,23 @@
 import styled from 'styled-components';
 import ArrowLeft from 'assets/svg/arrow-left2.svg';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const TitleBar = () => {
-  // TODO : room 가져오기
+  const navigate = useNavigate();
+  const goToChatList = () => {
+    navigate('/chatting-list');
+  };
+
+  const roomName: any = useSelector<any>(state => state.chat);
+
   return (
     <TitleBarContainer>
-      <BackBox>
+      <BackBox onClick={goToChatList}>
         <GoBackIcon src={ArrowLeft} />
-        <GoBackText>뒤로가기</GoBackText>
+        <GoBackText>채팅목록</GoBackText>
       </BackBox>
-      <Title>방이름</Title>
+      <Title>{roomName}</Title>
     </TitleBarContainer>
   );
 };
@@ -27,15 +35,13 @@ const Title = styled.div`
   color: ${props => props.theme.colors.boldGray};
 `;
 
-const BackBox = styled.div`
+const BackBox = styled.button`
   ${props => props.theme.flex.flexBox()}
   position: absolute;
   width: 10rem;
   left: 0.5rem;
-
-  &:hover {
-    cursor: pointer;
-  }
+  border: none;
+  background-color: white;
 `;
 
 const GoBackIcon = styled.img`

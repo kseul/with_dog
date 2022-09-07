@@ -5,8 +5,6 @@ import Input from './components/Input';
 import signInbg from 'assets/images/bg2.png';
 
 const ChatRoom = () => {
-  // 쿼리로 name, room 가져오기
-
   return (
     <ChatRoomContainer>
       <TitleBar />
