@@ -53,7 +53,7 @@ const AdminContainer = () => {
             <AdminRightPageUser postData={postData} setPostData={setPostData} />
           ) : params.value === 'posts' ? (
             <AdminRightPagePost postData={postData} setPostData={setPostData} />
-          ) : params.value === 'posts/all/deleted' ? (
+          ) : params.value === 'posts' ? (
             <AdminRightPagePost postData={postData} setPostData={setPostData} />
           ) : (
             <AdminRightPageUser postData={postData} setPostData={setPostData} />
