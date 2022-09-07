@@ -6,7 +6,8 @@ import NoticeBoard from 'pages/NoticeBoard/NoticeBoard';
 import MainRouter from './pages/MainRouter/MainRouter';
 import Main from 'pages/Main/Main';
 import ChatRoom from 'pages/Chatting/ChatRoom';
-import KakaoLogin from 'pages/Login/SignIn/kakaoLogin/KakaoLogin';
+import KakaoLogin from 'pages/Login/SignIn/kakaoLogin/KakaoLoginRedirect';
+import GoogleLogin from 'pages/Login/SignIn/googleLogin/GoogleRedirect';
 
 const Router = () => {
   return (
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path="/admin/:value/*" element={<Admin />} />
         <Route path="/chat" element={<ChatRoom />} />
         <Route path="/kakaoLogin" element={<KakaoLogin />} />
+        <Route path="/googleLogin" element={<GoogleLogin />} />
       </Routes>
     </BrowserRouter>
   );
