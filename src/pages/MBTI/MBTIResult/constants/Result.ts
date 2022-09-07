@@ -1,3 +1,5 @@
+import { ResultData } from 'types/type';
+import { MBTIResultProps } from 'types/type';
 import ESFCDog from '../../../../assets/images/ESFC_DOG.png';
 import INTCPosition from '../../../../assets/images/INTCPosition.png';
 import INTPPosition from '../../../../assets/images/INTPPosition.png';
@@ -15,15 +17,6 @@ import ESTCPosition from '../../../../assets/images/ESTCPosition.png';
 import ESTPPosition from '../../../../assets/images/ESTPPosition.png';
 import ESFCPosition from '../../../../assets/images/ESFCPosition.png';
 import ESFPPosition from '../../../../assets/images/ESFPPosition.png';
-
-export interface ResultData {
-  resultId: number;
-  MBTIImage: string;
-  MBTI: string;
-  MBTICharacter: string;
-  content: string;
-  MBTIPosition: string;
-}
 
 export const MBTI_RESULT: ResultData[] = [
   {
@@ -170,4 +163,16 @@ export const MBTI_RESULT: ResultData[] = [
       '의지하고 내 곁을 맡길 수 있는 믿음직한 친구입니다! 다른 강아지와도 사이 좋게 지내는 인싸 강아지이지만 그 어떤 강아지보다도 주인을 가장 잘 따릅니다! 의지할 수 있는 좋은 친구를 옆에 두셔서 좋으시겠어요~',
     MBTIPosition: ESFPPosition,
   },
+];
+
+export const MBTI_RESULT_DATA: MBTIResultProps[] = [
+  {
+    id: 0,
+    mbti: 'I',
+    score: 4,
+    layout: 'lefttop',
+  },
+  { id: 1, mbti: 'S', score: -5, layout: 'leftbottom' },
+  { id: 2, mbti: 'T', score: 10, layout: 'righttop' },
+  { id: 3, mbti: 'P', score: -6, layout: 'rightbottom' },
 ];

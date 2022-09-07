@@ -1,20 +1,13 @@
 import styled from 'styled-components/macro';
-import EnergyGraph from './EnergyGraph';
-import RelationGraph from './RelationGraph';
-import ReactionGraph from './ReactionGraph';
-import JudgementGraph from './JudgementGraph';
+import GraphComponent from './GraphComponent';
+import { MBTI_RESULT_DATA } from '../constants/Result';
 
 const MBTIGraph = () => {
   return (
     <MBTIGraphContainer>
-      <HorizontalAlign>
-        <EnergyGraph />
-        <RelationGraph />
-      </HorizontalAlign>
-      <HorizontalAlign>
-        <ReactionGraph />
-        <JudgementGraph />
-      </HorizontalAlign>
+      {MBTI_RESULT_DATA.map(({ mbti, score, id, layout }) => (
+        <GraphComponent key={id} mbti={mbti} score={score} layout={layout} />
+      ))}
     </MBTIGraphContainer>
   );
 };
@@ -23,13 +16,6 @@ const MBTIGraphContainer = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', 'center')};
   width: 75rem;
   height: 18.75rem;
-  margin: 0 auto;
-`;
-
-const HorizontalAlign = styled.div`
-  ${props => props.theme.flex.flexBox('row', 'center', 'space-between')};
-  width: 25rem;
-  height: 12.5rem;
   margin: 0 auto;
 `;
 
