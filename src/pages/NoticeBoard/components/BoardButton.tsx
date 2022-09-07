@@ -4,12 +4,6 @@ import pawsIcon from 'assets/svg/dog-paws2.svg';
 import { Link } from 'react-router-dom';
 
 const BoardButton = () => {
-  const [activateEditor, setActivateEditor] = useState(false);
-
-  const clickWrite = () => {
-    setActivateEditor(!activateEditor);
-  };
-
   return (
     <BoardButtonContainer>
       <BoardButtonWrapper>
