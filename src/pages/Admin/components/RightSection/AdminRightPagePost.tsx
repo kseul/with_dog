@@ -8,22 +8,16 @@ import ListPostContentsBox from 'pages/Admin/components/RightSection/ListPostCon
 import PostModal from 'pages/Admin/components/Modal/PostModal';
 import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/PageNation';
+import AdminSpinner from 'pages/Admin/components/AdminSpinner.tsx/AdminSpinner';
 
-const AdminRightPagePost = ({ postData, setPostData }) => {
+const AdminRightPagePost = ({ postData, setPostData, loading }) => {
   const location = useLocation();
 
-  //모달창 오픈
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalId, setModalId] = useState<number | undefined>();
-
-  // 상단 토글 버튼
   const [allToggle, setAllToggle] = useState<boolean>(false);
   const [banToggle, setBanToggle] = useState<boolean>(false);
-
-  // 검색
   const [search, setSearch] = useState<string>('');
-
-  //페이지네이션
   const [currentPage, setCurrentPage] = useState(1);
   const [indexClicked, setIndexClicked] = useState('');
   const [pagenatedData, setPagenatedData] = useState(postData);
@@ -37,7 +31,6 @@ const AdminRightPagePost = ({ postData, setPostData }) => {
     }
   }, [postData, indexOfFirst, indexOfLast]);
 
-  // 모달창 오픈
   const openModal = (): void => {
     setIsModalOpen(true);
   };
@@ -112,34 +105,41 @@ const AdminRightPagePost = ({ postData, setPostData }) => {
         </SortByUser>
       </SortBox>
       <UserListContainer>
-        <PostHeaderBox />
-        <ListContentsSection>
-          {pagenatedData &&
-            pagenatedData.map(data => (
-              <ListPostContentsBox
-                data={data}
-                key={data.id}
-                openModal={openModal}
-                onCurrentModal={onCurrentModal}
-              />
-            ))}
-          {postData && (
-            <PageNation
-              perPage={perPage}
-              totalPost={postData.length}
-              setCurrentPage={setCurrentPage}
-              setIndexClicked={setIndexClicked}
-              indexClicked={indexClicked}
-            />
-          )}
-
-          {isModalOpen &&
-            (location.pathname === '/admin/posts' ? (
-              <PostModal closeModal={closeModal} modalId={modalId} />
-            ) : (
-              <DeletedPostModal closeModal={closeModal} modalId={modalId} />
-            ))}
-        </ListContentsSection>
+        {loading ? (
+          <AdminSpinner />
+        ) : (
+          pagenatedData && (
+            <>
+              <PostHeaderBox />
+              <ListContentsSection>
+                {pagenatedData.map(data => (
+                  <ListPostContentsBox
+                    data={data}
+                    key={data.id}
+                    openModal={openModal}
+                    onCurrentModal={onCurrentModal}
+                  />
+                ))}
+                <PageNation
+                  perPage={perPage}
+                  totalPost={postData.length}
+                  setCurrentPage={setCurrentPage}
+                  setIndexClicked={setIndexClicked}
+                  indexClicked={indexClicked}
+                />
+                {isModalOpen &&
+                  (location.pathname === '/admin/posts' ? (
+                    <PostModal closeModal={closeModal} modalId={modalId} />
+                  ) : (
+                    <DeletedPostModal
+                      closeModal={closeModal}
+                      modalId={modalId}
+                    />
+                  ))}
+              </ListContentsSection>
+            </>
+          )
+        )}
       </UserListContainer>
     </AdminRightContainer>
   );

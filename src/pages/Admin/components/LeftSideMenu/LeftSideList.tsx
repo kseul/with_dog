@@ -16,7 +16,7 @@ const LeftSideList = ({ list, setClick, clicked, navigate }: ListProps) => {
         setClick(list);
         navigate(`/admin/${list.value}`);
       }}
-      className={clicked === list.listName ? 'selected' : ''}
+      className={clicked === list.value ? 'selected' : ''}
     >
       {list.listName}
     </ListBox>

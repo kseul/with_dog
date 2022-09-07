@@ -9,26 +9,38 @@ import AdminRightPagePost from 'pages/Admin/components/RightSection/AdminRightPa
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
 
 const AdminContainer = () => {
-  const [clicked, setClicked] = useState('');
-  const [postData, setPostData] = useState();
-
   const navigate = useNavigate();
   const params = useParams();
   const location = useLocation();
 
+  const [clicked, setClicked] = useState(location.pathname.slice(7));
+  const [postData, setPostData] = useState();
+  const [loading, setLoading] = useState(false);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        `https://togedog-dj.herokuapp.com/${location.pathname.slice(7)}`,
+        {
+          headers: {
+            accept: '*/*',
+            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
+          },
+        }
+      );
+      setPostData(response.data);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    axios
-      .get(`https://togedog-dj.herokuapp.com/${location.pathname.slice(7)}`, {
-        headers: {
-          accept: '*/*',
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
-        },
-      })
-      .then(res => setPostData(res.data));
+    fetchData();
   }, [location.pathname]);
 
   const setClick = list => {
-    setClicked(list.listName);
+    setClicked(list.value);
   };
 
   return (
@@ -50,13 +62,29 @@ const AdminContainer = () => {
         </AdminLeftSection>
         <AdminRightSection>
           {params.value === 'users' ? (
-            <AdminRightPageUser postData={postData} setPostData={setPostData} />
+            <AdminRightPageUser
+              postData={postData}
+              setPostData={setPostData}
+              loading={loading}
+            />
           ) : params.value === 'posts' ? (
-            <AdminRightPagePost postData={postData} setPostData={setPostData} />
+            <AdminRightPagePost
+              postData={postData}
+              setPostData={setPostData}
+              loading={loading}
+            />
           ) : params.value === 'posts' ? (
-            <AdminRightPagePost postData={postData} setPostData={setPostData} />
+            <AdminRightPagePost
+              postData={postData}
+              setPostData={setPostData}
+              loading={loading}
+            />
           ) : (
-            <AdminRightPageUser postData={postData} setPostData={setPostData} />
+            <AdminRightPageUser
+              postData={postData}
+              setPostData={setPostData}
+              loading={loading}
+            />
           )}
         </AdminRightSection>
       </SectionContainer>
@@ -67,6 +95,7 @@ const AdminContainer = () => {
 const AdminPageContainer = styled.div`
   width: 100%;
   height: 100vh;
+  min-width: 50rem;
 `;
 
 const SectionContainer = styled.div`
