@@ -1,12 +1,13 @@
 import styled from 'styled-components';
+import InputForm from '../components/inputForm/InputForm';
+import LoginButton from '../components/loginButton/LoginButton';
+import SNSButton from '../components/snsButton/SNSButton';
 import { KAKAO_AUTH_PATH } from './kakaoLogin/KakaoLoginData';
 import { GOOGLE_AUTH_PATH } from './googleLogin/GoogleloginData';
 import signInbg from 'assets/images/bg1.jpg';
 import googleIcon from 'assets/svg/google-logo.svg';
 import kakaoIcon from 'assets/svg/kakao-logo.svg';
-import InputForm from '../components/inputForm/InputForm';
-import LoginButton from '../components/loginButton/LoginButton';
-import SNSButton from '../components/snsButton/SNSButton';
+
 import character from 'assets/images/LoginBgCharacter.png';
 
 const SignIn = () => {
