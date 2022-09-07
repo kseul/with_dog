@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../components/spinner/Spinner';
 
-const KakaoLogin = () => {
+const KakaoLoginRedirect = () => {
   const navigate = useNavigate();
   const KAKAO_CODE = new URL(window.location.href).searchParams.get('code');
 
-  const getAndSendKakaoToken = () => {
+  const handleKakaoToken = () => {
     fetch('https://kauth.kakao.com/oauth/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -16,7 +16,7 @@ const KakaoLogin = () => {
       .then(data => {
         if (data.access_token) {
           const ACCESS_TOKEN = data.access_token;
-          fetch('https://togedog-dj.herokuapp.com/users/test/kakaotoken', {
+          fetch('https://togedog-dj.herokuapp.com/users/test/kakaotoken/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -36,10 +36,10 @@ const KakaoLogin = () => {
   };
 
   useEffect(() => {
-    getAndSendKakaoToken();
+    handleKakaoToken();
   });
 
   return <Spinner />;
 };
 
-export default KakaoLogin;
+export default KakaoLoginRedirect;
