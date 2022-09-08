@@ -7,22 +7,16 @@ import ListContentsBox from 'pages/Admin/components/RightSection/ListContentsBox
 import UserModal from 'pages/Admin/components/Modal/UserModal';
 import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/PageNation';
+import AdminSpinner from 'pages/Admin/components/AdminSpinner.tsx/AdminSpinner';
 
-const AdminRightPageUser = ({ postData, setPostData }) => {
+const AdminRightPageUser = ({ postData, setPostData, loading }) => {
   const location = useLocation();
 
-  // 모달창
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalId, setModalId] = useState<number | undefined>();
-
-  // 상단 토글
   const [allToggle, setAllToggle] = useState(false);
   const [banToggle, setBanToggle] = useState(false);
-
-  //검색
   const [search, setSearch] = useState<string>('');
-
-  // 페이지네이션
   const [currentPage, setCurrentPage] = useState(1);
   const [indexClicked, setIndexClicked] = useState('');
   const [pagenatedData, setPagenatedData] = useState(postData);
@@ -110,30 +104,35 @@ const AdminRightPageUser = ({ postData, setPostData }) => {
         </SortByUser>
       </SortBox>
       <UserListContainer>
-        <ListHeaderBox />
-        <ListContentsSection>
-          {pagenatedData &&
-            pagenatedData.map(data => (
-              <ListContentsBox
-                data={data}
-                key={data.id}
-                openModal={openModal}
-                onCurrentModal={onCurrentModal}
-              />
-            ))}
-          {postData && (
-            <PageNation
-              perPage={perPage}
-              totalPost={postData.length}
-              setCurrentPage={setCurrentPage}
-              setIndexClicked={setIndexClicked}
-              indexClicked={indexClicked}
-            />
-          )}
-          {isModalOpen && (
-            <UserModal closeModal={closeModal} modalId={modalId} />
-          )}
-        </ListContentsSection>
+        {loading ? (
+          <AdminSpinner />
+        ) : (
+          pagenatedData && (
+            <>
+              <ListHeaderBox />
+              <ListContentsSection>
+                {pagenatedData.map(data => (
+                  <ListContentsBox
+                    data={data}
+                    key={data.id}
+                    openModal={openModal}
+                    onCurrentModal={onCurrentModal}
+                  />
+                ))}
+                <PageNation
+                  perPage={perPage}
+                  totalPost={postData.length}
+                  setCurrentPage={setCurrentPage}
+                  setIndexClicked={setIndexClicked}
+                  indexClicked={indexClicked}
+                />
+                {isModalOpen && (
+                  <UserModal closeModal={closeModal} modalId={modalId} />
+                )}
+              </ListContentsSection>
+            </>
+          )
+        )}
       </UserListContainer>
     </AdminRightContainer>
   );
@@ -231,7 +230,9 @@ const TitleText = styled.span``;
 
 const UserInput = styled.input``;
 
-const UserListContainer = styled.div``;
+const UserListContainer = styled.div`
+  min-width: 31.25rem;
+`;
 
 const ListContentsSection = styled.div``;
 
