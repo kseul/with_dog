@@ -21,7 +21,7 @@ export interface LoginButtonProp {
 export interface SNSButtonProp {
   title: string;
   icon: string;
-  handleKakaoLogin: () => void;
+  handleSNSLogin: () => void;
 }
 
 export interface PageBoxProp {
@@ -131,4 +131,20 @@ export interface MBTIJudgdemnetProps extends MBTIProps {
 export interface AnswerType {
   testId: number;
   answerValue: string;
+}
+
+export interface ResultData {
+  resultId: number;
+  MBTIImage: string;
+  MBTI: string;
+  MBTICharacter: string;
+  content: string;
+  MBTIPosition: string;
+}
+
+export interface MBTIResultProps {
+  id?: number;
+  mbti: string;
+  score: number;
+  layout: string;
 }

@@ -23,14 +23,16 @@ const PostModal = ({ closeModal, modalId }) => {
   };
 
   const deletePost = () => {
-    if (window.confirm('게시글을 삭제하시겠습니까')) {
+    if (window.confirm('게시글을 삭제하시겠습니까?')) {
       axios.post(
         `https://togedog-dj.herokuapp.com/posts/${modalId}/delete/`,
-        { delete_reason: reason },
+        new URLSearchParams({
+          delete_reason: reason,
+        }),
         {
           headers: {
             Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
-            'Content-type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
         }
       );
