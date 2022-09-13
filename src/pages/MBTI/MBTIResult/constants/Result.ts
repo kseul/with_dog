@@ -1,6 +1,5 @@
 import { ResultData } from 'types/type';
 import { MBTIResultProps } from 'types/type';
-import ESFCDog from '../../../../assets/images/ESFC_DOG.png';
 import INTCPosition from '../../../../assets/images/INTCPosition.png';
 import INTPPosition from '../../../../assets/images/INTPPosition.png';
 import INFCPosition from '../../../../assets/images/INFCPosition.png';
@@ -17,11 +16,27 @@ import ESTCPosition from '../../../../assets/images/ESTCPosition.png';
 import ESTPPosition from '../../../../assets/images/ESTPPosition.png';
 import ESFCPosition from '../../../../assets/images/ESFCPosition.png';
 import ESFPPosition from '../../../../assets/images/ESFPPosition.png';
+import INTCDog from 'assets/svg/INTC_Character.svg';
+import INTPDog from 'assets/svg/INTP_Character.svg';
+import INFCDog from 'assets/svg/INFC_Character.svg';
+import INFPDog from 'assets/svg/INFP_Character.svg';
+import ISTCDog from 'assets/svg/ISTC_Character.svg';
+import ISTPDog from 'assets/svg/ISTP_Character.svg';
+import ISFCDog from 'assets/svg/ISTP_Character.svg';
+import ISFPDog from 'assets/svg/ISFC_Character.svg';
+import ENTCDog from 'assets/svg/ENTC_Character.svg';
+import ENTPDog from 'assets/svg/ENTP_Character.svg';
+import ENFCDog from 'assets/svg/ENFC_Character.svg';
+import ENFPDog from 'assets/svg/ENFP_Character.svg';
+import ESTCDog from 'assets/svg/ESTC_Character.svg';
+import ESTPDog from 'assets/svg/ESTP_Character.svg';
+import ESFCDog from 'assets/svg/ESFC_Character.svg';
+import ESFPDog from 'assets/svg/ESFP_Character.svg';
 
 export const MBTI_RESULT: ResultData[] = [
   {
     resultId: 0,
-    MBTIImage: ESFCDog,
+    MBTIImage: INTCDog,
     MBTI: 'INTC',
     MBTICharacter: '겁많은 탐험가 댕댕이',
     content:
@@ -30,7 +45,7 @@ export const MBTI_RESULT: ResultData[] = [
   },
   {
     resultId: 1,
-    MBTIImage: ESFCDog,
+    MBTIImage: INTPDog,
     MBTI: 'INTP',
     MBTICharacter: '눈치빠른 모범생 댕댕이',
     content:
@@ -39,7 +54,7 @@ export const MBTI_RESULT: ResultData[] = [
   },
   {
     resultId: 2,
-    MBTIImage: ESFCDog,
+    MBTIImage: INFCDog,
     MBTI: 'INFC',
     MBTICharacter: '세상이 궁금한 몽상가 댕댕이',
     content:
@@ -48,7 +63,7 @@ export const MBTI_RESULT: ResultData[] = [
   },
   {
     resultId: 3,
-    MBTIImage: ESFCDog,
+    MBTIImage: INFPDog,
     MBTI: 'INFP',
     MBTICharacter: '지혜로운 나무늘보 댕댕이',
     content:
@@ -57,7 +72,7 @@ export const MBTI_RESULT: ResultData[] = [
   },
   {
     resultId: 4,
-    MBTIImage: ESFCDog,
+    MBTIImage: ISTCDog,
     MBTI: 'ISTC',
     MBTICharacter: '겉바속촉 츤데레 댕댕이',
     content:
@@ -66,7 +81,7 @@ export const MBTI_RESULT: ResultData[] = [
   },
   {
     resultId: 5,
-    MBTIImage: ESFCDog,
+    MBTIImage: ISTPDog,
     MBTI: 'ISTP',
     MBTICharacter: '우직한 보디가드 댕댕이',
     content:
@@ -75,7 +90,7 @@ export const MBTI_RESULT: ResultData[] = [
   },
   {
     resultId: 6,
-    MBTIImage: ESFCDog,
+    MBTIImage: ISFCDog,
     MBTI: 'ISFC',
     MBTICharacter: '소심한 구경꾼 댕댕이',
     content:
@@ -84,7 +99,7 @@ export const MBTI_RESULT: ResultData[] = [
   },
   {
     resultId: 7,
-    MBTIImage: ESFCDog,
+    MBTIImage: ISFPDog,
     MBTI: 'ISFP',
     MBTICharacter: '부끄럼 많은 마당발 댕댕이',
     content:
@@ -93,7 +108,7 @@ export const MBTI_RESULT: ResultData[] = [
   },
   {
     resultId: 8,
-    MBTIImage: ESFCDog,
+    MBTIImage: ENTCDog,
     MBTI: 'ENTC',
     MBTICharacter: '호기심 많은 쫄보 댕댕이',
     content:
@@ -102,7 +117,7 @@ export const MBTI_RESULT: ResultData[] = [
   },
   {
     resultId: 9,
-    MBTIImage: ESFCDog,
+    MBTIImage: ENTPDog,
     MBTI: 'ENTP',
     MBTICharacter: '든든한 오른팔 댕댕이',
     content:
@@ -111,7 +126,7 @@ export const MBTI_RESULT: ResultData[] = [
   },
   {
     resultId: 10,
-    MBTIImage: ESFCDog,
+    MBTIImage: ENFCDog,
     MBTI: 'ENFC',
     MBTICharacter: '자유로운 영혼 댕댕이',
     content:
@@ -120,7 +135,7 @@ export const MBTI_RESULT: ResultData[] = [
   },
   {
     resultId: 11,
-    MBTIImage: ESFCDog,
+    MBTIImage: ENFPDog,
     MBTI: 'ENFP',
     MBTICharacter: '영리한 전략가 댕댕이',
     content:
@@ -129,7 +144,7 @@ export const MBTI_RESULT: ResultData[] = [
   },
   {
     resultId: 12,
-    MBTIImage: ESFCDog,
+    MBTIImage: ESTCDog,
     MBTI: 'ESTC',
     MBTICharacter: '콧대높은 천방지축 댕댕이',
     content:
@@ -138,7 +153,7 @@ export const MBTI_RESULT: ResultData[] = [
   },
   {
     resultId: 13,
-    MBTIImage: ESFCDog,
+    MBTIImage: ESTPDog,
     MBTI: 'ESTP',
     MBTICharacter: '싹싹한 골목대장 댕댕이',
     content:
@@ -156,7 +171,7 @@ export const MBTI_RESULT: ResultData[] = [
   },
   {
     resultId: 15,
-    MBTIImage: ESFCDog,
+    MBTIImage: ESFPDog,
     MBTI: 'ESFP',
     MBTICharacter: '능글맞은 장꾸 댕댕이',
     content:

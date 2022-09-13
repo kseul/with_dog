@@ -6,6 +6,7 @@ import RelationTest from './Relation/RelationTest';
 import ReactionTest from './Reaction/ReactionTest';
 import JudgementTest from './Judgement/JudgementTest';
 import { AnswerType } from 'types/type';
+import { MBTIScoreProps } from 'types/type';
 
 const MBTITest = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -19,35 +20,75 @@ const MBTITest = () => {
   const [reactionNameList, setReactionNameList] = useState<AnswerType[]>([]);
   const [judgementNameList, setJudgementNameList] = useState<AnswerType[]>([]);
 
-  const answerValueResult: string[] = energyNameList.map(a => a.answerValue);
-
-  const numberArr = answerValueResult => {
+  const numberArr = value => {
     const newArr = [0, 0, 0, 0, 0];
-    for (let i = 0; i < answerValueResult.length; i++) {
-      if (answerValueResult[i] === '매우 아니다') {
+    for (let i = 0; i < value.length; i++) {
+      if (value[i] === '매우 아니다') {
         newArr[i] = -2;
-      } else if (answerValueResult[i] === '아니다') {
+      } else if (value[i] === '아니다') {
         newArr[i] = -1;
-      } else if (answerValueResult[i] === '그렇다') {
+      } else if (value[i] === '그렇다') {
         newArr[i] = 1;
-      } else if (answerValueResult[i] === '매우 그렇다') {
+      } else if (value[i] === '매우 그렇다') {
         newArr[i] = 2;
       }
     }
-    return newArr.reduce((a, b) => a + b);
-  };
-  const score = numberArr(answerValueResult);
-
-  const abc = score => {
-    if (score < 0) {
-      return 'E';
-    } else if (score > 0) {
-      return 'I';
+    const sumResult = newArr.reduce((a, b) => a + b);
+    if (sumResult === 0) {
+      return newArr[0];
+    } else {
+      return sumResult;
     }
   };
-  const energyMBTI = abc(score);
 
-  console.log(energyMBTI);
+  const energyAnswerResult = energyNameList.map(a => a.answerValue);
+  const relationAnswerResult = relationNameList.map(a => a.answerValue);
+  const reactionAnswerResult = reactionNameList.map(a => a.answerValue);
+  const judgementAnswerResult = judgementNameList.map(a => a.answerValue);
+  const setMBTIResult: MBTIScoreProps[] = [];
+
+  const setEnergy = (energyAnswerResult): void => {
+    const energyScore = numberArr(energyAnswerResult);
+    if (energyScore < 0) {
+      setMBTIResult.push({ energy: 'E', energyScore: energyScore });
+    } else if (energyScore > 0) {
+      setMBTIResult.push({ energy: 'I', energyScore: energyScore });
+    }
+  };
+
+  const setRelation = (relationAnswerResult): void => {
+    const relationScore = numberArr(relationAnswerResult);
+    if (relationScore < 0) {
+      setMBTIResult.push({ relation: 'S', relationScore: relationScore });
+    } else if (relationScore > 0) {
+      setMBTIResult.push({ relation: 'N', relationScore: relationScore });
+    }
+  };
+
+  const setReaction = reactionAnswerResult => {
+    const reactionScore = numberArr(reactionAnswerResult);
+    if (reactionScore < 0) {
+      setMBTIResult.push({ reaction: 'F', reactionScore: reactionScore });
+    } else if (reactionScore > 0) {
+      setMBTIResult.push({ reaction: 'T', reactionScore: reactionScore });
+    }
+  };
+
+  const setJudgement = judgementAnswerResult => {
+    const judgementScore = numberArr(judgementAnswerResult);
+    if (judgementScore < 0) {
+      setMBTIResult.push({ judgement: 'C', judgementScore: judgementScore });
+    } else if (judgementScore > 0) {
+      setMBTIResult.push({ judgement: 'P', judgementScore: judgementScore });
+    }
+  };
+
+  setEnergy(energyAnswerResult);
+  setRelation(relationAnswerResult);
+  setReaction(reactionAnswerResult);
+  setJudgement(judgementAnswerResult);
+
+  console.log(setMBTIResult);
 
   const onClickCheck = (): void => {
     setIsChecked(!isChecked);

@@ -148,3 +148,14 @@ export interface MBTIResultProps {
   score: number;
   layout: string;
 }
+
+export interface MBTIScoreProps {
+  energy?: string;
+  energyScore?: number;
+  relation?: string;
+  relationScore?: number;
+  reaction?: string;
+  reactionScore?: number;
+  judgement?: string;
+  judgementScore?: number;
+}
