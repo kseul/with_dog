@@ -1,9 +1,20 @@
 import styled from 'styled-components';
 import { LoginButtonProp } from 'types/type';
 
-const LoginButton = ({ title, color, size }: LoginButtonProp) => {
+const LoginButton = ({
+  title,
+  color,
+  size,
+  isActive,
+  func,
+}: LoginButtonProp) => {
   return (
-    <Button color={color} style={{ width: `${size}rem` }}>
+    <Button
+      color={color}
+      style={{ width: `${size}rem` }}
+      disabled={!isActive}
+      onClick={func}
+    >
       {title}
     </Button>
   );
@@ -18,5 +29,6 @@ const Button = styled.button`
   color: white;
   text-align: center;
   font-size: 1.25rem;
+  opacity: ${props => (props.disabled ? 0.6 : 1)};
 `;
 export default LoginButton;

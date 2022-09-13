@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import { CheckValidProps } from 'types/type';
 
-const ConfirmText = () => {
+const ConfirmText = ({ title }: CheckValidProps) => {
   return (
     <ConfirmTextContainer>
-      <Title>이름을 작성해주세요.</Title>
+      <Title>{title}</Title>
     </ConfirmTextContainer>
   );
 };

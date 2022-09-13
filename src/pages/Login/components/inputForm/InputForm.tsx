@@ -1,8 +1,20 @@
 import styled from 'styled-components';
 import { IdPwInputProp } from 'types/type';
 
-const InputForm = ({ placeholder, type }: IdPwInputProp) => {
-  return <UserInputForm placeholder={placeholder} type={type} />;
+const InputForm = ({
+  placeholder,
+  type,
+  name,
+  handleUserInput,
+}: IdPwInputProp) => {
+  return (
+    <UserInputForm
+      onChange={handleUserInput}
+      placeholder={placeholder}
+      type={type}
+      name={name}
+    />
+  );
 };
 const UserInputForm = styled.input`
   width: 22rem;

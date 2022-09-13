@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import InputForm from '../components/inputForm/InputForm';
 import LoginButton from '../components/loginButton/LoginButton';
 import SNSButton from '../components/snsButton/SNSButton';
@@ -7,16 +9,36 @@ import { GOOGLE_AUTH_PATH } from './googleLogin/GoogleloginData';
 import signInbg from 'assets/images/bg1.jpg';
 import googleIcon from 'assets/svg/google-logo.svg';
 import kakaoIcon from 'assets/svg/kakao-logo.svg';
-
 import character from 'assets/images/LoginBgCharacter.png';
 
 const SignIn = () => {
+  const navigate = useNavigate();
+  const [userInputValue, setUserInputValue] = useState({
+    id: '',
+    password: '',
+  });
+
+  const { id, password } = userInputValue;
+
   const handleKakaoLogin = () => {
     window.location.href = KAKAO_AUTH_PATH;
   };
   const handleGoogleLogin = () => {
     window.location.href = GOOGLE_AUTH_PATH;
   };
+
+  const handleUserInput = e => {
+    const { name, value } = e.target;
+    setUserInputValue({ ...userInputValue, [name]: value });
+  };
+
+  const isActive = id.length > 1 && password.length >= 8 === true;
+
+  const goToSignUp = () => {
+    navigate('/signup');
+  };
+
+  const nothing = () => {};
 
   return (
     <SignInContainer>
@@ -25,11 +47,33 @@ const SignIn = () => {
         <LoginTitle>로그인</LoginTitle>
         <LoginSubTitle>함께하러 가시개!</LoginSubTitle>
         <IdPwInputContainer>
-          <InputForm placeholder="아이디 입력" type="text" />
-          <InputForm placeholder="비밀번호 입력" type="password" />
+          <InputForm
+            placeholder="이메일 입력"
+            type="text"
+            name="id"
+            handleUserInput={handleUserInput}
+          />
+          <InputForm
+            placeholder="비밀번호 입력"
+            type="password"
+            name="password"
+            handleUserInput={handleUserInput}
+          />
         </IdPwInputContainer>
-        <LoginButton title="로그인" color="#7CCCC7" size={21} />
-        <LoginButton title="회원가입" color="#CFB6D7" size={21} />
+        <LoginButton
+          title="로그인"
+          color="#7CCCC7"
+          size={21}
+          isActive={isActive}
+          func={nothing}
+        />
+        <LoginButton
+          title="회원가입"
+          color="#CFB6D7"
+          size={21}
+          isActive={true}
+          func={goToSignUp}
+        />
         <SnsLoginContainer>
           <SnsTitle>⏤ SNS 로그인 ⏤</SnsTitle>
           <SNSButton
