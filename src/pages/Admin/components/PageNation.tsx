@@ -52,17 +52,17 @@ const PageLi = styled.li`
 
   &.indexClicked {
     color: white;
-    background-color: #263a6c;
+    background-color: ${props => props.theme.colors.gray};
   }
 
   &:hover {
     cursor: pointer;
     color: white;
-    background-color: #263a6c;
+    background-color: ${props => props.theme.colors.gray};
   }
   &:focus::after {
     color: white;
-    background-color: #263a6c;
+    background-color: ${props => props.theme.colors.gray};
   }
 `;
 
@@ -71,7 +71,7 @@ const PageSpan = styled.span`
   &:focus::after {
     border-radius: 100%;
     color: white;
-    background-color: #263a6c;
+    background-color: ${props => props.theme.colors.gray};
   }
 `;
 

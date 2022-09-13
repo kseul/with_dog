@@ -3,17 +3,17 @@ import { ListData } from 'types/type';
 const LEFTSIDE_DB: ListData[] = [
   {
     id: 1,
-    listName: '사용자 관리',
+    listName: '사용자',
     value: 'users',
   },
   {
     id: 2,
-    listName: '게시글 관리',
+    listName: '게시글',
     value: 'posts',
   },
   {
     id: 3,
-    listName: '삭제된 게시글 관리',
+    listName: '삭제된 게시글',
     value: 'posts/deleted',
   },
   {
