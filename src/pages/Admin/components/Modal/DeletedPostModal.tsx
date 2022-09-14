@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import useAxios from 'hooks/useAxios';
 import UserInfoBox from 'pages/Admin/components/RightSection/UserInfoBox';
 import { AiOutlineClose } from 'react-icons/ai';
+import backgroundImage from 'assets/images/bg1.jpg';
 
 const DeletedPostModal = ({ closeModal, modalId }) => {
   const { response } = useAxios({
@@ -106,7 +107,8 @@ const ModalContainer = styled.div`
   height: 80%;
   max-height: 80%;
   min-height: 40rem;
-  background-color: #fff;
+  background: url(${backgroundImage}) center no-repeat;
+  background-size: cover;
 `;
 
 const ModalTop = styled.div`

@@ -2,6 +2,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import useAxios from 'hooks/useAxios';
 import { AiOutlineClose } from 'react-icons/ai';
+import backgroundImage from 'assets/images/bg1.jpg';
 
 const UserModal = ({ closeModal, modalId }) => {
   const { response } = useAxios({
@@ -78,7 +79,8 @@ const ModalContainer = styled.div`
   width: 35rem;
   height: 80%;
   max-height: 80%;
-  background-color: #fff;
+  background: url(${backgroundImage}) center no-repeat;
+  background-size: cover;
 `;
 
 const ModalTop = styled.div`
