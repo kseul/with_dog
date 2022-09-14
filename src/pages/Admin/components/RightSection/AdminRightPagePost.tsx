@@ -162,14 +162,15 @@ const CheckAll = styled.button`
   width: 1.25rem;
   height: 1.25rem;
   border: 1px solid black;
+  border-radius: 3px;
   background-color: transparent;
 
   &.active {
-    background-color: yellow;
+    background-color: ${props => props.theme.colors.boldGray};
   }
 
   :hover {
-    background-color: yellow;
+    background-color: ${props => props.theme.colors.boldGray};
   }
 `;
 
@@ -183,14 +184,15 @@ const ThreeBanned = styled.button`
   width: 1.25rem;
   height: 1.25rem;
   border: 1px solid black;
+  border-radius: 3px;
   background-color: transparent;
 
   &.active {
-    background-color: yellow;
+    background-color: ${props => props.theme.colors.boldGray};
   }
 
   :hover {
-    background-color: yellow;
+    background-color: ${props => props.theme.colors.boldGray};
   }
 `;
 
@@ -211,15 +213,17 @@ const SortByDate = styled.div`
 
 const DateTitle = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', 'center')}
+  margin-right : -3px;
   width: 5rem;
   height: 1.875rem;
-  background-color: ${props => props.theme.colors.gray};
+  border-radius: 3px;
+  background-color: ${props => props.theme.colors.lightGray};
 `;
 
 const DateText = styled.span``;
 
 const DateFilter = styled.div`
-  background-color: ${props => props.theme.colors.gray};
+  background-color: ${props => props.theme.colors.lightGray};
 `;
 
 const SortByUser = styled.form`
@@ -229,8 +233,10 @@ const SortByUser = styled.form`
 
 const UserTitle = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', 'center')}
+  margin-right : -3px;
   width: 5rem;
-  background-color: ${props => props.theme.colors.gray};
+  border-radius: 3px;
+  background-color: ${props => props.theme.colors.lightGray};
 `;
 
 const TitleText = styled.span``;

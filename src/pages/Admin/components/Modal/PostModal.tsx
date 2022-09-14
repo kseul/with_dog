@@ -4,6 +4,7 @@ import { useState } from 'react';
 import useAxios from 'hooks/useAxios';
 import UserInfoBox from 'pages/Admin/components/RightSection/UserInfoBox';
 import { AiOutlineClose } from 'react-icons/ai';
+import backgroundImage from 'assets/images/bg1.jpg';
 
 const PostModal = ({ closeModal, modalId }) => {
   const [reason, setReason] = useState<string>('');
@@ -46,11 +47,11 @@ const PostModal = ({ closeModal, modalId }) => {
       {response?.data && (
         <ModalContainer onClick={e => e.stopPropagation()}>
           <ModalTop>
+            <ModalTitle>게시글 관리</ModalTitle>
             <DeleteIconButton onClick={closeModal}>
               <AiOutlineClose />
             </DeleteIconButton>
           </ModalTop>
-          <ModalTitle>게시글 관리</ModalTitle>
           <ModalContentsWrapper>
             <UserInfo>
               <UserInfoTitle>사용자 정보</UserInfoTitle>
@@ -67,10 +68,12 @@ const PostModal = ({ closeModal, modalId }) => {
               </PostText>
             </PostContent>
             <PostImage>
-              <PostImageTitle>게시글 사진</PostImageTitle>
-              <PostImageContent>
-                <PostImg src={response.data.image_url} alt="게시글 이미지" />
-              </PostImageContent>
+              <PostBackground>
+                <PostImageTitle>게시글 사진</PostImageTitle>
+                <PostImageContent>
+                  <PostImg src={response.data.image_url} alt="게시글 이미지" />
+                </PostImageContent>
+              </PostBackground>
             </PostImage>
             <ReasonToBan>
               <ReasonToBanTitle>사유</ReasonToBanTitle>
@@ -113,29 +116,34 @@ const ModalContainer = styled.div`
   width: 45rem;
   height: 80%;
   max-height: 80%;
-  background-color: #fff;
+  min-height: 40rem;
+  background: url(${backgroundImage}) center no-repeat;
+  background-size: cover;
 `;
 
 const ModalTop = styled.div`
+  ${props => props.theme.flex.flexBox('', 'center', 'center')}
   width: 100%;
   height: 3rem;
   background-color: ${props => props.theme.colors.gray};
   border: 2px solid ${props => props.theme.colors.gray};
 `;
 
+const ModalTitle = styled.p`
+  margin: auto;
+  width: 95%;
+  text-align: center;
+  font-size: 1.5rem;
+`;
+
 const DeleteIconButton = styled.button`
   ${props => props.theme.flex.flexBox('row', 'center', '')}
-  margin-left : auto;
+  width: 5%;
   height: 100%;
   border-style: none;
   background: transparent;
   cursor: pointer;
   font-size: 1rem;
-`;
-
-const ModalTitle = styled.p`
-  padding-top: 0.5rem;
-  padding-left: 1rem;
 `;
 
 const ModalContentsWrapper = styled.div`
@@ -158,10 +166,10 @@ const PostContent = styled.div`
 
 const PostContentTitle = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', '')}
+  margin-bottom: -1px;
   width: 100%;
   height: 1.5rem;
   border: 1px solid black;
-  margin-bottom: -1px;
 `;
 
 const PostTitleIndex = styled.div`
@@ -180,7 +188,7 @@ const PostTitleBox = styled.div`
 
 const PostText = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', '')}
-  margin-bottom: -1px;
+  margin-top: -1px;
   width: 100%;
   height: 50%;
   border: 1px solid black;
@@ -211,6 +219,7 @@ const ReasonToBanContent = styled.textarea`
   width: 90%;
   height: 50%;
   resize: none;
+  font-family: 'Noto Sans KR', sans-serif;
 `;
 
 const BtnWrapper = styled.div`
@@ -230,18 +239,23 @@ const CancelBtn = styled.button`
 `;
 
 const PostImage = styled.div`
-  ${props => props.theme.flex.flexBox('column', 'center', 'space-evenly')}
+  ${props => props.theme.flex.flexBox('row', 'center', 'center')}
 `;
 
-const PostImageTitle = styled.p`
-  padding-bottom: 0.3rem;
+const PostBackground = styled.div`
+  ${props => props.theme.flex.flexBox('column', 'center', 'space-evenly')}
+  width: 90%;
+  height: 90%;
+  background-color: ${props => props.theme.colors.lightGray};
+  border-radius: 3px;
 `;
+
+const PostImageTitle = styled.p``;
 
 const PostImageContent = styled.div`
   position: relative;
-  width: 9.375rem;
-  height: 9.375rem;
-  border: 1px solid white;
+  width: 12rem;
+  height: 12rem;
 `;
 
 const PostImg = styled.img`
@@ -250,6 +264,7 @@ const PostImg = styled.img`
   left: 0;
   width: 100%;
   height: 100%;
+  border-radius: 3px;
 `;
 
 export default PostModal;

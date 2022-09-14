@@ -7,6 +7,7 @@ import AdminHeader from 'pages/Admin/components/AdminHeader';
 import AdminRightPageUser from 'pages/Admin/components/RightSection/AdminRightPageUser';
 import AdminRightPagePost from 'pages/Admin/components/RightSection/AdminRightPagePost';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
+import backGroundImg from 'assets/images/bg1.jpg';
 
 const AdminContainer = () => {
   const navigate = useNavigate();
@@ -93,9 +94,11 @@ const AdminContainer = () => {
 };
 
 const AdminPageContainer = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   min-width: 50rem;
+  background: url(${backGroundImg}) center no-repeat;
+  background-size: cover;
 `;
 
 const SectionContainer = styled.div`
@@ -107,17 +110,19 @@ const AdminLeftSection = styled.div`
   padding-top : 1px;
   width: 12.5rem;
   height: calc(100vh - 6.25rem);
-  background-color: ${props => props.theme.colors.lightGray};
+  background-color: ${props => props.theme.colors.lineLightGray};
 `;
 
 const ListWrapper = styled.ul`
+  width: 100%;
   padding-top: 1.5rem;
   list-style: none;
 `;
 
 const AdminRightSection = styled.div`
-  width: calc(100% - 12.5rem);
+  width: calc(100vw - 12.5rem);
   height: calc(100vh - 6.25rem);
+  min-width: 37.5rem;
 `;
 
 export default AdminContainer;
