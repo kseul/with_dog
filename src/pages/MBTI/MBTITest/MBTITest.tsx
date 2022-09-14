@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProgressBar from './ProgressBar';
 import EnergyTest from './Energy/EnergyTest';
 import RelationTest from './Relation/RelationTest';
@@ -7,6 +7,7 @@ import ReactionTest from './Reaction/ReactionTest';
 import JudgementTest from './Judgement/JudgementTest';
 import { AnswerType } from 'types/type';
 import { MBTIScoreProps } from 'types/type';
+import { joinMBTI } from 'types/type';
 
 const MBTITest = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -19,6 +20,7 @@ const MBTITest = () => {
   const [relationNameList, setRelationNameList] = useState<AnswerType[]>([]);
   const [reactionNameList, setReactionNameList] = useState<AnswerType[]>([]);
   const [judgementNameList, setJudgementNameList] = useState<AnswerType[]>([]);
+  const [mbtiText, setMbtiText] = useState<joinMBTI>({ mbti: '' });
 
   const numberArr = value => {
     const newArr = [0, 0, 0, 0, 0];
@@ -50,36 +52,76 @@ const MBTITest = () => {
   const setEnergy = (energyAnswerResult): void => {
     const energyScore = numberArr(energyAnswerResult);
     if (energyScore < 0) {
-      setMBTIResult.push({ energy: 'E', energyScore: energyScore });
+      setMBTIResult.push({
+        id: 0,
+        mbti: 'E',
+        score: energyScore,
+        layout: 'lefttop',
+      });
     } else if (energyScore > 0) {
-      setMBTIResult.push({ energy: 'I', energyScore: energyScore });
+      setMBTIResult.push({
+        id: 0,
+        mbti: 'I',
+        score: energyScore,
+        layout: 'lefttop',
+      });
     }
   };
 
   const setRelation = (relationAnswerResult): void => {
     const relationScore = numberArr(relationAnswerResult);
     if (relationScore < 0) {
-      setMBTIResult.push({ relation: 'S', relationScore: relationScore });
+      setMBTIResult.push({
+        id: 1,
+        mbti: 'S',
+        score: relationScore,
+        layout: 'leftbottom',
+      });
     } else if (relationScore > 0) {
-      setMBTIResult.push({ relation: 'N', relationScore: relationScore });
+      setMBTIResult.push({
+        id: 1,
+        mbti: 'N',
+        score: relationScore,
+        layout: 'leftbottom',
+      });
     }
   };
 
-  const setReaction = reactionAnswerResult => {
+  const setReaction = (reactionAnswerResult): void => {
     const reactionScore = numberArr(reactionAnswerResult);
     if (reactionScore < 0) {
-      setMBTIResult.push({ reaction: 'F', reactionScore: reactionScore });
+      setMBTIResult.push({
+        id: 2,
+        mbti: 'F',
+        score: reactionScore,
+        layout: 'righttop',
+      });
     } else if (reactionScore > 0) {
-      setMBTIResult.push({ reaction: 'T', reactionScore: reactionScore });
+      setMBTIResult.push({
+        id: 2,
+        mbti: 'T',
+        score: reactionScore,
+        layout: 'righttop',
+      });
     }
   };
 
   const setJudgement = judgementAnswerResult => {
     const judgementScore = numberArr(judgementAnswerResult);
     if (judgementScore < 0) {
-      setMBTIResult.push({ judgement: 'C', judgementScore: judgementScore });
+      setMBTIResult.push({
+        id: 3,
+        mbti: 'C',
+        score: judgementScore,
+        layout: 'rightbottom',
+      });
     } else if (judgementScore > 0) {
-      setMBTIResult.push({ judgement: 'P', judgementScore: judgementScore });
+      setMBTIResult.push({
+        id: 3,
+        mbti: 'P',
+        score: judgementScore,
+        layout: 'rightbottom',
+      });
     }
   };
 
@@ -88,7 +130,12 @@ const MBTITest = () => {
   setReaction(reactionAnswerResult);
   setJudgement(judgementAnswerResult);
 
-  console.log(setMBTIResult);
+  const mbtiObj = {};
+  const joinMbtiText = setMBTIResult.map(obj => obj.mbti).join('');
+  mbtiObj['mbti'] = joinMbtiText;
+  useEffect(() => {
+    setMbtiText(mbtiObj);
+  }, []);
 
   const onClickCheck = (): void => {
     setIsChecked(!isChecked);
