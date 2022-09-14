@@ -12,7 +12,7 @@ export interface AnswerData {
 export const ENERGY_TEST_DB: TestData[] = [
   {
     testId: 0,
-    testList: '1. 새로운 장소에 가면 금방 적응하는 편이다.',
+    testList: '1. 항상 흥이 돋아 있어서 정신이 없는 경우가 많은 편이다.',
     labelName: 'a',
   },
   {
@@ -27,7 +27,7 @@ export const ENERGY_TEST_DB: TestData[] = [
   },
   {
     testId: 3,
-    testList: '4. 항상 흥이 돋아 있어서 정신이 없는 경우가 많은 편이다.',
+    testList: '4. 새로운 장소에 가면 금방 적응하는 편이다.',
     labelName: 'd',
   },
   {
@@ -40,7 +40,7 @@ export const ENERGY_TEST_DB: TestData[] = [
 export const RELATION_TEST_DB: TestData[] = [
   {
     testId: 0,
-    testList: '6. 본인 집에 있을 경우에 반려견을 찾기 힘든 편이다.',
+    testList: '6. 혼자 있는 시간을 보내는 것을 좋아하는 편이다.',
     labelName: 'f',
   },
   {
@@ -50,7 +50,7 @@ export const RELATION_TEST_DB: TestData[] = [
   },
   {
     testId: 2,
-    testList: '8. 혼자 있는 시간을 보내는 것을 좋아하는 편이다.',
+    testList: '8. 본인 집에 있을 경우에 반려견을 찾기 힘든 편이다.',
     labelName: 'h',
   },
   {
@@ -96,8 +96,7 @@ export const REACTION_TEST_DB: TestData[] = [
 export const JUDEGEMENT_TEST_DB: TestData[] = [
   {
     testId: 1,
-    testList:
-      '16. 새로운 장소에 가면 주인 옆에 있기 보다 구석구석 냄새를 맡으며 돌아다니는 편이다.',
+    testList: '16. 산책 시 나와 함께 보폭을 맞추며 나란히 걷는 편이다.',
     labelName: 'p',
   },
   {
@@ -107,7 +106,8 @@ export const JUDEGEMENT_TEST_DB: TestData[] = [
   },
   {
     testId: 3,
-    testList: '18. 산책 시 나와 함께 보폭을 맞추며 나란히 걷는 편이다.',
+    testList:
+      '18. 새로운 장소에 가면 주인 옆에 있기 보다 구석구석 냄새를 맡으며 돌아다니는 편이다.',
     labelName: 'r',
   },
   {
