@@ -13,12 +13,12 @@ import character from 'assets/images/LoginBgCharacter.png';
 
 const SignIn = () => {
   const navigate = useNavigate();
+
   const [userInputValue, setUserInputValue] = useState({
-    id: '',
+    email: '',
     password: '',
   });
-
-  const { id, password } = userInputValue;
+  const { email, password } = userInputValue;
 
   const handleKakaoLogin = () => {
     window.location.href = KAKAO_AUTH_PATH;
@@ -32,13 +32,37 @@ const SignIn = () => {
     setUserInputValue({ ...userInputValue, [name]: value });
   };
 
-  const isActive = id.length > 1 && password.length >= 8 === true;
+  const isActive =
+    email.includes('@') && email.includes('.') && password.length > 0 === true;
+
+  const submitSigninInfo = () => {
+    if (isActive) {
+      fetch('https://togedog-dj.herokuapp.com/users/login/email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      })
+        .then(res => {
+          if (res.status === 200) {
+            navigate('/');
+            return res.json();
+          } else {
+            alert('이메일과 비밀번호를 다시 확인하세요.');
+          }
+        })
+        .then(data => {
+          console.log(data.user);
+          localStorage.setItem('token', data.access_token);
+        });
+    }
+  };
 
   const goToSignUp = () => {
     navigate('/signup');
   };
-
-  const nothing = () => {};
 
   return (
     <SignInContainer>
@@ -50,7 +74,7 @@ const SignIn = () => {
           <InputForm
             placeholder="이메일 입력"
             type="text"
-            name="id"
+            name="email"
             handleUserInput={handleUserInput}
           />
           <InputForm
@@ -65,7 +89,7 @@ const SignIn = () => {
           color="#7CCCC7"
           size={21}
           isActive={isActive}
-          func={nothing}
+          func={submitSigninInfo}
         />
         <LoginButton
           title="회원가입"
@@ -91,6 +115,7 @@ const SignIn = () => {
     </SignInContainer>
   );
 };
+
 const SignInContainer = styled.div`
   display: flex;
   justify-content: space-around;
@@ -100,9 +125,11 @@ const SignInContainer = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
 `;
+
 const Character = styled.img`
   height: 34.375rem;
 `;
+
 const LoginForm = styled.div`
   display: flex;
   flex-direction: column;
@@ -112,26 +139,32 @@ const LoginForm = styled.div`
   padding: 3.5rem;
   border-radius: 1.25rem;
   background-color: white;
-  box-shadow: 1px 2px 3px 4px lightgray;
+  box-shadow: 1px 1px 15px 2px rgba(0, 0, 0, 0.1);
 `;
+
 const LoginTitle = styled.div`
   font-size: 3rem;
   font-weight: 700;
 `;
+
 const LoginSubTitle = styled.div`
   margin-top: 1.25rem;
   font-size: 1.2rem;
   color: ${props => props.theme.colors.darkGray};
 `;
+
 const IdPwInputContainer = styled.div`
   margin-top: 4.6rem;
 `;
+
 const SnsLoginContainer = styled.div`
   margin-top: 1.875rem;
   text-align: center;
 `;
+
 const SnsTitle = styled.div`
   margin-bottom: 2.188rem;
   color: darkgray;
 `;
+
 export default SignIn;

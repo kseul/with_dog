@@ -138,5 +138,5 @@ export interface AnswerType {
 }
 
 export interface CheckValidProps {
-  title: string;
+  errorMessage: string;
 }

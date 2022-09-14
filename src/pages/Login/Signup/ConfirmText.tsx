@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { CheckValidProps } from 'types/type';
 
-const ConfirmText = ({ title }: CheckValidProps) => {
+const ConfirmText = ({ errorMessage }: CheckValidProps) => {
   return (
     <ConfirmTextContainer>
-      <Title>{title}</Title>
+      <Title>{errorMessage}</Title>
     </ConfirmTextContainer>
   );
 };

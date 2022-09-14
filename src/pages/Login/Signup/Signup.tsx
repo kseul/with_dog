@@ -1,20 +1,21 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoginButton from '../components/loginButton/LoginButton';
 import ConfirmText from './ConfirmText';
+import LoginButton from '../components/loginButton/LoginButton';
 import USER_LOCATION from '../DATA/USERLOCATION_DATA';
 import bgimg from 'assets/images/bg1.jpg';
 
 const Signup = () => {
   const navigate = useNavigate();
+
   const [userInputValue, setUserInputValue] = useState({
     name: '',
     email: '',
     password: '',
     nickname: '',
   });
-
+  const { name, email, password, nickname } = userInputValue;
   const [checkName, setCheckName] = useState(false);
   const [checkEmail, setCheckEmail] = useState(false);
   const [checkPassword, setCheckPassword] = useState(false);
@@ -22,15 +23,14 @@ const Signup = () => {
   const [checkNickName, setCheckNickName] = useState(false);
   const [checkUniqueEmail, setCheckUniqueEmail] = useState(false);
   const [userLocation, setUserLocation] = useState('');
-  const [allUserInfo, setAllUserInfo] = useState<{
-    name?: string;
-    email?: string;
-    password?: string;
-    nickname?: string;
-    location?: string;
-  }>({});
 
-  const { name, email, password, nickname } = userInputValue;
+  const allValidEmail = checkEmail && checkUniqueEmail;
+  const isActive =
+    checkName &&
+    allValidEmail &&
+    checkPassword &&
+    checkRePassword &&
+    checkNickName === true;
 
   const handleUserInput = e => {
     const { name, value } = e.target;
@@ -42,9 +42,12 @@ const Signup = () => {
         break;
 
       case 'email':
-        value.includes('@') && value.includes('.')
-          ? setCheckEmail(true)
-          : setCheckEmail(false);
+        const emailCondition = /^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
+        const validEmail = emailCondition.test(value);
+        validEmail ? setCheckEmail(true) : setCheckEmail(false);
+        if (value.length > 0) {
+          setCheckUniqueEmail(false);
+        }
         break;
 
       case 'password':
@@ -74,32 +77,42 @@ const Signup = () => {
   };
 
   const handleUniqueEmail = () => {
-    // 이메일 중복검사 준비
-    // if (checkEmail) {
-    //   fetch('', { method: 'POST', body: JSON.stringify({ email }) });
-    // }
-    setCheckUniqueEmail(true);
+    fetch('https://togedog-dj.herokuapp.com/users/signup/emailcheck/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.message === 'success') {
+          setCheckUniqueEmail(true);
+        } else {
+          alert('중복된 이메일 입니다.');
+          setCheckUniqueEmail(false);
+        }
+      });
   };
 
-  const allValidEmail = checkEmail && checkUniqueEmail;
-
-  const isActive =
-    checkName &&
-    allValidEmail &&
-    checkPassword &&
-    checkRePassword &&
-    checkNickName === true;
-
-  const submitUserInfo = () => {
+  const submitSignupInfo = () => {
     if (isActive) {
-      setAllUserInfo({
-        name: name,
-        email: email,
-        password: password,
-        nickname: nickname,
-        location: userLocation,
-      });
-      navigate('/');
+      fetch('https://togedog-dj.herokuapp.com/users/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          nickname: nickname,
+          email: email,
+          password: password,
+          address: userLocation,
+        }),
+      })
+        .then(res => res.json())
+        .then(result => {
+          if (result.message === 'success') {
+            alert('회원가입이 완료되었습니다.');
+            navigate('/signin');
+          }
+        });
     }
   };
 
@@ -109,7 +122,7 @@ const Signup = () => {
       name: 'name',
       placeholder: '이름 *',
       type: 'text',
-      title: '이름을 입력하세요.',
+      errorMessage: '이름을 입력하세요.',
       validCheck: checkName,
     },
     {
@@ -117,15 +130,15 @@ const Signup = () => {
       name: 'email',
       placeholder: '이메일 *',
       type: 'text',
-      title: '이메일 형식과 중복을 다시 한번 확인해주세요.',
-      validCheck: allValidEmail,
+      errorMessage: '이메일 형식을 확인해주세요.',
+      validCheck: checkEmail,
     },
     {
       id: 3,
       name: 'password',
       placeholder: '비밀번호 *',
       type: 'password',
-      title: '숫자와 특수기호를 포함시켜주세요.',
+      errorMessage: '숫자와 특수기호를 포함시켜주세요.',
       validCheck: checkPassword,
     },
     {
@@ -133,7 +146,7 @@ const Signup = () => {
       name: 'confirmPassword',
       placeholder: '비밀번호 확인 *',
       type: 'password',
-      title: '비밀번호를 다시 한번 확인해주세요.',
+      errorMessage: '비밀번호를 다시 한번 확인해주세요.',
       validCheck: checkRePassword,
     },
     {
@@ -141,7 +154,7 @@ const Signup = () => {
       name: 'nickname',
       placeholder: '닉네임 *',
       type: 'text',
-      title: '닉네임을 입력하세요.',
+      errorMessage: '닉네임을 입력하세요.',
       validCheck: checkNickName,
     },
   ];
@@ -152,7 +165,7 @@ const Signup = () => {
         <Title>회원가입</Title>
         <UserDataInputContainer>
           {USER_INPUT_FORM.map(
-            ({ id, placeholder, type, name, title, validCheck }) => {
+            ({ id, placeholder, type, name, errorMessage, validCheck }) => {
               return (
                 <UserDataInputWrapper key={id}>
                   <UserDataInput
@@ -161,20 +174,24 @@ const Signup = () => {
                     name={name}
                     onChange={handleUserInput}
                   />
-                  {!validCheck && <ConfirmText title={title} />}
+                  {!validCheck && <ConfirmText errorMessage={errorMessage} />}
                 </UserDataInputWrapper>
               );
             }
           )}
           <UniqueEmailButton onClick={handleUniqueEmail}>
-            중복 확인
+            {checkUniqueEmail ? (
+              <PassText>확인 완료</PassText>
+            ) : (
+              <RequestText>중복 확인</RequestText>
+            )}
           </UniqueEmailButton>
           <UserLocationContainer>
             <ChooseText>지역을 선택해주세요 👉 </ChooseText>
-            <UserLocation name="사용자 지역" onChange={handleUserLocation}>
+            <UserLocation onChange={handleUserLocation}>
               {USER_LOCATION.map(({ id, location }) => {
                 return (
-                  <Location key={id} value={location}>
+                  <Location key={id} value={location} defaultValue="서울특별시">
                     {location}
                   </Location>
                 );
@@ -188,7 +205,7 @@ const Signup = () => {
             color="#7CCCC7"
             size={18}
             isActive={isActive}
-            func={submitUserInfo}
+            func={submitSignupInfo}
           />
         </ButtonWrapper>
       </SignupForm>
@@ -223,6 +240,7 @@ const Title = styled.div`
 `;
 
 const UserDataInputContainer = styled.div`
+  position: relative;
   margin-bottom: 2.5rem;
 `;
 
@@ -240,14 +258,24 @@ const UserDataInput = styled.input`
 
 const UniqueEmailButton = styled.button`
   position: absolute;
-  top: 38%;
-  right: 38.5%;
+  top: 19%;
+  right: 0;
   width: 3.75rem;
   height: 1.25rem;
-  border: 1px solid black;
+  border: 1px solid gray;
   border-radius: 1.875rem;
   background-color: white;
-  font-size: 0.68rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+`;
+
+const PassText = styled.div`
+  color: green;
+`;
+
+const RequestText = styled.div`
+  color: red;
+  opacity: 0.6;
 `;
 
 const UserLocationContainer = styled.div`

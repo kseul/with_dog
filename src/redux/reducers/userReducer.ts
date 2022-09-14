@@ -4,11 +4,11 @@ const initialState = {
   name: '안성주',
   nickname: '안론머스크',
   email: 'wkddb1359@naver.com',
-  user_type: 'email',
+  user_type: 'normal',
   status: 'active',
-  account_type: 'normal',
-  thumbnail_url: 'nope',
-  mbti: null,
+  account_type: 'email',
+  thumbnail_url: 'http://thumbnail.url',
+  mbti: 'none',
 };
 
 const userReducer = (prevState = initialState, action) => {
