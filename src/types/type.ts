@@ -133,6 +133,10 @@ export interface AnswerType {
   answerValue: string;
 }
 
+export interface joinMBTI {
+  mbti?: string;
+}
+
 export interface ResultData {
   resultId: number;
   MBTIImage: string;
@@ -147,4 +151,11 @@ export interface MBTIResultProps {
   mbti: string;
   score: number;
   layout: string;
+}
+
+export interface MBTIScoreProps {
+  id?: number;
+  mbti?: string;
+  score?: number;
+  layout?: string;
 }
