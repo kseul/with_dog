@@ -140,3 +140,30 @@ export interface AnswerType {
 export interface CheckValidProps {
   errorMessage: string;
 }
+
+export interface joinMBTI {
+  mbti?: string;
+}
+
+export interface ResultData {
+  resultId: number;
+  MBTIImage: string;
+  MBTI: string;
+  MBTICharacter: string;
+  content: string;
+  MBTIPosition: string;
+}
+
+export interface MBTIResultProps {
+  id?: number;
+  mbti: string;
+  score: number;
+  layout: string;
+}
+
+export interface MBTIScoreProps {
+  id?: number;
+  mbti?: string;
+  score?: number;
+  layout?: string;
+}
