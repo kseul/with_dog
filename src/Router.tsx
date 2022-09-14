@@ -1,7 +1,7 @@
 import Admin from 'pages/Admin/Admin';
 import SignIn from 'pages/Login/SignIn';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Signup from './pages/Login/Signup/Signup';
+import Signup from './pages/Login/Signup';
 import NoticeBoard from 'pages/NoticeBoard/NoticeBoard';
 import MainRouter from './pages/MainRouter/MainRouter';
 import Main from 'pages/Main/Main';
