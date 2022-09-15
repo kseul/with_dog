@@ -4,12 +4,12 @@ import dogPaws from 'assets/svg/dog-paws1.svg';
 import cancelBtn from 'assets/svg/cancel.svg';
 import { BoardDataProp } from 'types/type';
 
-const BoardModalButton = ({ like }: BoardDataProp) => {
+const BoardModalButton = ({ post_likes_count }: BoardDataProp) => {
   return (
     <BoardModalButtonWrapper>
       <BoardModalButtonElement>
         <BoardModalImg src={dogPaws} />
-        <BoardModalText>{like} </BoardModalText>
+        <BoardModalText>{post_likes_count} </BoardModalText>
       </BoardModalButtonElement>
 
       <BoardModalButtonElement>

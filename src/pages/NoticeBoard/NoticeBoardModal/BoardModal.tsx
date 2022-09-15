@@ -6,26 +6,26 @@ import BoardModalTyping from './components/BoardModalTyping';
 import leftArrow from 'assets/svg/arrow-left.svg';
 import rightArrow from 'assets/svg/arrow-right.svg';
 import cancelButton from 'assets/svg/cancel.svg';
-import { BoardModalProp } from 'types/type';
+import { BoardDataProp } from 'types/type';
 
 const BoardModal = ({
   clickCard,
-  title,
-  date,
-  image,
-  like,
-}: BoardModalProp) => {
+  subject,
+  created_at,
+  image_url,
+  post_likes_count,
+}: BoardDataProp) => {
   return (
     <>
       <BoardModalContainer>
         <BoardModalImageWrapper>
-          <BoardImageBox src={image} />
+          <BoardImageBox src={image_url} />
         </BoardModalImageWrapper>
         <BoardModalContentWrapper>
-          <BoardModalTitle> {title} </BoardModalTitle>
-          <BoardModalDate> {date} </BoardModalDate>
+          <BoardModalTitle> {subject} </BoardModalTitle>
+          <BoardModalDate> {created_at} </BoardModalDate>
           <BoardModalComment />
-          <BoardModalButton like={like} />
+          <BoardModalButton post_likes_count={post_likes_count} />
           <BoardModalTyping />
         </BoardModalContentWrapper>
       </BoardModalContainer>

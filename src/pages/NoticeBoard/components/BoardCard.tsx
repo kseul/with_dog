@@ -3,7 +3,14 @@ import styled from 'styled-components';
 import { BoardDataProp } from 'types/type';
 import BoardModal from '../NoticeBoardModal/BoardModal';
 
-const BoardCard = ({ id, title, image, date, writer, like }: BoardDataProp) => {
+const BoardCard = ({
+  id,
+  subject,
+  image_url,
+  created_at,
+  user_nickname,
+  post_likes_count,
+}: BoardDataProp) => {
   const [activateModal, setActivateModal] = useState(false);
 
   const clickCard = () => {
@@ -13,24 +20,24 @@ const BoardCard = ({ id, title, image, date, writer, like }: BoardDataProp) => {
   return (
     <>
       <CardContainer onClick={clickCard}>
-        <CardImage src={image} />
-        <CardDate>{date}</CardDate>
-        <CardTitle>{title}</CardTitle>
+        <CardImage src={image_url} />
+        <CardDate>{created_at}</CardDate>
+        <CardTitle>{subject}</CardTitle>
         <CardBottom>
           <WriterProfile>
-            <WriterPhoto src={image} />
-            <WriterName>{writer}</WriterName>
+            <WriterPhoto src={image_url} />
+            <WriterName>{user_nickname}</WriterName>
           </WriterProfile>
-          <CardViews>{like}</CardViews>
+          <CardViews>{post_likes_count}</CardViews>
         </CardBottom>
       </CardContainer>
       {activateModal && (
         <BoardModal
           clickCard={clickCard}
-          title={title}
-          date={date}
-          image={image}
-          like={like}
+          subject={subject}
+          created_at={created_at}
+          image_url={image_url}
+          post_likes_count={post_likes_count}
         />
       )}
     </>

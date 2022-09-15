@@ -1,25 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import BoardCard from './BoardCard';
-import BOARD_DATA from '../DATA/BOARD_DATA';
 
 const BoardList = () => {
+  const [boardListData, setBoardListData] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://togedog-dj.herokuapp.com/posts`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => setBoardListData(data));
+  });
+
   return (
     <BoardListWrapper>
       <>
-        {BOARD_DATA.map(({ id, title, image, date, writer, like }) => {
-          return (
-            <BoardCard
-              key={id}
-              id={id}
-              title={title}
-              image={image}
-              date={date}
-              writer={writer}
-              like={like}
-            />
-          );
-        })}
+        {boardListData.map(
+          ({
+            id,
+            subject,
+            image_url,
+            created_at,
+            user_nickname,
+            post_likes_count,
+          }) => {
+            return (
+              <BoardCard
+                key={id}
+                id={id}
+                subject={subject}
+                image_url={image_url}
+                created_at={created_at}
+                user_nickname={user_nickname}
+                post_likes_count={post_likes_count}
+              />
+            );
+          }
+        )}
       </>
     </BoardListWrapper>
   );
