@@ -6,8 +6,9 @@ import NoticeBoard from 'pages/NoticeBoard/NoticeBoard';
 import MainRouter from './pages/MainRouter/MainRouter';
 import Main from 'pages/Main/Main';
 import ChatRoom from 'pages/Chatting/ChatRoom';
-import KakaoLogin from 'pages/Login/SignIn/kakaoLogin/KakaoLogin';
-import QuillEditor from 'pages/NoticeBoard/QuillEditor/QuillEditor';
+import KakaoLogin from 'pages/Login/SignIn/kakaoLogin/KakaoLoginRedirect';
+import GoogleLogin from 'pages/Login/SignIn/googleLogin/GoogleRedirect';
+import NoticeBoardWrite from 'pages/NoticeBoard/NoticeBoardWrite/NoticeBoardWrite';
 
 const Router = () => {
   return (
@@ -17,11 +18,12 @@ const Router = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/noticeboard" element={<NoticeBoard />} />
-        <Route path="/noticeboard/write" element={<QuillEditor />} />
+        <Route path="/noticeboard/write" element={<NoticeBoardWrite />} />
         <Route path="/*" element={<MainRouter />} />
         <Route path="/admin/:value/*" element={<Admin />} />
         <Route path="/chat" element={<ChatRoom />} />
         <Route path="/kakaoLogin" element={<KakaoLogin />} />
+        <Route path="/googleLogin" element={<GoogleLogin />} />
       </Routes>
     </BrowserRouter>
   );

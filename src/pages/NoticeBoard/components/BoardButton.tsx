@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import pawsIcon from 'assets/svg/dog-paws2.svg';
 import { Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ const BoardButton = () => {
         })}
       </BoardButtonWrapper>
 
-      <BoardWriteButton onClick={clickWrite}>
+      <BoardWriteButton>
         <StyledLink to="/noticeboard/write">
           <BoardBtnIcon src={pawsIcon} />
           새글쓰기
