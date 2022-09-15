@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import InputForm from '../components/inputForm/InputForm';
 import LoginButton from '../components/loginButton/LoginButton';
 import SNSButton from '../components/snsButton/SNSButton';
+import store from 'redux/store';
+import userActions from 'redux/actions/user';
 import { KAKAO_AUTH_PATH } from './kakaoLogin/KakaoLoginData';
 import { GOOGLE_AUTH_PATH } from './googleLogin/GoogleloginData';
 import signInbg from 'assets/images/bg1.jpg';
@@ -54,7 +56,8 @@ const SignIn = () => {
           }
         })
         .then(data => {
-          console.log(data.user);
+          const userData = data.user;
+          store.dispatch(userActions.logIn(userData));
           localStorage.setItem('token', data.access_token);
         });
     }

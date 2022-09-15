@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ConfirmText from './ConfirmText';
 import LoginButton from '../components/loginButton/LoginButton';
@@ -45,6 +45,7 @@ const Signup = () => {
         const emailCondition = /^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
         const validEmail = emailCondition.test(value);
         validEmail ? setCheckEmail(true) : setCheckEmail(false);
+
         if (value.length > 0) {
           setCheckUniqueEmail(false);
         }
@@ -72,25 +73,35 @@ const Signup = () => {
     }
   };
 
+  useEffect(() => {
+    if (checkEmail) {
+      const handleUniqueEmail = () => {
+        fetch('https://togedog-dj.herokuapp.com/users/signup/emailcheck/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        })
+          .then(res => res.json())
+          .then(result => {
+            if (result.message === 'success') {
+              setCheckUniqueEmail(true);
+            } else {
+              alert('중복된 이메일 입니다.');
+              setCheckUniqueEmail(false);
+            }
+          });
+      };
+
+      const timer = setTimeout(() => {
+        handleUniqueEmail();
+      }, 600);
+
+      return () => clearTimeout(timer);
+    }
+  }, [email, checkEmail]);
+
   const handleUserLocation = e => {
     setUserLocation(e.target.value);
-  };
-
-  const handleUniqueEmail = () => {
-    fetch('https://togedog-dj.herokuapp.com/users/signup/emailcheck/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
-    })
-      .then(res => res.json())
-      .then(result => {
-        if (result.message === 'success') {
-          setCheckUniqueEmail(true);
-        } else {
-          alert('중복된 이메일 입니다.');
-          setCheckUniqueEmail(false);
-        }
-      });
   };
 
   const submitSignupInfo = () => {
@@ -179,11 +190,11 @@ const Signup = () => {
               );
             }
           )}
-          <UniqueEmailButton onClick={handleUniqueEmail}>
+          <UniqueEmailButton>
             {checkUniqueEmail ? (
               <PassText>확인 완료</PassText>
             ) : (
-              <RequestText>중복 확인</RequestText>
+              <RequestText>중복 확인중</RequestText>
             )}
           </UniqueEmailButton>
           <UserLocationContainer>
@@ -260,7 +271,7 @@ const UniqueEmailButton = styled.button`
   position: absolute;
   top: 19%;
   right: 0;
-  width: 3.75rem;
+  width: 4rem;
   height: 1.25rem;
   border: 1px solid gray;
   border-radius: 1.875rem;
@@ -275,6 +286,7 @@ const PassText = styled.div`
 
 const RequestText = styled.div`
   color: red;
+  font-size: 0.6rem;
   opacity: 0.6;
 `;
 
