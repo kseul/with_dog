@@ -18,11 +18,25 @@ const AdminContainer = () => {
   const [postData, setPostData] = useState();
   const [loading, setLoading] = useState(false);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [counts, setCounts] = useState();
+  // const LIMIT = 10;
+  // const [pageNum, setPageNum] = useState({ limit: LIMIT, offset: 0 });
+  // const updatePageNum = (buttonNumber: number) => {
+  //   setPageNum({
+  //     ...pageNum,
+  //     limit: LIMIT,
+  //     offset: buttonNumber * LIMIT - LIMIT,
+  //   });
+  // };
+
   const fetchData = async () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://togedog-dj.herokuapp.com/${location.pathname.slice(7)}`,
+        `https://togedog-dj.herokuapp.com/${location.pathname.slice(
+          7
+        )}?page=${currentPage}`,
         {
           headers: {
             accept: '*/*',
@@ -30,7 +44,8 @@ const AdminContainer = () => {
           },
         }
       );
-      setPostData(response.data);
+      setPostData(response.data.items);
+      setCounts(response.data.count);
     } finally {
       setLoading(false);
     }
@@ -38,7 +53,7 @@ const AdminContainer = () => {
 
   useEffect(() => {
     fetchData();
-  }, [location.pathname]);
+  }, [location.pathname, currentPage]);
 
   const setClick = list => {
     setClicked(list.value);
@@ -65,26 +80,34 @@ const AdminContainer = () => {
           {params.value === 'users' ? (
             <AdminRightPageUser
               postData={postData}
-              setPostData={setPostData}
               loading={loading}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              counts={counts}
             />
           ) : params.value === 'posts' ? (
             <AdminRightPagePost
               postData={postData}
-              setPostData={setPostData}
               loading={loading}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              counts={counts}
             />
           ) : params.value === 'posts' ? (
             <AdminRightPagePost
               postData={postData}
-              setPostData={setPostData}
               loading={loading}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              counts={counts}
             />
           ) : (
             <AdminRightPageUser
               postData={postData}
-              setPostData={setPostData}
               loading={loading}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              counts={counts}
             />
           )}
         </AdminRightSection>
