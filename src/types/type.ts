@@ -100,36 +100,36 @@ export interface BoardModalProp {
 
 export interface MBTIProps {
   onClickCheck: () => void;
-  testId?: number | undefined;
+  testId?: number;
   labelName?: string;
 }
 
 export interface MBTIEnergyProps extends MBTIProps {
-  handleSetEnergyName: (value: string, testId: number) => void;
+  handleSetEnergyName: (value: string, id: number) => void;
   energyLength?: number;
   onEnergyCheck?: () => void;
 }
 
 export interface MBTIRelationProps extends MBTIProps {
-  handleSetRelationName: (value: string, testId: number) => void;
+  handleSetRelationName: (value: string, id: number) => void;
   relationLength?: number;
   onRelationCheck?: () => void;
 }
 
 export interface MBTIReactionProps extends MBTIProps {
-  handleSetReactionName: (value: string, testId: number) => void;
+  handleSetReactionName: (value: string, id: number) => void;
   reactionLength?: number;
   onReactionCheck?: () => void;
 }
 
 export interface MBTIJudgdemnetProps extends MBTIProps {
-  handleSetJudgementName: (value: string, testId: number) => void;
+  handleSetJudgementName: (value: string, id: number) => void;
   judgementLength?: number;
   onJudgementCheck?: () => void;
 }
 
 export interface AnswerType {
-  testId: number;
+  testId: number | null;
   answerValue: string;
 }
 
@@ -154,8 +154,8 @@ export interface MBTIResultProps {
 }
 
 export interface MBTIScoreProps {
-  id?: number;
+  id?: number | null;
   mbti?: string;
-  score?: number;
+  score?: number | null;
   layout?: string;
 }

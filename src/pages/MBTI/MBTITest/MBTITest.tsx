@@ -8,6 +8,9 @@ import JudgementTest from './Judgement/JudgementTest';
 import { AnswerType } from 'types/type';
 import { MBTIScoreProps } from 'types/type';
 import { joinMBTI } from 'types/type';
+import { useDispatch } from 'react-redux';
+import setMbtiResults from 'redux/actions/mbtiResult';
+import setMbtiTexts from 'redux/actions/mbtiText';
 
 const MBTITest = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -137,6 +140,10 @@ const MBTITest = () => {
     setMbtiText(mbtiObj);
   }, []);
 
+  const dispatch = useDispatch();
+  dispatch(setMbtiResults(setMBTIResult));
+  dispatch(setMbtiTexts(mbtiObj));
+
   const onClickCheck = (): void => {
     setIsChecked(!isChecked);
   };
@@ -158,9 +165,7 @@ const MBTITest = () => {
   };
 
   const handleSetEnergyName = (value: string, id: number): void => {
-    setEnergyNameList(
-      energyNameList.concat({ testId: id, answerValue: value })
-    );
+    setEnergyNameList(prev => prev.concat({ testId: id, answerValue: value }));
     const inputItemsCopy = energyNameList;
     inputItemsCopy[id].answerValue = value;
     setEnergyNameList(inputItemsCopy);
@@ -198,7 +203,13 @@ const MBTITest = () => {
   const reactionLength = reactionNameList.length;
   const judgementLength = judgementNameList.length;
   const percentLength =
-    energyLength + relationLength + reactionLength + judgementLength;
+    energyNameList.length +
+    relationNameList.length +
+    reactionNameList.length +
+    judgementNameList.length;
+  // console.log({ energyNameList });
+  // console.log(energyNameList.length);
+  // console.log(typeof energyNameList);
 
   return (
     <MBTITestContainer>
