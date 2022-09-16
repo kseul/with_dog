@@ -20,15 +20,6 @@ const AdminContainer = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [counts, setCounts] = useState();
-  // const LIMIT = 10;
-  // const [pageNum, setPageNum] = useState({ limit: LIMIT, offset: 0 });
-  // const updatePageNum = (buttonNumber: number) => {
-  //   setPageNum({
-  //     ...pageNum,
-  //     limit: LIMIT,
-  //     offset: buttonNumber * LIMIT - LIMIT,
-  //   });
-  // };
 
   const fetchData = async () => {
     try {
