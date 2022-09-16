@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import sessionStorage from 'redux-persist/es/storage/session';
 import userReducer from './userReducer';
 import postsReducer from './postsReducer';
 import mbtiGraphReducer from './mbtiGraphReducer';
@@ -12,8 +13,13 @@ const persistConfig = {
   whitelist: ['mbtiText'],
 };
 
+const authPersistConfig = {
+  key: 'user',
+  storage: sessionStorage,
+};
+
 const rootReducer = combineReducers({
-  user: userReducer,
+  user: persistReducer(authPersistConfig, userReducer),
   posts: postsReducer,
   graph: mbtiGraphReducer,
   mbtiText: mbtiTextReducer,
