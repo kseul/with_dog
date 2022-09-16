@@ -5,13 +5,13 @@ import userReducer from './userReducer';
 import postsReducer from './postsReducer';
 import mbtiGraphReducer from './mbtiGraphReducer';
 import mbtiTextReducer from './mbtiTextReducer';
+import chatReducer from './chatReducer';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['mbtiText'],
+  whitelist: ['mbtiText', 'chat'],
 };
-import chatReducer from './chatReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,

@@ -2,6 +2,7 @@ import io from 'socket.io-client';
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
 import TitleBar from './components/TitleBar';
 import Messages from './components/Messages';
 import Input from './components/Input';
@@ -14,15 +15,16 @@ const ChatRoom = () => {
   const [messages, setMessages] = useState<any>([]);
   const [currentTime, SetCurrentTime] = useState('');
 
-  const ENDPOINT = 'localhost:3000';
+  // const ENDPOINT = 'localhost:3000';
+  const ENDPOINT = 'http://54.180.89.143:8000';
 
-  // const storeData: any = useSelector<any>(state => state);
-  // TODO : user 데이터 초기값을 불러오는중 (리로드시 다시 초기화 되는지 확인)
-  // const { nickname, thumbnail_url, mbti } = storeData.user;
-  // TODO : 상수 데이터 활용 (리로드시 초기화)
+  const storeData = useSelector((state: RootState) => state);
+  const { nickname, thumbnail_url, mbti } = storeData.user.userData;
   // const room = storeData.chat;
-  const nickname = '스르비';
   const room = 1;
+  console.log(nickname);
+  console.log(thumbnail_url);
+  console.log(mbti);
 
   /* 현재시간을 얻는 함수 */
   useEffect(() => {
@@ -38,7 +40,7 @@ const ChatRoom = () => {
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit('join', { nickname, room });
-    console.log('1) 입장시 nickname, room 넘기기');
+    console.log('1) 입장시 nickname, room 넘기기 : ', { nickname, room });
   }, [ENDPOINT]);
 
   /* 서버로부터 메세지를 받아와서 messages 배열에 추가 <- 초기 입장메세지 + 메세지 */
