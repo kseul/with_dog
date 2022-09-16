@@ -1,7 +1,5 @@
-import axios from 'axios';
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import ListHeaderBox from 'pages/Admin/components/RightSection/ListHeaderBox';
 import ListContentsBox from 'pages/Admin/components/RightSection/ListContentsBox';
 import UserModal from 'pages/Admin/components/Modal/UserModal';
@@ -9,26 +7,19 @@ import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/PageNation';
 import AdminSpinner from 'pages/Admin/components/AdminSpinner.tsx/AdminSpinner';
 
-const AdminRightPageUser = ({ postData, setPostData, loading }) => {
-  const location = useLocation();
-
+const AdminRightPageUser = ({
+  postData,
+  loading,
+  currentPage,
+  setCurrentPage,
+  counts,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalId, setModalId] = useState<number | undefined>();
   const [allToggle, setAllToggle] = useState(false);
   const [banToggle, setBanToggle] = useState(false);
-  const [search, setSearch] = useState<string>('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [indexClicked, setIndexClicked] = useState('');
-  const [pagenatedData, setPagenatedData] = useState(postData);
+  const [blockNum, setBlockNum] = useState(0);
   const perPage = 10;
-  const indexOfLast = currentPage * perPage;
-  const indexOfFirst = indexOfLast - perPage;
-
-  useEffect(() => {
-    if (postData) {
-      setPagenatedData(postData.slice(indexOfFirst, indexOfLast));
-    }
-  }, [postData, indexOfFirst, indexOfLast]);
 
   const openModal = (): void => {
     setIsModalOpen(true);
@@ -40,36 +31,6 @@ const AdminRightPageUser = ({ postData, setPostData, loading }) => {
 
   const onCurrentModal = id => {
     setModalId(id);
-  };
-
-  const onChangeSearch = e => {
-    e.preventDefault();
-    setSearch(e.target.value);
-  };
-
-  const onSearch = e => {
-    e.preventDefault();
-    if (search === null || search === '') {
-      axios
-        .get(`https://togedog-dj.herokuapp.com/${location.pathname.slice(7)}`, {
-          headers: {
-            accept: '*/*',
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
-          },
-        })
-        .then(res => {
-          setPostData(res.data);
-          setPagenatedData(res.data.slice(indexOfFirst, indexOfLast));
-        });
-    } else {
-      const filterData = pagenatedData.filter(data =>
-        data.name.includes(search)
-      );
-      setPostData(filterData);
-      setPagenatedData(filterData.slice(indexOfFirst, indexOfLast));
-      setCurrentPage(1);
-    }
-    setSearch('');
   };
 
   return (
@@ -96,22 +57,22 @@ const AdminRightPageUser = ({ postData, setPostData, loading }) => {
             <DatePickerComponent />
           </DateFilter>
         </SortByDate>
-        <SortByUser onSubmit={e => onSearch(e)}>
+        <SortByUser>
           <UserTitle>
             <TitleText>사용자 검색</TitleText>
           </UserTitle>
-          <UserInput type="text" value={search} onChange={onChangeSearch} />
+          <UserInput type="text" />
         </SortByUser>
       </SortBox>
       <UserListContainer>
         {loading ? (
           <AdminSpinner />
         ) : (
-          pagenatedData && (
+          postData && (
             <>
               <ListHeaderBox />
               <ListContentsSection>
-                {pagenatedData.map(data => (
+                {postData.map(data => (
                   <ListContentsBox
                     data={data}
                     key={data.id}
@@ -121,10 +82,11 @@ const AdminRightPageUser = ({ postData, setPostData, loading }) => {
                 ))}
                 <PageNation
                   perPage={perPage}
-                  totalPost={postData.length}
                   setCurrentPage={setCurrentPage}
-                  setIndexClicked={setIndexClicked}
-                  indexClicked={indexClicked}
+                  currentPage={currentPage}
+                  blockNum={blockNum}
+                  setBlockNum={setBlockNum}
+                  counts={counts}
                 />
                 {isModalOpen && (
                   <UserModal closeModal={closeModal} modalId={modalId} />
