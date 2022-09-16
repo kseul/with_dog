@@ -8,7 +8,7 @@ const initialState = {
   status: 'active',
   account_type: 'normal',
   thumbnail_url: 'nope',
-  mbti: null,
+  mbti: 'ENFJ',
 };
 
 const userReducer = (prevState = initialState, action) => {

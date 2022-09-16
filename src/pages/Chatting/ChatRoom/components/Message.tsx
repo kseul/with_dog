@@ -3,18 +3,24 @@ import testImg from 'assets/images/dog3.png';
 import testImg2 from 'assets/images/dog4.png';
 import ArrowLeft from 'assets/svg/siren.svg';
 
-const Message = () => {
-  let isSentByCurrentUser = true;
+const Message = ({ message: { user, text, time }, nickname }) => {
+  let isSentByCurrentUser = false;
+  if (user === nickname) {
+    isSentByCurrentUser = true;
+  }
+  console.log('Message 컴포넌트에서 받아온 data: ', user, text, time, nickname);
+
+  // user === '함께하개 관리자' ?
 
   return isSentByCurrentUser ? (
     <MessageContainer currentUser={isSentByCurrentUser}>
       <MessageBox>
         <TextContainer>
           <TextData>
-            <Time>오후 2:02</Time>
+            <Time>{time}</Time>
           </TextData>
           <TextBox currentUser={isSentByCurrentUser}>
-            <Text>미루미코도 같이 놀자아아아</Text>
+            <Text>{text}</Text>
           </TextBox>
         </TextContainer>
       </MessageBox>
@@ -25,16 +31,16 @@ const Message = () => {
       <ProfileImg src={testImg} />
       <MessageBox>
         <UserBox>
-          <Nickname>날순이</Nickname>
+          <Nickname>{user}</Nickname>
           <Mbti>INFP</Mbti>
         </UserBox>
         <TextContainer>
           <TextBox currentUser={isSentByCurrentUser}>
-            <Text>이번주 한강 공놀이 ~~~~ ?</Text>
+            <Text>{text}</Text>
           </TextBox>
           <TextData>
             <ReportIcon src={ArrowLeft} />
-            <Time>오후 2:00</Time>
+            <Time>{time}</Time>
           </TextData>
         </TextContainer>
       </MessageBox>
@@ -52,7 +58,7 @@ const ProfileImg = styled.img`
   margin: 0 0.8rem;
   width: 4rem;
   height: 4rem;
-  border: 0.25rem solid white;
+  border: 0.2rem solid white;
   border-radius: 50%;
   object-fit: cover;
 `;

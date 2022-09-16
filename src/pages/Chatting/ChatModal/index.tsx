@@ -17,9 +17,9 @@ const ChatModal = ({
     store.dispatch(setRoom(`${title} 방`));
   };
 
-  store.subscribe(() => {
-    console.log(store.getState());
-  });
+  // store.subscribe(() => {
+  //   console.log('리덕스 상태:', store.getState());
+  // });
 
   return (
     <>
