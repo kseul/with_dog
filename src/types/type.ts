@@ -10,12 +10,16 @@ export interface ChatListProp {
 export interface IdPwInputProp {
   placeholder: string;
   type: string;
+  name: string;
+  handleUserInput: (e) => void;
 }
 
 export interface LoginButtonProp {
   title: string;
   color: string;
   size: number;
+  isActive: boolean;
+  func: () => void;
 }
 
 export interface SNSButtonProp {
@@ -131,6 +135,10 @@ export interface MBTIJudgdemnetProps extends MBTIProps {
 export interface AnswerType {
   testId: number | null;
   answerValue: string;
+}
+
+export interface CheckValidProps {
+  errorMessage: string;
 }
 
 export interface joinMBTI {
