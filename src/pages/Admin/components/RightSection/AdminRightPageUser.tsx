@@ -18,19 +18,8 @@ const AdminRightPageUser = ({
   const [modalId, setModalId] = useState<number | undefined>();
   const [allToggle, setAllToggle] = useState(false);
   const [banToggle, setBanToggle] = useState(false);
-  // const [search, setSearch] = useState<string>('');
-  // const [pagenatedData, setPagenatedData] = useState(postData);
-
   const [blockNum, setBlockNum] = useState(0);
   const perPage = 10;
-  // const indexOfLast = currentPage * perPage;
-  // const indexOfFirst = indexOfLast - perPage;
-
-  // useEffect(() => {
-  //   if (postData) {
-  //     setPagenatedData(postData.slice(indexOfFirst, indexOfLast));
-  //   }
-  // }, [postData, indexOfFirst, indexOfLast]);
 
   const openModal = (): void => {
     setIsModalOpen(true);
@@ -43,36 +32,6 @@ const AdminRightPageUser = ({
   const onCurrentModal = id => {
     setModalId(id);
   };
-
-  // const onChangeSearch = e => {
-  //   e.preventDefault();
-  //   setSearch(e.target.value);
-  // };
-
-  // const onSearch = e => {
-  //   e.preventDefault();
-  //   if (search === null || search === '') {
-  //     axios
-  //       .get(`https://togedog-dj.herokuapp.com/${location.pathname.slice(7)}`, {
-  //         headers: {
-  //           accept: '*/*',
-  //           Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
-  //         },
-  //       })
-  //       .then(res => {
-  //         setPostData(res.data);
-  //         setPagenatedData(res.data.slice(indexOfFirst, indexOfLast));
-  //       });
-  //   } else {
-  //     const filterData = pagenatedData.filter(data =>
-  //       data.name.includes(search)
-  //     );
-  //     setPostData(filterData);
-  //     setPagenatedData(filterData.slice(indexOfFirst, indexOfLast));
-  //     setCurrentPage(1);
-  //   }
-  //   setSearch('');
-  // };
 
   return (
     <AdminRightContainer>
