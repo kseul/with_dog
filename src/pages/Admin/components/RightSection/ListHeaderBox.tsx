@@ -19,7 +19,7 @@ const UserListHeader = styled.div`
   margin-left: auto;
   margin-right: auto;
   width: 90%;
-  height: 1.875rem;
+  height: 2.5rem;
   background-color: ${props => props.theme.colors.lightGray};
 `;
 

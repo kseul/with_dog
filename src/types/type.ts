@@ -10,18 +10,22 @@ export interface ChatListProp {
 export interface IdPwInputProp {
   placeholder: string;
   type: string;
+  name: string;
+  handleUserInput: (e) => void;
 }
 
 export interface LoginButtonProp {
   title: string;
   color: string;
   size: number;
+  isActive: boolean;
+  func: () => void;
 }
 
 export interface SNSButtonProp {
   title: string;
   icon: string;
-  handleKakaoLogin: () => void;
+  handleSNSLogin: () => void;
 }
 
 export interface PageBoxProp {
@@ -100,35 +104,66 @@ export interface BoardModalProp {
 
 export interface MBTIProps {
   onClickCheck: () => void;
-  testId?: number | undefined;
+  testId?: number;
   labelName?: string;
 }
 
 export interface MBTIEnergyProps extends MBTIProps {
-  handleSetEnergyName: (value: string, testId: number) => void;
+  handleSetEnergyName: (value: string, id: number) => void;
   energyLength?: number;
   onEnergyCheck?: () => void;
 }
 
 export interface MBTIRelationProps extends MBTIProps {
-  handleSetRelationName: (value: string, testId: number) => void;
+  handleSetRelationName: (value: string, id: number) => void;
   relationLength?: number;
   onRelationCheck?: () => void;
 }
 
 export interface MBTIReactionProps extends MBTIProps {
-  handleSetReactionName: (value: string, testId: number) => void;
+  handleSetReactionName: (value: string, id: number) => void;
   reactionLength?: number;
   onReactionCheck?: () => void;
 }
 
 export interface MBTIJudgdemnetProps extends MBTIProps {
-  handleSetJudgementName: (value: string, testId: number) => void;
+  handleSetJudgementName: (value: string, id: number) => void;
   judgementLength?: number;
   onJudgementCheck?: () => void;
 }
 
 export interface AnswerType {
-  testId: number;
+  testId: number | null;
   answerValue: string;
+}
+
+export interface CheckValidProps {
+  errorMessage: string;
+}
+
+export interface joinMBTI {
+  mbti?: string;
+}
+
+export interface ResultData {
+  resultId: number;
+  MBTIImage: string;
+  MBTI: string;
+  MBTICharacter: string;
+  content: string;
+  MBTIPosition: string;
+}
+
+export interface MBTIResultProps {
+  id?: number;
+  mbti: string;
+  score: number;
+  layout: string;
+}
+
+export interface MBTIScoreProps {
+  id?: number | null;
+  mbti?: string;
+  score?: number | null;
+  layout?: string;
 }

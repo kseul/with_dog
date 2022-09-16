@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_2" data-name="레이어 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 697.09 696.87">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-2 {
+        fill: #67cab2;
+      }
+
+      .cls-3 {
+        fill: #e3a5aa;
+      }
+
+      .cls-4 {
+        fill: #ff88ad;
+      }
+
+      .cls-5 {
+        fill: #fbd048;
+      }
+
+      .cls-6 {
+        fill: #7ea296;
+      }
+
+      .cls-7 {
+        fill: #98b9ba;
+      }
+
+      .cls-8, .cls-9 {
+        fill: #333;
+      }
+
+      .cls-10 {
+        fill: #1d4260;
+      }
+
+      .cls-11 {
+        fill: #95a9df;
+      }
+
+      .cls-12 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-13, .cls-14 {
+        font-size: 13.53px;
+      }
+
+      .cls-13, .cls-14, .cls-15, .cls-9, .cls-16 {
+        font-family: AppleSDGothicNeo-Bold-KSCpc-EUC-H, 'Apple SD Gothic Neo';
+      }
+
+      .cls-13, .cls-15, .cls-16 {
+        fill: #fff;
+      }
+
+      .cls-14 {
+        fill: #666;
+      }
+
+      .cls-15, .cls-9 {
+        font-size: 27.06px;
+      }
+
+      .cls-17 {
+        fill: none;
+        stroke: #777;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-16 {
+        font-size: 30.45px;
+      }
+
+      .cls-18 {
+        letter-spacing: 0em;
+      }
+
+      .cls-19 {
+        letter-spacing: 0em;
+      }
+
+      .cls-20 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <g id="_레이어_1-2" data-name="레이어 1">
+    <g>
+      <circle class="cls-17" cx="416.31" cy="280.77" r="67.66"/>
+      <circle class="cls-17" cx="145.67" cy="145.45" r="67.66"/>
+      <circle class="cls-17" cx="280.99" cy="145.45" r="67.66"/>
+      <circle class="cls-17" cx="416.31" cy="145.45" r="67.66"/>
+      <circle class="cls-17" cx="551.63" cy="145.45" r="67.66"/>
+      <circle class="cls-17" cx="145.67" cy="280.77" r="67.66"/>
+      <circle class="cls-8" cx="280.99" cy="280.77" r="67.66"/>
+      <circle class="cls-17" cx="551.63" cy="280.77" r="67.66"/>
+      <circle class="cls-17" cx="145.67" cy="416.09" r="67.66"/>
+      <circle class="cls-17" cx="280.99" cy="416.09" r="67.66"/>
+      <circle class="cls-17" cx="416.31" cy="416.09" r="67.66"/>
+      <circle class="cls-17" cx="551.63" cy="416.09" r="67.66"/>
+      <circle class="cls-17" cx="145.67" cy="551.4" r="67.66"/>
+      <circle class="cls-17" cx="280.99" cy="551.4" r="67.66"/>
+      <circle class="cls-17" cx="416.31" cy="551.4" r="67.66"/>
+      <circle class="cls-17" cx="551.63" cy="551.4" r="67.66"/>
+      <g>
+        <rect class="cls-3" x="0" y="77.79" width="67.66" height="270.64" rx="33.83" ry="33.83"/>
+        <text class="cls-16" transform="translate(43.69 251.88) rotate(-90)"><tspan x="0" y="0">외향적</tspan></text>
+      </g>
+      <g>
+        <rect class="cls-10" x="0" y="348.43" width="67.66" height="270.64" rx="33.83" ry="33.83"/>
+        <text class="cls-16" transform="translate(43.69 522.52) rotate(-90)"><tspan x="0" y="0">내향적</tspan></text>
+      </g>
+      <g>
+        <rect class="cls-7" x="450.14" y="527.72" width="67.66" height="270.64" rx="33.83" ry="33.83" transform="translate(1147.01 179.07) rotate(90)"/>
+        <text class="cls-16" transform="translate(445.19 672.91)"><tspan x="0" y="0">독립적</tspan></text>
+      </g>
+      <g>
+        <rect class="cls-5" x="179.5" y="527.72" width="67.66" height="270.64" rx="33.83" ry="33.83" transform="translate(876.37 449.71) rotate(90)"/>
+        <text class="cls-16" transform="translate(174.56 672.91)"><tspan x="0" y="0">사교적</tspan></text>
+      </g>
+      <g>
+        <rect class="cls-2" x="314.82" y="-101.49" width="67.66" height="270.64" rx="33.83" ry="33.83" transform="translate(382.48 -314.82) rotate(90)"/>
+        <text class="cls-16" transform="translate(309.88 43.69)"><tspan x="0" y="0">호기심</tspan></text>
+      </g>
+      <g>
+        <rect class="cls-6" x="111.84" y="-33.83" width="67.66" height="135.32" rx="33.83" ry="33.83" transform="translate(179.5 -111.84) rotate(90)"/>
+        <text class="cls-16" transform="translate(107.2 43.69)"><tspan x="0" y="0">영리한</tspan></text>
+      </g>
+      <g>
+        <rect class="cls-6" x="517.8" y="-33.83" width="67.66" height="135.32" rx="33.83" ry="33.83" transform="translate(585.46 -517.8) rotate(90)"/>
+        <text class="cls-16" transform="translate(513.16 43.69)"><tspan x="0" y="0">영리한</tspan></text>
+      </g>
+      <g>
+        <rect class="cls-4" x="629.44" y="213.11" width="67.66" height="270.64" rx="33.83" ry="33.83" transform="translate(1326.53 696.86) rotate(180)"/>
+        <text class="cls-16" transform="translate(653.4 309.65) rotate(90)"><tspan x="0" y="0">민감한</tspan></text>
+      </g>
+      <g>
+        <rect class="cls-11" x="629.44" y="77.79" width="67.66" height="135.32" rx="33.83" ry="33.83" transform="translate(1326.53 290.9) rotate(-180)"/>
+        <text class="cls-16" transform="translate(653.4 106.98) rotate(90)"><tspan x="0" y="0">무던한</tspan></text>
+      </g>
+      <g>
+        <rect class="cls-11" x="629.44" y="483.75" width="67.66" height="135.32" rx="33.83" ry="33.83" transform="translate(1326.53 1102.81) rotate(180)"/>
+        <text class="cls-16" transform="translate(653.4 512.94) rotate(90)"><tspan x="0" y="0">무던한</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(114.92 141.48)"><tspan x="0" y="0">ESTP</tspan></text>
+        <text class="cls-14" transform="translate(102.93 167.01)"><tspan x="0" y="0">싹싹한 골목대장</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(250.65 141.48)"><tspan x="0" y="0">ES</tspan><tspan class="cls-1" x="29.93" y="0">T</tspan><tspan x="44.82" y="0">C</tspan></text>
+        <text class="cls-14" transform="translate(232.39 167.01)"><tspan x="0" y="0">콧대높은 천방지축</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(383.75 141.48)"><tspan x="0" y="0">EN</tspan><tspan class="cls-12" x="34.37" y="0">T</tspan><tspan class="cls-20" x="49.26" y="0">C</tspan></text>
+        <text class="cls-14" transform="translate(371.78 167.01)"><tspan x="0" y="0">호기심 많은 쫄보</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(518.65 141.48)"><tspan x="0" y="0">ENTP</tspan></text>
+        <text class="cls-14" transform="translate(514.73 167.01)"><tspan x="0" y="0">든든한 오른팔</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(115.3 276.8)"><tspan x="0" y="0">ESFP</tspan></text>
+        <text class="cls-14" transform="translate(108.78 302.33)"><tspan x="0" y="0">능글맞은 장꾸</tspan></text>
+      </g>
+      <g>
+        <text class="cls-15" transform="translate(250.88 276.8)"><tspan x="0" y="0">ES</tspan><tspan class="cls-19" x="29.93" y="0">F</tspan><tspan x="44.36" y="0">C</tspan></text>
+        <text class="cls-13" transform="translate(238.25 302.33)"><tspan x="0" y="0">천진난만 꾸러기</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(383.98 276.8)"><tspan x="0" y="0">EN</tspan><tspan class="cls-18" x="34.37" y="0">F</tspan><tspan class="cls-20" x="48.8" y="0">C</tspan></text>
+        <text class="cls-14" transform="translate(379.42 302.33)"><tspan x="0" y="0">자유로운 영혼</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(516.12 276.8)"><tspan x="0" y="0">ENFP</tspan></text>
+        <text class="cls-14" transform="translate(514.73 302.33)"><tspan x="0" y="0">영리한 전략가</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(119.11 412.12)"><tspan x="0" y="0">ISFP</tspan></text>
+        <text class="cls-14" transform="translate(95.3 437.65)"><tspan x="0" y="0">부끄럼 많은 마당발</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(254.7 412.12)"><tspan x="0" y="0">IS</tspan><tspan class="cls-19" x="22.3" y="0">F</tspan><tspan x="36.73" y="0">C</tspan></text>
+        <text class="cls-14" transform="translate(244.1 437.65)"><tspan x="0" y="0">소심한 구경꾼</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(387.8 412.12)"><tspan x="0" y="0">IN</tspan><tspan class="cls-18" x="26.74" y="0">F</tspan><tspan class="cls-20" x="41.16" y="0">C</tspan></text>
+        <text class="cls-14" transform="translate(360.08 437.65)"><tspan x="0" y="0">세상이 궁금한 몽상가</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(522.84 412.12)"><tspan x="0" y="0">INFP</tspan></text>
+        <text class="cls-14" transform="translate(503.03 437.65)"><tspan x="0" y="0">지혜로운 나무늘보</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(118.73 547.43)"><tspan x="0" y="0">ISTP</tspan></text>
+        <text class="cls-14" transform="translate(102.93 572.97)"><tspan x="0" y="0">우직한 보디가드</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(254.47 547.43)"><tspan x="0" y="0">IS</tspan><tspan class="cls-1" x="22.3" y="0">T</tspan><tspan x="37.19" y="0">C</tspan></text>
+        <text class="cls-14" transform="translate(238.25 572.97)"><tspan x="0" y="0">겉바속촉 츤데레</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(387.57 547.43)"><tspan x="0" y="0">IN</tspan><tspan class="cls-12" x="26.74" y="0">T</tspan><tspan class="cls-20" x="41.62" y="0">C</tspan></text>
+        <text class="cls-14" transform="translate(379.42 572.97)"><tspan x="0" y="0">겁많은 탐험가</tspan></text>
+      </g>
+      <g>
+        <text class="cls-9" transform="translate(522.47 547.43)"><tspan x="0" y="0">INTP</tspan></text>
+        <text class="cls-14" transform="translate(508.88 572.97)"><tspan x="0" y="0">눈치빠른 모범생</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>
