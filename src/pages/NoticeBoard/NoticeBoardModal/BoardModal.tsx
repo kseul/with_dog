@@ -21,7 +21,7 @@ const BoardModal = ({ clickCard, modalContent }: BoardDataProp) => {
           <BoardModalContent> {modalContent.content} </BoardModalContent>
           <BoardModalComment comments={modalContent.comments} />
           <BoardModalButton post_likes_count={modalContent.post_likes_count} />
-          <BoardModalTyping />
+          <BoardModalTyping modalContent={modalContent} />
         </BoardModalContentWrapper>
       </BoardModalContainer>
 

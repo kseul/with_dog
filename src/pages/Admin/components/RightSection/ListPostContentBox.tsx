@@ -29,7 +29,7 @@ const ListContents = styled.div`
   margin: 0 auto;
   margin-bottom: -1px;
   width: 90%;
-  height: 1.875rem;
+  height: 2.5rem;
   border: 1px solid #cac8c8;
   cursor: pointer;
 

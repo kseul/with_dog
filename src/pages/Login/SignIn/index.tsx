@@ -1,20 +1,78 @@
 import styled from 'styled-components';
+import { useCookies } from 'react-cookie';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import InputForm from '../components/inputForm/InputForm';
+import LoginButton from '../components/loginButton/LoginButton';
+import SNSButton from '../components/snsButton/SNSButton';
+import store from 'redux/store';
+import userActions from 'redux/actions/user';
 import { KAKAO_AUTH_PATH } from './kakaoLogin/KakaoLoginData';
 import { GOOGLE_AUTH_PATH } from './googleLogin/GoogleloginData';
 import signInbg from 'assets/images/bg1.jpg';
 import googleIcon from 'assets/svg/google-logo.svg';
 import kakaoIcon from 'assets/svg/kakao-logo.svg';
-import InputForm from '../components/inputForm/InputForm';
-import LoginButton from '../components/loginButton/LoginButton';
-import SNSButton from '../components/snsButton/SNSButton';
 import character from 'assets/images/LoginBgCharacter.png';
 
 const SignIn = () => {
+  const [cookies, setCookie] = useCookies(['userToken']);
+
+  const navigate = useNavigate();
+
+  const [userInputValue, setUserInputValue] = useState({
+    email: '',
+    password: '',
+  });
+  const { email, password } = userInputValue;
+
   const handleKakaoLogin = () => {
     window.location.href = KAKAO_AUTH_PATH;
   };
   const handleGoogleLogin = () => {
     window.location.href = GOOGLE_AUTH_PATH;
+  };
+
+  const handleUserInput = e => {
+    const { name, value } = e.target;
+    setUserInputValue({ ...userInputValue, [name]: value });
+  };
+
+  const isActive =
+    email.includes('@') && email.includes('.') && password.length > 7 === true;
+
+  const submitSigninInfo = () => {
+    if (isActive) {
+      fetch('https://togedog-dj.herokuapp.com/users/login/email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      })
+        .then(res => {
+          if (res.status === 200) {
+            navigate('/');
+            return res.json();
+          } else {
+            alert('이메일과 비밀번호를 다시 확인하세요.');
+          }
+        })
+        .then(data => {
+          const userData = data.user;
+          store.dispatch(userActions.logIn(true));
+          store.dispatch(userActions.setUserData(userData));
+          setCookie('userToken', data.access_token, {
+            path: '/',
+            // secure: true,
+            // httpOnly: true,
+          });
+        });
+    }
+  };
+
+  const goToSignUp = () => {
+    navigate('/signup');
   };
 
   return (
@@ -24,11 +82,35 @@ const SignIn = () => {
         <LoginTitle>로그인</LoginTitle>
         <LoginSubTitle>함께하러 가시개!</LoginSubTitle>
         <IdPwInputContainer>
-          <InputForm placeholder="아이디 입력" type="text" />
-          <InputForm placeholder="비밀번호 입력" type="password" />
+          <InputForm
+            placeholder="이메일 입력"
+            type="text"
+            name="email"
+            handleUserInput={handleUserInput}
+            submitSigninInfo={submitSigninInfo}
+          />
+          <InputForm
+            placeholder="비밀번호 입력"
+            type="password"
+            name="password"
+            handleUserInput={handleUserInput}
+            submitSigninInfo={submitSigninInfo}
+          />
         </IdPwInputContainer>
-        <LoginButton title="로그인" color="#7CCCC7" size={21} />
-        <LoginButton title="회원가입" color="#CFB6D7" size={21} />
+        <LoginButton
+          title="로그인"
+          color="#7CCCC7"
+          size={21}
+          isActive={isActive}
+          func={submitSigninInfo}
+        />
+        <LoginButton
+          title="회원가입"
+          color="#CFB6D7"
+          size={21}
+          isActive={true}
+          func={goToSignUp}
+        />
         <SnsLoginContainer>
           <SnsTitle>⏤ SNS 로그인 ⏤</SnsTitle>
           <SNSButton
@@ -46,6 +128,7 @@ const SignIn = () => {
     </SignInContainer>
   );
 };
+
 const SignInContainer = styled.div`
   display: flex;
   justify-content: space-around;
@@ -55,9 +138,11 @@ const SignInContainer = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
 `;
+
 const Character = styled.img`
   height: 34.375rem;
 `;
+
 const LoginForm = styled.div`
   display: flex;
   flex-direction: column;
@@ -67,26 +152,32 @@ const LoginForm = styled.div`
   padding: 3.5rem;
   border-radius: 1.25rem;
   background-color: white;
-  box-shadow: 1px 2px 3px 4px lightgray;
+  box-shadow: 1px 1px 15px 2px rgba(0, 0, 0, 0.1);
 `;
+
 const LoginTitle = styled.div`
   font-size: 3rem;
   font-weight: 700;
 `;
+
 const LoginSubTitle = styled.div`
   margin-top: 1.25rem;
   font-size: 1.2rem;
   color: ${props => props.theme.colors.darkGray};
 `;
+
 const IdPwInputContainer = styled.div`
   margin-top: 4.6rem;
 `;
+
 const SnsLoginContainer = styled.div`
   margin-top: 1.875rem;
   text-align: center;
 `;
+
 const SnsTitle = styled.div`
   margin-bottom: 2.188rem;
   color: darkgray;
 `;
+
 export default SignIn;

@@ -7,6 +7,7 @@ import AdminHeader from 'pages/Admin/components/AdminHeader';
 import AdminRightPageUser from 'pages/Admin/components/RightSection/AdminRightPageUser';
 import AdminRightPagePost from 'pages/Admin/components/RightSection/AdminRightPagePost';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
+import backGroundImg from 'assets/images/bg1.jpg';
 
 const AdminContainer = () => {
   const navigate = useNavigate();
@@ -17,11 +18,16 @@ const AdminContainer = () => {
   const [postData, setPostData] = useState();
   const [loading, setLoading] = useState(false);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [counts, setCounts] = useState();
+
   const fetchData = async () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://togedog-dj.herokuapp.com/${location.pathname.slice(7)}`,
+        `https://togedog-dj.herokuapp.com/${location.pathname.slice(
+          7
+        )}?page=${currentPage}`,
         {
           headers: {
             accept: '*/*',
@@ -29,7 +35,8 @@ const AdminContainer = () => {
           },
         }
       );
-      setPostData(response.data);
+      setPostData(response.data.items);
+      setCounts(response.data.count);
     } finally {
       setLoading(false);
     }
@@ -37,7 +44,7 @@ const AdminContainer = () => {
 
   useEffect(() => {
     fetchData();
-  }, [location.pathname]);
+  }, [location.pathname, currentPage]);
 
   const setClick = list => {
     setClicked(list.value);
@@ -64,26 +71,34 @@ const AdminContainer = () => {
           {params.value === 'users' ? (
             <AdminRightPageUser
               postData={postData}
-              setPostData={setPostData}
               loading={loading}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              counts={counts}
             />
           ) : params.value === 'posts' ? (
             <AdminRightPagePost
               postData={postData}
-              setPostData={setPostData}
               loading={loading}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              counts={counts}
             />
           ) : params.value === 'posts' ? (
             <AdminRightPagePost
               postData={postData}
-              setPostData={setPostData}
               loading={loading}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              counts={counts}
             />
           ) : (
             <AdminRightPageUser
               postData={postData}
-              setPostData={setPostData}
               loading={loading}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              counts={counts}
             />
           )}
         </AdminRightSection>
@@ -93,9 +108,11 @@ const AdminContainer = () => {
 };
 
 const AdminPageContainer = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   min-width: 50rem;
+  background: url(${backGroundImg}) center no-repeat;
+  background-size: cover;
 `;
 
 const SectionContainer = styled.div`
@@ -107,17 +124,19 @@ const AdminLeftSection = styled.div`
   padding-top : 1px;
   width: 12.5rem;
   height: calc(100vh - 6.25rem);
-  background-color: ${props => props.theme.colors.lightGray};
+  background-color: ${props => props.theme.colors.lineLightGray};
 `;
 
 const ListWrapper = styled.ul`
+  width: 100%;
   padding-top: 1.5rem;
   list-style: none;
 `;
 
 const AdminRightSection = styled.div`
-  width: calc(100% - 12.5rem);
+  width: calc(100vw - 12.5rem);
   height: calc(100vh - 6.25rem);
+  min-width: 37.5rem;
 `;
 
 export default AdminContainer;
