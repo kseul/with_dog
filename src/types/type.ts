@@ -88,6 +88,8 @@ export interface BoardDataProp {
   created_at?: string;
   user_nickname?: string;
   post_likes_count?: number;
+  comments?: any;
+  modalContent?: any;
   clickCard?: () => void;
 }
 

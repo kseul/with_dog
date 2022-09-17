@@ -1,28 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-import COMMENT_DATA from '../DATA/COMMENT_DATA';
 
-const BoardModalComment = () => {
+const BoardModalComment = ({ comments }) => {
   return (
-    <CommentContainer>
-      <>
-        {COMMENT_DATA.map(
-          ({ id, commentProfile, commentWriter, commentContent }) => {
-            return (
-              <CommentWrapper key={id}>
+    <Comment>
+      {comments &&
+        comments.map(({ id, content, user_nickname }) => {
+          return (
+            <CommentContainer key={id}>
+              <CommentWrapper>
                 <CommentProfile />
                 <CommentText>
-                  <CommentWriter>{commentWriter}</CommentWriter>
-                  <CommentContent>{commentContent}</CommentContent>
+                  <CommentWriter>{user_nickname}</CommentWriter>
+                  <CommentContent>{content}</CommentContent>
                 </CommentText>
               </CommentWrapper>
-            );
-          }
-        )}
-      </>
-    </CommentContainer>
+            </CommentContainer>
+          );
+        })}
+    </Comment>
   );
 };
+
+const Comment = styled.div``;
 
 const CommentContainer = styled.div`
   width: 100%;

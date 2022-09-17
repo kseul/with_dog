@@ -14,7 +14,7 @@ const BoardList = () => {
     })
       .then(response => response.json())
       .then(data => setBoardListData(data));
-  });
+  }, []);
 
   return (
     <BoardListWrapper>

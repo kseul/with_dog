@@ -8,24 +8,19 @@ import rightArrow from 'assets/svg/arrow-right.svg';
 import cancelButton from 'assets/svg/cancel.svg';
 import { BoardDataProp } from 'types/type';
 
-const BoardModal = ({
-  clickCard,
-  subject,
-  created_at,
-  image_url,
-  post_likes_count,
-}: BoardDataProp) => {
+const BoardModal = ({ clickCard, modalContent }: BoardDataProp) => {
   return (
     <>
       <BoardModalContainer>
         <BoardModalImageWrapper>
-          <BoardImageBox src={image_url} />
+          <BoardImageBox src={modalContent.image_url} />
         </BoardModalImageWrapper>
         <BoardModalContentWrapper>
-          <BoardModalTitle> {subject} </BoardModalTitle>
-          <BoardModalDate> {created_at} </BoardModalDate>
-          <BoardModalComment />
-          <BoardModalButton post_likes_count={post_likes_count} />
+          <BoardModalTitle> {modalContent.subject} </BoardModalTitle>
+          <BoardModalDate> {modalContent.created_at} </BoardModalDate>
+          <BoardModalContent> {modalContent.content} </BoardModalContent>
+          <BoardModalComment comments={modalContent.comments} />
+          <BoardModalButton post_likes_count={modalContent.post_likes_count} />
           <BoardModalTyping />
         </BoardModalContentWrapper>
       </BoardModalContainer>
@@ -82,6 +77,11 @@ const BoardModalDate = styled.div`
   border-bottom: 0.063rem solid ${props => props.theme.colors.lineLightGray};
   color: ${props => props.theme.colors.lightGray};
   font-size: 0.8rem;
+`;
+
+const BoardModalContent = styled.div`
+  width: 100%;
+  padding-bottom: 0.5rem;
 `;
 
 const BoardModalBackground = styled.div`

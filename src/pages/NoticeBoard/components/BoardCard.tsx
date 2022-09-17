@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BoardDataProp } from 'types/type';
 import BoardModal from '../NoticeBoardModal/BoardModal';
@@ -12,10 +12,26 @@ const BoardCard = ({
   post_likes_count,
 }: BoardDataProp) => {
   const [activateModal, setActivateModal] = useState(false);
+  const [modalContent, setModalContent] = useState([]);
 
   const clickCard = () => {
     setActivateModal(!activateModal);
   };
+
+  useEffect(() => {
+    if (activateModal) {
+      fetch(`https://togedog-dj.herokuapp.com/posts/${id}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          setModalContent(data);
+        });
+    }
+  }, [activateModal]);
 
   return (
     <>
@@ -32,13 +48,7 @@ const BoardCard = ({
         </CardBottom>
       </CardContainer>
       {activateModal && (
-        <BoardModal
-          clickCard={clickCard}
-          subject={subject}
-          created_at={created_at}
-          image_url={image_url}
-          post_likes_count={post_likes_count}
-        />
+        <BoardModal clickCard={clickCard} modalContent={modalContent} />
       )}
     </>
   );
