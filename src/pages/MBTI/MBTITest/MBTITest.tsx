@@ -141,7 +141,6 @@ const MBTITest = () => {
 
   const mbtiObj = {};
   const joinMbtiText = setMBTIResult.map(obj => obj.mbti).join('');
-  console.log(joinMbtiText);
   mbtiObj['mbti'] = joinMbtiText;
   const mbtiUserData = Object.values(mbtiObj).toString();
 
@@ -161,7 +160,6 @@ const MBTITest = () => {
     setNextReactionPage(!nextReactionPage);
   };
   const checkLogin = useSelector((state: RootState) => state.user);
-  console.log(checkLogin);
 
   const onJudgementCheck = (): void => {
     setNextJudgementPage(!nextJudgementPage);
@@ -218,9 +216,6 @@ const MBTITest = () => {
     relationNameList.length +
     reactionNameList.length +
     judgementNameList.length;
-  // console.log({ energyNameList });
-  // console.log(energyNameList.length);
-  // console.log(typeof energyNameList);
 
   useEffect(() => {
     setMbtiText(mbtiObj);
