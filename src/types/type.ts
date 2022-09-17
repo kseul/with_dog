@@ -141,7 +141,7 @@ export interface CheckValidProps {
   errorMessage: string;
 }
 
-export interface joinMBTI {
+export interface JoinMBTI {
   mbti?: string;
 }
 

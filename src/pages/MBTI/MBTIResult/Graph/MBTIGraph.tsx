@@ -1,11 +1,10 @@
 import styled from 'styled-components/macro';
 import GraphComponent from './GraphComponent';
-import { MBTI_RESULT_DATA } from '../constants/Result';
 
-const MBTIGraph = () => {
+const MBTIGraph = ({ graphResult }) => {
   return (
     <MBTIGraphContainer>
-      {MBTI_RESULT_DATA.map(({ mbti, score, id, layout }) => (
+      {graphResult[1].map(({ mbti, score, id, layout }) => (
         <GraphComponent key={id} mbti={mbti} score={score} layout={layout} />
       ))}
     </MBTIGraphContainer>

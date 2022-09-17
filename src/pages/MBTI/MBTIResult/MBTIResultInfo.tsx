@@ -2,12 +2,16 @@ import styled, { css } from 'styled-components/macro';
 import MBTIGraph from './Graph/MBTIGraph';
 import ChatroomRecommendation from './ChatroomRecommendation';
 import SNSshare from './SNSshare';
-import ESFC_DOG from '../../../../src/assets/svg/ESFC_DOG.svg';
-import ResultNotice from '../../../../src/assets/svg/ResultNoticePositoin.svg';
-import ResultInfo from '../../../../src/assets/svg/ResultInfoPositoin.svg';
-import ESFCPosition from '../../../../src/assets/svg/ESFCPositoin.svg';
+import ESFC_DOG from 'assets/svg/ESFC_DOG.svg';
+import ResultInfo from 'assets/svg/ResultInfoPositoin.svg';
+import ResultNotice from 'assets/svg/ResultNoticePositoin.svg';
+import ESFCPosition from 'assets/svg/ESFCPositoin.svg';
+import { MBTI_RESULT } from './constants/Result';
 
-const MBTIResultInfo = () => {
+const MBTIResultInfo = ({ graphResult, mbtiResultText }) => {
+  const findMBTIValue = mbtiResultText.mbti;
+  const getMBTIResult = Object.values(findMBTIValue);
+
   return (
     <MBTIResultInfoContainer>
       <MBTIDOG src={ESFC_DOG} />
@@ -22,7 +26,7 @@ const MBTIResultInfo = () => {
       </MBTIContent>
       <NoticeImage src={ResultNotice} />
       <GraphInfo src={ResultInfo} />
-      <MBTIGraph />
+      <MBTIGraph graphResult={graphResult} />
       <GraphSummary src={ESFCPosition} />
       <ChatroomRecommendation />
       <SNSshare />
