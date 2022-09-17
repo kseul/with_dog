@@ -14,6 +14,7 @@ import setMbtiTexts from 'redux/actions/mbtiText';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from 'redux/reducers';
 import { useSelector } from 'react-redux';
+import userActions from 'redux/actions/user';
 
 const MBTITest = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -157,12 +158,19 @@ const MBTITest = () => {
   const onReactionCheck = (): void => {
     setNextReactionPage(!nextReactionPage);
   };
+  const checkLogin = useSelector((state: RootState) => state.user);
+  console.log(checkLogin);
 
   const onJudgementCheck = (): void => {
     setNextJudgementPage(!nextJudgementPage);
     navigate('/mbti-result');
     dispatch(setMbtiResults(setMBTIResult));
     dispatch(setMbtiTexts(mbtiObj));
+    {
+      checkLogin.LoggedIn === true
+        ? dispatch(userActions.setMBTI(mbtiObj))
+        : dispatch(setMbtiTexts(mbtiObj));
+    }
   };
 
   const handleSetEnergyName = (value: string, id: number): void => {

@@ -1,6 +1,8 @@
 const initialState = {
   LoggedIn: false,
-  userData: {},
+  userData: {
+    mbti: 'none',
+  },
 };
 
 const userReducer = (prevState = initialState, action) => {
@@ -12,7 +14,7 @@ const userReducer = (prevState = initialState, action) => {
     case 'SET_USER_DATA':
       return { ...prevState, userData: action.data };
     case 'SET_MBTI':
-      return { ...prevState, mbti: action.data };
+      return { ...prevState, userData: action.data };
     default:
       return prevState;
   }
