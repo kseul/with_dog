@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useCookies } from 'react-cookie';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputForm from '../components/inputForm/InputForm';
@@ -14,6 +15,8 @@ import kakaoIcon from 'assets/svg/kakao-logo.svg';
 import character from 'assets/images/LoginBgCharacter.png';
 
 const SignIn = () => {
+  const [cookies, setCookie] = useCookies(['userToken']);
+
   const navigate = useNavigate();
 
   const [userInputValue, setUserInputValue] = useState({
@@ -35,7 +38,7 @@ const SignIn = () => {
   };
 
   const isActive =
-    email.includes('@') && email.includes('.') && password.length > 0 === true;
+    email.includes('@') && email.includes('.') && password.length > 7 === true;
 
   const submitSigninInfo = () => {
     if (isActive) {
@@ -57,8 +60,13 @@ const SignIn = () => {
         })
         .then(data => {
           const userData = data.user;
-          store.dispatch(userActions.logIn(userData));
-          localStorage.setItem('token', data.access_token);
+          store.dispatch(userActions.logIn(true));
+          store.dispatch(userActions.setUserData(userData));
+          setCookie('userToken', data.access_token, {
+            path: '/',
+            // secure: true,
+            // httpOnly: true,
+          });
         });
     }
   };
@@ -79,12 +87,14 @@ const SignIn = () => {
             type="text"
             name="email"
             handleUserInput={handleUserInput}
+            submitSigninInfo={submitSigninInfo}
           />
           <InputForm
             placeholder="비밀번호 입력"
             type="password"
             name="password"
             handleUserInput={handleUserInput}
+            submitSigninInfo={submitSigninInfo}
           />
         </IdPwInputContainer>
         <LoginButton
