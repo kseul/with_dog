@@ -6,6 +6,7 @@ const InputForm = ({
   type,
   name,
   handleUserInput,
+  submitSigninInfo,
 }: IdPwInputProp) => {
   return (
     <UserInputForm
@@ -13,6 +14,11 @@ const InputForm = ({
       placeholder={placeholder}
       type={type}
       name={name}
+      onKeyDown={e => {
+        if (e.key === 'Enter') {
+          submitSigninInfo();
+        }
+      }}
     />
   );
 };
