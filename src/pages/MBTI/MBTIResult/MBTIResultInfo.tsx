@@ -7,12 +7,10 @@ import ResultNotice from 'assets/svg/ResultNoticePositoin.svg';
 import { MBTI_RESULT } from './constants/Result';
 
 const MBTIResultInfo = ({ graphResult, mbtiResultText }) => {
-  // const findMBTIValue = mbtiResultText.mbti;
   const getMBTIResult: string = Object.values(mbtiResultText.mbti).toString();
   const resultMBTI = MBTI_RESULT.filter(item => {
     return item.MBTI === getMBTIResult;
   });
-  console.log(resultMBTI);
 
   return (
     <MBTIResultInfoContainer>

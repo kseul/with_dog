@@ -7,6 +7,8 @@ import { RootState } from 'redux/reducers';
 const MBTIResult = () => {
   const graphResult = useSelector((state: RootState) => state.graph);
   const mbtiResultText = useSelector((state: RootState) => state.mbtiText);
+  const checkLogin = useSelector((state: RootState) => state.user);
+  console.log(checkLogin);
 
   return (
     <MBTIResultContainer>

@@ -141,7 +141,9 @@ const MBTITest = () => {
 
   const mbtiObj = {};
   const joinMbtiText = setMBTIResult.map(obj => obj.mbti).join('');
+  console.log(joinMbtiText);
   mbtiObj['mbti'] = joinMbtiText;
+  const mbtiUserData = Object.values(mbtiObj).toString();
 
   const onClickCheck = (): void => {
     setIsChecked(!isChecked);
@@ -169,7 +171,7 @@ const MBTITest = () => {
     {
       checkLogin.LoggedIn === true
         ? dispatch(userActions.setMBTI(mbtiObj))
-        : dispatch(setMbtiTexts(mbtiObj));
+        : dispatch(userActions.setMBTI(mbtiUserData));
     }
   };
 

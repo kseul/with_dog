@@ -4,7 +4,7 @@ import GraphComponent from './GraphComponent';
 const MBTIGraph = ({ graphResult }) => {
   return (
     <MBTIGraphContainer>
-      {graphResult[1].map(({ mbti, score, id, layout }) => (
+      {graphResult.map(({ mbti, score, id, layout }) => (
         <GraphComponent key={id} mbti={mbti} score={score} layout={layout} />
       ))}
     </MBTIGraphContainer>
