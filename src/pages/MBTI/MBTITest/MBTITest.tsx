@@ -7,7 +7,7 @@ import ReactionTest from './Reaction/ReactionTest';
 import JudgementTest from './Judgement/JudgementTest';
 import { AnswerType } from 'types/type';
 import { MBTIScoreProps } from 'types/type';
-import { joinMBTI } from 'types/type';
+import { JoinMBTI } from 'types/type';
 import { useDispatch } from 'react-redux';
 import setMbtiResults from 'redux/actions/mbtiResult';
 import setMbtiTexts from 'redux/actions/mbtiText';
@@ -23,7 +23,7 @@ const MBTITest = () => {
   const [relationNameList, setRelationNameList] = useState<AnswerType[]>([]);
   const [reactionNameList, setReactionNameList] = useState<AnswerType[]>([]);
   const [judgementNameList, setJudgementNameList] = useState<AnswerType[]>([]);
-  const [mbtiText, setMbtiText] = useState<joinMBTI>({ mbti: '' });
+  const [mbtiText, setMbtiText] = useState<JoinMBTI>({ mbti: '' });
 
   const numberArr = value => {
     const newArr = [0, 0, 0, 0, 0];

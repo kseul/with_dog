@@ -6,6 +6,7 @@ import { RootState } from 'redux/reducers';
 import TitleBar from './components/TitleBar';
 import Messages from './components/Messages';
 import Input from './components/Input';
+import { UserDataProps } from 'types/type';
 import signInbg from 'assets/images/bg2.png';
 
 let socket;
@@ -15,16 +16,17 @@ const ChatRoom = () => {
   const [messages, setMessages] = useState<any>([]);
   const [currentTime, SetCurrentTime] = useState('');
 
-  // const ENDPOINT = 'localhost:3000';
-  const ENDPOINT = 'http://54.180.89.143:8000';
+  const ENDPOINT = 'localhost:3000';
+  // const ENDPOINT = 'http://54.180.89.143:8000';
+  const room = 1;
 
   const storeData = useSelector((state: RootState) => state);
-  const { nickname, thumbnail_url, mbti } = storeData.user.userData;
+  const { nickname, thumbnail_url, mbti }: UserDataProps =
+    storeData.user.userData;
   // const room = storeData.chat;
-  const room = 1;
-  console.log(nickname);
-  console.log(thumbnail_url);
-  console.log(mbti);
+  // console.log(nickname);
+  // console.log(thumbnail_url);
+  // console.log(mbti);
 
   /* 현재시간을 얻는 함수 */
   useEffect(() => {
@@ -40,18 +42,18 @@ const ChatRoom = () => {
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit('join', { nickname, room });
-    console.log('1) 입장시 nickname, room 넘기기 : ', { nickname, room });
   }, [ENDPOINT]);
 
   /* 서버로부터 메세지를 받아와서 messages 배열에 추가 <- 초기 입장메세지 + 메세지 */
   useEffect(() => {
     socket.on('add_message', message => {
-      console.log('✨add_message로 받아온 데이터: ', message);
       const newMessage = message;
       setMessages(messages => [...messages, newMessage]);
     });
-    console.log('add_message 초기실행');
+    console.log('message: ', message);
   }, []);
+
+  console.log('messages: ', messages);
 
   /* 화면의 Input 값을 입력받고 서버로 message 데이터 전송 */
   const sendMessage = e => {
@@ -59,10 +61,8 @@ const ChatRoom = () => {
     if (message) {
       socket.emit('send_message', message, nickname, room, currentTime, () => {
         setMessage('');
-        console.log('✨send_message실행, message 데이터: ', message);
       });
     }
-    console.log('send_message실행');
   };
 
   useEffect(() => {
@@ -75,8 +75,8 @@ const ChatRoom = () => {
   //   socket.emit('disconnect', { nickname, room });
   // }, [ENDPOINT]);
 
-  console.log('message state: ', message);
-  console.log('messages state: ', messages);
+  // console.log('message state: ', message);
+  // console.log('messages state: ', messages);
 
   return (
     <ChatRoomContainer>

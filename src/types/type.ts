@@ -141,7 +141,7 @@ export interface CheckValidProps {
   errorMessage: string;
 }
 
-export interface joinMBTI {
+export interface JoinMBTI {
   mbti?: string;
 }
 
@@ -166,4 +166,15 @@ export interface MBTIScoreProps {
   mbti?: string;
   score?: number | null;
   layout?: string;
+}
+
+export interface UserDataProps {
+  account_type?: string;
+  email?: string;
+  mbti?: string;
+  name?: string;
+  nickname?: string;
+  status?: string;
+  thumbnail_url?: string;
+  user_type?: string;
 }

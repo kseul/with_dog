@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 import testImg from 'assets/images/dog3.png';
-import testImg2 from 'assets/images/dog4.png';
 import ArrowLeft from 'assets/svg/siren.svg';
 
 const Message = ({ message: { user, text, time }, nickname }) => {
@@ -10,11 +9,9 @@ const Message = ({ message: { user, text, time }, nickname }) => {
   if (user === nickname) {
     isSentByCurrentUser = true;
   }
-  console.log('Message 컴포넌트에서 받아온 data: ', user, text, time, nickname);
 
-  const storeData = useSelector((state: RootState) => state);
+  const storeData = useSelector((state: any) => state);
   const userImage = storeData.user.userData.thumbnail_url;
-  console.log(userImage);
 
   // user === '함께하개 관리자' ?
 
@@ -30,8 +27,7 @@ const Message = ({ message: { user, text, time }, nickname }) => {
           </TextBox>
         </TextContainer>
       </MessageBox>
-      {/* <ProfileImg src={userImage} /> */}
-      <ProfileImg src={testImg2} />
+      <ProfileImg src={userImage} />
     </MessageContainer>
   ) : (
     <MessageContainer currentUser={isSentByCurrentUser}>
