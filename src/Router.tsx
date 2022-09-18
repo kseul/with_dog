@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Signup from './pages/Login/Signup';
 import NoticeBoard from 'pages/NoticeBoard/NoticeBoard';
 import MainRouter from './pages/MainRouter/MainRouter';
-import Main from 'pages/Main/Main';
+import Main from 'pages/Main';
 import ChatRoom from 'pages/Chatting/ChatRoom';
 import KakaoLogin from 'pages/Login/SignIn/kakaoLogin/KakaoLoginRedirect';
 import GoogleLogin from 'pages/Login/SignIn/googleLogin/GoogleRedirect';

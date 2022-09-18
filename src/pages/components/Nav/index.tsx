@@ -29,6 +29,7 @@ const Nav = () => {
     </NavContainer>
   );
 };
+
 const NavContainer = styled.div`
   position: fixed;
   display: flex;
@@ -38,45 +39,57 @@ const NavContainer = styled.div`
   width: 100%;
   height: 5rem;
   border-bottom: 2px solid #e1e2e3;
-  background-color: white;
+  background-color: #fdfdfd;
+  z-index: 10;
 `;
+
 const PageContainer = styled.div`
   display: flex;
   padding-left: 1.875rem;
 `;
+
 const LogoContainer = styled.div`
   position: relative;
   padding-right: 8.5rem;
+  margin-left: 2rem;
   cursor: pointer;
 `;
+
 const Logo = styled.img`
   position: absolute;
   top: -40%;
   left: -28%;
   width: 3.75rem;
 `;
+
 const LogoText = styled.div`
   font-size: 1.69rem;
   font-weight: 600;
 `;
+
 const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-right: 3.8rem;
 `;
+
 const UserImgWrapper = styled.div`
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 70%;
   overflow: hidden;
 `;
+
 const UserImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
 `;
+
 const UserNickName = styled.div`
   padding-left: 0.625rem;
 `;
+
 export default Nav;
 
 const PAGE_LIST = [
