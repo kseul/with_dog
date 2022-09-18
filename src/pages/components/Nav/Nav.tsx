@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import logo from 'assets/svg/with-dog-logo.svg';
 import userImg from 'assets/images/dog3.png';
 import PageBox from './PageBox';
