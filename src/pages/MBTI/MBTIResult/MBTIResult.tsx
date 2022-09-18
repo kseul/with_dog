@@ -5,11 +5,17 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 
 const MBTIResult = () => {
-  const exampleSelector = useSelector((state: RootState) => state.graph);
+  const graphResult = useSelector((state: RootState) => state.graph);
+  const mbtiResultText = useSelector((state: RootState) => state.mbtiText);
+  const checkLogin = useSelector((state: RootState) => state.user);
+
   return (
     <MBTIResultContainer>
       <MBTIResultBox>
-        <MBTIResultInfo />
+        <MBTIResultInfo
+          graphResult={graphResult}
+          mbtiResultText={mbtiResultText}
+        />
       </MBTIResultBox>
     </MBTIResultContainer>
   );
