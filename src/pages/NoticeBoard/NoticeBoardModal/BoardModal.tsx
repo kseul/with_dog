@@ -18,7 +18,12 @@ const BoardModal = ({ clickCard, modalContent }: BoardDataProp) => {
         <BoardModalContentWrapper>
           <BoardModalTitle> {modalContent.subject} </BoardModalTitle>
           <BoardModalDate> {modalContent.created_at} </BoardModalDate>
-          <BoardModalContent> {modalContent.content} </BoardModalContent>
+          <BoardModalMainText>
+            <BoardModalWriter> {modalContent.user_nickname}</BoardModalWriter>
+            <BoardModalText
+              dangerouslySetInnerHTML={{ __html: modalContent.content }}
+            />
+          </BoardModalMainText>
           <BoardModalComment comments={modalContent.comments} />
           <BoardModalButton post_likes_count={modalContent.post_likes_count} />
           <BoardModalTyping modalContent={modalContent} />
@@ -79,10 +84,17 @@ const BoardModalDate = styled.div`
   font-size: 0.8rem;
 `;
 
-const BoardModalContent = styled.div`
+const BoardModalMainText = styled.div`
   width: 100%;
   padding-bottom: 0.5rem;
 `;
+
+const BoardModalWriter = styled.div`
+  margin: 0.3rem;
+  font-weight: bold;
+`;
+
+const BoardModalText = styled.span``;
 
 const BoardModalBackground = styled.div`
   position: absolute;

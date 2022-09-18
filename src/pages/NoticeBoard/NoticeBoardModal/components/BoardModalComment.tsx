@@ -12,7 +12,9 @@ const BoardModalComment = ({ comments }) => {
                 <CommentProfile />
                 <CommentText>
                   <CommentWriter>{user_nickname}</CommentWriter>
-                  <CommentContent>{content}</CommentContent>
+                  <CommentContent
+                    dangerouslySetInnerHTML={{ __html: content }}
+                  />
                 </CommentText>
               </CommentWrapper>
             </CommentContainer>
