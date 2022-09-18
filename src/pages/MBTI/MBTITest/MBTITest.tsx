@@ -11,6 +11,10 @@ import { JoinMBTI } from 'types/type';
 import { useDispatch } from 'react-redux';
 import setMbtiResults from 'redux/actions/mbtiResult';
 import setMbtiTexts from 'redux/actions/mbtiText';
+import { useNavigate } from 'react-router-dom';
+import { RootState } from 'redux/reducers';
+import { useSelector } from 'react-redux';
+import userActions from 'redux/actions/user';
 
 const MBTITest = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -24,6 +28,7 @@ const MBTITest = () => {
   const [reactionNameList, setReactionNameList] = useState<AnswerType[]>([]);
   const [judgementNameList, setJudgementNameList] = useState<AnswerType[]>([]);
   const [mbtiText, setMbtiText] = useState<JoinMBTI>({ mbti: '' });
+  const dispatch = useDispatch();
 
   const numberArr = value => {
     const newArr = [0, 0, 0, 0, 0];
@@ -51,6 +56,7 @@ const MBTITest = () => {
   const reactionAnswerResult = reactionNameList.map(a => a.answerValue);
   const judgementAnswerResult = judgementNameList.map(a => a.answerValue);
   const setMBTIResult: MBTIScoreProps[] = [];
+  const navigate = useNavigate();
 
   const setEnergy = (energyAnswerResult): void => {
     const energyScore = numberArr(energyAnswerResult);
@@ -136,13 +142,7 @@ const MBTITest = () => {
   const mbtiObj = {};
   const joinMbtiText = setMBTIResult.map(obj => obj.mbti).join('');
   mbtiObj['mbti'] = joinMbtiText;
-  useEffect(() => {
-    setMbtiText(mbtiObj);
-  }, []);
-
-  const dispatch = useDispatch();
-  dispatch(setMbtiResults(setMBTIResult));
-  dispatch(setMbtiTexts(mbtiObj));
+  const mbtiUserData = Object.values(mbtiObj).toString();
 
   const onClickCheck = (): void => {
     setIsChecked(!isChecked);
@@ -159,9 +159,18 @@ const MBTITest = () => {
   const onReactionCheck = (): void => {
     setNextReactionPage(!nextReactionPage);
   };
+  const checkLogin = useSelector((state: RootState) => state.user);
 
   const onJudgementCheck = (): void => {
     setNextJudgementPage(!nextJudgementPage);
+    navigate('/mbti-result');
+    dispatch(setMbtiResults(setMBTIResult));
+    dispatch(setMbtiTexts(mbtiObj));
+    {
+      checkLogin.LoggedIn === true
+        ? dispatch(userActions.setMBTI(mbtiObj))
+        : dispatch(userActions.setMBTI(mbtiUserData));
+    }
   };
 
   const handleSetEnergyName = (value: string, id: number): void => {
@@ -207,9 +216,10 @@ const MBTITest = () => {
     relationNameList.length +
     reactionNameList.length +
     judgementNameList.length;
-  // console.log({ energyNameList });
-  // console.log(energyNameList.length);
-  // console.log(typeof energyNameList);
+
+  useEffect(() => {
+    setMbtiText(mbtiObj);
+  }, []);
 
   return (
     <MBTITestContainer>

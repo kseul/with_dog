@@ -12,6 +12,7 @@ export interface IdPwInputProp {
   type: string;
   name: string;
   handleUserInput: (e) => void;
+  submitSigninInfo: () => void;
 }
 
 export interface LoginButtonProp {

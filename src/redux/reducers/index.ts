@@ -11,7 +11,7 @@ import chatReducer from './chatReducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['mbtiText', 'chat'],
+  whitelist: ['mbtiText', 'graph', 'chat'],
 };
 
 const authPersistConfig = {
