@@ -7,14 +7,10 @@ import LastPage from './pageComposition/LastPage';
 import PAGES_DATA from './DATA/PAGES_DATA';
 import Page1Bg from 'assets/images/mainPage1.jpeg';
 import Page5Bg from 'assets/images/mainPage5.jpeg';
-import { useSelector } from 'react-redux';
 
 const Main = () => {
   const pageRef = useRef<any>([]);
   const [currentPage, setCurrentPage] = useState<unknown>();
-
-  const test = useSelector((state: any) => state.user);
-  console.log(test);
 
   useEffect(() => {
     const pageObserver = new IntersectionObserver(
