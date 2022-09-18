@@ -10,7 +10,7 @@ import mbtiTextReducer from './mbtiTextReducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['mbtiText'],
+  whitelist: ['mbtiText', 'graph'],
 };
 
 const authPersistConfig = {

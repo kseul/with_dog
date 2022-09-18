@@ -1,6 +1,14 @@
 const initialState = {
   LoggedIn: false,
-  userData: {},
+  userData: {
+    account_type: '',
+    email: '',
+    mbti: '',
+    name: '',
+    nickname: '',
+    status: '',
+    thumbnail_url: '',
+  },
 };
 
 const userReducer = (prevState = initialState, action) => {
@@ -12,7 +20,10 @@ const userReducer = (prevState = initialState, action) => {
     case 'SET_USER_DATA':
       return { ...prevState, userData: action.data };
     case 'SET_MBTI':
-      return { ...prevState, mbti: action.data };
+      return {
+        ...prevState,
+        userData: { ...prevState.userData, mbti: action.data },
+      };
     default:
       return prevState;
   }
