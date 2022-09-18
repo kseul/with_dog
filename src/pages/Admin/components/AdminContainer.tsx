@@ -1,6 +1,6 @@
 import axios from 'axios';
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import LeftSideList from 'pages/Admin/components/LeftSideMenu/LeftSideList';
 import AdminHeader from 'pages/Admin/components/AdminHeader';
@@ -19,15 +19,16 @@ const AdminContainer = () => {
   const [loading, setLoading] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [banNum, setBanNum] = useState(0);
   const [counts, setCounts] = useState();
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://togedog-dj.herokuapp.com/${location.pathname.slice(
-          7
-        )}?page=${currentPage}`,
+        `https://togedog-dj.herokuapp.com/${location.pathname.slice(7)}${
+          location.search ? location.search + '&' : '?'
+        }page=${currentPage}`,
         {
           headers: {
             accept: '*/*',
@@ -40,11 +41,11 @@ const AdminContainer = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, location.pathname, location.search]);
 
   useEffect(() => {
     fetchData();
-  }, [location.pathname, currentPage]);
+  }, [fetchData]);
 
   const setClick = list => {
     setClicked(list.value);
@@ -75,6 +76,8 @@ const AdminContainer = () => {
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
               counts={counts}
+              banNum={banNum}
+              setBanNum={setBanNum}
             />
           ) : params.value === 'posts' ? (
             <AdminRightPagePost
@@ -99,6 +102,8 @@ const AdminContainer = () => {
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
               counts={counts}
+              banNum={banNum}
+              setBanNum={setBanNum}
             />
           )}
         </AdminRightSection>

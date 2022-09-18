@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ListHeaderBox from 'pages/Admin/components/RightSection/ListHeaderBox';
 import ListContentsBox from 'pages/Admin/components/RightSection/ListContentsBox';
 import UserModal from 'pages/Admin/components/Modal/UserModal';
@@ -13,13 +14,21 @@ const AdminRightPageUser = ({
   currentPage,
   setCurrentPage,
   counts,
+  banNum,
+  setBanNum,
 }) => {
+  const navigate = useNavigate();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalId, setModalId] = useState<number | undefined>();
-  const [allToggle, setAllToggle] = useState(false);
-  const [banToggle, setBanToggle] = useState(false);
   const [blockNum, setBlockNum] = useState(0);
   const perPage = 10;
+
+  const [search, setSearch] = useState('');
+  const filterValue = {
+    search: search,
+    reported: banNum,
+  };
 
   const openModal = (): void => {
     setIsModalOpen(true);
@@ -33,19 +42,29 @@ const AdminRightPageUser = ({
     setModalId(id);
   };
 
+  const onSearch = e => {
+    e.preventDefault();
+    setSearch(e.target.value);
+  };
+
+  const updateUrl = filterValue => {
+    const result = Object.keys(filterValue)
+      .map(filter => `${filter}=${filterValue[filter]}`)
+      .join('&');
+    navigate(`?${result}`);
+  };
+
+  useEffect(() => {
+    updateUrl(filterValue);
+  }, [banNum, search]);
+
   return (
     <AdminRightContainer>
       <AdminRightTitle />
       <FilterBox>
-        <CheckAll
-          onClick={() => setAllToggle(prev => !prev)}
-          className={allToggle ? 'active' : ''}
-        />
+        <CheckAll />
         <CheckAllText>전체</CheckAllText>
-        <ThreeBanned
-          onClick={() => setBanToggle(prev => !prev)}
-          className={banToggle ? 'active' : ''}
-        />
+        <ThreeBanned onClick={() => setBanNum(3)} />
         <ThreeBannedText>신고 3회 이상</ThreeBannedText>
       </FilterBox>
       <SortBox>
@@ -61,7 +80,14 @@ const AdminRightPageUser = ({
           <UserTitle>
             <TitleText>사용자 검색</TitleText>
           </UserTitle>
-          <UserInput type="text" />
+          <UserInput
+            type="text"
+            value={search}
+            placeholder="닉네임을 입력하세요."
+            onChange={e => {
+              onSearch(e);
+            }}
+          />
         </SortByUser>
       </SortBox>
       <UserListContainer>
@@ -181,7 +207,7 @@ const DateFilter = styled.div`
   background-color: ${props => props.theme.colors.gray};
 `;
 
-const SortByUser = styled.form`
+const SortByUser = styled.div`
   ${props => props.theme.flex.flexBox('row', '', 'left')}
   width: 18.75rem;
 `;

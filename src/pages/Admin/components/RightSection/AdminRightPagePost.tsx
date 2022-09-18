@@ -93,7 +93,7 @@ const AdminRightPagePost = ({
                   counts={counts}
                 />
                 {isModalOpen &&
-                  (location.pathname === '/admin/posts' ? (
+                  (location.pathname === '/admin/posts/admin' ? (
                     <PostModal closeModal={closeModal} modalId={modalId} />
                   ) : (
                     <DeletedPostModal
