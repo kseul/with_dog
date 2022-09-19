@@ -9,7 +9,7 @@ export const shareKakao = () => {
     content: {
       title: '함께하개',
       description: '댕댕이 MBTI 검사결과 보러가기',
-      imageUrl: kakaoShare,
+      imageUrl: 'https://ifh.cc/g/bp4jV4.png',
       link: {
         webUrl: sharedUrl,
         mobileWebUrl: sharedUrl,
