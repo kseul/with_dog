@@ -18,15 +18,11 @@ const ChatRoom = () => {
 
   const ENDPOINT = 'localhost:3000';
   // const ENDPOINT = 'http://54.180.89.143:8000';
-  const room = 1;
 
   const storeData = useSelector((state: RootState) => state);
-  const { nickname, thumbnail_url, mbti }: UserDataProps =
-    storeData.user.userData;
-  // const room = storeData.chat;
-  // console.log(nickname);
-  // console.log(thumbnail_url);
-  // console.log(mbti);
+  const { nickname }: UserDataProps = storeData.user.userData;
+  const room = storeData.chat.id;
+  const userMbti = storeData.user.userData.mbti;
 
   /* 현재시간을 얻는 함수 */
   useEffect(() => {
@@ -50,18 +46,23 @@ const ChatRoom = () => {
       const newMessage = message;
       setMessages(messages => [...messages, newMessage]);
     });
-    console.log('message: ', message);
   }, []);
-
-  console.log('messages: ', messages);
 
   /* 화면의 Input 값을 입력받고 서버로 message 데이터 전송 */
   const sendMessage = e => {
     e.preventDefault();
     if (message) {
-      socket.emit('send_message', message, nickname, room, currentTime, () => {
-        setMessage('');
-      });
+      socket.emit(
+        'send_message',
+        message,
+        nickname,
+        room,
+        currentTime,
+        userMbti,
+        () => {
+          setMessage('');
+        }
+      );
     }
   };
 
@@ -70,13 +71,6 @@ const ChatRoom = () => {
       socket.close();
     };
   }, []);
-
-  // useEffect(() => {
-  //   socket.emit('disconnect', { nickname, room });
-  // }, [ENDPOINT]);
-
-  // console.log('message state: ', message);
-  // console.log('messages state: ', messages);
 
   return (
     <ChatRoomContainer>

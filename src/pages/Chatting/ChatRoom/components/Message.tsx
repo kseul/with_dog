@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { RootState } from 'redux/reducers';
-import testImg from 'assets/images/dog3.png';
-import ArrowLeft from 'assets/svg/siren.svg';
+import Siren from 'assets/svg/siren.svg';
 
-const Message = ({ message: { user, text, time }, nickname }) => {
+const Message = ({ message: { user, text, time, mbti }, nickname }) => {
   let isSentByCurrentUser = false;
   if (user === nickname) {
     isSentByCurrentUser = true;
@@ -13,7 +11,13 @@ const Message = ({ message: { user, text, time }, nickname }) => {
   const storeData = useSelector((state: any) => state);
   const userImage = storeData.user.userData.thumbnail_url;
 
-  // user === '함께하개 관리자' ?
+  if (user === '함께하개 관리자') {
+    return (
+      <AdminTextBox>
+        <Text>{text}</Text>
+      </AdminTextBox>
+    );
+  }
 
   return isSentByCurrentUser ? (
     <MessageContainer currentUser={isSentByCurrentUser}>
@@ -31,18 +35,23 @@ const Message = ({ message: { user, text, time }, nickname }) => {
     </MessageContainer>
   ) : (
     <MessageContainer currentUser={isSentByCurrentUser}>
-      <ProfileImg src={testImg} />
+      <ProfileImg src={userImage} />
       <MessageBox>
         <UserBox>
           <Nickname>{user}</Nickname>
-          <Mbti>INFP</Mbti>
+          <Mbti>{mbti}</Mbti>
         </UserBox>
         <TextContainer>
           <TextBox currentUser={isSentByCurrentUser}>
             <Text>{text}</Text>
           </TextBox>
           <TextData>
-            <ReportIcon src={ArrowLeft} />
+            <ReportIcon
+              src={Siren}
+              onClick={() => {
+                console.log('hi');
+              }}
+            />
             <Time>{time}</Time>
           </TextData>
         </TextContainer>
@@ -54,7 +63,7 @@ const Message = ({ message: { user, text, time }, nickname }) => {
 const MessageContainer = styled.div<{ currentUser: boolean }>`
   ${props => props.theme.flex.flexBox()}
   justify-content: ${({ currentUser }) => (currentUser ? 'end' : 'start')};
-  padding: 1.3rem 1rem 0rem 1rem;
+  padding: 1.3rem 1rem 0 1rem;
 `;
 
 const ProfileImg = styled.img`
@@ -129,6 +138,17 @@ const ReportIcon = styled.img`
 
 const Time = styled.div`
   font-size: 0.8rem;
+`;
+
+const AdminTextBox = styled.div`
+  margin: 0.8rem auto 0.8rem auto;
+  padding: 0.3rem 0;
+  width: 80%;
+  border-radius: 5rem;
+  color: #efefef;
+  background-color: gray;
+  font-size: 0.4rem;
+  text-align: center;
 `;
 
 export default Message;
