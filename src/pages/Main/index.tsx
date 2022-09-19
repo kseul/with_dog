@@ -9,7 +9,8 @@ import Page1Bg from 'assets/images/mainPage1.jpeg';
 import Page5Bg from 'assets/images/mainPage5.jpeg';
 
 const Main = () => {
-  const pageRef = useRef<any>([]);
+  const pageRef = useRef<HTMLDivElement[]>([]);
+
   const [currentPage, setCurrentPage] = useState<unknown>();
 
   useEffect(() => {

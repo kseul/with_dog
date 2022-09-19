@@ -168,3 +168,7 @@ export interface MBTIScoreProps {
   score?: number | null;
   layout?: string;
 }
+
+export interface MainRef<T> {
+  current: T;
+}

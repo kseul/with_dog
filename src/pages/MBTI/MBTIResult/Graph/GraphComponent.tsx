@@ -68,7 +68,7 @@ const BasicText = css`
   text-align: center;
 `;
 
-const GraphComponentContainer = styled.div<{ layout: any }>`
+const GraphComponentContainer = styled.div<{ layout: string }>`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')}
   position: absolute;
   left: ${props => (props.layout === 'lefttop' ? `24%` : '')};
