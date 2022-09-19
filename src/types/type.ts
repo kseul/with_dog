@@ -179,3 +179,7 @@ export interface UserDataProps {
   thumbnail_url?: string;
   user_type?: string;
 }
+
+export interface MainRef<T> {
+  current: T;
+}
