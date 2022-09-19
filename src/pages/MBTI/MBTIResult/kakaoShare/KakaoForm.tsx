@@ -1,4 +1,3 @@
-import kakaoShare from 'assets/images/kakaoShare.png';
 const { Kakao, location }: any = window;
 
 export const shareKakao = () => {

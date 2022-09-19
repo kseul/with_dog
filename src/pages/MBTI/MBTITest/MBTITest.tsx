@@ -186,37 +186,46 @@ const MBTITest = () => {
   };
 
   const handleSetEnergyName = (value: string, id: number): void => {
-    setEnergyNameList(prev => prev.concat({ testId: id, answerValue: value }));
-    const inputItemsCopy = energyNameList;
-    inputItemsCopy[id].answerValue = value;
-    setEnergyNameList(inputItemsCopy);
+    if (energyNameList.length === 0) {
+      energyNameList.push({ testId: id, answerValue: value });
+      setEnergyNameList(energyNameList);
+    } else {
+      if (energyNameList[id] !== undefined) {
+        energyNameList[id].answerValue = value;
+        setEnergyNameList(energyNameList);
+      } else {
+        energyNameList.push({ testId: id, answerValue: value });
+        setEnergyNameList(energyNameList);
+      }
+    }
+    // setEnergyNameList(prev => prev.push({ testId: id, answerValue: value }));
+    // energyNameList[id].answerValue = value;
+    // setEnergyNameList(energyNameList);
   };
+  console.log(energyNameList);
 
   const handleSetRelationName = (value: string, id: number): void => {
     setRelationNameList(
       relationNameList.concat({ testId: id, answerValue: value })
     );
-    const inputItemsCopy = relationNameList;
-    inputItemsCopy[id].answerValue = value;
-    setRelationNameList(inputItemsCopy);
+    relationNameList[id].answerValue = value;
+    setRelationNameList(relationNameList);
   };
 
   const handleSetReactionName = (value: string, id: number): void => {
     setReactionNameList(
       reactionNameList.concat({ testId: id, answerValue: value })
     );
-    const inputItemsCopy = reactionNameList;
-    inputItemsCopy[id].answerValue = value;
-    setReactionNameList(inputItemsCopy);
+    reactionNameList[id].answerValue = value;
+    setReactionNameList(reactionNameList);
   };
 
   const handleSetJudgementName = (value: string, id: number): void => {
     setJudgementNameList(
       judgementNameList.concat({ testId: id, answerValue: value })
     );
-    const inputItemsCopy = judgementNameList;
-    inputItemsCopy[id].answerValue = value;
-    setJudgementNameList(inputItemsCopy);
+    judgementNameList[id].answerValue = value;
+    setJudgementNameList(judgementNameList);
   };
 
   const energyLength = energyNameList.length;
