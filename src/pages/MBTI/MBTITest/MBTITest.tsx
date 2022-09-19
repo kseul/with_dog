@@ -150,14 +150,26 @@ const MBTITest = () => {
 
   const onEnergyCheck = (): void => {
     setNextPage(!nextPage);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   const onRelationCheck = (): void => {
     setNextRelationPage(!nextRelationPage);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   const onReactionCheck = (): void => {
     setNextReactionPage(!nextReactionPage);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
   const checkLogin = useSelector((state: RootState) => state.user);
 

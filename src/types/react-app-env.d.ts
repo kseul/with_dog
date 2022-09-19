@@ -1,3 +1,3 @@
 interface Window {
-  property: window;
+  property: SomeType;
 }
