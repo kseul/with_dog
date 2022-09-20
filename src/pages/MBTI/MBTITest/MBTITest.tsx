@@ -63,14 +63,14 @@ const MBTITest = () => {
     if (energyScore < 0) {
       setMBTIResult.push({
         id: 0,
-        mbti: 'E',
+        mbti: 'I',
         score: energyScore,
         layout: 'lefttop',
       });
     } else if (energyScore > 0) {
       setMBTIResult.push({
         id: 0,
-        mbti: 'I',
+        mbti: 'E',
         score: energyScore,
         layout: 'lefttop',
       });
@@ -185,46 +185,63 @@ const MBTITest = () => {
     }
   };
 
-  const handleSetEnergyName = (value: string, id: number): void => {
-    if (energyNameList.length === 0) {
-      energyNameList.push({ testId: id, answerValue: value });
-      setEnergyNameList(energyNameList);
-    } else {
-      if (energyNameList[id] !== undefined) {
-        energyNameList[id].answerValue = value;
-        setEnergyNameList(energyNameList);
+  const handleSetEnergyName = (value, id) => {
+    const newArr = [0];
+    for (let i = 0; i < energyNameList.length; i++) {
+      if (energyNameList[i].testId === id) {
+        energyNameList[i].answerValue = value;
       } else {
-        energyNameList.push({ testId: id, answerValue: value });
-        setEnergyNameList(energyNameList);
+        newArr[0]++;
       }
     }
-    // setEnergyNameList(prev => prev.push({ testId: id, answerValue: value }));
-    // energyNameList[id].answerValue = value;
-    // setEnergyNameList(energyNameList);
+    if (newArr[0] === energyNameList.length) {
+      energyNameList.push({ testId: id, answerValue: value });
+    }
+    setEnergyNameList(energyNameList);
   };
-  console.log(energyNameList);
 
   const handleSetRelationName = (value: string, id: number): void => {
-    setRelationNameList(
-      relationNameList.concat({ testId: id, answerValue: value })
-    );
-    relationNameList[id].answerValue = value;
+    const newArr = [0];
+    for (let i = 0; i < relationNameList.length; i++) {
+      if (relationNameList[i].testId === id) {
+        relationNameList[i].answerValue = value;
+      } else {
+        newArr[0]++;
+      }
+    }
+    if (newArr[0] === relationNameList.length) {
+      relationNameList.push({ testId: id, answerValue: value });
+    }
     setRelationNameList(relationNameList);
   };
 
   const handleSetReactionName = (value: string, id: number): void => {
-    setReactionNameList(
-      reactionNameList.concat({ testId: id, answerValue: value })
-    );
-    reactionNameList[id].answerValue = value;
+    const newArr = [0];
+    for (let i = 0; i < reactionNameList.length; i++) {
+      if (reactionNameList[i].testId === id) {
+        reactionNameList[i].answerValue = value;
+      } else {
+        newArr[0]++;
+      }
+    }
+    if (newArr[0] === reactionNameList.length) {
+      reactionNameList.push({ testId: id, answerValue: value });
+    }
     setReactionNameList(reactionNameList);
   };
 
   const handleSetJudgementName = (value: string, id: number): void => {
-    setJudgementNameList(
-      judgementNameList.concat({ testId: id, answerValue: value })
-    );
-    judgementNameList[id].answerValue = value;
+    const newArr = [0];
+    for (let i = 0; i < judgementNameList.length; i++) {
+      if (judgementNameList[i].testId === id) {
+        judgementNameList[i].answerValue = value;
+      } else {
+        newArr[0]++;
+      }
+    }
+    if (newArr[0] === judgementNameList.length) {
+      judgementNameList.push({ testId: id, answerValue: value });
+    }
     setJudgementNameList(judgementNameList);
   };
 
