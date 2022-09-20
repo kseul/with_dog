@@ -1,9 +1,9 @@
 import styled from 'styled-components';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { RootState } from 'redux/reducers';
-import { useCookies } from 'react-cookie';
 
 const UserProfile = () => {
   const navigate = useNavigate();
