@@ -49,7 +49,7 @@ const NavContainer = styled.div`
   height: 4.8rem;
   border-bottom: 2px solid #e1e2e3;
   background-color: #fdfdfd;
-  z-index: 10;
+  z-index: 1;
 `;
 
 const PageContainer = styled.div`

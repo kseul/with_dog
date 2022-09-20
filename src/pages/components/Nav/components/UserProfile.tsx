@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { RootState } from 'redux/reducers';
+import { useCookies } from 'react-cookie';
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const UserProfile = () => {
   const userData = useSelector((state: RootState) => state.user.userData);
   const { nickname, thumbnail_url } = userData;
   const [profileModal, setProfileModal] = useState(false);
+  const [, , removeCookie] = useCookies(['userToken']);
 
   const goToMyPage = () => {
     navigate('/mypage');
@@ -23,6 +25,12 @@ const UserProfile = () => {
     },
     [profileModal]
   );
+
+  const handleLogOut = () => {
+    sessionStorage.clear();
+    removeCookie('userToken', { path: '/' });
+    window.location.replace('/');
+  };
 
   useEffect(() => {
     window.addEventListener('click', closeModal);
@@ -48,7 +56,9 @@ const UserProfile = () => {
           <ModalContent onClick={goToMyPage} bottom={false}>
             마이 페이지
           </ModalContent>
-          <ModalContent bottom={true}>로그아웃</ModalContent>
+          <ModalContent onClick={handleLogOut} bottom={true}>
+            로그아웃
+          </ModalContent>
         </ProfileModal>
       ) : null}
     </UserProfileContainer>
@@ -59,7 +69,6 @@ const UserProfileContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  margin-right: 4.2rem;
 `;
 
 const UserImgWrapper = styled.div`

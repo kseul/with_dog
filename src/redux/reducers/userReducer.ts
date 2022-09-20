@@ -13,11 +13,9 @@ const initialState = {
 
 const userReducer = (prevState = initialState, action) => {
   switch (action.type) {
-    case 'LOG_IN':
+    case 'USER_ACCESS':
       return { ...prevState, LoggedIn: action.data };
-    case 'LOG_OUT':
-      return { ...prevState };
-    case 'SET_USER_DATA':
+    case 'HANDLE_USER_DATA':
       return { ...prevState, userData: action.data };
     case 'SET_MBTI':
       return {
