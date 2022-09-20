@@ -17,7 +17,7 @@ import kakaoIcon from 'assets/svg/kakao-logo.svg';
 import character from 'assets/images/LoginBgCharacter.png';
 
 const SignIn = () => {
-  // const [, setCookie] = useCookies(['userToken']);
+  const [, setCookie] = useCookies(['userToken']);
   const [showAlertModal, setShowAlertModal] = useState('');
 
   const navigate = useNavigate();
@@ -59,6 +59,11 @@ const SignIn = () => {
           if (res.status === 200) {
             store.dispatch(userActions.userAccess(true));
             store.dispatch(userActions.handleUserData(userData));
+            setCookie('userToken', res.data.access_token, {
+              path: '/',
+              secure: true,
+              // httpOnly: true,
+            });
             navigate('/');
           }
         })
