@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect } from 'react';
+import styled from 'styled-components/macro';
 import BoardModalComment from './components/BoardModalComment';
 import BoardModalButton from './components/BoardModalButton';
 import BoardModalTyping from './components/BoardModalTyping';
@@ -7,77 +7,120 @@ import leftArrow from 'assets/svg/arrow-left.svg';
 import rightArrow from 'assets/svg/arrow-right.svg';
 import cancelButton from 'assets/svg/cancel.svg';
 import { BoardDataProp } from 'types/type';
+import BoardWriter from './components/UI/BoardWriter';
 
-const BoardModal = ({ clickCard, modalContent }: BoardDataProp) => {
+const BoardModal = ({ handleModal, modalContent }: BoardDataProp) => {
+  useEffect(() => {
+    document.body.style.cssText = `
+      position: fixed;
+      top: -${window.scrollY}px;
+      overflow-y: scroll;
+      width: 100%;`;
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = '';
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    };
+  }, []);
+
   return (
     <>
-      <BoardModalContainer>
-        <BoardModalImageWrapper>
-          <BoardImageBox src={modalContent.image_url} />
-        </BoardModalImageWrapper>
-        <BoardModalContentWrapper>
-          <BoardModalTitle> {modalContent.subject} </BoardModalTitle>
-          <BoardModalDate> {modalContent.created_at} </BoardModalDate>
-          <BoardModalMainText>
-            <BoardModalWriter> {modalContent.user_nickname}</BoardModalWriter>
-            <BoardModalText
-              dangerouslySetInnerHTML={{ __html: modalContent.content }}
+      <ModalContainer onClick={handleModal}>
+        <Modal
+          onClick={e => {
+            e.stopPropagation();
+          }}
+        >
+          <ModalImageWrapper>
+            <BoardImageBox src={modalContent.image_url} />
+          </ModalImageWrapper>
+          <ModalContentWrapper>
+            <BoardModalTitle> {modalContent.subject} </BoardModalTitle>
+            <BoardModalDate> {modalContent.created_at} </BoardModalDate>
+            <BoardModalMainText>
+              {/* REFACTORING : 작성자 부분 Comment 작성 부분을 재사용할 수 있지 않을까? */}
+              <BoardWriter
+                thumbnail={modalContent.user_thumbnail}
+                nickName={modalContent.user_nickname}
+              />
+              <BoardModalText
+                dangerouslySetInnerHTML={{ __html: modalContent.content }}
+              />
+              <BoardModalComment comments={modalContent.comments} />
+            </BoardModalMainText>
+            <BoardModalButton
+              post_likes_count={modalContent.post_likes_count}
             />
-          </BoardModalMainText>
-          <BoardModalComment comments={modalContent.comments} />
-          <BoardModalButton post_likes_count={modalContent.post_likes_count} />
-          <BoardModalTyping modalContent={modalContent} />
-        </BoardModalContentWrapper>
-      </BoardModalContainer>
+            <BoardModalTyping modalContent={modalContent} />
+          </ModalContentWrapper>
+        </Modal>
 
-      <BoardModalBackground onClick={clickCard}>
+        <BoardModalLeftConvenience src={leftArrow} />
+        <BoardModalRightConvenience src={rightArrow} />
+        <BoardModalCancelConvenience src={cancelButton} />
+      </ModalContainer>
+      {/* <BoardModalBackground onClick={handleModal}>
         <BoardModalLeftArrowButton src={leftArrow} />
         <BoardModalRightArrowButton src={rightArrow} />
         <BoardModalCancelButton src={cancelButton} />
-      </BoardModalBackground>
+      </BoardModalBackground> */}
     </>
   );
 };
 
-const BoardModalContainer = styled.div`
-  display: flex;
+const ModalContainer = styled.div`
   position: fixed;
-  top: 10%;
-  left: 17vw;
-  width: 65vw;
-  height: 80vh;
-  z-index: 2;
-  background-color: white;
-  border-radius: 2rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vmax;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.6);
 `;
 
-const BoardModalImageWrapper = styled.div`
+const Modal = styled.div`
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75vw;
+  height: 88vh;
+  z-index: 999;
+  background-color: white;
+  border-radius: 1rem;
+`;
+
+const ModalImageWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  border-radius: 2rem;
+  border-radius: 1rem;
   background-color: black;
 `;
 
 const BoardImageBox = styled.img`
   width: 100%;
+  max-height: 82vh;
 `;
 
-const BoardModalContentWrapper = styled.div`
-  ${props => props.theme.flex.flexBox('column')}
+const ModalContentWrapper = styled.div`
+  ${props => props.theme.flex.flexBox('column', '', '')}
   width: 90%;
   padding: 3rem;
 `;
 
 const BoardModalTitle = styled.div`
+  flex: 2;
   width: 100%;
+  margin-bottom: 0.5rem;
   font-size: 2rem;
   font-weight: bold;
 `;
 
 const BoardModalDate = styled.div`
+  flex: 1;
   width: 100%;
-  margin: 0.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 0.063rem solid ${props => props.theme.colors.lineLightGray};
   color: ${props => props.theme.colors.lightGray};
@@ -85,50 +128,48 @@ const BoardModalDate = styled.div`
 `;
 
 const BoardModalMainText = styled.div`
+  flex: 20;
   width: 100%;
-  padding-bottom: 0.5rem;
+  padding: 0.5rem;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.4rem;
+    border-radius: 1rem;
+    background: ${props => props.theme.colors.lineLightGray};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background: ${props => props.theme.colors.mint};
+  }
 `;
 
-const BoardModalWriter = styled.div`
-  margin: 0.3rem;
-  font-weight: bold;
+const BoardModalText = styled.div`
+  font-size: 0.9rem;
+  line-height: 1.2rem;
 `;
 
-const BoardModalText = styled.span``;
-
-const BoardModalBackground = styled.div`
+const BoardModalConvenience = styled.img`
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vmax;
-  height: 100vmax;
-  z-index: 1;
-  background-color: black;
-  opacity: 50%;
+  cursor: pointer;
+  width: 2.5rem;
+  height: 2.5rem;
 `;
 
-const BoardModalLeftArrowButton = styled.img`
-  position: absolute;
+const BoardModalLeftConvenience = styled(BoardModalConvenience)`
   top: 50vh;
-  left: 9vw;
-  width: 3.5rem;
-  height: 3.5rem;
+  left: 2vw;
 `;
 
-const BoardModalRightArrowButton = styled.img`
-  position: absolute;
+const BoardModalRightConvenience = styled(BoardModalConvenience)`
   top: 50vh;
-  left: 89vw;
-  width: 3.5rem;
-  height: 3.5rem;
+  right: 2vw;
 `;
 
-const BoardModalCancelButton = styled.img`
-  position: absolute;
+const BoardModalCancelConvenience = styled(BoardModalConvenience)`
   top: 2vh;
   right: 2vw;
-  width: 4rem;
-  height: 4rem;
 `;
 
 export default BoardModal;

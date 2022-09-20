@@ -9,7 +9,9 @@ const BoardModalComment = ({ comments }) => {
           return (
             <CommentContainer key={id}>
               <CommentWrapper>
-                <CommentProfile />
+                <CommentProfile>
+                  <CommentProfileImg />
+                </CommentProfile>
                 <CommentText>
                   <CommentWriter>{user_nickname}</CommentWriter>
                   <CommentContent
@@ -26,23 +28,26 @@ const BoardModalComment = ({ comments }) => {
 
 const Comment = styled.div``;
 
-const CommentContainer = styled.div`
-  width: 100%;
-  height: 75%;
-  border-bottom: 0.065rem solid ${props => props.theme.colors.lineLightGray};
-`;
+const CommentContainer = styled.div``;
 
 const CommentWrapper = styled.div`
   ${props => props.theme.flex.flexBox('', '', '')};
   margin-top: 1rem;
 `;
 
-const CommentProfile = styled.img`
-  width: 3.5rem;
+const CommentProfile = styled.div`
+  width: 3rem;
   height: 3rem;
-  border: 1px solid black;
-  border-radius: 50%;
+  border: 0.063rem solid black;
+  border-radius: 70%;
   margin-right: 1rem;
+  overflow: hidden;
+`;
+
+const CommentProfileImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const CommentText = styled.div`
@@ -56,6 +61,8 @@ const CommentWriter = styled.span`
   font-weight: bold;
 `;
 
-const CommentContent = styled.span``;
+const CommentContent = styled.span`
+  line-height: 1.2rem;
+`;
 
 export default BoardModalComment;

@@ -26,6 +26,7 @@ const BoardList = () => {
             image_url,
             created_at,
             user_nickname,
+            user_thumbnail,
             post_likes_count,
           }) => {
             return (
@@ -36,6 +37,7 @@ const BoardList = () => {
                 image_url={image_url}
                 created_at={created_at}
                 user_nickname={user_nickname}
+                user_thumbnail={user_thumbnail}
                 post_likes_count={post_likes_count}
               />
             );

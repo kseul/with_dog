@@ -9,12 +9,13 @@ const BoardCard = ({
   image_url,
   created_at,
   user_nickname,
+  user_thumbnail,
   post_likes_count,
 }: BoardDataProp) => {
   const [activateModal, setActivateModal] = useState(false);
   const [modalContent, setModalContent] = useState([]);
 
-  const clickCard = () => {
+  const handleModal = () => {
     setActivateModal(!activateModal);
   };
 
@@ -35,20 +36,22 @@ const BoardCard = ({
 
   return (
     <>
-      <CardContainer onClick={clickCard}>
-        <CardImage src={image_url} />
+      <CardContainer onClick={handleModal}>
+        <CardImageWrapper>
+          <CardImage src={image_url} />
+        </CardImageWrapper>
         <CardDate>{created_at}</CardDate>
         <CardTitle>{subject}</CardTitle>
         <CardBottom>
           <WriterProfile>
-            <WriterPhoto src={image_url} />
+            <WriterPhoto src={user_thumbnail} />
             <WriterName>{user_nickname}</WriterName>
           </WriterProfile>
           <CardViews>{post_likes_count}</CardViews>
         </CardBottom>
       </CardContainer>
       {activateModal && (
-        <BoardModal clickCard={clickCard} modalContent={modalContent} />
+        <BoardModal handleModal={handleModal} modalContent={modalContent} />
       )}
     </>
   );
@@ -65,10 +68,16 @@ const CardContainer = styled.div`
   box-shadow: rgb(0, 0, 0, 10%) 0px 4px 16px 0px;
 `;
 
-const CardImage = styled.img`
+const CardImageWrapper = styled.div`
   width: 100%;
   height: 65%;
+`;
+
+const CardImage = styled.img`
+  width: 100%;
+  height: 100%;
   border-radius: 10%;
+  object-fit: fit;
 `;
 
 const CardDate = styled.div`
@@ -79,12 +88,14 @@ const CardDate = styled.div`
 `;
 
 const CardTitle = styled.div`
-  padding-bottom: 0.6rem;
+  width: 14rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid ${props => props.theme.colors.lineLightGray};
   text-align: center;
   font-size: 1.2rem;
   font-weight: bold;
   white-space: nowrap;
+  overflow: hidden;
 `;
 
 const CardBottom = styled.div`
@@ -98,7 +109,6 @@ const CardBottom = styled.div`
 const WriterProfile = styled.div`
   display: flex;
   align-items: center;
-  height: 2rem;
   font-weight: bold;
 `;
 

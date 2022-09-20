@@ -92,10 +92,11 @@ export interface BoardDataProp {
   image_url?: string;
   created_at?: string;
   user_nickname?: string;
+  user_thumbnail?: string;
   post_likes_count?: number;
   comments?: any;
   modalContent?: any;
-  clickCard?: () => void;
+  handleModal?: () => void;
 }
 
 export interface MBTIProps {
