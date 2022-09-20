@@ -5,12 +5,12 @@ const BoardModalComment = ({ comments }) => {
   return (
     <Comment>
       {comments &&
-        comments.map(({ id, content, user_nickname }) => {
+        comments.map(({ id, content, user_nickname, user_thumbnail_url }) => {
           return (
             <CommentContainer key={id}>
               <CommentWrapper>
                 <CommentProfile>
-                  <CommentProfileImg />
+                  <CommentProfileImg src={user_thumbnail_url} />
                 </CommentProfile>
                 <CommentText>
                   <CommentWriter>{user_nickname}</CommentWriter>
@@ -36,9 +36,8 @@ const CommentWrapper = styled.div`
 `;
 
 const CommentProfile = styled.div`
-  width: 3rem;
-  height: 3rem;
-  border: 0.063rem solid black;
+  width: 2rem;
+  height: 2rem;
   border-radius: 70%;
   margin-right: 1rem;
   overflow: hidden;

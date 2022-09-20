@@ -24,47 +24,38 @@ const BoardModal = ({ handleModal, modalContent }: BoardDataProp) => {
   }, []);
 
   return (
-    <>
-      <ModalContainer onClick={handleModal}>
-        <Modal
-          onClick={e => {
-            e.stopPropagation();
-          }}
-        >
-          <ModalImageWrapper>
-            <BoardImageBox src={modalContent.image_url} />
-          </ModalImageWrapper>
-          <ModalContentWrapper>
-            <BoardModalTitle> {modalContent.subject} </BoardModalTitle>
-            <BoardModalDate> {modalContent.created_at} </BoardModalDate>
-            <BoardModalMainText>
-              {/* REFACTORING : 작성자 부분 Comment 작성 부분을 재사용할 수 있지 않을까? */}
-              <BoardWriter
-                thumbnail={modalContent.user_thumbnail}
-                nickName={modalContent.user_nickname}
-              />
-              <BoardModalText
-                dangerouslySetInnerHTML={{ __html: modalContent.content }}
-              />
-              <BoardModalComment comments={modalContent.comments} />
-            </BoardModalMainText>
-            <BoardModalButton
-              post_likes_count={modalContent.post_likes_count}
+    <ModalContainer onClick={handleModal}>
+      <Modal
+        onClick={e => {
+          e.stopPropagation();
+        }}
+      >
+        <ModalImageWrapper>
+          <BoardImageBox src={modalContent.image_url} />
+        </ModalImageWrapper>
+        <ModalContentWrapper>
+          <BoardModalTitle> {modalContent.subject} </BoardModalTitle>
+          <BoardModalDate> {modalContent.created_at} </BoardModalDate>
+          <BoardModalMainText>
+            {/* REFACTORING : 작성자 부분 Comment 작성 부분을 재사용할 수 있지 않을까? */}
+            <BoardWriter
+              thumbnail={modalContent.user_thumbnail}
+              nickName={modalContent.user_nickname}
             />
-            <BoardModalTyping modalContent={modalContent} />
-          </ModalContentWrapper>
-        </Modal>
+            <BoardModalText
+              dangerouslySetInnerHTML={{ __html: modalContent.content }}
+            />
+            <BoardModalComment comments={modalContent.comments} />
+          </BoardModalMainText>
+          <BoardModalButton post_likes_count={modalContent.post_likes_count} />
+          <BoardModalTyping modalContent={modalContent} />
+        </ModalContentWrapper>
+      </Modal>
 
-        <BoardModalLeftConvenience src={leftArrow} />
-        <BoardModalRightConvenience src={rightArrow} />
-        <BoardModalCancelConvenience src={cancelButton} />
-      </ModalContainer>
-      {/* <BoardModalBackground onClick={handleModal}>
-        <BoardModalLeftArrowButton src={leftArrow} />
-        <BoardModalRightArrowButton src={rightArrow} />
-        <BoardModalCancelButton src={cancelButton} />
-      </BoardModalBackground> */}
-    </>
+      <BoardModalLeftConvenience src={leftArrow} />
+      <BoardModalRightConvenience src={rightArrow} />
+      <BoardModalCancelConvenience src={cancelButton} />
+    </ModalContainer>
   );
 };
 
