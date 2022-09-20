@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import Nav from 'pages/components/Nav/Nav';
+import Nav from 'pages/components/Nav';
 import FirstPage from './pageComposition/FirstPage';
 import ContentPages from './pageComposition/ContentPages';
 import LastPage from './pageComposition/LastPage';
@@ -22,7 +22,7 @@ const Main = () => {
           }
         });
       },
-      { rootMargin: '-2% 0px', threshold: 0 }
+      { rootMargin: '-2% 0px', threshold: 0.5 }
     );
     pageRef.current.forEach((page: HTMLDivElement) =>
       pageObserver.observe(page)
