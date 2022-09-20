@@ -11,7 +11,7 @@ const DeletedPostModal = ({ closeModal, modalId }) => {
     url: `https://togedog-dj.herokuapp.com/posts/deleted/${modalId}/`,
     headers: {
       accept: '*/*',
-      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
     },
   });
 
@@ -21,7 +21,7 @@ const DeletedPostModal = ({ closeModal, modalId }) => {
         `https://togedog-dj.herokuapp.com/posts/${modalId}/delete/hard/`,
         {
           headers: {
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
           },
         }
       );

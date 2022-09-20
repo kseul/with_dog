@@ -1,13 +1,14 @@
 import styled from 'styled-components';
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import PostHeaderBox from 'pages/Admin/components/RightSection/PostHeaderBox';
 import DeletedPostModal from 'pages/Admin/components/Modal/DeletedPostModal';
 import ListPostContentsBox from 'pages/Admin/components/RightSection/ListPostContentBox';
 import PostModal from 'pages/Admin/components/Modal/PostModal';
 import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/PageNation';
-import AdminSpinner from 'pages/Admin/components/AdminSpinner.tsx/AdminSpinner';
+import AdminSpinner from 'pages/Admin/components/AdminSpinner/AdminSpinner';
+import selectedImg from 'assets/svg/dog-paws2.svg';
 
 const AdminRightPagePost = ({
   postData,
@@ -15,15 +16,25 @@ const AdminRightPagePost = ({
   currentPage,
   setCurrentPage,
   counts,
+  banNum,
+  setBanNum,
 }) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalId, setModalId] = useState<number | undefined>();
-  const [allToggle, setAllToggle] = useState<boolean>(false);
-  const [banToggle, setBanToggle] = useState<boolean>(false);
   const [blockNum, setBlockNum] = useState(0);
   const perPage = 10;
+
+  let date = new Date();
+  const [startDate, setStartDate] = useState(date.setDate(date.getDate() - 7));
+  const [endDate, setEndDate] = useState(date.setDate(date.getDate() + 7));
+  const [search, setSearch] = useState('');
+  const filterValue = {
+    search: search,
+    reported: banNum,
+  };
 
   const openModal = (): void => {
     setIsModalOpen(true);
@@ -37,19 +48,46 @@ const AdminRightPagePost = ({
     setModalId(id);
   };
 
+  const onSearch = e => {
+    e.preventDefault();
+    setSearch(e.target.value);
+  };
+
+  const updateUrl = filterValue => {
+    const result = Object.keys(filterValue)
+      .map(filter => `${filter}=${filterValue[filter]}`)
+      .join('&');
+    navigate(`?${result}`);
+  };
+
+  const allFilter = () => {
+    setBanNum(0);
+    setSearch('');
+  };
+
+  const reportFilter = e => {
+    if (e.target.checked) {
+      setBanNum(3);
+    } else {
+      setBanNum(0);
+    }
+  };
+
+  useEffect(() => {
+    updateUrl(filterValue);
+  }, [banNum, search]);
+
   return (
     <AdminRightContainer>
       <AdminRightTitle />
       <FilterBox>
-        <CheckAll
-          onClick={() => setAllToggle(prev => !prev)}
-          className={allToggle ? 'active' : ''}
-        />
+        <CheckAll onClick={() => allFilter()}>
+          <SelectedImg className="pawImg" src={selectedImg} />
+        </CheckAll>
         <CheckAllText>전체</CheckAllText>
-        <ThreeBanned
-          onClick={() => setBanToggle(prev => !prev)}
-          className={banToggle ? 'active' : ''}
-        />
+        <InputLabel>
+          <ThreeBanned type="checkbox" onClick={e => reportFilter(e)} />
+        </InputLabel>
         <ThreeBannedText>신고 3회 이상</ThreeBannedText>
       </FilterBox>
       <SortBox>
@@ -58,14 +96,26 @@ const AdminRightPagePost = ({
             <DateText>날짜</DateText>
           </DateTitle>
           <DateFilter>
-            <DatePickerComponent />
+            <DatePickerComponent
+              startDate={startDate}
+              endDate={endDate}
+              setStartDate={setStartDate}
+              setEndDate={setEndDate}
+            />
           </DateFilter>
         </SortByDate>
         <SortByUser>
           <UserTitle>
             <TitleText>사용자 검색</TitleText>
           </UserTitle>
-          <UserInput type="text" />
+          <UserInput
+            type="text"
+            value={search}
+            placeholder="닉네임을 입력하세요."
+            onChange={e => {
+              onSearch(e);
+            }}
+          />
         </SortByUser>
       </SortBox>
       <UserListContainer>
@@ -119,46 +169,58 @@ const AdminRightTitle = styled.div`
   height: 1.5rem;
 `;
 
-const FilterBox = styled.div``;
+const FilterBox = styled.div`
+  ${props => props.theme.flex.flexBox('', 'center', '')}
+`;
 
 const CheckAll = styled.button`
+  position: relative;
   margin-left: 1.25rem;
   margin-right: 0.625rem;
   width: 1.25rem;
   height: 1.25rem;
-  border: 1px solid black;
+  border: 0.1px solid black;
   border-radius: 3px;
   background-color: transparent;
+  overflow: hidden;
 
-  &.active {
+  :hover .pawImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 3px;
     background-color: ${props => props.theme.colors.boldGray};
   }
+`;
 
-  :hover {
-    background-color: ${props => props.theme.colors.boldGray};
-  }
+const SelectedImg = styled.img`
+  display: none;
+  width: 1.25rem;
+  height: 1.25rem;
 `;
 
 const CheckAllText = styled.span`
   font-size: 1.25rem;
 `;
 
-const ThreeBanned = styled.button`
+const InputLabel = styled.label`
   margin-left: 1.25rem;
   margin-right: 0.625rem;
+
+  input[type='checkbox']:checked {
+    accent-color: ${props => props.theme.colors.boldGray};
+  }
+`;
+
+const ThreeBanned = styled.input`
   width: 1.25rem;
   height: 1.25rem;
-  border: 1px solid black;
+  border: 0.1px solid black;
   border-radius: 3px;
-  background-color: transparent;
-
-  &.active {
-    background-color: ${props => props.theme.colors.boldGray};
-  }
-
-  :hover {
-    background-color: ${props => props.theme.colors.boldGray};
-  }
+  cursor: pointer;
 `;
 
 const ThreeBannedText = styled.span`
@@ -191,7 +253,7 @@ const DateFilter = styled.div`
   background-color: ${props => props.theme.colors.lightGray};
 `;
 
-const SortByUser = styled.form`
+const SortByUser = styled.div`
   ${props => props.theme.flex.flexBox('row', '', 'left')}
   width: 18.75rem;
 `;
@@ -208,7 +270,9 @@ const TitleText = styled.span``;
 
 const UserInput = styled.input``;
 
-const UserListContainer = styled.div``;
+const UserListContainer = styled.div`
+  min-width: 31.25rem;
+`;
 
 const ListContentsSection = styled.div``;
 

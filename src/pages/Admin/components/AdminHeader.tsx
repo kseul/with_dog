@@ -1,14 +1,25 @@
 import styled from 'styled-components';
+import { useState } from 'react';
+import NoticeModal from 'pages/Admin/components/Modal/NoticeModal';
 import logo from 'assets/svg/with-dog-logo.svg';
 
 const AdminHeader = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (): void => {
+    setIsModalOpen(prev => !prev);
+  };
+
   return (
     <AdminHeaderContainer>
       <TitleBox>
         <Logo src={logo} />
         <AdminHeaderTitle>함께하개</AdminHeaderTitle>
       </TitleBox>
-      <AdminLoginBox>로그아웃</AdminLoginBox>
+      <AdminNoticeWrapper>
+        <NoticeBtn onClick={openModal}>알림버튼</NoticeBtn>
+        {isModalOpen && <NoticeModal />}
+      </AdminNoticeWrapper>
     </AdminHeaderContainer>
   );
 };
@@ -35,11 +46,13 @@ const AdminHeaderTitle = styled.p`
   color: ${props => props.theme.colors.white};
 `;
 
-const AdminLoginBox = styled.div`
+const AdminNoticeWrapper = styled.div`
+  position: relative;
   margin-right: 1.25rem;
   font-size: 1.563rem;
   color: ${props => props.theme.colors.white};
-  cursor: pointer;
 `;
+
+const NoticeBtn = styled.button``;
 
 export default AdminHeader;

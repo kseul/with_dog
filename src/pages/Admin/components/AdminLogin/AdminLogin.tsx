@@ -1,22 +1,35 @@
 import styled from 'styled-components';
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import signInbg from 'assets/images/bg1.jpg';
 import AdminLoginButton from 'pages/Admin/components/AdminLogin/AdminLoginButton';
 import character from 'assets/images/LoginBgCharacter.png';
 
 const AdminSignIn = () => {
+  const navigate = useNavigate();
   const [adminId, setAdminId] = useState('');
   const [adminPassword, setAdminPassword] = useState('');
 
-  const loginPost = e => {
-    e.preventDefault();
+  const submitSigninInfo = e => {
     axios
-      .post('url', {
-        id: adminId,
+      .post('https://togedog-dj.herokuapp.com/users/login/email', {
+        email: adminId,
         password: adminPassword,
       })
-      .then(res => console.log(res.data));
+      .then(res => {
+        if (res.status === 200 && res.data.user.user_type === 'admin') {
+          navigate('/admin/users');
+          sessionStorage.setItem('token', res.data.access_token);
+        }
+      })
+      .catch(error => {
+        if (error.response.status === 404) {
+          alert('접근이 불가능합니다.');
+        } else if (error.response.status === 422) {
+          alert('아이디와 비밀번호를 다시 입력하여 주세요.');
+        }
+      });
   };
 
   return (
@@ -25,7 +38,7 @@ const AdminSignIn = () => {
       <LoginForm>
         <LoginTitle>관리자 로그인</LoginTitle>
         <LoginSubTitle>관리하러 가시개!</LoginSubTitle>
-        <IdPwInputContainer onSubmit={e => loginPost(e)}>
+        <IdPwInputContainer>
           <AdminIdInput
             placeholder="아이디 입력"
             type="text"
@@ -41,7 +54,7 @@ const AdminSignIn = () => {
           title="로그인"
           color="#728180"
           size={21}
-          loginPost={loginPost}
+          submitSigninInfo={submitSigninInfo}
         />
       </LoginForm>
     </SignInContainer>
@@ -49,6 +62,8 @@ const AdminSignIn = () => {
 };
 const SignInContainer = styled.div`
   ${props => props.theme.flex.flexBox('flex', 'center', 'space-around')}
+  width : 100%;
+  min-width: 50rem;
   height: 100vh;
   background-image: url(${signInbg});
   background-size: cover;
@@ -75,7 +90,7 @@ const LoginSubTitle = styled.div`
   font-size: 1.2rem;
   color: ${props => props.theme.colors.darkGray};
 `;
-const IdPwInputContainer = styled.form`
+const IdPwInputContainer = styled.div`
   margin-top: 4.6rem;
 `;
 

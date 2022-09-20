@@ -32,7 +32,7 @@ const AdminContainer = () => {
         {
           headers: {
             accept: '*/*',
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
           },
         }
       );
@@ -86,6 +86,8 @@ const AdminContainer = () => {
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
               counts={counts}
+              banNum={banNum}
+              setBanNum={setBanNum}
             />
           ) : params.value === 'posts' ? (
             <AdminRightPagePost
@@ -94,6 +96,8 @@ const AdminContainer = () => {
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
               counts={counts}
+              banNum={banNum}
+              setBanNum={setBanNum}
             />
           ) : (
             <AdminRightPageUser
@@ -141,7 +145,7 @@ const ListWrapper = styled.ul`
 const AdminRightSection = styled.div`
   width: calc(100vw - 12.5rem);
   height: calc(100vh - 6.25rem);
-  min-width: 37.5rem;
+  min-width: 40rem;
 `;
 
 export default AdminContainer;

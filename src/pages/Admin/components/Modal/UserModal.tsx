@@ -10,7 +10,7 @@ const UserModal = ({ closeModal, modalId }) => {
     url: `https://togedog-dj.herokuapp.com/users/${modalId}`,
     headers: {
       accept: '*/*',
-      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
     },
   });
 
@@ -18,7 +18,7 @@ const UserModal = ({ closeModal, modalId }) => {
     if (window.confirm('계정을 삭제하시겠습니까?')) {
       axios.delete(`https://togedog-dj.herokuapp.com/users/${modalId}`, {
         headers: {
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
       });
     } else {

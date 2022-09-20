@@ -11,7 +11,8 @@ const ListPostContentsBox = ({ data, openModal, onCurrentModal }) => {
           }}
         >
           <UserName>{data.user_name}</UserName>
-          <PostContent>{data.content}</PostContent>
+          <UserNickName>{data.user_nickname}</UserNickName>
+          <PostContent>{data.subject}</PostContent>
           <UserMbti>{data.user_mbti}</UserMbti>
           <UserSignDate>
             {new Date(data.updated_at).toISOString().substring(0, 10)}
@@ -25,7 +26,7 @@ const ListPostContentsBox = ({ data, openModal, onCurrentModal }) => {
 const ListContents = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: auto 1fr 1fr 1fr;
+  grid-template-columns: auto 1fr 1fr 1fr 1fr;
   margin: 0 auto;
   margin-bottom: -1px;
   width: 90%;
@@ -40,6 +41,11 @@ const ListContents = styled.div`
 
 const UserName = styled.span`
   width: 6.25rem;
+  text-align: center;
+  vertical-align: middle;
+`;
+
+const UserNickName = styled.span`
   text-align: center;
   vertical-align: middle;
 `;

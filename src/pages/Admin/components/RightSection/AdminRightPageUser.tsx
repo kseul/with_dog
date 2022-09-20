@@ -6,7 +6,8 @@ import ListContentsBox from 'pages/Admin/components/RightSection/ListContentsBox
 import UserModal from 'pages/Admin/components/Modal/UserModal';
 import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/PageNation';
-import AdminSpinner from 'pages/Admin/components/AdminSpinner.tsx/AdminSpinner';
+import AdminSpinner from 'pages/Admin/components/AdminSpinner/AdminSpinner';
+import selectedImg from 'assets/svg/dog-paws2.svg';
 
 const AdminRightPageUser = ({
   postData,
@@ -24,6 +25,13 @@ const AdminRightPageUser = ({
   const [blockNum, setBlockNum] = useState(0);
   const perPage = 10;
 
+  let date = new Date();
+  const [startDate, setStartDate] = useState(
+    new Date(date.setDate(date.getDate() - 7))
+  );
+  const [endDate, setEndDate] = useState(
+    new Date(date.setDate(date.getDate() + 7))
+  );
   const [search, setSearch] = useState('');
   const filterValue = {
     search: search,
@@ -54,6 +62,19 @@ const AdminRightPageUser = ({
     navigate(`?${result}`);
   };
 
+  const allFilter = () => {
+    setBanNum(0);
+    setSearch('');
+  };
+
+  const reportFilter = e => {
+    if (e.target.checked) {
+      setBanNum(3);
+    } else {
+      setBanNum(0);
+    }
+  };
+
   useEffect(() => {
     updateUrl(filterValue);
   }, [banNum, search]);
@@ -62,9 +83,13 @@ const AdminRightPageUser = ({
     <AdminRightContainer>
       <AdminRightTitle />
       <FilterBox>
-        <CheckAll />
+        <CheckAll onClick={() => allFilter()}>
+          <SelectedImg className="pawImg" src={selectedImg} />
+        </CheckAll>
         <CheckAllText>전체</CheckAllText>
-        <ThreeBanned onClick={() => setBanNum(3)} />
+        <InputLabel>
+          <ThreeBanned type="checkbox" onClick={e => reportFilter(e)} />
+        </InputLabel>
         <ThreeBannedText>신고 3회 이상</ThreeBannedText>
       </FilterBox>
       <SortBox>
@@ -73,7 +98,12 @@ const AdminRightPageUser = ({
             <DateText>날짜</DateText>
           </DateTitle>
           <DateFilter>
-            <DatePickerComponent />
+            <DatePickerComponent
+              startDate={startDate}
+              endDate={endDate}
+              setStartDate={setStartDate}
+              setEndDate={setEndDate}
+            />
           </DateFilter>
         </SortByDate>
         <SortByUser>
@@ -135,49 +165,63 @@ const AdminRightTitle = styled.div`
   height: 1.5rem;
 `;
 
-const FilterBox = styled.div``;
+const FilterBox = styled.div`
+  ${props => props.theme.flex.flexBox('', 'center', '')}
+`;
 
 const CheckAll = styled.button`
+  position: relative;
   margin-left: 1.25rem;
   margin-right: 0.625rem;
   width: 1.25rem;
   height: 1.25rem;
-  border: 1px solid black;
+  border: 0.1px solid black;
   border-radius: 3px;
   background-color: transparent;
+  overflow: hidden;
 
-  &.active {
+  :hover .pawImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 3px;
     background-color: ${props => props.theme.colors.boldGray};
   }
+`;
 
-  :hover {
-    background-color: ${props => props.theme.colors.boldGray};
-  }
+const SelectedImg = styled.img`
+  display: none;
+  width: 1.25rem;
+  height: 1.25rem;
 `;
 
 const CheckAllText = styled.span`
+  margin-top: 2px;
   font-size: 1.25rem;
 `;
 
-const ThreeBanned = styled.button`
+const InputLabel = styled.label`
   margin-left: 1.25rem;
   margin-right: 0.625rem;
-  width: 1.25rem;
-  height: 1.25rem;
-  border: 1px solid black;
-  border-radius: 3px;
-  background-color: transparent;
 
-  &.active {
-    background-color: ${props => props.theme.colors.boldGray};
-  }
-
-  :hover {
-    background-color: ${props => props.theme.colors.boldGray};
+  input[type='checkbox']:checked {
+    accent-color: ${props => props.theme.colors.boldGray};
   }
 `;
 
+const ThreeBanned = styled.input`
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 0.1px solid black;
+  border-radius: 3px;
+  cursor: pointer;
+`;
+
 const ThreeBannedText = styled.span`
+  margin-top: 2px;
   font-size: 1.25rem;
 `;
 
