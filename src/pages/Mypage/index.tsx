@@ -1,19 +1,29 @@
-import { useState } from 'react';
-import MBTILETTER_DATA from './DATA/MBTILETTER_DATA';
 import styled, { css } from 'styled-components';
+import MBTILETTER_DATA from './DATA/MBTILETTER_DATA';
 import bgimg from 'assets/images/bg1.jpg';
 import defaultUserImg from 'assets/images/defaultImg.png';
 import cameraImg from 'assets/svg/camera.svg';
 import editPencil from 'assets/svg/pencil.svg';
 import arrowBottom from 'assets/svg/arrow-bottom.svg';
 
+import { useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
+import store from 'redux/store';
+import userActions from 'redux/actions/user';
+import TextEditModal from './components/TextEditModal';
+
 const Mypage = () => {
-  const [mbti, setMbti] = useState('MBTI');
   const changeMbti = (e: any) => {
-    setMbti(e.target.value);
+    store.dispatch(userActions.setMBTI(e.target.value));
   };
+
+  const userData = useSelector((state: any) => state.user.userData);
+  const { name, nickname, email, mbti } = userData;
+  console.log(userData);
+
   return (
     <MypageContainer>
+      {/* <TextEditModal /> */}
       <MypageForm>
         <UserImgContainer>
           <UserImg src={defaultUserImg} />
@@ -22,9 +32,9 @@ const Mypage = () => {
           </EditImgWrapper>
         </UserImgContainer>
         <UserNamingContainer>
-          <UserName>안성주</UserName>
+          <UserName>{name}</UserName>
           <UserNickName>
-            안론머스크
+            {nickname}
             <EditNickname src={editPencil} />
           </UserNickName>
         </UserNamingContainer>
@@ -40,10 +50,9 @@ const Mypage = () => {
           </Mbti>
           <MbtiNickName>세상이 궁금한 몽상가 댕댕이</MbtiNickName>
         </DogMbtiContainer>
-        <UserInfoContainer>
-          <UserEmail>wkddb1359@naver.com</UserEmail>
-          <UserLocation>경상남도</UserLocation>
-        </UserInfoContainer>
+        <UserEmailWrapper>
+          <UserEmail>{email}</UserEmail>
+        </UserEmailWrapper>
       </MypageForm>
     </MypageContainer>
   );
@@ -67,10 +76,11 @@ const EditsMbti = css`
 const MypageContainer = styled.div`
   ${SortElement}
   height: 100vh;
+  padding-top: 4.8rem;
   background-image: url(${bgimg});
   background-size: cover;
 `;
-const MypageForm = styled.div`
+const MypageForm = styled.form`
   padding: 1.875rem 5.625rem;
   background-color: white;
   border-radius: 1.25rem;
@@ -140,16 +150,13 @@ const MbtiOption = styled.option``;
 const MbtiNickName = styled.div`
   ${FontStyle}
 `;
-const UserInfoContainer = styled.div`
-  /* margin-top: 2rem; */
+const UserEmailWrapper = styled.div`
+  margin-top: 3rem;
   color: gray;
 `;
 const UserEmail = styled.div`
   ${FontStyle}
   margin-bottom: 0.3rem;
 `;
-const UserLocation = styled.div`
-  ${FontStyle}
-  font-size: 1.1rem;
-`;
+
 export default Mypage;
