@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useEffect, useRef, useState } from 'react';
 import Nav from 'pages/components/Nav';
 import FirstPage from './pageComposition/FirstPage';
 import ContentPages from './pageComposition/ContentPages';

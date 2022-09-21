@@ -70,7 +70,6 @@ const BasicText = css`
 
 const GraphComponentContainer = styled.div<{ layout: string }>`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')}
-  position: absolute;
   left: ${props => (props.layout === 'lefttop' ? `24%` : '')};
   left: ${props => (props.layout === 'leftbottom' ? `24%` : '')};
   right: ${props => (props.layout === 'righttop' ? `24%` : '')};
