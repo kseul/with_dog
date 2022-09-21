@@ -51,12 +51,7 @@ const Message = ({
             <Text>{text}</Text>
           </TextBox>
           <TextData>
-            <ReportIcon
-              src={Siren}
-              onClick={() => {
-                console.log('hi');
-              }}
-            />
+            <ReportIcon src={Siren} />
             <Time>{time}</Time>
           </TextData>
         </TextContainer>

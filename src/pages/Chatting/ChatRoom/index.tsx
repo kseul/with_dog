@@ -24,7 +24,6 @@ const ChatRoom = () => {
   const room: ChatRoomProps = storeData.chat.id;
   const userMbti = storeData.user.userData.mbti;
 
-  /* 현재시간을 얻는 함수 */
   useEffect(() => {
     const date = new Date();
     const hours = date.getHours();
@@ -34,13 +33,11 @@ const ChatRoom = () => {
     SetCurrentTime(`${currentHour}:${minutes}`);
   }, [message]);
 
-  /* 입장시 닉네임과 방을 전달 */
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit('join', { nickname, room });
   }, [ENDPOINT]);
 
-  /* 서버로부터 메세지를 받아와서 messages 배열에 추가 <- 초기 입장메세지 + 메세지 */
   useEffect(() => {
     socket.on('add_message', message => {
       const newMessage: MessagesProps = message;
@@ -48,7 +45,6 @@ const ChatRoom = () => {
     });
   }, []);
 
-  /* 화면의 Input 값을 입력받고 서버로 message 데이터 전송 */
   const sendMessage = e => {
     e.preventDefault();
     if (message) {
