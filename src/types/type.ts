@@ -183,3 +183,16 @@ export interface UserDataProps {
 export interface MainRef<T> {
   current: T;
 }
+
+export interface ChatRoomProps {
+  room?: number;
+}
+
+export interface MessagesProps {
+  user?: string;
+  text?: string;
+  time?: string;
+  mbti?: string;
+  nickname?: string;
+  message;
+}

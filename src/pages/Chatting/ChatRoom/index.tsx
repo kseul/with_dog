@@ -6,14 +6,14 @@ import { RootState } from 'redux/reducers';
 import TitleBar from './components/TitleBar';
 import Messages from './components/Messages';
 import Input from './components/Input';
-import { UserDataProps } from 'types/type';
+import { UserDataProps, ChatRoomProps, MessagesProps } from 'types/type';
 import signInbg from 'assets/images/bg2.png';
 
 let socket;
 
 const ChatRoom = () => {
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState<any>([]);
+  const [messages, setMessages] = useState<MessagesProps[]>([]);
   const [currentTime, SetCurrentTime] = useState('');
 
   const ENDPOINT = 'localhost:3000';
@@ -21,7 +21,7 @@ const ChatRoom = () => {
 
   const storeData = useSelector((state: RootState) => state);
   const { nickname }: UserDataProps = storeData.user.userData;
-  const room = storeData.chat.id;
+  const room: ChatRoomProps = storeData.chat.id;
   const userMbti = storeData.user.userData.mbti;
 
   /* 현재시간을 얻는 함수 */
@@ -43,7 +43,7 @@ const ChatRoom = () => {
   /* 서버로부터 메세지를 받아와서 messages 배열에 추가 <- 초기 입장메세지 + 메세지 */
   useEffect(() => {
     socket.on('add_message', message => {
-      const newMessage = message;
+      const newMessage: MessagesProps = message;
       setMessages(messages => [...messages, newMessage]);
     });
   }, []);

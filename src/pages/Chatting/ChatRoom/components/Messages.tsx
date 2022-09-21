@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { useEffect, useRef } from 'react';
 import Message from './Message';
 
 const Messages = ({ messages, nickname }) => {

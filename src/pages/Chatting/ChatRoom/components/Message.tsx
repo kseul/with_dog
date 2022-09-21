@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
+import { MessagesProps } from 'types/type';
 import Siren from 'assets/svg/siren.svg';
 
-const Message = ({ message: { user, text, time, mbti }, nickname }) => {
+const Message = ({
+  message: { user, text, time, mbti },
+  nickname,
+}: MessagesProps) => {
   let isSentByCurrentUser = false;
   if (user === nickname) {
     isSentByCurrentUser = true;
   }
 
-  const storeData = useSelector((state: any) => state);
+  const storeData = useSelector((state: RootState) => state);
   const userImage = storeData.user.userData.thumbnail_url;
 
   if (user === '함께하개 관리자') {
