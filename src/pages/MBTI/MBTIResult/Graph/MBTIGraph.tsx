@@ -12,10 +12,11 @@ const MBTIGraph = ({ graphResult }) => {
 };
 
 const MBTIGraphContainer = styled.div`
-  ${props => props.theme.flex.flexBox('row', 'center', 'center')};
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
   width: 75rem;
   height: 18.75rem;
-  margin: 0 auto;
 `;
 
 export default MBTIGraph;
