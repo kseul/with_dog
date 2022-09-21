@@ -11,19 +11,42 @@ import { RootState } from 'redux/reducers';
 import store from 'redux/store';
 import userActions from 'redux/actions/user';
 import TextEditModal from './components/TextEditModal';
+import { useState } from 'react';
 
 const Mypage = () => {
-  const changeMbti = (e: any) => {
-    store.dispatch(userActions.setMBTI(e.target.value));
+  const [showEditMoal, setShowEditModal] = useState(false);
+
+  const openEditModal = () => {
+    setShowEditModal(true);
   };
 
   const userData = useSelector((state: any) => state.user.userData);
   const { name, nickname, email, mbti } = userData;
   console.log(userData);
 
+  const formData = new FormData();
+
+  formData.append('mbti', mbti);
+  // formData.append('nickname', nickname);
+  // console.log('formData', formData);
+
+  const changeMbti = (e: any) => {
+    store.dispatch(userActions.setMBTI(e.target.value));
+    fetch('https://togedog-dj.herokuapp.com/users/30', {
+      // formData,
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
+      },
+    })
+      .then(res => console.log('res', res))
+      .then(result => console.log('result', result));
+  };
+
   return (
     <MypageContainer>
-      {/* <TextEditModal /> */}
+      {showEditMoal && <TextEditModal setShowEditModal={setShowEditModal} />}
       <MypageForm>
         <UserImgContainer>
           <UserImg src={defaultUserImg} />
@@ -35,7 +58,7 @@ const Mypage = () => {
           <UserName>{name}</UserName>
           <UserNickName>
             {nickname}
-            <EditNickname src={editPencil} />
+            <EditNickname src={editPencil} onClick={openEditModal} />
           </UserNickName>
         </UserNamingContainer>
         <DogMbtiContainer>
@@ -70,7 +93,7 @@ const SortElement = css`
 const EditsMbti = css`
   position: absolute;
   top: 26%;
-  right: 12%;
+  right: 13%;
   height: 1.25rem;
 `;
 const MypageContainer = styled.div`
@@ -120,12 +143,12 @@ const UserName = styled.div`
 const UserNickName = styled.div`
   position: relative;
   ${FontStyle}
-  font-size: 2.8rem;
+  font-size: 2.6rem;
 `;
 const EditNickname = styled.img`
   position: absolute;
-  top: 30%;
-  right: -6%;
+  top: 40%;
+  right: -8%;
   height: 1.25rem;
   cursor: pointer;
 `;
@@ -135,7 +158,7 @@ const DogMbtiContainer = styled.div`
 const Mbti = styled.div`
   position: relative;
   ${FontStyle}
-  font-size: 3.2rem;
+  font-size: 3rem;
   color: ${props => props.theme.colors.mint};
 `;
 const ArrowImg = styled.img`
@@ -149,6 +172,7 @@ const EditMbti = styled.select`
 const MbtiOption = styled.option``;
 const MbtiNickName = styled.div`
   ${FontStyle}
+  margin-top: 1rem;
 `;
 const UserEmailWrapper = styled.div`
   margin-top: 3rem;

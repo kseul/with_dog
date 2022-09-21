@@ -22,6 +22,11 @@ const userReducer = (prevState = initialState, action) => {
         ...prevState,
         userData: { ...prevState.userData, mbti: action.data },
       };
+    case 'CHANGE_NICKNAME':
+      return {
+        ...prevState,
+        userData: { ...prevState.userData, nickname: action.data },
+      };
     default:
       return prevState;
   }

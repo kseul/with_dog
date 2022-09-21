@@ -16,10 +16,18 @@ const setMBTI = data => {
   };
 };
 
+const changeNickname = data => {
+  return {
+    type: 'CHANGE_NICKNAME',
+    data,
+  };
+};
+
 const userActions = {
   userAccess,
   handleUserData,
   setMBTI,
+  changeNickname,
 };
 
 export default userActions;

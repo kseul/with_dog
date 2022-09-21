@@ -178,3 +178,7 @@ export interface AlertModalProps {
   showAlertModal: string;
   setShowAlertModal: (string) => void;
 }
+
+export interface EditModalProps {
+  setShowEditModal: (boolean) => void;
+}
