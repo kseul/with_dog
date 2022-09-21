@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import NoticeModal from 'pages/Admin/components/Modal/NoticeModal';
 import logo from 'assets/svg/with-dog-logo.svg';
+import { AiFillBell } from 'react-icons/ai';
 
 const AdminHeader = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,7 +18,8 @@ const AdminHeader = () => {
         <AdminHeaderTitle>함께하개</AdminHeaderTitle>
       </TitleBox>
       <AdminNoticeWrapper>
-        <NoticeBtn onClick={openModal}>알림버튼</NoticeBtn>
+        <AiFillBell className="noticeIcon" onClick={openModal} />
+        <NoticeNum>21</NoticeNum>
         {isModalOpen && <NoticeModal />}
       </AdminNoticeWrapper>
     </AdminHeaderContainer>
@@ -48,11 +50,25 @@ const AdminHeaderTitle = styled.p`
 
 const AdminNoticeWrapper = styled.div`
   position: relative;
-  margin-right: 1.25rem;
-  font-size: 1.563rem;
+  margin-right: 2rem;
   color: ${props => props.theme.colors.white};
+
+  .noticeIcon {
+    font-size: 2rem;
+    cursor: pointer;
+  }
 `;
 
-const NoticeBtn = styled.button``;
+const NoticeNum = styled.span`
+  position: absolute;
+  left: 18px;
+  padding-top: 5px;
+  width: 1.3rem;
+  height: 1.3rem;
+  background-color: blue;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  text-align: center;
+`;
 
 export default AdminHeader;

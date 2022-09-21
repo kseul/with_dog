@@ -8,19 +8,20 @@ import AdminRightPageUser from 'pages/Admin/components/RightSection/AdminRightPa
 import AdminRightPagePost from 'pages/Admin/components/RightSection/AdminRightPagePost';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
 import backGroundImg from 'assets/images/bg1.jpg';
+import { ListData } from 'types/type';
 
 const AdminContainer = () => {
   const navigate = useNavigate();
   const params = useParams();
   const location = useLocation();
 
-  const [clicked, setClicked] = useState(location.pathname.slice(7));
+  const [clicked, setClicked] = useState<string>(location.pathname.slice(7));
   const [postData, setPostData] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<Boolean>(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [banNum, setBanNum] = useState(0);
-  const [counts, setCounts] = useState();
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [banNum, setBanNum] = useState<number>(0);
+  const [counts, setCounts] = useState<number>();
 
   const fetchData = useCallback(async () => {
     try {
@@ -47,7 +48,7 @@ const AdminContainer = () => {
     fetchData();
   }, [fetchData]);
 
-  const setClick = list => {
+  const setClick = (list: ListData): void => {
     setClicked(list.value);
   };
 
