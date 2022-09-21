@@ -1,6 +1,8 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import Spinner from 'pages/Login/components/spinner/Spinner';
+import store from 'redux/store';
+import userActions from 'redux/actions/user';
 
 const GoogleRedirect = () => {
   const navigate = useNavigate();
@@ -23,10 +25,16 @@ const GoogleRedirect = () => {
               token: ACCESS_TOKEN,
             }),
           })
-            .then(res => res.json())
+            .then(res => {
+              if (res.status === 200) {
+                navigate('/');
+                return res.json();
+              }
+            })
             .then(result => {
-              localStorage.setItem('token', result.access_token);
-              navigate('/');
+              const userData = result.user;
+              store.dispatch(userActions.userAccess(true));
+              store.dispatch(userActions.handleUserData(userData));
             });
         } else {
           alert('구글 로그인 실패하셨습니다!');

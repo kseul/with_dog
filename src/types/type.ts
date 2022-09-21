@@ -135,7 +135,7 @@ export interface MBTIJudgdemnetProps extends MBTIProps {
 
 export interface AnswerType {
   testId: number | null;
-  answerValue: string;
+  answerValue?: string;
 }
 
 export interface CheckValidProps {
@@ -182,6 +182,12 @@ export interface UserDataProps {
 
 export interface MainRef<T> {
   current: T;
+}
+
+export interface AlertModalProps {
+  title: string;
+  showAlertModal: string;
+  setShowAlertModal: (string) => void;
 }
 
 export interface ChatRoomProps {

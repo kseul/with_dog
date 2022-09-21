@@ -1,14 +1,14 @@
 import styled from 'styled-components/macro';
-import TitlePaw from '../../../assets/svg/TitlePawPositoin.svg';
-import Kakao from '../../../assets/svg/kakao-logo2.svg';
-import Twitter from '../../../assets/svg/twitter.svg';
-import FaceBook from '../../../assets/svg/Facebook_2.svg';
-import { shareKakao } from './kakaoShare/KakaoForm';
+import { sendKakaoLink } from './kakaoShare/KakaoShareData';
+import TitlePaw from 'assets/svg/TitlePawPositoin.svg';
+import Kakao from 'assets/svg/kakao-logo2.svg';
+import Twitter from 'assets/svg/twitter.svg';
+import FaceBook from 'assets/svg/Facebook_2.svg';
 
 const SNSshare = () => {
   const { location } = window;
   const kakaoShare = () => {
-    shareKakao();
+    sendKakaoLink();
   };
 
   const facebookShare = () => {
