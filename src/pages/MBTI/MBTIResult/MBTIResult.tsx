@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import MBTIResultInfo from './MBTIResultInfo';
-import ResultBackground from '../../../../src/assets/images/MBTIResult.jpg';
+import ResultBackground from 'assets/images/MBTIResult.jpg';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 

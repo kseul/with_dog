@@ -1,3 +1,4 @@
+import React from 'react';
 import styled, { css } from 'styled-components/macro';
 import MBTIGraph from './Graph/MBTIGraph';
 import ChatroomRecommendation from './ChatroomRecommendation';
@@ -5,7 +6,6 @@ import SNSshare from './SNSshare';
 import ResultInfo from 'assets/svg/ResultInfoPositoin.svg';
 import ResultNotice from 'assets/svg/ResultNoticePositoin.svg';
 import { MBTI_RESULT } from './constants/Result';
-import React from 'react';
 
 const MBTIResultInfo = ({ graphResult, mbtiResultText }) => {
   const getMBTIResult: string = Object.values(mbtiResultText.mbti).toString();

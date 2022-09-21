@@ -1,5 +1,12 @@
 import styled from 'styled-components/macro';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
+import setMbtiResults from 'redux/actions/mbtiResult';
+import setMbtiTexts from 'redux/actions/mbtiText';
+import userActions from 'redux/actions/user';
 import ProgressBar from './ProgressBar';
 import EnergyTest from './Energy/EnergyTest';
 import RelationTest from './Relation/RelationTest';
@@ -8,13 +15,6 @@ import JudgementTest from './Judgement/JudgementTest';
 import { AnswerType } from 'types/type';
 import { MBTIScoreProps } from 'types/type';
 import { JoinMBTI } from 'types/type';
-import { useDispatch } from 'react-redux';
-import setMbtiResults from 'redux/actions/mbtiResult';
-import setMbtiTexts from 'redux/actions/mbtiText';
-import { useNavigate } from 'react-router-dom';
-import { RootState } from 'redux/reducers';
-import { useSelector } from 'react-redux';
-import userActions from 'redux/actions/user';
 
 const MBTITest = () => {
   const [isChecked, setIsChecked] = useState(false);
