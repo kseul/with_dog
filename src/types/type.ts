@@ -172,3 +172,9 @@ export interface MBTIScoreProps {
 export interface MainRef<T> {
   current: T;
 }
+
+export interface AlertModalProps {
+  title: string;
+  showAlertModal: string;
+  setShowAlertModal: (string) => void;
+}

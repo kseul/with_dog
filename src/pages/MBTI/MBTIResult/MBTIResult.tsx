@@ -24,7 +24,7 @@ const MBTIResult = () => {
 const MBTIResultContainer = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
   width: 100vw;
-  height: 206.25rem;
+  height: 220rem;
   background-image: url(${ResultBackground});
   background-size: cover;
 `;
@@ -34,6 +34,7 @@ const MBTIResultBox = styled.div`
   width: 87.5rem;
   height: 100%;
   margin: 8rem 0 3rem 0;
+  padding: 5rem 0;
   background-color: white;
   border-radius: 1.25rem;
 `;
