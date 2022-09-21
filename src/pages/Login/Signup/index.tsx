@@ -38,7 +38,9 @@ const Signup = () => {
 
     switch (name) {
       case 'name':
-        value ? setCheckName(true) : setCheckName(false);
+        value.length > 0 && value.length <= 10
+          ? setCheckName(true)
+          : setCheckName(false);
         break;
 
       case 'email':
@@ -65,7 +67,9 @@ const Signup = () => {
         break;
 
       case 'nickname':
-        value ? setCheckNickName(true) : setCheckNickName(false);
+        value.length > 0 && value.length <= 10
+          ? setCheckNickName(true)
+          : setCheckNickName(false);
         break;
 
       default:

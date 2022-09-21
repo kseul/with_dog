@@ -1,14 +1,22 @@
 import styled from 'styled-components';
-import logo from 'assets/svg/with-dog-logo.svg';
-import userImg from 'assets/images/dog3.png';
-import PageBox from './PageBox';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import PageBox from './components/PageBox';
+import UserProfile from './components/UserProfile';
+import { RootState } from 'redux/reducers';
+import logo from 'assets/svg/with-dog-logo.svg';
 
 const Nav = () => {
   const navigate = useNavigate();
   const goToMain = () => {
     navigate('/');
   };
+  const goToSignIn = () => {
+    navigate('/signin');
+  };
+
+  const isLoggedIn = useSelector((state: RootState) => state.user.LoggedIn);
+
   return (
     <NavContainer>
       <PageContainer>
@@ -21,14 +29,16 @@ const Nav = () => {
         <LogoText>함께하개</LogoText>
       </LogoContainer>
       <ProfileContainer>
-        <UserImgWrapper>
-          <UserImg src={userImg} />
-        </UserImgWrapper>
-        <UserNickName>안론머스크</UserNickName>
+        {isLoggedIn ? (
+          <UserProfile />
+        ) : (
+          <RequireLogin onClick={goToSignIn}>✋ 로그인하시개</RequireLogin>
+        )}
       </ProfileContainer>
     </NavContainer>
   );
 };
+
 const NavContainer = styled.div`
   position: fixed;
   display: flex;
@@ -36,47 +46,47 @@ const NavContainer = styled.div`
   justify-content: space-between;
   padding: 0 2.5rem;
   width: 100%;
-  height: 5rem;
+  height: 4.8rem;
   border-bottom: 2px solid #e1e2e3;
-  background-color: white;
+  background-color: #fdfdfd;
+  z-index: 1;
 `;
+
 const PageContainer = styled.div`
   display: flex;
-  padding-left: 1.875rem;
+  padding-left: 1.7rem;
 `;
+
 const LogoContainer = styled.div`
   position: relative;
   padding-right: 8.5rem;
   cursor: pointer;
 `;
+
 const Logo = styled.img`
   position: absolute;
   top: -40%;
   left: -28%;
   width: 3.75rem;
 `;
+
 const LogoText = styled.div`
   font-size: 1.69rem;
   font-weight: 600;
 `;
+
 const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-right: 4.2rem;
 `;
-const UserImgWrapper = styled.div`
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 70%;
-  overflow: hidden;
+
+const RequireLogin = styled.div`
+  font-size: 1.188rem;
+  font-weight: 600;
+  cursor: pointer;
 `;
-const UserImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-const UserNickName = styled.div`
-  padding-left: 0.625rem;
-`;
+
 export default Nav;
 
 const PAGE_LIST = [

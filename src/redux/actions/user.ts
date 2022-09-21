@@ -1,13 +1,11 @@
-const logIn = data => {
-  return {
-    type: 'LOG_IN',
-    data,
-  };
+const userAccess = data => {
+  return { type: 'USER_ACCESS', data };
 };
 
-const logOut = () => {
+const handleUserData = data => {
   return {
-    type: 'LOG_OUT',
+    type: 'HANDLE_USER_DATA',
+    data,
   };
 };
 
@@ -19,8 +17,8 @@ const setMBTI = data => {
 };
 
 const userActions = {
-  logIn,
-  logOut,
+  userAccess,
+  handleUserData,
   setMBTI,
 };
 

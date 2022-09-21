@@ -1,6 +1,9 @@
+import axios from 'axios';
 import styled from 'styled-components';
+import { useCookies } from 'react-cookie';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AlertModal from 'pages/components/AlertModal';
 import InputForm from '../components/inputForm/InputForm';
 import LoginButton from '../components/loginButton/LoginButton';
 import SNSButton from '../components/snsButton/SNSButton';
@@ -14,6 +17,9 @@ import kakaoIcon from 'assets/svg/kakao-logo.svg';
 import character from 'assets/images/LoginBgCharacter.png';
 
 const SignIn = () => {
+  const [, setCookie] = useCookies(['userToken']);
+  const [showAlertModal, setShowAlertModal] = useState('');
+
   const navigate = useNavigate();
 
   const [userInputValue, setUserInputValue] = useState({
@@ -35,31 +41,64 @@ const SignIn = () => {
   };
 
   const isActive =
-    email.includes('@') && email.includes('.') && password.length > 0 === true;
+    email.includes('@') && email.includes('.') && password.length > 7 === true;
 
   const submitSigninInfo = () => {
     if (isActive) {
-      fetch('https://togedog-dj.herokuapp.com/users/login/email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      })
+      axios
+        .post(
+          'https://togedog-dj.herokuapp.com/users/login/email',
+          {
+            email: email,
+            password: password,
+          },
+          { withCredentials: true }
+        )
         .then(res => {
+          const userData = res.data.user;
           if (res.status === 200) {
+            store.dispatch(userActions.userAccess(true));
+            store.dispatch(userActions.handleUserData(userData));
+            setCookie('userToken', res.data.access_token, {
+              path: '/',
+              secure: true,
+              // httpOnly: true,
+            });
             navigate('/');
-            return res.json();
-          } else {
-            alert('이메일과 비밀번호를 다시 확인하세요.');
           }
         })
-        .then(data => {
-          const userData = data.user;
-          store.dispatch(userActions.logIn(userData));
-          localStorage.setItem('token', data.access_token);
+        .catch(error => {
+          if (error) {
+            setShowAlertModal('이메일과 비밀번호를 다시 확인해주세요.');
+          }
         });
+
+      // fetch('https://togedog-dj.herokuapp.com/users/login/email', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({
+      //     email: email,
+      //     password: password,
+      //   }),
+      // })
+      //   .then(res => {
+      //     if (res.status === 200) {
+      //       navigate('/');
+      //       return res.json();
+      //     } else {
+      //       alert('이메일과 비밀번호를 다시 확인하세요.');
+      //     }
+      //   })
+      //   .then(data => {
+      //     const userData = data.user;
+      //     store.dispatch(userActions.userAccess(true));
+      //     store.dispatch(userActions.handleUserData(userData));
+      //     setCookie('userToken', data.access_token, {
+      //       path: '/',
+      //       // secure: true,
+      //       // httpOnly: true,
+      //     });
+      //   });
     }
   };
 
@@ -69,6 +108,11 @@ const SignIn = () => {
 
   return (
     <SignInContainer>
+      <AlertModal
+        title={showAlertModal}
+        setShowAlertModal={setShowAlertModal}
+        showAlertModal={showAlertModal}
+      />
       <Character src={character} />
       <LoginForm>
         <LoginTitle>로그인</LoginTitle>
@@ -79,12 +123,14 @@ const SignIn = () => {
             type="text"
             name="email"
             handleUserInput={handleUserInput}
+            submitSigninInfo={submitSigninInfo}
           />
           <InputForm
             placeholder="비밀번호 입력"
             type="password"
             name="password"
             handleUserInput={handleUserInput}
+            submitSigninInfo={submitSigninInfo}
           />
         </IdPwInputContainer>
         <LoginButton
