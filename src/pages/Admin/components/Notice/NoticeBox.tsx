@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 const NoticeBox = ({ data }) => {
-  return (
-    <NoticeBoxWrapper>{data.post_subject}이 신고 되었습니다.</NoticeBoxWrapper>
-  );
+  return <NoticeBoxWrapper>게시글이 신고 되었습니다.</NoticeBoxWrapper>;
 };
 
 const NoticeBoxWrapper = styled.div`

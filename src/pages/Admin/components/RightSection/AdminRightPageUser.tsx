@@ -22,7 +22,7 @@ const AdminRightPageUser = ({
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalId, setModalId] = useState<number | undefined>();
-  const [blockNum, setBlockNum] = useState(0);
+  const [blockNum, setBlockNum] = useState<number>(0);
   const perPage = 10;
 
   let date = new Date();
@@ -32,10 +32,14 @@ const AdminRightPageUser = ({
   const [endDate, setEndDate] = useState(
     new Date(date.setDate(date.getDate() + 7))
   );
+
   const [search, setSearch] = useState('');
   const filterValue = {
     search: search,
     reported: banNum,
+    date: `${startDate.toISOString().substring(0, 10)}~${endDate
+      .toISOString()
+      .substring(0, 10)}`,
   };
 
   const openModal = (): void => {
@@ -76,8 +80,12 @@ const AdminRightPageUser = ({
   };
 
   useEffect(() => {
-    updateUrl(filterValue);
-  }, [banNum, search]);
+    const timer = setTimeout(() => {
+      updateUrl(filterValue);
+    }, 600);
+
+    return () => clearTimeout(timer);
+  }, [banNum, search, startDate, endDate]);
 
   return (
     <AdminRightContainer>

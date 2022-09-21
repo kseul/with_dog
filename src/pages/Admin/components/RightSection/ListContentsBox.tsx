@@ -8,11 +8,11 @@ const ListContentsBox = ({ data, openModal, onCurrentModal }) => {
         onCurrentModal(data.id);
       }}
     >
-      <UserName>{data.name}</UserName>
       <UserNickName>{data.nickname}</UserNickName>
       <UserEmail>{data.email}</UserEmail>
       <UserMbti>{data.mbti}</UserMbti>
       <UserSignDate>{data.email}</UserSignDate>
+      <UserReported>{data.reported_count}</UserReported>
     </ListContents>
   );
 };
@@ -33,13 +33,8 @@ const ListContents = styled.div`
   }
 `;
 
-const UserName = styled.span`
-  width: 6.25rem;
-  text-align: center;
-  vertical-align: middle;
-`;
-
 const UserNickName = styled.span`
+  width: 6.25rem;
   text-align: center;
   vertical-align: middle;
 `;
@@ -59,4 +54,8 @@ const UserSignDate = styled.span`
   vertical-align: middle;
 `;
 
+const UserReported = styled.span`
+  text-align: center;
+  vertical-align: middle;
+`;
 export default ListContentsBox;

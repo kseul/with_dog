@@ -35,13 +35,12 @@ const UserModal = ({ closeModal, modalId }) => {
             </DeleteIconButton>
           </ModalTop>
           <ModalContents>
-            <ProfileImage />
+            <ProfileImage src={response.data.thumbnail_url} />
             <UserName>{response.data.name}</UserName>
             <UserNickName>{response.data.nickname}</UserNickName>
             <Mbti>{response.data.mbti}</Mbti>
             <MbtiText>{response.data.mbti}</MbtiText>
             <UserEmail>{response.data.email}</UserEmail>
-            <UserAddress>경기도 서울시 부산구 대구동 73</UserAddress>
             <BtnContainer>
               <CancelBtn
                 onClick={() => {
@@ -105,10 +104,9 @@ const ModalContents = styled.div`
   height: calc(100% - 3rem);
 `;
 
-const ProfileImage = styled.div`
+const ProfileImage = styled.img`
   width: 9.375rem;
   height: 9.375rem;
-  border: 1px solid black;
   border-radius: 50%;
 `;
 
@@ -131,11 +129,7 @@ const MbtiText = styled.p`
 `;
 
 const UserEmail = styled.p`
-  font-size: 0.7rem;
-`;
-
-const UserAddress = styled.p`
-  font-size: 0.7rem;
+  font-size: 1rem;
 `;
 
 const BtnContainer = styled.div`

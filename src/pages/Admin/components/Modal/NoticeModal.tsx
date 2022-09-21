@@ -2,24 +2,16 @@ import styled from 'styled-components';
 import NoticeBox from 'pages/Admin/components/Notice/NoticeBox';
 import backgroundImage from 'assets/images/bg1.jpg';
 
-const TEST_DATA = [
-  {
-    id: 1,
-    post_subject: '안녕',
-  },
-  { id: 2, post_subject: '안녕' },
-  { id: 3, post_subject: '안녕' },
-  { id: 4, post_subject: '안녕' },
-];
-
-const NoticeModal = () => {
+const NoticeModal = ({ data }) => {
   return (
     <NoticeModalContainer>
-      <NoticeList>
-        {TEST_DATA.map(data => (
-          <NoticeBox key={data.id} data={data} />
-        ))}
-      </NoticeList>
+      {data && (
+        <NoticeList>
+          {data.post_reports.map(data => (
+            <NoticeBox key={data.id} data={data} />
+          ))}
+        </NoticeList>
+      )}
     </NoticeModalContainer>
   );
 };

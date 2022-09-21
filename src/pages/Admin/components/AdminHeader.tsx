@@ -1,10 +1,20 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import useAxios from 'hooks/useAxios';
 import NoticeModal from 'pages/Admin/components/Modal/NoticeModal';
 import logo from 'assets/svg/with-dog-logo.svg';
 import { AiFillBell } from 'react-icons/ai';
 
 const AdminHeader = () => {
+  const { response } = useAxios({
+    method: 'GET',
+    url: `https://togedog-dj.herokuapp.com/admin/notices`,
+    headers: {
+      accept: '*/*',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+    },
+  });
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = (): void => {
@@ -19,8 +29,10 @@ const AdminHeader = () => {
       </TitleBox>
       <AdminNoticeWrapper>
         <AiFillBell className="noticeIcon" onClick={openModal} />
-        <NoticeNum>21</NoticeNum>
-        {isModalOpen && <NoticeModal />}
+        {response?.data.count !== 0 && (
+          <NoticeNum>{response?.data.count}</NoticeNum>
+        )}
+        {isModalOpen && <NoticeModal data={response?.data} />}
       </AdminNoticeWrapper>
     </AdminHeaderContainer>
   );
@@ -65,7 +77,7 @@ const NoticeNum = styled.span`
   padding-top: 5px;
   width: 1.3rem;
   height: 1.3rem;
-  background-color: blue;
+  background-color: #00eeff;
   border-radius: 50%;
   font-size: 0.8rem;
   text-align: center;

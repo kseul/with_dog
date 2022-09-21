@@ -28,12 +28,19 @@ const AdminRightPagePost = ({
   const perPage = 10;
 
   let date = new Date();
-  const [startDate, setStartDate] = useState(date.setDate(date.getDate() - 7));
-  const [endDate, setEndDate] = useState(date.setDate(date.getDate() + 7));
+  const [startDate, setStartDate] = useState(
+    new Date(date.setDate(date.getDate() - 7))
+  );
+  const [endDate, setEndDate] = useState(
+    new Date(date.setDate(date.getDate() + 7))
+  );
   const [search, setSearch] = useState('');
   const filterValue = {
     search: search,
     reported: banNum,
+    date: `${startDate.toISOString().substring(0, 10)}~${endDate
+      .toISOString()
+      .substring(0, 10)}`,
   };
 
   const openModal = (): void => {
@@ -75,7 +82,7 @@ const AdminRightPagePost = ({
 
   useEffect(() => {
     updateUrl(filterValue);
-  }, [banNum, search]);
+  }, [banNum, search, startDate, endDate]);
 
   return (
     <AdminRightContainer>
