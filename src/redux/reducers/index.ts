@@ -6,6 +6,7 @@ import userReducer from './userReducer';
 import postsReducer from './postsReducer';
 import mbtiGraphReducer from './mbtiGraphReducer';
 import mbtiTextReducer from './mbtiTextReducer';
+import userCounterReducer from './userCounterReducer';
 
 const persistConfig = {
   key: 'root',
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   posts: postsReducer,
   graph: mbtiGraphReducer,
   mbtiText: mbtiTextReducer,
+  counter: userCounterReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

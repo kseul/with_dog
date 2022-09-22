@@ -1,4 +1,5 @@
 const initialState: [] = [];
+
 const postsReducer = (prevState = initialState, action) => {
   switch (action.type) {
     case 'ADD_POST':
