@@ -4,19 +4,39 @@ import dogPaws from 'assets/svg/dog-paws1.svg';
 import pencilBtn from 'assets/svg/pencil.svg';
 import { BoardDataProp } from 'types/type';
 import BoardEditModal from './BoardEditModal';
+import { useSelector } from 'react-redux';
+import store from 'redux/store';
+import boardActions from 'redux/actions/board';
 
 const BoardModalButton = ({ modalContent }: BoardDataProp) => {
+  const boardData = useSelector((state: any) => state.board.boardData);
   const [activateEditModal, setActivateEditModal] = useState(false);
 
   const handleEditModal = () => {
     setActivateEditModal(!activateEditModal);
   };
 
+  const handleLike = async () => {
+    boardData.is_liked
+      ? store.dispatch(boardActions.likeMinus())
+      : store.dispatch(boardActions.likePlus());
+
+    await fetch(
+      `https://togedog-dj.herokuapp.com/posts/${boardData.id}/likes`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+        },
+      }
+    );
+  };
+
   return (
     <BoardModalButtonWrapper>
-      <BoardModalButtonElement>
+      <BoardModalButtonElement onClick={handleLike}>
         <BoardModalImg src={dogPaws} />
-        <BoardModalText>{modalContent.post_likes_count} </BoardModalText>
+        <BoardModalText>{boardData.post_likes_count}</BoardModalText>
       </BoardModalButtonElement>
 
       <BoardModalButtonElement>

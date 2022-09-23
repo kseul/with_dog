@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import boardActions from 'redux/actions/board';
 import store from 'redux/store';
 import styled from 'styled-components';
