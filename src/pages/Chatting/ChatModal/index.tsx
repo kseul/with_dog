@@ -1,15 +1,23 @@
 import styled from 'styled-components';
 import { ChatModalProp } from 'types/type';
 import ArrowRight from 'assets/svg/arrow-right.svg';
+import { Link } from 'react-router-dom';
+import store from 'redux/store';
+import chatRoomActions from 'redux/actions/chat';
 
 const ChatModal = ({
   onClickToggleModal,
-  currentModal,
+  id,
   Image,
   modalDescription,
   type,
   title,
 }: ChatModalProp) => {
+  const currentRoom = (title, id) => {
+    store.dispatch(chatRoomActions.setRoom(`${title} 방`));
+    store.dispatch(chatRoomActions.setRoomId(id));
+  };
+
   return (
     <>
       <ChatModalContainer>
@@ -18,10 +26,16 @@ const ChatModal = ({
         <Description>{modalDescription}</Description>
         <Line />
         <Type>{type}</Type>
-        <EntryBtn>
-          <Text>채팅방 입장하기</Text>
-          <GoChatEntryIcon src={ArrowRight} />
-        </EntryBtn>
+        <Link to={`/chat/${id}`}>
+          <EntryBtn
+            onClick={() => {
+              currentRoom(title, id);
+            }}
+          >
+            <Text>채팅방 입장하기</Text>
+            <GoChatEntryIcon src={ArrowRight} />
+          </EntryBtn>
+        </Link>
       </ChatModalContainer>
       <BackGround onClick={onClickToggleModal} />
     </>
