@@ -27,6 +27,11 @@ const userReducer = (prevState = initialState, action) => {
         ...prevState,
         userData: { ...prevState.userData, nickname: action.data },
       };
+    case 'SET_USER_IMAGE':
+      return {
+        ...prevState,
+        userData: { ...prevState.userData, thumbnail_url: action.data },
+      };
     default:
       return prevState;
   }

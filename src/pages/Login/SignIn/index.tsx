@@ -69,7 +69,7 @@ const SignIn = () => {
         })
         .catch(error => {
           if (error) {
-            setShowAlertModal('이메일과 비밀번호를 다시 확인해주세요.');
+            setShowAlertModal('이메일과 비밀번호를 다시 확인해주세요');
           }
         });
 
@@ -108,11 +108,12 @@ const SignIn = () => {
 
   return (
     <SignInContainer>
-      <AlertModal
-        title={showAlertModal}
-        setShowAlertModal={setShowAlertModal}
-        showAlertModal={showAlertModal}
-      />
+      {showAlertModal && (
+        <AlertModal
+          title={showAlertModal}
+          setShowAlertModal={setShowAlertModal}
+        />
+      )}
       <Character src={character} />
       <LoginForm>
         <LoginTitle>로그인</LoginTitle>

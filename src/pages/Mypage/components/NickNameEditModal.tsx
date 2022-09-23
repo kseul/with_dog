@@ -1,31 +1,25 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-import { EditModalProps } from 'types/type';
-import store from 'redux/store';
-import userActions from 'redux/actions/user';
+import { useEffect } from 'react';
 
-const TextEditModal = ({ setShowEditModal }: EditModalProps) => {
-  const [checkNickname, setCheckNickname] = useState(false);
-  const [changedNickname, setChangedNickname] = useState('');
-
-  const isActive = checkNickname === true;
-
-  const handleUserInput = (e: any) => {
+const NickNameEditModal = ({
+  setShowEditModal,
+  submitChangedNickname,
+  validkNickname,
+  setValidNickname,
+  setChangedNickname,
+}) => {
+  const handleUserInput = e => {
     const { value } = e.target;
-    if (value.length > 0 && value.length <= 6) {
-      setCheckNickname(true);
+
+    if (value.length > 0 && value.length <= 10) {
+      setValidNickname(true);
       setChangedNickname(value);
     } else {
-      setCheckNickname(false);
+      setValidNickname(false);
     }
   };
 
   const closeModal = () => {
-    setShowEditModal(false);
-  };
-
-  const submitChangedNickname = () => {
-    store.dispatch(userActions.changeNickname(changedNickname));
     setShowEditModal(false);
   };
 
@@ -47,13 +41,24 @@ const TextEditModal = ({ setShowEditModal }: EditModalProps) => {
       <TextEditModalContainer>
         <Title>수정할 닉네임을 입력하세요.</Title>
         <EditNickNameInput
-          placeholder="닉네임은 6글자 내로 작성해주세요."
+          placeholder="닉네임은 10글자 내로 작성해주세요."
           type="text"
           onChange={handleUserInput}
+          onKeyDown={e => {
+            if (e.key === 'Enter') {
+              submitChangedNickname();
+            }
+          }}
         />
         <ButtonContainer>
-          <CancelButton onClick={closeModal}>취소</CancelButton>
-          <ConfirmButton disabled={!isActive} onClick={submitChangedNickname}>
+          <CancelButton onClick={closeModal} type="button">
+            취소
+          </CancelButton>
+          <ConfirmButton
+            disabled={!validkNickname}
+            onClick={submitChangedNickname}
+            type="button"
+          >
             확인
           </ConfirmButton>
         </ButtonContainer>
@@ -63,7 +68,7 @@ const TextEditModal = ({ setShowEditModal }: EditModalProps) => {
   );
 };
 
-const TextEditModalContainer = styled.div`
+const TextEditModalContainer = styled.form`
   ${props => props.theme.flex.flexBox('column')}
   position: absolute;
   width: 33rem;
@@ -79,11 +84,11 @@ const Title = styled.div`
 `;
 
 const EditNickNameInput = styled.input`
+  width: 20rem;
+  height: 2.813rem;
   margin-top: 2rem;
   padding-left: 0;
   padding-top: 0.9rem;
-  width: 20rem;
-  height: 2.813rem;
   border: none;
   border-bottom: 1px solid gray;
   font-size: 1rem;
@@ -128,4 +133,4 @@ const BackGround = styled.div`
   z-index: 1;
 `;
 
-export default TextEditModal;
+export default NickNameEditModal;
