@@ -1,5 +1,7 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import userActions from 'redux/actions/user';
+import store from 'redux/store';
 import Spinner from '../../components/spinner/Spinner';
 
 const KakaoLoginRedirect = () => {
@@ -23,10 +25,16 @@ const KakaoLoginRedirect = () => {
               token: ACCESS_TOKEN,
             }),
           })
-            .then(res => res.json())
+            .then(res => {
+              if (res.status === 200) {
+                navigate('/');
+                return res.json();
+              }
+            })
             .then(result => {
-              localStorage.setItem('token', result.access_token);
-              navigate('/');
+              const userData = result.user;
+              store.dispatch(userActions.userAccess(true));
+              store.dispatch(userActions.handleUserData(userData));
             });
         } else {
           alert('카카오 로그인 실패하셨습니다!');

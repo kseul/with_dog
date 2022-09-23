@@ -123,7 +123,7 @@ export interface MBTIJudgdemnetProps extends MBTIProps {
 
 export interface AnswerType {
   testId: number | null;
-  answerValue: string;
+  answerValue?: string;
 }
 
 export interface CheckValidProps {
