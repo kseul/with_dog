@@ -10,6 +10,7 @@ import KakaoLogin from 'pages/Login/SignIn/kakaoLogin/KakaoLoginRedirect';
 import GoogleLogin from 'pages/Login/SignIn/googleLogin/GoogleRedirect';
 import NoticeBoardWrite from 'pages/NoticeBoard/NoticeBoardWrite/NoticeBoardWrite';
 import AdminSignIn from 'pages/Admin/components/AdminLogin/AdminLogin';
+import NoticeBoardModify from 'pages/NoticeBoard/NoticeBoardWrite/NoticeBoardModify';
 
 const Router = () => {
   return (
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/noticeboard" element={<NoticeBoard />} />
         <Route path="/noticeboard/write" element={<NoticeBoardWrite />} />
+        <Route path="/noticeboard/modify" element={<NoticeBoardModify />} />
         <Route path="/*" element={<MainRouter />} />
         <Route path="/admin/:value/*" element={<Admin />} />
         <Route path="/adminsignin" element={<AdminSignIn />} />

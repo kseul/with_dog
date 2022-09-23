@@ -47,7 +47,7 @@ const BoardModal = ({ handleModal, modalContent }: BoardDataProp) => {
             />
             <BoardModalComment comments={modalContent.comments} />
           </BoardModalMainText>
-          <BoardModalButton post_likes_count={modalContent.post_likes_count} />
+          <BoardModalButton modalContent={modalContent} />
           <BoardModalTyping modalContent={modalContent} />
         </ModalContentWrapper>
       </Modal>

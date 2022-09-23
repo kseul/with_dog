@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import boardActions from 'redux/actions/board';
+import store from 'redux/store';
 import styled from 'styled-components';
 import { BoardDataProp } from 'types/type';
 import BoardModal from '../NoticeBoardModal/BoardModal';
@@ -30,6 +33,7 @@ const BoardCard = ({
         .then(response => response.json())
         .then(data => {
           setModalContent(data);
+          store.dispatch(boardActions.getBoard(data));
         });
     }
   }, [activateModal]);

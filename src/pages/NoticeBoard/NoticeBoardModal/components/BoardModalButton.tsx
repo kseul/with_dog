@@ -1,20 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import dogPaws from 'assets/svg/dog-paws1.svg';
-import cancelBtn from 'assets/svg/cancel.svg';
+import pencilBtn from 'assets/svg/pencil.svg';
 import { BoardDataProp } from 'types/type';
+import BoardEditModal from './BoardEditModal';
 
-const BoardModalButton = ({ post_likes_count }: BoardDataProp) => {
+const BoardModalButton = ({ modalContent }: BoardDataProp) => {
+  const [activateEditModal, setActivateEditModal] = useState(false);
+
+  const handleEditModal = () => {
+    setActivateEditModal(!activateEditModal);
+  };
+
   return (
     <BoardModalButtonWrapper>
       <BoardModalButtonElement>
         <BoardModalImg src={dogPaws} />
-        <BoardModalText>{post_likes_count} </BoardModalText>
+        <BoardModalText>{modalContent.post_likes_count} </BoardModalText>
       </BoardModalButtonElement>
 
       <BoardModalButtonElement>
-        <BoardModalImg src={cancelBtn} />
-        <BoardModalText>삭제하기</BoardModalText>
+        <BoardModalImg src={pencilBtn} />
+        <BoardModalText onClick={handleEditModal}>수정하기</BoardModalText>
+        {activateEditModal && (
+          <BoardEditModal handleEditModal={handleEditModal} />
+        )}
       </BoardModalButtonElement>
     </BoardModalButtonWrapper>
   );
@@ -31,6 +41,7 @@ const BoardModalButtonElement = styled.div`
   display: flex;
   align-items: center;
   margin: 0.3rem;
+  cursor: pointer;
 `;
 
 const BoardModalImg = styled.img`
