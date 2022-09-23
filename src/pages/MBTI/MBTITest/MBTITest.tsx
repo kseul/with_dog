@@ -177,10 +177,11 @@ const MBTITest = () => {
     setNextJudgementPage(!nextJudgementPage);
     navigate('/mbti-result');
     dispatch(setMbtiResults(setMBTIResult));
-    dispatch(setMbtiTexts(mbtiObj));
+    dispatch(setMbtiTexts(mbtiUserData));
+
     {
       checkLogin.LoggedIn === true
-        ? dispatch(userActions.setMBTI(mbtiObj))
+        ? dispatch(userActions.setMBTI(mbtiUserData))
         : dispatch(userActions.setMBTI(mbtiUserData));
     }
   };
