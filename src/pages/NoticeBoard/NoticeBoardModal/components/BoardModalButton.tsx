@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import dogPaws from 'assets/svg/dog-paws1.svg';
 import pencilBtn from 'assets/svg/pencil.svg';
+import siren from 'assets/svg/siren.svg';
 import { BoardDataProp } from 'types/type';
 import BoardEditModal from './BoardEditModal';
 import { useSelector } from 'react-redux';
@@ -32,6 +33,23 @@ const BoardModalButton = ({ modalContent }: BoardDataProp) => {
     );
   };
 
+  const handleReport = async () => {
+    const formData = new FormData();
+    formData.append('content', boardData.content);
+
+    await fetch(
+      `https://togedog-dj.herokuapp.com/posts/${boardData.id}/report/`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
+        },
+        body: formData,
+      }
+    );
+    return alert('신고가 완료되었습니다.');
+  };
+
   return (
     <BoardModalButtonWrapper>
       <BoardModalButtonElement onClick={handleLike}>
@@ -45,6 +63,11 @@ const BoardModalButton = ({ modalContent }: BoardDataProp) => {
         {activateEditModal && (
           <BoardEditModal handleEditModal={handleEditModal} />
         )}
+      </BoardModalButtonElement>
+
+      <BoardModalButtonElement>
+        <BoardModalImg src={siren} />
+        <BoardModalText onClick={handleReport}>신고하기</BoardModalText>
       </BoardModalButtonElement>
     </BoardModalButtonWrapper>
   );

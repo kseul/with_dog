@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components/macro';
-import BoardModalComment from './components/BoardModalComment';
+import BoardModalComment from '../NoticeBoardComment/BoardModalComment';
 import BoardModalButton from './components/BoardModalButton';
 import BoardModalTyping from './components/BoardModalTyping';
 import leftArrow from 'assets/svg/arrow-left.svg';
