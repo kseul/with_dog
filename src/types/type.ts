@@ -131,14 +131,14 @@ export interface MBTIJudgdemnetProps extends MBTIProps {
 
 export interface AnswerType {
   testId: number | null;
-  answerValue: string;
+  answerValue?: string;
 }
 
 export interface CheckValidProps {
   errorMessage: string;
 }
 
-export interface joinMBTI {
+export interface JoinMBTI {
   mbti?: string;
 }
 
@@ -163,4 +163,14 @@ export interface MBTIScoreProps {
   mbti?: string;
   score?: number | null;
   layout?: string;
+}
+
+export interface MainRef<T> {
+  current: T;
+}
+
+export interface AlertModalProps {
+  title: string;
+  showAlertModal: string;
+  setShowAlertModal: (string) => void;
 }

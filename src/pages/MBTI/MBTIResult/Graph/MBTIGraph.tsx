@@ -1,11 +1,10 @@
 import styled from 'styled-components/macro';
 import GraphComponent from './GraphComponent';
-import { MBTI_RESULT_DATA } from '../constants/Result';
 
-const MBTIGraph = () => {
+const MBTIGraph = ({ graphResult }) => {
   return (
     <MBTIGraphContainer>
-      {MBTI_RESULT_DATA.map(({ mbti, score, id, layout }) => (
+      {graphResult.map(({ mbti, score, id, layout }) => (
         <GraphComponent key={id} mbti={mbti} score={score} layout={layout} />
       ))}
     </MBTIGraphContainer>
@@ -13,10 +12,11 @@ const MBTIGraph = () => {
 };
 
 const MBTIGraphContainer = styled.div`
-  ${props => props.theme.flex.flexBox('row', 'center', 'center')};
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
   width: 75rem;
   height: 18.75rem;
-  margin: 0 auto;
 `;
 
 export default MBTIGraph;

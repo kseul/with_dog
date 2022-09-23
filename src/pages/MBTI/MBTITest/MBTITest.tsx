@@ -1,5 +1,12 @@
 import styled from 'styled-components/macro';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
+import setMbtiResults from 'redux/actions/mbtiResult';
+import setMbtiTexts from 'redux/actions/mbtiText';
+import userActions from 'redux/actions/user';
 import ProgressBar from './ProgressBar';
 import EnergyTest from './Energy/EnergyTest';
 import RelationTest from './Relation/RelationTest';
@@ -7,10 +14,7 @@ import ReactionTest from './Reaction/ReactionTest';
 import JudgementTest from './Judgement/JudgementTest';
 import { AnswerType } from 'types/type';
 import { MBTIScoreProps } from 'types/type';
-import { joinMBTI } from 'types/type';
-import { useDispatch } from 'react-redux';
-import setMbtiResults from 'redux/actions/mbtiResult';
-import setMbtiTexts from 'redux/actions/mbtiText';
+import { JoinMBTI } from 'types/type';
 
 const MBTITest = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -23,7 +27,8 @@ const MBTITest = () => {
   const [relationNameList, setRelationNameList] = useState<AnswerType[]>([]);
   const [reactionNameList, setReactionNameList] = useState<AnswerType[]>([]);
   const [judgementNameList, setJudgementNameList] = useState<AnswerType[]>([]);
-  const [mbtiText, setMbtiText] = useState<joinMBTI>({ mbti: '' });
+  const [mbtiText, setMbtiText] = useState<JoinMBTI>({ mbti: '' });
+  const dispatch = useDispatch();
 
   const numberArr = value => {
     const newArr = [0, 0, 0, 0, 0];
@@ -51,20 +56,21 @@ const MBTITest = () => {
   const reactionAnswerResult = reactionNameList.map(a => a.answerValue);
   const judgementAnswerResult = judgementNameList.map(a => a.answerValue);
   const setMBTIResult: MBTIScoreProps[] = [];
+  const navigate = useNavigate();
 
   const setEnergy = (energyAnswerResult): void => {
     const energyScore = numberArr(energyAnswerResult);
     if (energyScore < 0) {
       setMBTIResult.push({
         id: 0,
-        mbti: 'E',
+        mbti: 'I',
         score: energyScore,
         layout: 'lefttop',
       });
     } else if (energyScore > 0) {
       setMBTIResult.push({
         id: 0,
-        mbti: 'I',
+        mbti: 'E',
         score: energyScore,
         layout: 'lefttop',
       });
@@ -136,13 +142,7 @@ const MBTITest = () => {
   const mbtiObj = {};
   const joinMbtiText = setMBTIResult.map(obj => obj.mbti).join('');
   mbtiObj['mbti'] = joinMbtiText;
-  useEffect(() => {
-    setMbtiText(mbtiObj);
-  }, []);
-
-  const dispatch = useDispatch();
-  dispatch(setMbtiResults(setMBTIResult));
-  dispatch(setMbtiTexts(mbtiObj));
+  const mbtiUserData = Object.values(mbtiObj).toString();
 
   const onClickCheck = (): void => {
     setIsChecked(!isChecked);
@@ -150,52 +150,99 @@ const MBTITest = () => {
 
   const onEnergyCheck = (): void => {
     setNextPage(!nextPage);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   const onRelationCheck = (): void => {
     setNextRelationPage(!nextRelationPage);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   const onReactionCheck = (): void => {
     setNextReactionPage(!nextReactionPage);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
+  const checkLogin = useSelector((state: RootState) => state.user);
 
   const onJudgementCheck = (): void => {
     setNextJudgementPage(!nextJudgementPage);
+    navigate('/mbti-result');
+    dispatch(setMbtiResults(setMBTIResult));
+    dispatch(setMbtiTexts(mbtiObj));
+    {
+      checkLogin.LoggedIn === true
+        ? dispatch(userActions.setMBTI(mbtiObj))
+        : dispatch(userActions.setMBTI(mbtiUserData));
+    }
   };
 
-  const handleSetEnergyName = (value: string, id: number): void => {
-    setEnergyNameList(prev => prev.concat({ testId: id, answerValue: value }));
-    const inputItemsCopy = energyNameList;
-    inputItemsCopy[id].answerValue = value;
-    setEnergyNameList(inputItemsCopy);
+  const handleSetEnergyName = (value, id) => {
+    const newArr = [0];
+    for (let i = 0; i < energyNameList.length; i++) {
+      if (energyNameList[i].testId === id) {
+        energyNameList[i].answerValue = value;
+      } else {
+        newArr[0]++;
+      }
+    }
+    if (newArr[0] === energyNameList.length) {
+      energyNameList.push({ testId: id, answerValue: value });
+    }
+    setEnergyNameList(energyNameList);
   };
 
   const handleSetRelationName = (value: string, id: number): void => {
-    setRelationNameList(
-      relationNameList.concat({ testId: id, answerValue: value })
-    );
-    const inputItemsCopy = relationNameList;
-    inputItemsCopy[id].answerValue = value;
-    setRelationNameList(inputItemsCopy);
+    const newArr = [0];
+    for (let i = 0; i < relationNameList.length; i++) {
+      if (relationNameList[i].testId === id) {
+        relationNameList[i].answerValue = value;
+      } else {
+        newArr[0]++;
+      }
+    }
+    if (newArr[0] === relationNameList.length) {
+      relationNameList.push({ testId: id, answerValue: value });
+    }
+    setRelationNameList(relationNameList);
   };
 
   const handleSetReactionName = (value: string, id: number): void => {
-    setReactionNameList(
-      reactionNameList.concat({ testId: id, answerValue: value })
-    );
-    const inputItemsCopy = reactionNameList;
-    inputItemsCopy[id].answerValue = value;
-    setReactionNameList(inputItemsCopy);
+    const newArr = [0];
+    for (let i = 0; i < reactionNameList.length; i++) {
+      if (reactionNameList[i].testId === id) {
+        reactionNameList[i].answerValue = value;
+      } else {
+        newArr[0]++;
+      }
+    }
+    if (newArr[0] === reactionNameList.length) {
+      reactionNameList.push({ testId: id, answerValue: value });
+    }
+    setReactionNameList(reactionNameList);
   };
 
   const handleSetJudgementName = (value: string, id: number): void => {
-    setJudgementNameList(
-      judgementNameList.concat({ testId: id, answerValue: value })
-    );
-    const inputItemsCopy = judgementNameList;
-    inputItemsCopy[id].answerValue = value;
-    setJudgementNameList(inputItemsCopy);
+    const newArr = [0];
+    for (let i = 0; i < judgementNameList.length; i++) {
+      if (judgementNameList[i].testId === id) {
+        judgementNameList[i].answerValue = value;
+      } else {
+        newArr[0]++;
+      }
+    }
+    if (newArr[0] === judgementNameList.length) {
+      judgementNameList.push({ testId: id, answerValue: value });
+    }
+    setJudgementNameList(judgementNameList);
   };
 
   const energyLength = energyNameList.length;
@@ -207,9 +254,10 @@ const MBTITest = () => {
     relationNameList.length +
     reactionNameList.length +
     judgementNameList.length;
-  // console.log({ energyNameList });
-  // console.log(energyNameList.length);
-  // console.log(typeof energyNameList);
+
+  useEffect(() => {
+    setMbtiText(mbtiObj);
+  }, []);
 
   return (
     <MBTITestContainer>

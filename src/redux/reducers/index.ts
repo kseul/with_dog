@@ -11,7 +11,7 @@ import boardReducer from './boardReducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['mbtiText'],
+  whitelist: ['mbtiText', 'graph'],
 };
 
 const authPersistConfig = {

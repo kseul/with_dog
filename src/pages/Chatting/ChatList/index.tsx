@@ -27,6 +27,7 @@ const ChatList = () => {
 const ChatListContainer = styled.div`
   ${props => props.theme.flex.flexBox('column')}
   height: 100vh;
+  padding-top: 4.8rem;
   background-color: #ececed;
 `;
 
