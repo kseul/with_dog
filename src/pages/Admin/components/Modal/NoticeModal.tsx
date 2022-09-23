@@ -1,15 +1,53 @@
 import styled from 'styled-components';
+import axios from 'axios';
+import NoticeDetailModal from 'pages/Admin/components/Modal/NoticeDetailModal';
 import NoticeBox from 'pages/Admin/components/Notice/NoticeBox';
 import backgroundImage from 'assets/images/bg1.jpg';
 
-const NoticeModal = ({ data }) => {
+const NoticeModal = ({
+  data,
+  onCurrentModal,
+  modalId,
+  noticeDetailModal,
+  isNoticeDetailModal,
+}) => {
+  const newArr = [...data.post_reports, ...data.comment_reports];
+
+  const clickAndRead = () => {
+    axios
+      .post(
+        `https://togedog-dj.herokuapp.com/admin/notices/all`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        }
+      )
+      .then(res => console.log(res))
+      .catch(error => console.log(error));
+  };
+
   return (
     <NoticeModalContainer>
       {data && (
         <NoticeList>
-          {data.post_reports.map(data => (
-            <NoticeBox key={data.id} data={data} />
+          {newArr.map(data => (
+            <NoticeBox
+              key={data.id}
+              data={data}
+              onCurrentModal={onCurrentModal}
+              noticeDetailModal={noticeDetailModal}
+              clickAndRead={clickAndRead}
+            />
           ))}
+          {isNoticeDetailModal && (
+            <NoticeDetailModal
+              noticeDetailModal={noticeDetailModal}
+              modalId={modalId}
+            />
+          )}
         </NoticeList>
       )}
     </NoticeModalContainer>

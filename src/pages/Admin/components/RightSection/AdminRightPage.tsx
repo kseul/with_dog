@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import ListHeaderBox from 'pages/Admin/components/RightSection/ListHeaderBox';
 import ListContentsBox from 'pages/Admin/components/RightSection/ListContentsBox';
+import PostHeaderBox from 'pages/Admin/components/RightSection/PostHeaderBox';
+import ListPostContentsBox from 'pages/Admin/components/RightSection/ListPostContentBox';
 import UserModal from 'pages/Admin/components/Modal/UserModal';
+import PostModal from 'pages/Admin/components/Modal/PostModal';
+import DeletedPostModal from 'pages/Admin/components/Modal/DeletedPostModal';
 import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/PageNation';
 import AdminSpinner from 'pages/Admin/components/AdminSpinner/AdminSpinner';
@@ -15,16 +19,21 @@ const AdminRightPageUser = ({
   currentPage,
   setCurrentPage,
   counts,
-  banNum,
-  setBanNum,
+  isModalOpen,
+  modalId,
+  detailModalOpener,
+  onCurrentModal,
 }) => {
   const navigate = useNavigate();
+  const params = useParams();
+  const location = useLocation();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalId, setModalId] = useState<number | undefined>();
   const [blockNum, setBlockNum] = useState<number>(0);
   const perPage = 10;
 
+  // 필터
+  const [search, setSearch] = useState('');
+  const [banNum, setBanNum] = useState<number>(0);
   let date = new Date();
   const [startDate, setStartDate] = useState(
     new Date(date.setDate(date.getDate() - 7))
@@ -33,25 +42,12 @@ const AdminRightPageUser = ({
     new Date(date.setDate(date.getDate() + 7))
   );
 
-  const [search, setSearch] = useState('');
   const filterValue = {
     search: search,
     reported: banNum,
     date: `${startDate.toISOString().substring(0, 10)}~${endDate
       .toISOString()
       .substring(0, 10)}`,
-  };
-
-  const openModal = (): void => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = (): void => {
-    setIsModalOpen(false);
-  };
-
-  const onCurrentModal = id => {
-    setModalId(id);
   };
 
   const onSearch = e => {
@@ -86,6 +82,83 @@ const AdminRightPageUser = ({
 
     return () => clearTimeout(timer);
   }, [banNum, search, startDate, endDate]);
+
+  const rightSectionOpener = () => {
+    switch (params.value) {
+      case 'users':
+        return (
+          <>
+            <ListHeaderBox />
+            <ListContentsSection>
+              {postData.map(data => (
+                <ListContentsBox
+                  data={data}
+                  key={data.id}
+                  detailModalOpener={detailModalOpener}
+                  onCurrentModal={onCurrentModal}
+                />
+              ))}
+              <PageNation
+                perPage={perPage}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+                blockNum={blockNum}
+                setBlockNum={setBlockNum}
+                counts={counts}
+              />
+            </ListContentsSection>
+          </>
+        );
+      case 'posts':
+        return (
+          <>
+            <PostHeaderBox />
+            <ListContentsSection>
+              {postData.map(data => (
+                <ListPostContentsBox
+                  data={data}
+                  key={data.id}
+                  detailModalOpener={detailModalOpener}
+                  onCurrentModal={onCurrentModal}
+                />
+              ))}
+              <PageNation
+                perPage={perPage}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+                blockNum={blockNum}
+                setBlockNum={setBlockNum}
+                counts={counts}
+              />
+            </ListContentsSection>
+          </>
+        );
+    }
+  };
+
+  const modalOpener = () => {
+    switch (location.pathname) {
+      case '/admin/users':
+        return (
+          <UserModal detailModalOpener={detailModalOpener} modalId={modalId} />
+        );
+      case '/admin/posts/admin':
+        return (
+          <PostModal detailModalOpener={detailModalOpener} modalId={modalId} />
+        );
+      case '/admin/posts/deleted/':
+        return (
+          <DeletedPostModal
+            detailModalOpener={detailModalOpener}
+            modalId={modalId}
+          />
+        );
+      default:
+        return (
+          <UserModal detailModalOpener={detailModalOpener} modalId={modalId} />
+        );
+    }
+  };
 
   return (
     <AdminRightContainer>
@@ -129,36 +202,8 @@ const AdminRightPageUser = ({
         </SortByUser>
       </SortBox>
       <UserListContainer>
-        {loading ? (
-          <AdminSpinner />
-        ) : (
-          postData && (
-            <>
-              <ListHeaderBox />
-              <ListContentsSection>
-                {postData.map(data => (
-                  <ListContentsBox
-                    data={data}
-                    key={data.id}
-                    openModal={openModal}
-                    onCurrentModal={onCurrentModal}
-                  />
-                ))}
-                <PageNation
-                  perPage={perPage}
-                  setCurrentPage={setCurrentPage}
-                  currentPage={currentPage}
-                  blockNum={blockNum}
-                  setBlockNum={setBlockNum}
-                  counts={counts}
-                />
-                {isModalOpen && (
-                  <UserModal closeModal={closeModal} modalId={modalId} />
-                )}
-              </ListContentsSection>
-            </>
-          )
-        )}
+        {loading ? <AdminSpinner /> : postData && rightSectionOpener()}
+        {isModalOpen && modalOpener()}
       </UserListContainer>
     </AdminRightContainer>
   );

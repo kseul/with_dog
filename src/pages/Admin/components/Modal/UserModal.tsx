@@ -4,7 +4,7 @@ import useAxios from 'hooks/useAxios';
 import { AiOutlineClose } from 'react-icons/ai';
 import backgroundImage from 'assets/images/bg1.jpg';
 
-const UserModal = ({ closeModal, modalId }) => {
+const UserModal = ({ modalId, detailModalOpener }) => {
   const { response } = useAxios({
     method: 'GET',
     url: `https://togedog-dj.herokuapp.com/users/${modalId}`,
@@ -26,11 +26,11 @@ const UserModal = ({ closeModal, modalId }) => {
     }
   };
   return (
-    <ModalBackground onClick={closeModal}>
+    <ModalBackground onClick={detailModalOpener}>
       {response?.data && (
         <ModalContainer onClick={e => e.stopPropagation()}>
           <ModalTop>
-            <DeleteIconButton onClick={closeModal}>
+            <DeleteIconButton onClick={detailModalOpener}>
               <AiOutlineClose />
             </DeleteIconButton>
           </ModalTop>
@@ -45,7 +45,7 @@ const UserModal = ({ closeModal, modalId }) => {
               <CancelBtn
                 onClick={() => {
                   deleteUser();
-                  closeModal();
+                  detailModalOpener();
                 }}
               >
                 계정 삭제

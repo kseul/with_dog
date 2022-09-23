@@ -1,27 +1,39 @@
 import axios from 'axios';
 import styled from 'styled-components';
+import { useState } from 'react';
 import useAxios from 'hooks/useAxios';
 import UserInfoBox from 'pages/Admin/components/RightSection/UserInfoBox';
 import { AiOutlineClose } from 'react-icons/ai';
 import backgroundImage from 'assets/images/bg1.jpg';
 
-const DeletedPostModal = ({ detailModalOpener, modalId }) => {
+const NoticeDetailModal = ({ noticeDetailModal, modalId }) => {
+  const [reason, setReason] = useState<string>('');
+
   const { response } = useAxios({
     method: 'GET',
-    url: `https://togedog-dj.herokuapp.com/posts/deleted/${modalId}/`,
+    url: `https://togedog-dj.herokuapp.com/posts/${modalId}/admin/`,
     headers: {
       accept: '*/*',
       Authorization: `Bearer ${sessionStorage.getItem('token')}`,
     },
   });
 
+  const getReason = e => {
+    e.preventDefault();
+    setReason(e.target.value);
+  };
+
   const deletePost = () => {
-    if (window.confirm('게시글을 완전히 삭제하시겠습니까?')) {
+    if (window.confirm('게시글을 삭제하시겠습니까?')) {
       axios.post(
-        `https://togedog-dj.herokuapp.com/posts/${modalId}/delete/hard/`,
+        `https://togedog-dj.herokuapp.com/posts/${modalId}/delete/`,
+        new URLSearchParams({
+          delete_reason: reason,
+        }),
         {
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
         }
       );
@@ -31,12 +43,12 @@ const DeletedPostModal = ({ detailModalOpener, modalId }) => {
   };
 
   return (
-    <ModalBackground onClick={detailModalOpener}>
+    <ModalBackground onClick={noticeDetailModal}>
       {response?.data && (
         <ModalContainer onClick={e => e.stopPropagation()}>
           <ModalTop>
-            <ModalTitle>삭제된 게시글 관리</ModalTitle>
-            <DeleteIconButton onClick={detailModalOpener}>
+            <ModalTitle>게시글 관리</ModalTitle>
+            <DeleteIconButton onClick={noticeDetailModal}>
               <AiOutlineClose />
             </DeleteIconButton>
           </ModalTop>
@@ -65,13 +77,11 @@ const DeletedPostModal = ({ detailModalOpener, modalId }) => {
             </PostImage>
             <ReasonToBan>
               <ReasonToBanTitle>사유</ReasonToBanTitle>
-              <ReasonToBanContent>
-                {response.data.delete_reason}
-              </ReasonToBanContent>
+              <ReasonToBanContent onChange={getReason} />
               <BtnWrapper>
                 <CancelBtn
                   onClick={() => {
-                    detailModalOpener();
+                    noticeDetailModal();
                     deletePost();
                   }}
                 >
@@ -109,6 +119,8 @@ const ModalContainer = styled.div`
   min-height: 40rem;
   background: url(${backgroundImage}) center no-repeat;
   background-size: cover;
+  z-index: 7;
+  color: black;
 `;
 
 const ModalTop = styled.div`
@@ -128,7 +140,7 @@ const ModalTitle = styled.p`
 
 const DeleteIconButton = styled.button`
   ${props => props.theme.flex.flexBox('row', 'center', '')}
-  margin-left : auto;
+  width: 5%;
   height: 100%;
   border-style: none;
   background: transparent;
@@ -156,10 +168,10 @@ const PostContent = styled.div`
 
 const PostContentTitle = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', '')}
+  margin-bottom: -1px;
   width: 100%;
   height: 1.5rem;
   border: 1px solid black;
-  margin-bottom: -1px;
 `;
 
 const PostTitleIndex = styled.div`
@@ -178,7 +190,7 @@ const PostTitleBox = styled.div`
 
 const PostText = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', '')}
-  margin-bottom: -1px;
+  margin-top: -1px;
   width: 100%;
   height: 50%;
   border: 1px solid black;
@@ -205,12 +217,11 @@ const ReasonToBanTitle = styled.p`
   padding-top: 1rem;
 `;
 
-const ReasonToBanContent = styled.div`
-  padding-top: 0.5rem;
-  padding-left: 0.5rem;
+const ReasonToBanContent = styled.textarea`
   width: 90%;
   height: 50%;
-  border: 1px solid black;
+  resize: none;
+  font-family: 'Noto Sans KR', sans-serif;
 `;
 
 const BtnWrapper = styled.div`
@@ -245,8 +256,8 @@ const PostImageTitle = styled.p``;
 
 const PostImageContent = styled.div`
   position: relative;
-  width: 13rem;
-  height: 13rem;
+  width: 12rem;
+  height: 12rem;
 `;
 
 const PostImg = styled.img`
@@ -258,4 +269,4 @@ const PostImg = styled.img`
   border-radius: 3px;
 `;
 
-export default DeletedPostModal;
+export default NoticeDetailModal;

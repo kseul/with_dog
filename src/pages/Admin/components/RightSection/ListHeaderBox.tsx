@@ -25,7 +25,7 @@ const UserListHeader = styled.div`
 `;
 
 const UserNickName = styled.span`
-  width: 6.25rem;
+  width: 8rem;
   text-align: center;
   vertical-align: middle;
 `;

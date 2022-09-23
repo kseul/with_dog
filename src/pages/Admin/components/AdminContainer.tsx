@@ -1,18 +1,16 @@
 import axios from 'axios';
 import styled from 'styled-components';
 import { useState, useEffect, useCallback } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import LeftSideList from 'pages/Admin/components/LeftSideMenu/LeftSideList';
 import AdminHeader from 'pages/Admin/components/AdminHeader';
-import AdminRightPageUser from 'pages/Admin/components/RightSection/AdminRightPageUser';
-import AdminRightPagePost from 'pages/Admin/components/RightSection/AdminRightPagePost';
+import AdminRightPage from 'pages/Admin/components/RightSection/AdminRightPage';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
 import backGroundImg from 'assets/images/bg1.jpg';
 import { ListData } from 'types/type';
 
 const AdminContainer = () => {
   const navigate = useNavigate();
-  const params = useParams();
   const location = useLocation();
 
   const [clicked, setClicked] = useState<string>(location.pathname.slice(7));
@@ -20,8 +18,19 @@ const AdminContainer = () => {
   const [loading, setLoading] = useState<Boolean>(false);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [banNum, setBanNum] = useState<number>(0);
   const [counts, setCounts] = useState<number>();
+
+  //모달
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalId, setModalId] = useState<number | undefined>();
+
+  const detailModalOpener = (): void => {
+    setIsModalOpen(prev => !prev);
+  };
+
+  const onCurrentModal = (id: number): void => {
+    setModalId(id);
+  };
 
   const fetchData = useCallback(async () => {
     try {
@@ -54,7 +63,7 @@ const AdminContainer = () => {
 
   return (
     <AdminPageContainer>
-      <AdminHeader />
+      <AdminHeader onCurrentModal={onCurrentModal} modalId={modalId} />
       <SectionContainer>
         <AdminLeftSection>
           <ListWrapper>
@@ -70,47 +79,17 @@ const AdminContainer = () => {
           </ListWrapper>
         </AdminLeftSection>
         <AdminRightSection>
-          {params.value === 'users' ? (
-            <AdminRightPageUser
-              postData={postData}
-              loading={loading}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              counts={counts}
-              banNum={banNum}
-              setBanNum={setBanNum}
-            />
-          ) : params.value === 'posts' ? (
-            <AdminRightPagePost
-              postData={postData}
-              loading={loading}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              counts={counts}
-              banNum={banNum}
-              setBanNum={setBanNum}
-            />
-          ) : params.value === 'posts' ? (
-            <AdminRightPagePost
-              postData={postData}
-              loading={loading}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              counts={counts}
-              banNum={banNum}
-              setBanNum={setBanNum}
-            />
-          ) : (
-            <AdminRightPageUser
-              postData={postData}
-              loading={loading}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              counts={counts}
-              banNum={banNum}
-              setBanNum={setBanNum}
-            />
-          )}
+          <AdminRightPage
+            postData={postData}
+            loading={loading}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            counts={counts}
+            isModalOpen={isModalOpen}
+            modalId={modalId}
+            detailModalOpener={detailModalOpener}
+            onCurrentModal={onCurrentModal}
+          />
         </AdminRightSection>
       </SectionContainer>
     </AdminPageContainer>

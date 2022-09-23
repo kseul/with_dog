@@ -6,7 +6,7 @@ import UserInfoBox from 'pages/Admin/components/RightSection/UserInfoBox';
 import { AiOutlineClose } from 'react-icons/ai';
 import backgroundImage from 'assets/images/bg1.jpg';
 
-const PostModal = ({ closeModal, modalId }) => {
+const PostModal = ({ detailModalOpener, modalId }) => {
   const [reason, setReason] = useState<string>('');
 
   const { response } = useAxios({
@@ -43,12 +43,12 @@ const PostModal = ({ closeModal, modalId }) => {
   };
 
   return (
-    <ModalBackground onClick={closeModal}>
+    <ModalBackground onClick={detailModalOpener}>
       {response?.data && (
         <ModalContainer onClick={e => e.stopPropagation()}>
           <ModalTop>
             <ModalTitle>게시글 관리</ModalTitle>
-            <DeleteIconButton onClick={closeModal}>
+            <DeleteIconButton onClick={detailModalOpener}>
               <AiOutlineClose />
             </DeleteIconButton>
           </ModalTop>
@@ -81,7 +81,7 @@ const PostModal = ({ closeModal, modalId }) => {
               <BtnWrapper>
                 <CancelBtn
                   onClick={() => {
-                    closeModal();
+                    detailModalOpener();
                     deletePost();
                   }}
                 >
@@ -119,6 +119,7 @@ const ModalContainer = styled.div`
   min-height: 40rem;
   background: url(${backgroundImage}) center no-repeat;
   background-size: cover;
+  z-index: 7;
 `;
 
 const ModalTop = styled.div`

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-const ListContentsBox = ({ data, openModal, onCurrentModal }) => {
+const ListContentsBox = ({ data, detailModalOpener, onCurrentModal }) => {
   return (
     <ListContents
       onClick={() => {
-        openModal();
+        detailModalOpener();
         onCurrentModal(data.id);
       }}
     >
@@ -34,7 +34,7 @@ const ListContents = styled.div`
 `;
 
 const UserNickName = styled.span`
-  width: 6.25rem;
+  width: 8rem;
   text-align: center;
   vertical-align: middle;
 `;

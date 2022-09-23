@@ -5,7 +5,7 @@ import NoticeModal from 'pages/Admin/components/Modal/NoticeModal';
 import logo from 'assets/svg/with-dog-logo.svg';
 import { AiFillBell } from 'react-icons/ai';
 
-const AdminHeader = () => {
+const AdminHeader = ({ onCurrentModal, modalId }) => {
   const { response } = useAxios({
     method: 'GET',
     url: `https://togedog-dj.herokuapp.com/admin/notices`,
@@ -15,10 +15,16 @@ const AdminHeader = () => {
     },
   });
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isNoticeModalOpen, setIsNoticeModalOpen] = useState<Boolean>(false);
+  const [isNoticeDetailModal, setIsNoticeDetailModal] =
+    useState<Boolean>(false);
 
-  const openModal = (): void => {
-    setIsModalOpen(prev => !prev);
+  const noticeModal = (): void => {
+    setIsNoticeModalOpen(prev => !prev);
+  };
+
+  const noticeDetailModal = (): void => {
+    setIsNoticeDetailModal(prev => !prev);
   };
 
   return (
@@ -28,11 +34,19 @@ const AdminHeader = () => {
         <AdminHeaderTitle>함께하개</AdminHeaderTitle>
       </TitleBox>
       <AdminNoticeWrapper>
-        <AiFillBell className="noticeIcon" onClick={openModal} />
+        <AiFillBell className="noticeIcon" onClick={noticeModal} />
         {response?.data.count !== 0 && (
           <NoticeNum>{response?.data.count}</NoticeNum>
         )}
-        {isModalOpen && <NoticeModal data={response?.data} />}
+        {isNoticeModalOpen && (
+          <NoticeModal
+            data={response?.data}
+            noticeDetailModal={noticeDetailModal}
+            isNoticeDetailModal={isNoticeDetailModal}
+            onCurrentModal={onCurrentModal}
+            modalId={modalId}
+          />
+        )}
       </AdminNoticeWrapper>
     </AdminHeaderContainer>
   );
