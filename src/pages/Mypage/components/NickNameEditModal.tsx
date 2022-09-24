@@ -46,6 +46,7 @@ const NickNameEditModal = ({
           onChange={handleUserInput}
           onKeyDown={e => {
             if (e.key === 'Enter') {
+              e.preventDefault();
               submitChangedNickname();
             }
           }}

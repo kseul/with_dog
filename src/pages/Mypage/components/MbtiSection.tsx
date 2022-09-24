@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import MBTILETTER_DATA from '../DATA/MBTILETTER_DATA';
 import arrowBottom from 'assets/svg/arrow-bottom.svg';
 
-const MbtiSection = ({ mbti, changeMbti }) => {
+const MbtiSection = ({ mbti, submitChangedMbti }) => {
   const mbtiNickName = MBTILETTER_DATA.filter(data => {
     return data.mbti === mbti;
   });
@@ -12,7 +12,7 @@ const MbtiSection = ({ mbti, changeMbti }) => {
       <Mbti>
         {mbti}
         <ArrowImg src={arrowBottom} />
-        <EditMbti onChange={changeMbti}>
+        <EditMbti onChange={submitChangedMbti}>
           {MBTILETTER_DATA.map(({ id, mbti }) => {
             return <MbtiOption key={id}>{mbti}</MbtiOption>;
           })}

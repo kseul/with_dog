@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import cameraImg from 'assets/svg/camera.svg';
 
-const UserImgSection = ({ changeUserImage, thumbnail_url }) => {
+const UserImgSection = ({ submitChangedUserImage, thumbnail_url }) => {
   return (
     <UserImgContainer>
       <UserImg src={thumbnail_url} />
@@ -10,7 +10,7 @@ const UserImgSection = ({ changeUserImage, thumbnail_url }) => {
           type="file"
           accept=".jpg, .jepg, .jfif, .png, .webp, .avif, .svg"
           id="imgFile"
-          onChange={changeUserImage}
+          onChange={submitChangedUserImage}
         />
         <FileInputLabel htmlFor="imgFile">
           <EditImg src={cameraImg} />

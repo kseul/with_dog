@@ -1,4 +1,5 @@
 const MBTILETTER_DATA = [
+  { id: 0, mbti: 'none', nickname: 'MBTI를 설정해주세요.' },
   { id: 1, mbti: 'INTC', nickname: '겁많은 탐험가 댕댕이' },
   { id: 2, mbti: 'INTP', nickname: '눈치 빠른 모범생 댕댕이' },
   { id: 3, mbti: 'INFC', nickname: '세상이 궁금한 몽상가 댕댕이' },
