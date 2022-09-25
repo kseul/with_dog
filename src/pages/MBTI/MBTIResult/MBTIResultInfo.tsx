@@ -6,10 +6,9 @@ import SNSshare from './SNSshare';
 import ResultInfo from 'assets/svg/ResultInfoPositoin.svg';
 import ResultNotice from 'assets/svg/ResultNoticePositoin.svg';
 import { MBTI_RESULT } from './constants/Result';
-import UserCounter from './UserCounter';
 
 const MBTIResultInfo = ({ graphResult, mbtiResultText }) => {
-  const getMBTIResult: string = Object.values(mbtiResultText.mbti).toString();
+  const getMBTIResult: any = Object.values(mbtiResultText).toString();
   const resultMBTI = MBTI_RESULT.filter(item => {
     return item.MBTI === getMBTIResult;
   });
@@ -38,7 +37,6 @@ const MBTIResultInfo = ({ graphResult, mbtiResultText }) => {
         )
       )}
       <ChatroomRecommendation />
-      <UserCounter />
       <SNSshare />
     </MBTIResultInfoContainer>
   );

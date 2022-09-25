@@ -40,7 +40,7 @@ const Nav = () => {
 };
 
 const NavContainer = styled.div`
-  position: sticky;
+  position: fixed;
   top: 0;
   display: flex;
   align-items: center;
@@ -50,6 +50,7 @@ const NavContainer = styled.div`
   height: 4.8rem;
   border-bottom: 2px solid #e1e2e3;
   background-color: #fdfdfd;
+  z-index: 1;
 `;
 
 const PageContainer = styled.div`

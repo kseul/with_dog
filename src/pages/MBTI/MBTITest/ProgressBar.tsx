@@ -12,8 +12,7 @@ const ProgressBar = ({ percentLength }: { percentLength: number }) => {
 
 const ProgressBarContainer = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', 'center')}
-  position: -webkit-sticky;
-  position: sticky;
+  position: fixed;
   top: 70px;
   width: 75rem;
   height: 3.125rem;
