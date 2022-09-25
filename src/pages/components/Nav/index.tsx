@@ -40,7 +40,8 @@ const Nav = () => {
 };
 
 const NavContainer = styled.div`
-  position: fixed;
+  position: sticky;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,7 +50,6 @@ const NavContainer = styled.div`
   height: 4.8rem;
   border-bottom: 2px solid #e1e2e3;
   background-color: #fdfdfd;
-  z-index: 1;
 `;
 
 const PageContainer = styled.div`

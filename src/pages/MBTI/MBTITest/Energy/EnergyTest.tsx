@@ -54,7 +54,6 @@ const Questions = styled.li`
   font-weight: 350;
   color: #191919;
   text-align: center;
-  border-bottom: 1px solid #bfbfbf;
 `;
 
 export default EnergyTest;

@@ -317,7 +317,7 @@ const MBTITest = () => {
 const MBTITestContainer = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
   width: 100%;
-  height: 100%;
+  height: auto;
   margin: 0 auto;
   background-color: #edeef0;
 `;
