@@ -4,13 +4,13 @@ import useAxios from 'hooks/useAxios';
 import { AiOutlineClose } from 'react-icons/ai';
 import backgroundImage from 'assets/images/bg1.jpg';
 
-const UserModal = ({ closeModal, modalId }) => {
+const UserModal = ({ modalId, detailModalOpener }) => {
   const { response } = useAxios({
     method: 'GET',
     url: `https://togedog-dj.herokuapp.com/users/${modalId}`,
     headers: {
       accept: '*/*',
-      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
     },
   });
 
@@ -18,7 +18,7 @@ const UserModal = ({ closeModal, modalId }) => {
     if (window.confirm('계정을 삭제하시겠습니까?')) {
       axios.delete(`https://togedog-dj.herokuapp.com/users/${modalId}`, {
         headers: {
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
       });
     } else {
@@ -26,27 +26,26 @@ const UserModal = ({ closeModal, modalId }) => {
     }
   };
   return (
-    <ModalBackground onClick={closeModal}>
+    <ModalBackground onClick={detailModalOpener}>
       {response?.data && (
         <ModalContainer onClick={e => e.stopPropagation()}>
           <ModalTop>
-            <DeleteIconButton onClick={closeModal}>
+            <DeleteIconButton onClick={detailModalOpener}>
               <AiOutlineClose />
             </DeleteIconButton>
           </ModalTop>
           <ModalContents>
-            <ProfileImage />
+            <ProfileImage src={response.data.thumbnail_url} />
             <UserName>{response.data.name}</UserName>
             <UserNickName>{response.data.nickname}</UserNickName>
             <Mbti>{response.data.mbti}</Mbti>
             <MbtiText>{response.data.mbti}</MbtiText>
             <UserEmail>{response.data.email}</UserEmail>
-            <UserAddress>경기도 서울시 부산구 대구동 73</UserAddress>
             <BtnContainer>
               <CancelBtn
                 onClick={() => {
                   deleteUser();
-                  closeModal();
+                  detailModalOpener();
                 }}
               >
                 계정 삭제
@@ -105,10 +104,9 @@ const ModalContents = styled.div`
   height: calc(100% - 3rem);
 `;
 
-const ProfileImage = styled.div`
+const ProfileImage = styled.img`
   width: 9.375rem;
   height: 9.375rem;
-  border: 1px solid black;
   border-radius: 50%;
 `;
 
@@ -131,11 +129,7 @@ const MbtiText = styled.p`
 `;
 
 const UserEmail = styled.p`
-  font-size: 0.7rem;
-`;
-
-const UserAddress = styled.p`
-  font-size: 0.7rem;
+  font-size: 1rem;
 `;
 
 const BtnContainer = styled.div`

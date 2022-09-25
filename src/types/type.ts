@@ -72,18 +72,6 @@ export interface ListData {
   value: string;
 }
 
-export interface PagenatedData {
-  account_type: string;
-  email: string;
-  id: number;
-  mbti: string;
-  name: string;
-  nickname: string;
-  status: string;
-  thumbnail_url: string;
-  user_type: string;
-}
-
 export type idProp = number | undefined;
 
 export interface BoardDataProp {

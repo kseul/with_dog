@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const PostHeaderBox = () => {
   return (
     <PostHeader>
-      <UserName>사용자</UserName>
+      <UserNickName>닉네임</UserNickName>
       <PostContent>게시글 제목</PostContent>
       <UserMbti>MBTI</UserMbti>
       <PostedDate>게시일</PostedDate>
@@ -23,8 +23,8 @@ const PostHeader = styled.div`
   background-color: ${props => props.theme.colors.lightGray};
 `;
 
-const UserName = styled.span`
-  width: 6.25rem;
+const UserNickName = styled.span`
+  width: 8rem;
   text-align: center;
   vertical-align: middle;
 `;

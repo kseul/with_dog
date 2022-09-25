@@ -9,12 +9,12 @@ const LEFTSIDE_DB: ListData[] = [
   {
     id: 2,
     listName: '게시글',
-    value: 'posts',
+    value: 'posts/admin',
   },
   {
     id: 3,
     listName: '삭제된 게시글',
-    value: 'posts/deleted',
+    value: 'posts/deleted/',
   },
   {
     id: 4,

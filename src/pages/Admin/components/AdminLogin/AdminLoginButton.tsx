@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-const LoginButton = ({ title, color, size, loginPost }) => {
+const LoginButton = ({ title, color, size, submitSigninInfo }) => {
   return (
     <Button
       color={color}
       style={{ width: `${size}rem` }}
-      onClick={e => loginPost(e)}
+      onClick={e => submitSigninInfo(e)}
     >
       {title}
     </Button>
