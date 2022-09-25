@@ -12,6 +12,7 @@ const ConfirmText = ({ errorMessage }: CheckValidProps) => {
 const ConfirmTextContainer = styled.div`
   position: relative;
 `;
+
 const Title = styled.div`
   position: absolute;
   top: -40px;
@@ -20,4 +21,5 @@ const Title = styled.div`
   color: red;
   opacity: 0.6;
 `;
+
 export default ConfirmText;

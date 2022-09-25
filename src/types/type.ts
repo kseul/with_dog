@@ -170,8 +170,26 @@ export interface MainRef<T> {
 
 export interface AlertModalProps {
   title: string;
+  setShowAlertModal: (string) => void;
+}
+
+export interface EditModalProps {
   showAlertModal: string;
   setShowAlertModal: (string) => void;
+  setShowEditModal: (boolean) => void;
+  setLengthLimit: (boolean) => void;
+}
+
+export interface UserDataProps {
+  account_type?: string;
+  email?: string;
+  mbti?: string;
+  name?: string;
+  nickname?: string;
+  status?: string;
+  thumbnail_url?: string;
+  user_type?: string;
+  id?: number;
 }
 
 export interface ChatRoomProps {

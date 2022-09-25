@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { useCookies } from 'react-cookie';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import store from 'redux/store';
+import userActions from 'redux/actions/user';
 import AlertModal from 'pages/components/AlertModal';
 import InputForm from '../components/inputForm/InputForm';
 import LoginButton from '../components/loginButton/LoginButton';
 import SNSButton from '../components/snsButton/SNSButton';
-import store from 'redux/store';
-import userActions from 'redux/actions/user';
 import { KAKAO_AUTH_PATH } from './kakaoLogin/KakaoLoginData';
 import { GOOGLE_AUTH_PATH } from './googleLogin/GoogleloginData';
 import signInbg from 'assets/images/bg1.jpg';
@@ -69,7 +69,7 @@ const SignIn = () => {
         })
         .catch(error => {
           if (error) {
-            setShowAlertModal('이메일과 비밀번호를 다시 확인해주세요.');
+            setShowAlertModal('이메일과 비밀번호를 다시 확인해주세요');
           }
         });
 
@@ -108,11 +108,12 @@ const SignIn = () => {
 
   return (
     <SignInContainer>
-      <AlertModal
-        title={showAlertModal}
-        setShowAlertModal={setShowAlertModal}
-        showAlertModal={showAlertModal}
-      />
+      {showAlertModal && (
+        <AlertModal
+          title={showAlertModal}
+          setShowAlertModal={setShowAlertModal}
+        />
+      )}
       <Character src={character} />
       <LoginForm>
         <LoginTitle>로그인</LoginTitle>
