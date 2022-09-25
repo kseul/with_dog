@@ -1,6 +1,7 @@
 const initialState = {
   LoggedIn: false,
   userData: {
+    id: 0,
     account_type: '',
     email: '',
     mbti: '',

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import store from 'redux/store';
@@ -9,6 +10,7 @@ import MbtiSection from './components/MbtiSection';
 import UserEmailSection from './components/UserEmailSection';
 import NickNameEditModal from './components/NickNameEditModal';
 import AlertModal from 'pages/components/AlertModal';
+import { RootState } from 'redux/reducers';
 import bgimg from 'assets/images/bg1.jpg';
 
 const Mypage = () => {
@@ -20,91 +22,62 @@ const Mypage = () => {
 
   const formData = new FormData();
 
-  const userData = useSelector((state: any) => state.user.userData);
+  const userData = useSelector((state: RootState) => state.user.userData);
   const { name, nickname, email, mbti, thumbnail_url, id } = userData;
 
   const openEditModal = () => {
     setShowEditModal(true);
   };
 
-  // const option = {
-  //   url: `https://togedog-dj.herokuapp.com/user/${id}`,
-  //   method: 'PATCH',
-  //   headers: {
-  //     Accept: 'application/json',
-  //     Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
-  //   },
-  //   body: formData,
-  // };
+  const option = {
+    url: `https://togedog-dj.herokuapp.com/users/${id}`,
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
+    },
+    data: formData,
+  };
 
   const submitChangedMbti = async e => {
-    formData.append('mbti', e.target.value);
-
-    const response = await fetch(
-      `https://togedog-dj.herokuapp.com/users/${userData.id}`,
-      {
-        method: 'PATCH',
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
-        },
-        body: formData,
-      }
-    );
-    if (response.status === 200) {
+    try {
+      formData.append('mbti', e.target.value);
+      await axios(option);
       setShowAlertModal('MBTI 변경이 완료되었습니다.');
       store.dispatch(userActions.setMBTI(e.target.value));
-    } else {
+    } catch (error) {
       setShowAlertModal('MBTI 변경에 실패하였습니다.');
     }
   };
 
   const submitChangedUserImage = async e => {
-    formData.append('file', e.target.files[0]);
-
-    const response = await fetch(
-      `https://togedog-dj.herokuapp.com/users/${userData.id}`,
-      {
-        method: 'PATCH',
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
-        },
-        body: formData,
-      }
-    );
-    if (response.status === 200) {
-      const data = await response.json();
+    try {
+      formData.append('file', e.target.files[0]);
+      const response = await axios(option);
       setShowAlertModal('프로필 사진이 변경되었습니다.');
-      store.dispatch(userActions.setUserImage(data.user_thumbnail_url));
-    } else {
+      store.dispatch(
+        userActions.setUserImage(response.data.user_thumbnail_url)
+      );
+    } catch (error) {
       setShowAlertModal('프로필 사진 변경에 실패하였습니다.');
     }
   };
 
   const submitChangedNickname = async () => {
-    if (validkNickname) {
-      formData.append('nickname', changedNickname);
-
-      const response = await fetch(
-        `https://togedog-dj.herokuapp.com/users/${id}`,
-        {
-          method: 'PATCH',
-          headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
-          },
-          body: formData,
-        }
-      );
-      if (response.status === 200) {
+    try {
+      if (validkNickname) {
+        formData.append('nickname', changedNickname);
+        await axios(option);
         setShowAlertModal('닉네임 변경이 완료되었습니다.');
         store.dispatch(userActions.changeNickname(changedNickname));
-      } else if (response.status === 400) {
+      }
+    } catch (error: any) {
+      if (error.response.status === 400) {
         setShowAlertModal('부적절한 단어가 사용되었습니다.');
       } else {
         setShowAlertModal('닉네임 변경에 실패하였습니다.');
       }
+    } finally {
       setShowEditModal(false);
     }
   };
