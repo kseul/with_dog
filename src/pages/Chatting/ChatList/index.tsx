@@ -29,6 +29,7 @@ const ChatListContainer = styled.div`
   height: 100vh;
   padding-top: 4.8rem;
   background-color: #ececed;
+  padding-top: 5rem;
 `;
 
 export default ChatList;

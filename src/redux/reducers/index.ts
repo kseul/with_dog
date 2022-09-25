@@ -7,11 +7,12 @@ import postsReducer from './postsReducer';
 import mbtiGraphReducer from './mbtiGraphReducer';
 import mbtiTextReducer from './mbtiTextReducer';
 import userCounterReducer from './userCounterReducer';
+import chatReducer from './chatReducer';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['mbtiText', 'graph'],
+  whitelist: ['mbtiText', 'graph', 'chat'],
 };
 
 const authPersistConfig = {
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   graph: mbtiGraphReducer,
   mbtiText: mbtiTextReducer,
   counter: userCounterReducer,
+  chat: chatReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);
