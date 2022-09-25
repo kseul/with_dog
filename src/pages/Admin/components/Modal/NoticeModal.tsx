@@ -16,7 +16,7 @@ const NoticeModal = ({
   const clickAndRead = () => {
     axios
       .post(
-        `https://togedog-dj.herokuapp.com/admin/notices/all`,
+        `https://togedog-dj.herokuapp.com/admin/notices`,
         {},
         {
           headers: {
