@@ -1,13 +1,16 @@
 import styled from 'styled-components';
+import store from 'redux/store';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 import { MessagesProps } from 'types/type';
 import Siren from 'assets/svg/siren.svg';
+import chatReportActions from 'redux/actions/chatReport';
 
 const Message = ({
-  message: { user, text, time, mbti },
+  message: { user, text, time, mbti, id, messageId },
   nickname,
-}: MessagesProps) => {
+  setIsShowModal,
+}: MessagesProps | any) => {
   let isSentByCurrentUser = false;
   if (user === nickname) {
     isSentByCurrentUser = true;
@@ -15,6 +18,12 @@ const Message = ({
 
   const storeData = useSelector((state: RootState) => state);
   const userImage = storeData.user.userData.thumbnail_url;
+
+  const ReportChatData = (id, messageId, text) => {
+    store.dispatch(chatReportActions.reportedUserId(id));
+    store.dispatch(chatReportActions.reportedMessageId(messageId));
+    store.dispatch(chatReportActions.reportedMessage(text));
+  };
 
   if (user === '함께하개 관리자') {
     return (
@@ -51,7 +60,13 @@ const Message = ({
             <Text>{text}</Text>
           </TextBox>
           <TextData>
-            <ReportIcon src={Siren} />
+            <ReportIcon
+              src={Siren}
+              onClick={() => {
+                setIsShowModal(true);
+                ReportChatData(id, messageId, text);
+              }}
+            />
             <Time>{time}</Time>
           </TextData>
         </TextContainer>

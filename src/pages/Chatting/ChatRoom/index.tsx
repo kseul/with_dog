@@ -8,6 +8,7 @@ import Messages from './components/Messages';
 import Input from './components/Input';
 import { UserDataProps, ChatRoomProps, MessagesProps } from 'types/type';
 import signInbg from 'assets/images/bg2.png';
+import ChatReportModal from '../ChatReportModal';
 
 let socket;
 
@@ -15,14 +16,14 @@ const ChatRoom = () => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<MessagesProps[]>([]);
   const [currentTime, SetCurrentTime] = useState('');
+  const [isShowModal, setIsShowModal] = useState(false);
 
   const ENDPOINT = 'localhost:3000';
   // const ENDPOINT = 'http://54.180.89.143:8000';
 
   const storeData = useSelector((state: RootState) => state);
-  const { nickname }: UserDataProps = storeData.user.userData;
+  const { nickname, mbti, id }: UserDataProps = storeData.user.userData;
   const room: ChatRoomProps = storeData.chat.id;
-  const userMbti = storeData.user.userData.mbti;
 
   useEffect(() => {
     const date = new Date();
@@ -54,7 +55,8 @@ const ChatRoom = () => {
         nickname,
         room,
         currentTime,
-        userMbti,
+        mbti,
+        id,
         () => {
           setMessage('');
         }
@@ -71,12 +73,17 @@ const ChatRoom = () => {
   return (
     <ChatRoomContainer>
       <TitleBar />
-      <Messages messages={messages} nickname={nickname} />
+      <Messages
+        messages={messages}
+        nickname={nickname}
+        setIsShowModal={setIsShowModal}
+      />
       <Input
         message={message}
         setMessage={setMessage}
         sendMessage={sendMessage}
       />
+      {isShowModal && <ChatReportModal setIsShowModal={setIsShowModal} />}
     </ChatRoomContainer>
   );
 };

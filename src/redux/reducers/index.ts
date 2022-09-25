@@ -7,6 +7,7 @@ import postsReducer from './postsReducer';
 import mbtiGraphReducer from './mbtiGraphReducer';
 import mbtiTextReducer from './mbtiTextReducer';
 import chatReducer from './chatReducer';
+import chatReportReducer from './chatReportReducer';
 
 const persistConfig = {
   key: 'root',
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   graph: mbtiGraphReducer,
   mbtiText: mbtiTextReducer,
   chat: chatReducer,
+  chatReport: chatReportReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

@@ -178,6 +178,7 @@ export interface UserDataProps {
   status?: string;
   thumbnail_url?: string;
   user_type?: string;
+  id?: number;
 }
 
 export interface MainRef<T> {
