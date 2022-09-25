@@ -71,9 +71,13 @@ const PostModal = ({ detailModalOpener, modalId }) => {
                 </PostContentTitle>
               </PostContent>
               <CommentList>
-                {response?.data.comments.map(comment => (
-                  <CommentBox key={comment.id} comment={comment} />
-                ))}
+                {response?.data.comments.length === 0 ? (
+                  <p>등록된 댓글이 없습니다.</p>
+                ) : (
+                  response?.data.comments.map(comment => (
+                    <CommentBox key={comment.id} comment={comment} />
+                  ))
+                )}
               </CommentList>
               <ReasonToBan>
                 <ReasonToBanContent
@@ -131,7 +135,6 @@ const ModalTop = styled.div`
   height: 3rem;
   background-color: ${props => props.theme.colors.gray};
   border: 1px solid ${props => props.theme.colors.gray};
-  border-radius: 3px;
 `;
 
 const ModalTitle = styled.p`
@@ -170,7 +173,9 @@ const LeftBackground = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${props => props.theme.colors.lightGray};
-  border-radius: 1.875rem;
+  border-top-right-radius: 1.875rem;
+  border-bottom-right-radius: 1.875rem;
+  box-shadow: 5px 0px 5px lightGray;
 `;
 
 const PostImg = styled.img`

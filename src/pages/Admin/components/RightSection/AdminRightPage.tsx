@@ -65,6 +65,8 @@ const AdminRightPageUser = ({
   const allFilter = () => {
     setBanNum(0);
     setSearch('');
+    setStartDate(new Date(date.setDate(date.getDate() - 7)));
+    setEndDate(new Date(date.setDate(date.getDate() + 7)));
   };
 
   const reportFilter = e => {
