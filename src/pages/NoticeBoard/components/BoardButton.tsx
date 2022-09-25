@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import pawsIcon from 'assets/svg/dog-paws2.svg';
+import { Link } from 'react-router-dom';
 
 const BoardButton = () => {
   return (
@@ -17,8 +18,10 @@ const BoardButton = () => {
       </BoardButtonWrapper>
 
       <BoardWriteButton>
-        <BoardBtnIcon src={pawsIcon} />
-        새글쓰기
+        <StyledLink to="/noticeboard/write">
+          <BoardBtnIcon src={pawsIcon} />
+          새글쓰기
+        </StyledLink>
       </BoardWriteButton>
     </BoardButtonContainer>
   );
@@ -59,15 +62,23 @@ const BoardFilterButton = styled.button`
   color: white;
 `;
 
-const BoardWriteButton = styled.button`
+const BoardWriteButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 6.8rem;
   height: 2rem;
-  border: none;
   border-radius: 1rem;
   background-color: ${props => props.theme.colors.mint};
+  color: white;
+`;
+
+const StyledLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 0.9rem;
   color: white;
 `;
 

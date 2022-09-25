@@ -6,6 +6,8 @@ import userReducer from './userReducer';
 import postsReducer from './postsReducer';
 import mbtiGraphReducer from './mbtiGraphReducer';
 import mbtiTextReducer from './mbtiTextReducer';
+import boardReducer from './boardReducer';
+import boardListReducer from './boardListReducer';
 import chatReducer from './chatReducer';
 
 const persistConfig = {
@@ -24,6 +26,8 @@ const rootReducer = combineReducers({
   posts: postsReducer,
   graph: mbtiGraphReducer,
   mbtiText: mbtiTextReducer,
+  board: boardReducer,
+  boardList: boardListReducer,
   chat: chatReducer,
 });
 

@@ -88,19 +88,15 @@ export type idProp = number | undefined;
 
 export interface BoardDataProp {
   id?: number;
-  title?: string;
-  image?: string;
-  date?: string;
-  writer?: string;
-  like?: number;
-}
-
-export interface BoardModalProp {
-  clickCard?: () => void;
-  title?: string;
-  date?: string;
-  image?: string;
-  like?: number;
+  subject?: string;
+  image_url?: string;
+  created_at?: string;
+  user_nickname?: string;
+  user_thumbnail?: string;
+  post_likes_count?: number;
+  comments?: any;
+  modalContent?: any;
+  handleModal?: () => void;
 }
 
 export interface MBTIProps {
