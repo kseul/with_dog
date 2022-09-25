@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ArrowRight from 'assets/svg/arrow-right.svg';
-import { ChatListProp, idProp } from 'types/type';
+import { ChatListProp } from 'types/type';
 import { useState } from 'react';
 import ChatModal from 'pages/Chatting/ChatModal';
 
@@ -12,14 +12,9 @@ const ChatListRight = ({
   type,
 }: ChatListProp) => {
   const [isShowModal, setIsShowModal] = useState(false);
-  const [currentModal, setCurrentModal] = useState<number | undefined>();
 
   const onClickToggleModal = () => {
     setIsShowModal(!isShowModal);
-  };
-
-  const onCurrentModal = (id: idProp) => {
-    setCurrentModal(id);
   };
 
   return (
@@ -27,7 +22,6 @@ const ChatListRight = ({
       <ChatListRightContainer
         onClick={() => {
           onClickToggleModal();
-          onCurrentModal(id);
         }}
       >
         <GoChatIntro> 살펴보개 </GoChatIntro>
@@ -35,8 +29,8 @@ const ChatListRight = ({
       </ChatListRightContainer>
       {isShowModal && (
         <ChatModal
+          id={id}
           onClickToggleModal={onClickToggleModal}
-          currentModal={currentModal}
           Image={Image}
           title={title}
           modalDescription={modalDescription}

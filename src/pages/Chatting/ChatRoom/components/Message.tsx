@@ -1,40 +1,58 @@
 import styled from 'styled-components';
-import testImg from 'assets/images/dog3.png';
-import testImg2 from 'assets/images/dog4.png';
-import ArrowLeft from 'assets/svg/siren.svg';
+import { useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
+import { MessagesProps } from 'types/type';
+import Siren from 'assets/svg/siren.svg';
 
-const Message = () => {
-  let isSentByCurrentUser = true;
+const Message = ({
+  message: { user, text, time, mbti },
+  nickname,
+}: MessagesProps) => {
+  let isSentByCurrentUser = false;
+  if (user === nickname) {
+    isSentByCurrentUser = true;
+  }
+
+  const storeData = useSelector((state: RootState) => state);
+  const userImage = storeData.user.userData.thumbnail_url;
+
+  if (user === '함께하개 관리자') {
+    return (
+      <AdminTextBox>
+        <Text>{text}</Text>
+      </AdminTextBox>
+    );
+  }
 
   return isSentByCurrentUser ? (
     <MessageContainer currentUser={isSentByCurrentUser}>
       <MessageBox>
         <TextContainer>
           <TextData>
-            <Time>오후 2:02</Time>
+            <Time>{time}</Time>
           </TextData>
           <TextBox currentUser={isSentByCurrentUser}>
-            <Text>미루미코도 같이 놀자아아아</Text>
+            <Text>{text}</Text>
           </TextBox>
         </TextContainer>
       </MessageBox>
-      <ProfileImg src={testImg2} />
+      <ProfileImg src={userImage} />
     </MessageContainer>
   ) : (
     <MessageContainer currentUser={isSentByCurrentUser}>
-      <ProfileImg src={testImg} />
+      <ProfileImg src={userImage} />
       <MessageBox>
         <UserBox>
-          <Nickname>날순이</Nickname>
-          <Mbti>INFP</Mbti>
+          <Nickname>{user}</Nickname>
+          <Mbti>{mbti}</Mbti>
         </UserBox>
         <TextContainer>
           <TextBox currentUser={isSentByCurrentUser}>
-            <Text>이번주 한강 공놀이 ~~~~ ?</Text>
+            <Text>{text}</Text>
           </TextBox>
           <TextData>
-            <ReportIcon src={ArrowLeft} />
-            <Time>오후 2:00</Time>
+            <ReportIcon src={Siren} />
+            <Time>{time}</Time>
           </TextData>
         </TextContainer>
       </MessageBox>
@@ -45,14 +63,14 @@ const Message = () => {
 const MessageContainer = styled.div<{ currentUser: boolean }>`
   ${props => props.theme.flex.flexBox()}
   justify-content: ${({ currentUser }) => (currentUser ? 'end' : 'start')};
-  padding: 1.3rem 1rem 0rem 1rem;
+  padding: 1.3rem 1rem 0 1rem;
 `;
 
 const ProfileImg = styled.img`
   margin: 0 0.8rem;
   width: 4rem;
   height: 4rem;
-  border: 0.25rem solid white;
+  border: 0.2rem solid white;
   border-radius: 50%;
   object-fit: cover;
 `;
@@ -120,6 +138,17 @@ const ReportIcon = styled.img`
 
 const Time = styled.div`
   font-size: 0.8rem;
+`;
+
+const AdminTextBox = styled.div`
+  margin: 0.8rem auto 0.8rem auto;
+  padding: 0.3rem 0;
+  width: 80%;
+  border-radius: 5rem;
+  color: #efefef;
+  background-color: gray;
+  font-size: 0.4rem;
+  text-align: center;
 `;
 
 export default Message;

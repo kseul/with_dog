@@ -25,7 +25,7 @@ const Router = () => {
         <Route path="/*" element={<MainRouter />} />
         <Route path="/admin/:value/*" element={<Admin />} />
         <Route path="/adminsignin" element={<AdminSignIn />} />
-        <Route path="/chat" element={<ChatRoom />} />
+        <Route path="/chat/:id" element={<ChatRoom />} />
         <Route path="/kakaoLogin" element={<KakaoLogin />} />
         <Route path="/googleLogin" element={<GoogleLogin />} />
       </Routes>

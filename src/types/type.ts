@@ -36,7 +36,7 @@ export interface PageBoxProp {
 
 export interface ChatModalProp {
   onClickToggleModal: () => void;
-  currentModal: idProp;
+  id?: number;
   Image: any;
   modalDescription: string | undefined;
   type: string | undefined;
@@ -165,6 +165,17 @@ export interface MBTIScoreProps {
   layout?: string;
 }
 
+export interface UserDataProps {
+  account_type?: string;
+  email?: string;
+  mbti?: string;
+  name?: string;
+  nickname?: string;
+  status?: string;
+  thumbnail_url?: string;
+  user_type?: string;
+}
+
 export interface MainRef<T> {
   current: T;
 }
@@ -173,4 +184,17 @@ export interface AlertModalProps {
   title: string;
   showAlertModal: string;
   setShowAlertModal: (string) => void;
+}
+
+export interface ChatRoomProps {
+  room?: number;
+}
+
+export interface MessagesProps {
+  user?: string;
+  text?: string;
+  time?: string;
+  mbti?: string;
+  nickname?: string;
+  message;
 }

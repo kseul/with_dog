@@ -1,11 +1,21 @@
 import styled from 'styled-components';
 
-const Input = () => {
+const Input = ({ message, setMessage, sendMessage }) => {
   return (
     <InputContainer>
       <InputBox>
-        <ChatInput type="text" placeholder="메세지 입력" />
-        <InputBtn>전송</InputBtn>
+        <ChatInput
+          type="text"
+          value={message}
+          placeholder="메세지 입력"
+          onChange={e => setMessage(e.target.value)}
+          onKeyDown={e =>
+            e.key === 'Enter' && e.nativeEvent.isComposing === false
+              ? sendMessage(e)
+              : null
+          }
+        />
+        <InputBtn onClick={e => sendMessage(e)}>전송</InputBtn>
       </InputBox>
     </InputContainer>
   );
