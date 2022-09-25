@@ -88,7 +88,7 @@ const BoardListWrapper = styled.div`
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   width: 100%;
-  margin-top: 1.5rem;
+  margin-top: 3rem;
 
   @media screen and (min-width: 1920px) {
     grid-template-columns: repeat(4, 1fr);
