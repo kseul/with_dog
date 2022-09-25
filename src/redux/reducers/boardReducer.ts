@@ -1,4 +1,5 @@
 const initialState = {
+  boardList: [],
   boardData: {
     comments: [],
     content: '',
@@ -16,6 +17,11 @@ const initialState = {
 
 const boardReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'GET_BOARDLIST':
+      return {
+        ...state,
+        boardList: [...state.boardList, ...action.boardData],
+      };
     case 'GET_BOARD':
       return {
         ...state,

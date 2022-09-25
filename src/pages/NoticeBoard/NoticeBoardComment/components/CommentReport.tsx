@@ -9,7 +9,7 @@ interface commentReportProps {
 }
 
 const CommentReport = ({ id }: commentReportProps) => {
-  const boardData = useSelector((state: RootState) => state.board.boardData);
+  const boardData = useSelector((state: any) => state.board.boardData);
 
   const handleCommentReport = async () => {
     const formData = new FormData();

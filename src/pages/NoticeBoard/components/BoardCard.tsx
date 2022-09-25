@@ -54,7 +54,11 @@ const BoardCard = ({
         </CardBottom>
       </CardContainer>
       {activateModal && (
-        <BoardModal handleModal={handleModal} modalContent={modalContent} />
+        <BoardModal
+          modalContent={modalContent}
+          setModalContent={setModalContent}
+          handleModal={handleModal}
+        />
       )}
     </>
   );

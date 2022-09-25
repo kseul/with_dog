@@ -7,6 +7,7 @@ import postsReducer from './postsReducer';
 import mbtiGraphReducer from './mbtiGraphReducer';
 import mbtiTextReducer from './mbtiTextReducer';
 import boardReducer from './boardReducer';
+import boardListReducer from './boardListReducer';
 
 const persistConfig = {
   key: 'root',
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   graph: mbtiGraphReducer,
   mbtiText: mbtiTextReducer,
   board: boardReducer,
+  boardList: boardListReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

@@ -1,11 +1,12 @@
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import React, { useState } from 'react';
+import boardActions from 'redux/actions/board';
+import store from 'redux/store';
 import styled from 'styled-components/macro';
 import BoardCard from './BoardCard';
 
 const BoardList = () => {
   const [boardListData, setBoardListData] = useState([]);
-
   const [boardOffset, setBoardOffset] = useState(0);
   const [boardLimit, setBoardLimit] = useState(9);
 
@@ -21,6 +22,7 @@ const BoardList = () => {
     );
     const data = await response.json();
     setBoardListData(boardListData.concat(data));
+    store.dispatch(boardActions.getBoardList(data));
   };
 
   const fetchMoreList = async () => {

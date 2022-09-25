@@ -8,8 +8,24 @@ import rightArrow from 'assets/svg/arrow-right.svg';
 import cancelButton from 'assets/svg/cancel.svg';
 import { BoardDataProp } from 'types/type';
 import BoardWriter from './components/UI/BoardWriter';
+import store from 'redux/store';
+import boardActions from 'redux/actions/board';
+import { useSelector } from 'react-redux';
 
-const BoardModal = ({ handleModal, modalContent }: BoardDataProp) => {
+interface BoardModalProps {
+  modalContent: any;
+  setModalContent: any;
+  handleModal?: () => void;
+}
+
+const BoardModal = ({
+  modalContent,
+  setModalContent,
+  handleModal,
+}: BoardModalProps) => {
+  const boardData = useSelector((state: any) => state.board.boardData);
+  const boardListData = useSelector((state: any) => state.board.boardList);
+
   useEffect(() => {
     document.body.style.cssText = `
       position: fixed;
@@ -22,6 +38,52 @@ const BoardModal = ({ handleModal, modalContent }: BoardDataProp) => {
       window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
     };
   }, []);
+
+  const leftBtnHandle = () => {
+    const boardListLength = boardListData.length;
+    let boardId: number[] = [];
+
+    for (let i = 0; i < boardListLength; i++) {
+      boardId.push(boardListData[i].id);
+    }
+
+    let idIndex = boardId.indexOf(boardData.id) - 1;
+
+    fetch(`https://togedog-dj.herokuapp.com/posts/${boardId[idIndex]}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        setModalContent(data);
+        store.dispatch(boardActions.getBoard(data));
+      });
+  };
+
+  const rightBtnHandle = () => {
+    const boardListLength = boardListData.length;
+    let boardId: number[] = [];
+
+    for (let i = 0; i < boardListLength; i++) {
+      boardId.push(boardListData[i].id);
+    }
+
+    let idIndex = boardId.indexOf(boardData.id) + 1;
+
+    fetch(`https://togedog-dj.herokuapp.com/posts/${boardId[idIndex]}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        setModalContent(data);
+        store.dispatch(boardActions.getBoard(data));
+      });
+  };
 
   return (
     <ModalContainer onClick={handleModal}>
@@ -52,8 +114,20 @@ const BoardModal = ({ handleModal, modalContent }: BoardDataProp) => {
         </ModalContentWrapper>
       </Modal>
 
-      <BoardModalLeftConvenience src={leftArrow} />
-      <BoardModalRightConvenience src={rightArrow} />
+      <BoardModalLeftConvenience
+        src={leftArrow}
+        onClick={e => {
+          e.stopPropagation();
+          leftBtnHandle();
+        }}
+      />
+      <BoardModalRightConvenience
+        src={rightArrow}
+        onClick={e => {
+          e.stopPropagation();
+          rightBtnHandle();
+        }}
+      />
       <BoardModalCancelConvenience src={cancelButton} />
     </ModalContainer>
   );
