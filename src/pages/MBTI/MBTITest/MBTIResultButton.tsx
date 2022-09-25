@@ -1,6 +1,8 @@
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components/macro';
 
 const MBTIResultButton = ({ onCheck }) => {
+  const dispatch = useDispatch();
   return (
     <MBTIResultButtonContainer>
       <ResultButton onClick={onCheck}>결과 보러 가기</ResultButton>

@@ -7,6 +7,7 @@ import { RootState } from 'redux/reducers';
 import setMbtiResults from 'redux/actions/mbtiResult';
 import setMbtiTexts from 'redux/actions/mbtiText';
 import userActions from 'redux/actions/user';
+import setUserCounter from 'redux/actions/userCounterAction';
 import ProgressBar from './ProgressBar';
 import EnergyTest from './Energy/EnergyTest';
 import RelationTest from './Relation/RelationTest';
@@ -184,7 +185,15 @@ const MBTITest = () => {
         ? dispatch(userActions.setMBTI(mbtiUserData))
         : dispatch(userActions.setMBTI(mbtiUserData));
     }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
+
+  // const onIncrease = () => {
+  //   dispatch(setUserCounter());
+  // };
 
   const handleSetEnergyName = (value, id) => {
     const newArr = [0];
@@ -308,8 +317,8 @@ const MBTITest = () => {
 
 const MBTITestContainer = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
-  width: 100vw;
-  height: 100%;
+  width: 100%;
+  height: auto;
   margin: 0 auto;
   background-color: #edeef0;
 `;

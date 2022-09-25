@@ -26,7 +26,7 @@ const BasicText = css`
 
 const ChatroomRecommendationContainer = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'space-between')};
-  margin-top: 9.375rem;
+  margin: 5rem 0;
 `;
 
 const TitleContainer = styled.div`
