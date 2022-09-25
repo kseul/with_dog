@@ -1,37 +1,48 @@
 import axios from 'axios';
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import LeftSideList from 'pages/Admin/components/LeftSideMenu/LeftSideList';
 import AdminHeader from 'pages/Admin/components/AdminHeader';
-import AdminRightPageUser from 'pages/Admin/components/RightSection/AdminRightPageUser';
-import AdminRightPagePost from 'pages/Admin/components/RightSection/AdminRightPagePost';
+import AdminRightPage from 'pages/Admin/components/RightSection/AdminRightPage';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
 import backGroundImg from 'assets/images/bg1.jpg';
+import { ListData } from 'types/type';
 
 const AdminContainer = () => {
   const navigate = useNavigate();
-  const params = useParams();
   const location = useLocation();
 
-  const [clicked, setClicked] = useState(location.pathname.slice(7));
+  const [clicked, setClicked] = useState<string>(location.pathname.slice(7));
   const [postData, setPostData] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<Boolean>(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [counts, setCounts] = useState();
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [counts, setCounts] = useState<number>();
 
-  const fetchData = async () => {
+  //모달
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalId, setModalId] = useState<number | undefined>();
+
+  const detailModalOpener = (): void => {
+    setIsModalOpen(prev => !prev);
+  };
+
+  const onCurrentModal = (id: number): void => {
+    setModalId(id);
+  };
+
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://togedog-dj.herokuapp.com/${location.pathname.slice(
-          7
-        )}?page=${currentPage}`,
+        `https://togedog-dj.herokuapp.com/${location.pathname.slice(7)}${
+          location.search ? location.search + '&' : '?'
+        }page=${currentPage}`,
         {
           headers: {
             accept: '*/*',
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
           },
         }
       );
@@ -40,19 +51,19 @@ const AdminContainer = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, location.pathname, location.search]);
 
   useEffect(() => {
     fetchData();
-  }, [location.pathname, currentPage]);
+  }, [fetchData]);
 
-  const setClick = list => {
+  const setClick = (list: ListData): void => {
     setClicked(list.value);
   };
 
   return (
     <AdminPageContainer>
-      <AdminHeader />
+      <AdminHeader onCurrentModal={onCurrentModal} modalId={modalId} />
       <SectionContainer>
         <AdminLeftSection>
           <ListWrapper>
@@ -68,39 +79,17 @@ const AdminContainer = () => {
           </ListWrapper>
         </AdminLeftSection>
         <AdminRightSection>
-          {params.value === 'users' ? (
-            <AdminRightPageUser
-              postData={postData}
-              loading={loading}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              counts={counts}
-            />
-          ) : params.value === 'posts' ? (
-            <AdminRightPagePost
-              postData={postData}
-              loading={loading}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              counts={counts}
-            />
-          ) : params.value === 'posts' ? (
-            <AdminRightPagePost
-              postData={postData}
-              loading={loading}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              counts={counts}
-            />
-          ) : (
-            <AdminRightPageUser
-              postData={postData}
-              loading={loading}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              counts={counts}
-            />
-          )}
+          <AdminRightPage
+            postData={postData}
+            loading={loading}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            counts={counts}
+            isModalOpen={isModalOpen}
+            modalId={modalId}
+            detailModalOpener={detailModalOpener}
+            onCurrentModal={onCurrentModal}
+          />
         </AdminRightSection>
       </SectionContainer>
     </AdminPageContainer>
@@ -136,7 +125,7 @@ const ListWrapper = styled.ul`
 const AdminRightSection = styled.div`
   width: calc(100vw - 12.5rem);
   height: calc(100vh - 6.25rem);
-  min-width: 37.5rem;
+  min-width: 40rem;
 `;
 
 export default AdminContainer;

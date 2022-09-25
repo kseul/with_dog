@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 
-const ListContentsBox = ({ data, openModal, onCurrentModal }) => {
+const ListContentsBox = ({ data, detailModalOpener, onCurrentModal }) => {
   return (
     <ListContents
       onClick={() => {
-        openModal();
+        detailModalOpener();
         onCurrentModal(data.id);
       }}
     >
-      <UserName>{data.name}</UserName>
+      <UserNickName>{data.nickname}</UserNickName>
       <UserEmail>{data.email}</UserEmail>
       <UserMbti>{data.mbti}</UserMbti>
       <UserSignDate>{data.email}</UserSignDate>
+      <UserReported>{data.reported_count}</UserReported>
     </ListContents>
   );
 };
@@ -19,7 +20,7 @@ const ListContentsBox = ({ data, openModal, onCurrentModal }) => {
 const ListContents = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: auto 1fr 1fr 1fr;
+  grid-template-columns: auto 1fr 1fr 1fr 1fr;
   margin: 0 auto;
   margin-bottom: -1px;
   width: 90%;
@@ -32,8 +33,8 @@ const ListContents = styled.div`
   }
 `;
 
-const UserName = styled.span`
-  width: 6.25rem;
+const UserNickName = styled.span`
+  width: 8rem;
   text-align: center;
   vertical-align: middle;
 `;
@@ -53,4 +54,8 @@ const UserSignDate = styled.span`
   vertical-align: middle;
 `;
 
+const UserReported = styled.span`
+  text-align: center;
+  vertical-align: middle;
+`;
 export default ListContentsBox;
