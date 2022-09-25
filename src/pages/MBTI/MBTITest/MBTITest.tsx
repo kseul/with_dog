@@ -7,7 +7,6 @@ import { RootState } from 'redux/reducers';
 import setMbtiResults from 'redux/actions/mbtiResult';
 import setMbtiTexts from 'redux/actions/mbtiText';
 import userActions from 'redux/actions/user';
-import setUserCounter from 'redux/actions/userCounterAction';
 import ProgressBar from './ProgressBar';
 import EnergyTest from './Energy/EnergyTest';
 import RelationTest from './Relation/RelationTest';
@@ -179,7 +178,6 @@ const MBTITest = () => {
     navigate('/mbti-result');
     dispatch(setMbtiResults(setMBTIResult));
     dispatch(setMbtiTexts(mbtiUserData));
-
     {
       checkLogin.LoggedIn === true
         ? dispatch(userActions.setMBTI(mbtiUserData))
@@ -190,10 +188,6 @@ const MBTITest = () => {
       behavior: 'smooth',
     });
   };
-
-  // const onIncrease = () => {
-  //   dispatch(setUserCounter());
-  // };
 
   const handleSetEnergyName = (value, id) => {
     const newArr = [0];
@@ -320,6 +314,7 @@ const MBTITestContainer = styled.div`
   width: 100%;
   height: auto;
   margin: 0 auto;
+  padding-top: 150px;
   background-color: #edeef0;
 `;
 
