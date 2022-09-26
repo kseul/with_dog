@@ -22,7 +22,7 @@ const CHATLIST_DATA = [
       '천방지축 천진난만한 댕댕이, 자유로운 영혼의 장난꾸러기 같은 댕댕이들을 위한 채팅방입니다!',
     modalDescription:
       '자유로운 영혼 댕댕이, 콧대높은 천방지축 댕댕이, 천진난만 꾸러기 댕댕이, 능글맞은 장난꾸러기 댕댕이들이 모인 채팅방 입니다 :) 어서 함께 하시개!',
-    type: 'ENFC, ESTC, ENFC, ENFP',
+    type: 'ENFC, ESTC, ESFC, ESFP',
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const CHATLIST_DATA = [
       '눈치가 빠르고 든든한 모범 댕댕이, 지혜로운 나무늘보 댕댕이, 영리한 전략가 댕댕이들을 위한 채팅방입니다!',
     modalDescription:
       '눈치빠른 모범생 댕댕이, 지혜로운 나무늘보 댕댕이, 든든한 오른팔 댕댕이, 영리한 전략가 댕댕이들이 모인 채팅방 입니다 :) 어서 함께 하시개!',
-    type: 'INTC, INFP, ENTP, ENFP',
+    type: 'INTP, INFP, ENTP, ENFP',
   },
   {
     id: 4,
