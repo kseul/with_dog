@@ -2,8 +2,7 @@ import styled from 'styled-components/macro';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { RootState } from 'redux/reducers';
+import { useCookies } from 'react-cookie';
 import setMbtiResults from 'redux/actions/mbtiResult';
 import setMbtiTexts from 'redux/actions/mbtiText';
 import userActions from 'redux/actions/user';
@@ -170,7 +169,9 @@ const MBTITest = () => {
       behavior: 'smooth',
     });
   };
-  const checkLogin = useSelector((state: RootState) => state.user);
+
+  const [cookies] = useCookies(['userToken']);
+  const checkLogin = cookies.userToken && true;
 
   const onJudgementCheck = (): void => {
     setNextJudgementPage(!nextJudgementPage);

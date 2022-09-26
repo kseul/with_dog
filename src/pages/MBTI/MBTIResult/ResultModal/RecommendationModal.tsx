@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ArrowRight from 'assets/svg/arrow-right.svg';
 import store from 'redux/store';
 import chatRoomActions from 'redux/actions/chat';
+import { Fragment, useEffect } from 'react';
 
 const RecommendationModal = ({ onClickToggleModal, resultModal }) => {
   const currentRoom = (title, id) => {
@@ -10,12 +11,25 @@ const RecommendationModal = ({ onClickToggleModal, resultModal }) => {
     store.dispatch(chatRoomActions.setRoomId(id));
   };
 
+  useEffect(() => {
+    document.body.style.cssText = `
+      position: fixed;
+      top: -${window.scrollY}px;
+      overflow-y: scroll;
+      width: 100%;`;
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = '';
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    };
+  }, []);
+
   return (
     <>
       {resultModal.map(({ id, Image, title, modalDescription, type }) => {
         return (
-          <A key={id}>
-            <ChatModalContainer key={id}>
+          <Fragment key={id}>
+            <ChatModalContainer>
               <Image style={{ width: '12rem', marginRight: '1rem' }} />
               <Title>{title}형</Title>
               <Description>{modalDescription}</Description>
@@ -33,19 +47,18 @@ const RecommendationModal = ({ onClickToggleModal, resultModal }) => {
               </Link>
             </ChatModalContainer>
             <BackGround onClick={onClickToggleModal} key={id} />
-          </A>
+          </Fragment>
         );
       })}
     </>
   );
 };
 
-const A = styled.div``;
-
 const ChatModalContainer = styled.div`
   ${props => props.theme.flex.flexBox('column')}
   position: fixed;
   top: 50%;
+  left: 38%;
   width: 30rem;
   height: 40rem;
   transform: translateY(-49%);
@@ -113,8 +126,9 @@ const GoChatEntryIcon = styled.img`
 const BackGround = styled.div`
   position: absolute;
   top: 0;
+  left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 230rem;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 `;
