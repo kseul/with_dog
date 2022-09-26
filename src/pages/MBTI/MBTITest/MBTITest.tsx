@@ -179,7 +179,7 @@ const MBTITest = () => {
     dispatch(setMbtiResults(setMBTIResult));
     dispatch(setMbtiTexts(mbtiUserData));
     {
-      checkLogin.LoggedIn === true
+      checkLogin === true
         ? dispatch(userActions.setMBTI(mbtiUserData))
         : dispatch(userActions.setMBTI(mbtiUserData));
     }

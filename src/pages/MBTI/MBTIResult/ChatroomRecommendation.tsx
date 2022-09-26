@@ -48,22 +48,21 @@ const ChatroomRecommendation = () => {
       <ContentText>
         최고의 궁합을 자랑하는 함께하개의 채팅방 추천받기
       </ContentText>
-      <JoinButton>
-        <ButtonText
-          onClick={() => {
-            handleClick(getMBTIResult);
-            onClickToggleModal();
-          }}
-        >
-          참여하개
-        </ButtonText>
+      <JoinButton
+        onClick={() => {
+          handleClick(getMBTIResult);
+          onClickToggleModal();
+        }}
+      >
+        <ButtonText>참여하개</ButtonText>
       </JoinButton>
-      {isShowModal && checkLogin ? (
+      {isShowModal && checkLogin && (
         <RecommendationModal
           onClickToggleModal={onClickToggleModal}
           resultModal={resultModal}
         />
-      ) : (
+      )}
+      {isShowModal && !checkLogin && (
         <LoginModal onClickToggleModal={onClickToggleModal} />
       )}
     </ChatroomRecommendationContainer>
@@ -113,7 +112,7 @@ const JoinButton = styled.button`
   }
 `;
 
-const ButtonText = styled.span`
+const ButtonText = styled.div`
   color: white;
   font-size: 1.563rem;
   font-weight: 500;
