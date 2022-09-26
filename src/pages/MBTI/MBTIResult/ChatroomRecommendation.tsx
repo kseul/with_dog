@@ -1,7 +1,39 @@
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
 import styled, { css } from 'styled-components/macro';
 import TitlePaw from '../../../assets/svg/TitlePawPositoin.svg';
+import { room1, room2, room3, room4 } from './constants/Result';
+import RecommendationModal from './ResultModal/RecommendationModal';
+import CHATLIST_DATA from 'pages/Chatting/DATA/CHATLIST_DATA';
 
 const ChatroomRecommendation = () => {
+  const mbtiResultText = useSelector((state: RootState) => state.mbtiText);
+  const getMBTIResult: string = Object.values(mbtiResultText).toString();
+
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [roomID, setRoomID] = useState<number>();
+
+  const resultModal = CHATLIST_DATA.filter(item => {
+    return item.id === roomID;
+  });
+
+  const handleClick = (getMBTIResult: string) => {
+    if (room1.includes(getMBTIResult)) {
+      setRoomID(1);
+    } else if (room2.includes(getMBTIResult)) {
+      setRoomID(2);
+    } else if (room3.includes(getMBTIResult)) {
+      setRoomID(3);
+    } else if (room4.includes(getMBTIResult)) {
+      setRoomID(4);
+    }
+  };
+
+  const onClickToggleModal = () => {
+    setIsShowModal(!isShowModal);
+  };
+
   return (
     <ChatroomRecommendationContainer>
       <TitleContainer>
@@ -13,8 +45,21 @@ const ChatroomRecommendation = () => {
         최고의 궁합을 자랑하는 함께하개의 채팅방 추천받기
       </ContentText>
       <JoinButton>
-        <ButtonText>참여하개</ButtonText>
+        <ButtonText
+          onClick={() => {
+            handleClick(getMBTIResult);
+            onClickToggleModal();
+          }}
+        >
+          참여하개
+        </ButtonText>
       </JoinButton>
+      {isShowModal && (
+        <RecommendationModal
+          onClickToggleModal={onClickToggleModal}
+          resultModal={resultModal}
+        />
+      )}
     </ChatroomRecommendationContainer>
   );
 };
