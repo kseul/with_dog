@@ -52,20 +52,6 @@ export interface ToMbtiButtonProp {
   textSize: number;
 }
 
-export interface MainPagesProp {
-  backGroundImage: string;
-}
-
-export interface LastPageProp extends MainPagesProp {
-  title: string;
-  subTitle: string;
-}
-
-export interface ContentPagesProp extends LastPageProp {
-  reverse: boolean;
-  id: number;
-}
-
 export interface ListData {
   id: number;
   listName: string;
