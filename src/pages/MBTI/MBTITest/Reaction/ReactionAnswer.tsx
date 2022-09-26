@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import { ANSWER_DB } from '../constants/Test';
-import { MBTIReactionProps } from 'types/type';
+import { MBTIReactionProps } from '../type';
 
 const ReactionAnswer = ({
   handleSetReactionName,

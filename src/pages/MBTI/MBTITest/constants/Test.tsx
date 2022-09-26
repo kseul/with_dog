@@ -1,13 +1,4 @@
-export interface TestData {
-  testId: number;
-  testList: string;
-  labelName: string;
-}
-
-export interface AnswerData {
-  id: number;
-  name: string;
-}
+import { AnswerData, TestData } from '../type';
 
 export const ENERGY_TEST_DB: TestData[] = [
   {

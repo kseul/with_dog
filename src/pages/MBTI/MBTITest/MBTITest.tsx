@@ -12,9 +12,8 @@ import EnergyTest from './Energy/EnergyTest';
 import RelationTest from './Relation/RelationTest';
 import ReactionTest from './Reaction/ReactionTest';
 import JudgementTest from './Judgement/JudgementTest';
-import { AnswerType } from 'types/type';
-import { MBTIScoreProps } from 'types/type';
-import { JoinMBTI } from 'types/type';
+import setUserCounter from 'redux/actions/userCounterAction';
+import { AnswerType, JoinMBTI, MBTIScoreProps } from './type';
 
 const MBTITest = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -187,6 +186,7 @@ const MBTITest = () => {
       top: 0,
       behavior: 'smooth',
     });
+    dispatch(setUserCounter(0));
   };
 
   const handleSetEnergyName = (value, id) => {

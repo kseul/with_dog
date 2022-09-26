@@ -1,5 +1,4 @@
-import { ResultData } from 'types/type';
-import { MBTIResultProps } from 'types/type';
+import { MBTIResultProps, ResultData } from '../type';
 import INTCPosition from '../../../../assets/images/INTCPosition.png';
 import INTPPosition from '../../../../assets/images/INTPPosition.png';
 import INFCPosition from '../../../../assets/images/INFCPosition.png';

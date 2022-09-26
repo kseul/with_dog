@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import { ANSWER_DB } from '../constants/Test';
-import { MBTIRelationProps } from 'types/type';
+import { MBTIRelationProps } from '../type';
 
 const RelationAnswer = ({
   handleSetRelationName,

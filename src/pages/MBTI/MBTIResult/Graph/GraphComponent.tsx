@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components/macro';
-import { MBTIResultProps } from 'types/type';
+import { MBTIResultProps } from '../type';
 
 const GraphComponent = ({ mbti, score, layout }: MBTIResultProps) => {
   const titleProps = (mbti: string) => {
