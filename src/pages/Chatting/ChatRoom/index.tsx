@@ -9,6 +9,7 @@ import Input from './components/Input';
 import { UserDataProps, ChatRoomProps, MessagesProps } from 'types/type';
 import signInbg from 'assets/images/bg2.png';
 import ChatReportModal from '../ChatReportModal';
+import { useCookies } from 'react-cookie';
 
 let socket;
 
@@ -18,11 +19,14 @@ const ChatRoom = () => {
   const [currentTime, SetCurrentTime] = useState('');
   const [isShowModal, setIsShowModal] = useState(false);
 
-  const ENDPOINT = 'localhost:3000';
-  // const ENDPOINT = 'http://54.180.89.143:8000';
+  // const ENDPOINT = 'localhost:3000';
+  const ENDPOINT = 'http://54.180.89.143:8000';
+
+  const [cookies] = useCookies(['userToken']);
 
   const storeData = useSelector((state: RootState) => state);
-  const { nickname, mbti, id }: UserDataProps = storeData.user.userData;
+  const { nickname, mbti, thumbnail_url, id }: UserDataProps =
+    storeData.user.userData;
   const room: ChatRoomProps = storeData.chat.id;
 
   useEffect(() => {
@@ -35,7 +39,11 @@ const ChatRoom = () => {
   }, [message]);
 
   useEffect(() => {
-    socket = io(ENDPOINT);
+    socket = io(ENDPOINT, {
+      auth: {
+        token: cookies.userToken,
+      },
+    });
     socket.emit('join', { nickname, room });
   }, [ENDPOINT]);
 
@@ -56,6 +64,7 @@ const ChatRoom = () => {
         room,
         currentTime,
         mbti,
+        thumbnail_url,
         id,
         () => {
           setMessage('');

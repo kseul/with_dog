@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-// import store from 'redux/store';
 import { useSelector } from 'react-redux';
-// import chatReportActions from 'redux/actions/chatReport';
 import { RootState } from 'redux/reducers';
 import { useCookies } from 'react-cookie';
 
@@ -11,15 +9,10 @@ const ChatReportModal = ({ setIsShowModal }) => {
   const [reportInput, setReportInput] = useState('');
   const [reportModalSubmit, setReportModalSubmit] = useState(false);
 
-  console.log(reportModalSubmit);
-
   const [cookies] = useCookies(['userToken']);
 
   const storeData = useSelector((state: RootState) => state);
   const { id, messageId, text } = storeData.chatReport;
-  console.log(storeData);
-  console.log(id, messageId, text);
-  console.log(reportInput);
 
   const handleReportInput = e => {
     const { value } = e.target;
@@ -36,23 +29,19 @@ const ChatReportModal = ({ setIsShowModal }) => {
     setIsShowModal(false);
   };
 
-  // const setReportContent = () => {
-  //   // store.dispatch(chatReportActions.reportContent(reportInput));
-  //   setReportModalSubmit(true);
-  // };
-
   const handleReportSubmit = () => {
-    fetch('', {
+    fetch('http://54.180.89.143:8000/chat/report', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${cookies.userToken}`,
       },
-      // body: {
-      //   reported_user_id: id,
-      //   message_id: 123,
-      //   message_text: text,
-      //   content: reportInput,
-      // },
+
+      body: JSON.stringify({
+        reported_user_id: id,
+        message_id: messageId,
+        message_text: text,
+        content: reportInput,
+      }),
     });
   };
 
