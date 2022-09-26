@@ -35,6 +35,9 @@ const AlertModal = ({ title, setShowAlertModal }: AlertModalProps) => {
 const AlertModalContainer = styled.div`
   ${props => props.theme.flex.flexBox('column')}
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 31.25rem;
   height: 9.375rem;
   background-color: white;

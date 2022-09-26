@@ -29,6 +29,7 @@ const UserImg = styled.img`
   border-radius: 70%;
   width: 14rem;
   height: 14rem;
+  object-fit: cover;
 `;
 
 const EditImgContainer = styled.div`

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
+import EditModalButton from './EditModalButton';
 
 const NickNameEditModal = ({
   setShowEditModal,
@@ -52,16 +53,18 @@ const NickNameEditModal = ({
           }}
         />
         <ButtonContainer>
-          <CancelButton onClick={closeModal} type="button">
-            취소
-          </CancelButton>
-          <ConfirmButton
-            disabled={!validkNickname}
-            onClick={submitChangedNickname}
-            type="button"
-          >
-            확인
-          </ConfirmButton>
+          <EditModalButton
+            title="취소"
+            backgroundColor="#CFB6D7"
+            func={closeModal}
+            isActive={true}
+          />
+          <EditModalButton
+            title="확인"
+            backgroundColor="#7CCCC7"
+            func={submitChangedNickname}
+            isActive={validkNickname}
+          />
         </ButtonContainer>
       </TextEditModalContainer>
       <BackGround onClick={closeModal} />
@@ -101,29 +104,6 @@ const ButtonContainer = styled.div`
   justify-content: space-evenly;
   width: 100%;
   padding-top: 1.8rem;
-`;
-
-const ConfirmButton = styled.button`
-  display: block;
-  width: 9.375rem;
-  height: 1.875rem;
-  border-radius: 0.875rem;
-  border: none;
-  background-color: ${props => props.theme.colors.mint};
-  font-size: 1rem;
-  color: white;
-  opacity: ${props => (props.disabled ? 0.6 : 1)};
-`;
-
-const CancelButton = styled.button`
-  display: block;
-  width: 9.375rem;
-  height: 1.875rem;
-  border-radius: 0.875rem;
-  border: none;
-  background-color: ${props => props.theme.colors.purple};
-  font-size: 1rem;
-  color: white;
 `;
 
 const BackGround = styled.div`
