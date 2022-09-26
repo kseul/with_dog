@@ -46,7 +46,7 @@ const RecommendationModal = ({ onClickToggleModal, resultModal }) => {
                 </EntryBtn>
               </Link>
             </ChatModalContainer>
-            <BackGround onClick={onClickToggleModal} key={id} />
+            <BackGround onClick={onClickToggleModal} />
           </Fragment>
         );
       })}

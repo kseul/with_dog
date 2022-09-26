@@ -1,18 +1,22 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
+import { useCookies } from 'react-cookie';
 import styled, { css } from 'styled-components/macro';
 import TitlePaw from '../../../assets/svg/TitlePawPositoin.svg';
 import { room1, room2, room3, room4 } from './constants/Result';
 import RecommendationModal from './ResultModal/RecommendationModal';
 import CHATLIST_DATA from 'pages/Chatting/DATA/CHATLIST_DATA';
+import LoginModal from './ResultModal/LoginModal';
 
 const ChatroomRecommendation = () => {
   const mbtiResultText = useSelector((state: RootState) => state.mbtiText);
   const getMBTIResult: string = Object.values(mbtiResultText).toString();
-
   const [isShowModal, setIsShowModal] = useState(false);
   const [roomID, setRoomID] = useState<number>();
+
+  const [cookies] = useCookies(['userToken']);
+  const checkLogin = cookies.userToken && true;
 
   const resultModal = CHATLIST_DATA.filter(item => {
     return item.id === roomID;
@@ -54,11 +58,13 @@ const ChatroomRecommendation = () => {
           참여하개
         </ButtonText>
       </JoinButton>
-      {isShowModal && (
+      {isShowModal && checkLogin ? (
         <RecommendationModal
           onClickToggleModal={onClickToggleModal}
           resultModal={resultModal}
         />
+      ) : (
+        <LoginModal onClickToggleModal={onClickToggleModal} />
       )}
     </ChatroomRecommendationContainer>
   );
