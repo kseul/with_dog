@@ -1,10 +1,18 @@
 import styled from 'styled-components';
-import { ChatModalProp } from 'types/type';
-import ArrowRight from 'assets/svg/arrow-right.svg';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import store from 'redux/store';
 import chatRoomActions from 'redux/actions/chat';
-import { useEffect } from 'react';
+import ArrowRight from 'assets/svg/arrow-right.svg';
+
+interface ChatModalProp {
+  onClickToggleModal: () => void;
+  id?: number;
+  Image: any;
+  modalDescription: string | undefined;
+  type: string | undefined;
+  title: string | undefined;
+}
 
 const ChatModal = ({
   onClickToggleModal,

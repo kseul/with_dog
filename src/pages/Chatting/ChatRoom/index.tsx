@@ -1,15 +1,31 @@
-import io from 'socket.io-client';
 import styled from 'styled-components';
+import io from 'socket.io-client';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
+import { useCookies } from 'react-cookie';
 import TitleBar from './components/TitleBar';
 import Messages from './components/Messages';
 import Input from './components/Input';
-import { UserDataProps, ChatRoomProps, MessagesProps } from 'types/type';
-import signInbg from 'assets/images/bg2.png';
 import ChatReportModal from '../ChatReportModal';
-import { useCookies } from 'react-cookie';
+import { MessagesProps } from 'pages/Chatting/type';
+import signInbg from 'assets/images/bg2.png';
+
+interface UserDataProps {
+  account_type?: string;
+  email?: string;
+  mbti?: string;
+  name?: string;
+  nickname?: string;
+  status?: string;
+  thumbnail_url?: string;
+  user_type?: string;
+  id?: number;
+}
+
+interface ChatRoomProps {
+  room?: number;
+}
 
 let socket;
 

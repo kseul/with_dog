@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import store from 'redux/store';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
-import { MessagesProps } from 'types/type';
-import Siren from 'assets/svg/siren.svg';
 import chatReportActions from 'redux/actions/chatReport';
+import { MessagesProps } from 'pages/Chatting/type';
+import Siren from 'assets/svg/siren.svg';
 
 const Message = ({
   message: {

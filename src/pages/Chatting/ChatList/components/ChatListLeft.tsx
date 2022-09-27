@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ChatListProp } from 'types/type';
+import { ChatListProp } from 'pages/Chatting/type';
 
 const ChatListLeft = ({ Image, title, description }: ChatListProp) => {
   return (
