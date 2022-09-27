@@ -1,9 +1,18 @@
 import styled from 'styled-components';
-import { ChatModalProp } from 'types/type';
-import ArrowRight from 'assets/svg/arrow-right.svg';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import store from 'redux/store';
 import chatRoomActions from 'redux/actions/chat';
+import ArrowRight from 'assets/svg/arrow-right.svg';
+
+interface ChatModalProp {
+  onClickToggleModal: () => void;
+  id?: number;
+  Image: any;
+  modalDescription: string | undefined;
+  type: string | undefined;
+  title: string | undefined;
+}
 
 const ChatModal = ({
   onClickToggleModal,
@@ -17,6 +26,19 @@ const ChatModal = ({
     store.dispatch(chatRoomActions.setRoom(`${title} 방`));
     store.dispatch(chatRoomActions.setRoomId(id));
   };
+
+  useEffect(() => {
+    document.body.style.cssText = `
+      position: fixed;
+      top: -${window.scrollY}px;
+      overflow-y: scroll;
+      width: 100%;`;
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = '';
+      window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+    };
+  }, []);
 
   return (
     <>
@@ -113,8 +135,8 @@ const GoChatEntryIcon = styled.img`
 const BackGround = styled.div`
   position: absolute;
   top: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 `;

@@ -1,12 +1,3 @@
-export interface ChatListProp {
-  id?: number;
-  Image?: any;
-  title?: string;
-  description?: string;
-  modalDescription?: string;
-  type?: string;
-}
-
 export interface IdPwInputProp {
   placeholder: string;
   type: string;
@@ -32,15 +23,6 @@ export interface SNSButtonProp {
 export interface PageBoxProp {
   title: string;
   moveTo: string;
-}
-
-export interface ChatModalProp {
-  onClickToggleModal: () => void;
-  id?: number;
-  Image: any;
-  modalDescription: string | undefined;
-  type: string | undefined;
-  title: string | undefined;
 }
 
 export interface ToMbtiButtonProp {
@@ -135,17 +117,6 @@ export interface MBTIScoreProps {
   layout?: string;
 }
 
-export interface UserDataProps {
-  account_type?: string;
-  email?: string;
-  mbti?: string;
-  name?: string;
-  nickname?: string;
-  status?: string;
-  thumbnail_url?: string;
-  user_type?: string;
-}
-
 export interface MainRef<T> {
   current: T;
 }
@@ -167,17 +138,4 @@ export interface UserDataProps {
   thumbnail_url?: string;
   user_type?: string;
   id?: number;
-}
-
-export interface ChatRoomProps {
-  room?: number;
-}
-
-export interface MessagesProps {
-  user?: string;
-  text?: string;
-  time?: string;
-  mbti?: string;
-  nickname?: string;
-  message;
 }

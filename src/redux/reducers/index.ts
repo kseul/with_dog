@@ -10,6 +10,7 @@ import userCounterReducer from './userCounterReducer';
 import boardReducer from './boardReducer';
 import boardListReducer from './boardListReducer';
 import chatReducer from './chatReducer';
+import chatReportReducer from './chatReportReducer';
 
 const persistConfig = {
   key: 'root',
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   board: boardReducer,
   boardList: boardListReducer,
   chat: chatReducer,
+  chatReport: chatReportReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

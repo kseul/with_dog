@@ -20,12 +20,14 @@ io.on('connection', socket => {
 
   socket.on(
     'send_message',
-    (message, nickname, room, currentTime, userMbti, callback) => {
+    (message, nickname, room, currentTime, mbti, id, callback) => {
       io.to(room).emit('add_message', {
         user: nickname,
         text: message,
         time: currentTime,
-        mbti: userMbti,
+        mbti,
+        id,
+        messageId: 1234,
       });
       callback();
     }

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ChatListProp } from 'types/type';
+import { ChatListProp } from 'pages/Chatting/type';
 
 const ChatListLeft = ({ Image, title, description }: ChatListProp) => {
   return (
@@ -31,15 +31,15 @@ const DogType = styled.div`
 const Line = styled.div`
   background-color: ${props => props.theme.colors.lineLightGray};
   width: 2px;
-  height: 2.5rem;
+  height: 3.5rem;
   margin: 0 0.3rem 0 0.3rem;
 `;
 
 const Introduce = styled.div`
   flex-basis: 100%;
   color: ${props => props.theme.colors.gray};
-  font-size: 0.9rem;
-  line-height: 1.25rem;
+  font-size: 1.15rem;
+  line-height: 1.7rem;
   margin-left: 1rem;
 `;
 
