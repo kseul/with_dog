@@ -104,11 +104,11 @@ const JoinButton = styled.button`
   width: 33.75rem;
   height: 3.125rem;
   margin-top: 1.25rem;
-  background-color: #888888;
+  background-color: #7dccc7;
   border-style: none;
   border-radius: 3.125rem;
   &:hover {
-    background-color: #7dccc7;
+    background: linear-gradient(to right, #8fefe6, #c3c8f3);
   }
 `;
 

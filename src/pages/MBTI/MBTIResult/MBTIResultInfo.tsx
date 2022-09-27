@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components/macro';
 import MBTIGraph from './Graph/MBTIGraph';
 import ChatroomRecommendation from './ChatroomRecommendation';
 import SNSshare from './SNSshare';
-import ResultInfo from 'assets/svg/ResultInfoPositoin.svg';
-import ResultNotice from 'assets/svg/ResultNoticePositoin.svg';
+import ResultInfo from 'assets/svg/ResultInfoPositoin2.svg';
+import ResultNotice from 'assets/svg/MBTINotice6.svg';
 import { MBTI_RESULT } from './constants/Result';
 import UserCounter from './UserCounter';
 
@@ -29,7 +29,10 @@ const MBTIResultInfo = ({ graphResult, mbtiResultText }) => {
             <MBTIDOG src={MBTIImage} />
             <MBTIResult>{MBTI}</MBTIResult>
             <MBTICharacterText>{MBTICharacter}</MBTICharacterText>
-            <MBTIContent>{content}</MBTIContent>
+            <MBTIContentBackground>
+              <MBTIContent>{content}</MBTIContent>
+            </MBTIContentBackground>
+
             <NoticeImage src={ResultNotice} />
             <GraphInfo src={ResultInfo} />
             <MBTIGraph graphResult={graphResult} />
@@ -55,7 +58,7 @@ const MBTIResultInfoContainer = styled.div`
 `;
 
 const MBTIDOG = styled.img`
-  width: 20rem;
+  height: 33rem;
 `;
 
 const MBTIResult = styled.span`
@@ -67,20 +70,30 @@ const MBTIResult = styled.span`
 
 const MBTICharacterText = styled.span`
   margin-top: 1rem;
-  font-size: 1.125rem;
-  ${BasicText}
-`;
-
-const MBTIContent = styled.span`
-  margin: 3rem 20rem 0 20rem;
-  line-height: 2rem;
   font-size: 1.2rem;
   ${BasicText}
 `;
 
+const MBTIContentBackground = styled.div`
+  ${props => props.theme.flex.flexBox('row', 'center', 'center')};
+  margin: 3rem 18rem 3rem 18rem;
+  padding: 3rem;
+  width: 60.625rem;
+  height: 12rem;
+  border-radius: 2rem;
+  background-color: #a8e1dc;
+  /* background: linear-gradient(to bottom right, #8fefe6, #c3c8f3); */
+`;
+
+const MBTIContent = styled.span`
+  line-height: 2.3rem;
+  font-size: 1.25rem;
+  ${BasicText}
+`;
+
 const NoticeImage = styled.img`
-  width: 58.125rem;
-  margin-top: 5rem;
+  width: 60rem;
+  margin: 5rem 0;
 `;
 
 const GraphInfo = styled.img`

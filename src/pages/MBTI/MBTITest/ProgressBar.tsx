@@ -26,7 +26,6 @@ const ProgressBarWrapper = styled.div`
   height: 3.125rem;
   margin: 1rem 0 1.25rem 0;
   background-color: white;
-  /* border: 5px solid #edeef0; */
   border-radius: 3.125rem;
 `;
 

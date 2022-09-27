@@ -25,5 +25,5 @@ export interface CountTime {
 }
 
 export interface CountUser {
-  userNum?: number;
+  userNum: number;
 }
