@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import useAxios from 'hooks/useAxios';
 import UserInfoBox from 'pages/Admin/components/RightSection/UserInfoBox';
+import CommentBox from 'pages/Admin/components/Modal/CommentBox';
 import { AiOutlineClose } from 'react-icons/ai';
 import backgroundImage from 'assets/images/bg1.jpg';
 
-const PostModal = ({ closeModal, modalId }) => {
+const PostModal = ({ detailModalOpener, modalId }) => {
   const [reason, setReason] = useState<string>('');
 
   const { response } = useAxios({
@@ -14,7 +15,7 @@ const PostModal = ({ closeModal, modalId }) => {
     url: `https://togedog-dj.herokuapp.com/posts/${modalId}/admin/`,
     headers: {
       accept: '*/*',
-      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
     },
   });
 
@@ -32,7 +33,7 @@ const PostModal = ({ closeModal, modalId }) => {
         }),
         {
           headers: {
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         }
@@ -43,52 +44,58 @@ const PostModal = ({ closeModal, modalId }) => {
   };
 
   return (
-    <ModalBackground onClick={closeModal}>
+    <ModalBackground onClick={detailModalOpener}>
       {response?.data && (
         <ModalContainer onClick={e => e.stopPropagation()}>
           <ModalTop>
             <ModalTitle>게시글 관리</ModalTitle>
-            <DeleteIconButton onClick={closeModal}>
+            <DeleteIconButton onClick={detailModalOpener}>
               <AiOutlineClose />
             </DeleteIconButton>
           </ModalTop>
           <ModalContentsWrapper>
-            <UserInfo>
-              <UserInfoTitle>사용자 정보</UserInfoTitle>
-              <UserInfoBox data={response.data} />
-            </UserInfo>
-            <PostContent>
-              <PostContentTitle>
-                <PostTitleIndex>게시글 제목</PostTitleIndex>
-                <PostTitleBox>{response.data.subject}</PostTitleBox>
-              </PostContentTitle>
-              <PostText>
-                <PostTextIndex>게시글 내용</PostTextIndex>
-                <PostTextBox>{response.data.content}</PostTextBox>
-              </PostText>
-            </PostContent>
-            <PostImage>
-              <PostBackground>
-                <PostImageTitle>게시글 사진</PostImageTitle>
-                <PostImageContent>
-                  <PostImg src={response.data.image_url} alt="게시글 이미지" />
-                </PostImageContent>
-              </PostBackground>
-            </PostImage>
-            <ReasonToBan>
-              <ReasonToBanTitle>사유</ReasonToBanTitle>
-              <ReasonToBanContent onChange={getReason} />
-              <BtnWrapper>
-                <CancelBtn
-                  onClick={() => {
-                    closeModal();
-                    deletePost();
-                  }}
-                >
-                  게시글 삭제
-                </CancelBtn>
-              </BtnWrapper>
-            </ReasonToBan>
+            <ModalLeftSection>
+              <LeftBackground>
+                <PostImg src={response.data.image_url} alt="게시글 이미지" />
+                <UserInfoBox data={response.data} />
+              </LeftBackground>
+            </ModalLeftSection>
+            <ModalRightSection>
+              <PostContent>
+                <PostContentTitle>
+                  <PostTitle>{response.data.subject}</PostTitle>
+                  <PostUpload>
+                    {response.data.updated_at.substring(0, 10)}
+                  </PostUpload>
+                  <PostText>{response.data.content}</PostText>
+                </PostContentTitle>
+              </PostContent>
+              <CommentList>
+                {response?.data.comments.length === 0 ? (
+                  <p>등록된 댓글이 없습니다.</p>
+                ) : (
+                  response?.data.comments.map(comment => (
+                    <CommentBox key={comment.id} comment={comment} />
+                  ))
+                )}
+              </CommentList>
+              <ReasonToBan>
+                <ReasonToBanContent
+                  placeholder="삭제 사유를 입력하여 주세요."
+                  onChange={getReason}
+                />
+                <BtnWrapper>
+                  <CancelBtn
+                    onClick={() => {
+                      detailModalOpener();
+                      deletePost();
+                    }}
+                  >
+                    게시글 삭제
+                  </CancelBtn>
+                </BtnWrapper>
+              </ReasonToBan>
+            </ModalRightSection>
           </ModalContentsWrapper>
         </ModalContainer>
       )}
@@ -113,12 +120,13 @@ const ModalContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 45rem;
+  width: 60rem;
   height: 80%;
-  max-height: 80%;
   min-height: 40rem;
   background: url(${backgroundImage}) center no-repeat;
   background-size: cover;
+  border-radius: 3px;
+  z-index: 7;
 `;
 
 const ModalTop = styled.div`
@@ -126,7 +134,7 @@ const ModalTop = styled.div`
   width: 100%;
   height: 3rem;
   background-color: ${props => props.theme.colors.gray};
-  border: 2px solid ${props => props.theme.colors.gray};
+  border: 1px solid ${props => props.theme.colors.gray};
 `;
 
 const ModalTitle = styled.p`
@@ -149,83 +157,94 @@ const DeleteIconButton = styled.button`
 const ModalContentsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: calc(100% - 4.5rem);
+  width: 100%;
+  height: calc(100% - 3rem);
 `;
 
-const UserInfoTitle = styled.p``;
+const ModalLeftSection = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
 
-const UserInfo = styled.div`
-  margin-top: 1rem;
-  margin-left: 1rem;
+const LeftBackground = styled.div`
+  position: absolute;
+  ${props => props.theme.flex.flexBox('column', 'center', 'space-evenly')}
+  width: 100%;
+  height: 100%;
+  background-color: ${props => props.theme.colors.lightGray};
+  border-top-right-radius: 1.875rem;
+  border-bottom-right-radius: 1.875rem;
+  box-shadow: 5px 0px 5px lightGray;
+`;
+
+const PostImg = styled.img`
+  width: 90%;
+  max-height: 60%;
+`;
+
+const ModalRightSection = styled.div`
+  ${props => props.theme.flex.flexBox('column', '', 'space-evenly')}
+  width: 100%;
+  height: 100%;
 `;
 
 const PostContent = styled.div`
   margin-top: 2rem;
   width: 90%;
+  height: 20%;
+  overflow-y: auto;
 `;
 
 const PostContentTitle = styled.div`
-  ${props => props.theme.flex.flexBox('row', 'center', '')}
-  margin-bottom: -1px;
+  ${props => props.theme.flex.flexBox('column', '', '')}
+  margin-left: 1rem;
   width: 100%;
-  height: 1.5rem;
-  border: 1px solid black;
+  height: 30%;
 `;
 
-const PostTitleIndex = styled.div`
-  padding-top: 0.2rem;
-  width: 30%;
-  height: 100%;
-  background-color: ${props => props.theme.colors.lightGray};
-  border-right: 1px solid black;
-  text-align: center;
-`;
-
-const PostTitleBox = styled.div`
+const PostTitle = styled.div`
   width: 70%;
-  padding-left: 0.5rem;
+  font-size: 1.5rem;
+`;
+
+const PostUpload = styled.div`
+  color: rgb(124, 124, 124);
+  font-size: 0.7rem;
+  border-bottom: 1px solid gray;
 `;
 
 const PostText = styled.div`
-  ${props => props.theme.flex.flexBox('row', 'center', '')}
-  margin-top: -1px;
-  width: 100%;
-  height: 50%;
-  border: 1px solid black;
-`;
-
-const PostTextIndex = styled.div`
-  ${props => props.theme.flex.flexBox('row', 'center', 'center')}
-  width: 30%;
-  height: 100%;
-  background-color: ${props => props.theme.colors.lightGray};
-  border-right: 1px solid black;
-`;
-
-const PostTextBox = styled.div`
+  padding-top: 0.5rem;
   width: 70%;
-  padding-left: 0.5rem;
+  height: 3.5rem;
+`;
+
+const CommentList = styled.div`
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  height: 30%;
+  overflow-y: scroll;
 `;
 
 const ReasonToBan = styled.div`
+  margin-top: 2rem;
   ${props => props.theme.flex.flexBox('column', '', 'space-evenly')}
 `;
 
-const ReasonToBanTitle = styled.p`
-  padding-top: 1rem;
-`;
-
 const ReasonToBanContent = styled.textarea`
+  margin-left: auto;
+  margin-right: auto;
   width: 90%;
-  height: 50%;
+  height: 8rem;
   resize: none;
   font-family: 'Noto Sans KR', sans-serif;
 `;
 
 const BtnWrapper = styled.div`
-  margin-left: auto;
-  margin-right: auto;
-  width: rem;
+  margin: 1rem auto;
 `;
 
 const CancelBtn = styled.button`
@@ -236,35 +255,6 @@ const CancelBtn = styled.button`
   background-color: black;
   color: #ffff;
   cursor: pointer;
-`;
-
-const PostImage = styled.div`
-  ${props => props.theme.flex.flexBox('row', 'center', 'center')}
-`;
-
-const PostBackground = styled.div`
-  ${props => props.theme.flex.flexBox('column', 'center', 'space-evenly')}
-  width: 90%;
-  height: 90%;
-  background-color: ${props => props.theme.colors.lightGray};
-  border-radius: 3px;
-`;
-
-const PostImageTitle = styled.p``;
-
-const PostImageContent = styled.div`
-  position: relative;
-  width: 12rem;
-  height: 12rem;
-`;
-
-const PostImg = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 3px;
 `;
 
 export default PostModal;

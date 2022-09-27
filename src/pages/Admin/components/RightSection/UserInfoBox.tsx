@@ -31,28 +31,32 @@ const UserInfoBox = ({ data }) => {
 
 const UserInfoContainer = styled.div`
   width: 90%;
+  background-color: ${props => props.theme.colors.white};
 `;
 
 const UserInfoWrapper = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', '')}
   width: 100%;
   height: 1.5rem;
-  border: 1px solid black;
-  margin-bottom: -1px;
 `;
 
 const UserCategory = styled.div`
+  margin-bottom: -1px;
   padding-top: 0.2rem;
   width: 30%;
   height: 100%;
-  background-color: ${props => props.theme.colors.lightGray};
-  border-right: 1px solid black;
+  border-right: none;
+  border: 0.5px solid black;
   text-align: center;
 `;
 
 const CategoryText = styled.div`
-  width: 70%;
+  margin-bottom: -1px;
+  padding-top: 0.2rem;
   padding-left: 0.5rem;
+  width: 70%;
+  height: 100%;
+  border: 0.5px solid black;
 `;
 
 export default UserInfoBox;

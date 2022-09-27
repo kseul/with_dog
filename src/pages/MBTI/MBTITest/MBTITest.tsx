@@ -178,12 +178,15 @@ const MBTITest = () => {
     navigate('/mbti-result');
     dispatch(setMbtiResults(setMBTIResult));
     dispatch(setMbtiTexts(mbtiUserData));
-
     {
       checkLogin.LoggedIn === true
         ? dispatch(userActions.setMBTI(mbtiUserData))
         : dispatch(userActions.setMBTI(mbtiUserData));
     }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   const handleSetEnergyName = (value, id) => {
@@ -308,9 +311,10 @@ const MBTITest = () => {
 
 const MBTITestContainer = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
-  width: 100vw;
-  height: 100%;
+  width: 100%;
+  height: auto;
   margin: 0 auto;
+  padding-top: 150px;
   background-color: #edeef0;
 `;
 

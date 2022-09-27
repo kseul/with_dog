@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import ToMbtiButton from '../components/toMbtiButton/ToMbtiButton';
-import { MainPagesProp } from 'types/type';
 import dogPaw from 'assets/svg/dog-paws2.svg';
 
-const FirstPage = React.forwardRef<HTMLDivElement, MainPagesProp>(
+interface FirstPageProps {
+  backGroundImage: string;
+}
+
+const FirstPage = React.forwardRef<HTMLDivElement, FirstPageProps>(
   ({ backGroundImage }, ref) => {
     return (
       <FirstPageContainer
@@ -47,31 +50,38 @@ const FirstPageContainer = styled.div`
   scroll-snap-align: center;
   scroll-snap-stop: always;
 `;
+
 const TextContainer = styled.div`
   padding-top: 17rem;
   padding-left: 6rem;
 `;
+
 const Title = styled.div`
   font-size: 4.7vmin;
   font-weight: 600;
 `;
+
 const SubTitle = styled.div`
   padding-top: 0.9rem;
   font-size: 3vmin;
 `;
+
 const DescriptionContainer = styled.div`
   margin-top: 4rem;
 `;
+
 const DescriptionTitle = styled.div`
   font-size: 2.8vmin;
   line-height: 1.2;
 `;
+
 const DescriptionSubTitle = styled.div`
   margin-top: 1.1rem;
   font-size: 2.3vmin;
   font-weight: 300;
   line-height: 1.2;
 `;
+
 const ButtonWrapper = styled.div`
   margin-top: 1.5rem;
 `;

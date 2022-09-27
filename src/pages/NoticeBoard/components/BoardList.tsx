@@ -1,26 +1,83 @@
-import React from 'react';
-import styled from 'styled-components';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
+import React, { useState } from 'react';
+import boardActions from 'redux/actions/board';
+import store from 'redux/store';
+import styled from 'styled-components/macro';
 import BoardCard from './BoardCard';
-import BOARD_DATA from '../DATA/BOARD_DATA';
 
 const BoardList = () => {
+  const [boardListData, setBoardListData] = useState([]);
+  const [boardOffset, setBoardOffset] = useState(0);
+  const [boardLimit, setBoardLimit] = useState(9);
+
+  const fetchBoardList = async () => {
+    const response = await fetch(
+      `https://togedog-dj.herokuapp.com/posts?offset=${boardOffset}&limit=${boardLimit}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+        },
+      }
+    );
+    const data = await response.json();
+    setBoardListData(boardListData.concat(data));
+    store.dispatch(boardActions.getBoardList(data));
+  };
+
+  const fetchMoreList = async () => {
+    await fetchBoardList();
+    setBoardOffset(boardOffset + 9);
+    setBoardLimit(boardLimit + 9);
+  };
+
+  const onIntersect: IntersectionObserverCallback = async (
+    [entry],
+    observer
+  ) => {
+    if (entry.isIntersecting) {
+      // observer.unobserve(entry.target);
+      await fetchMoreList();
+      // observer.observe(entry.target);
+    }
+  };
+
+  const { setTarget } = useIntersectionObserver({
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5,
+    onIntersect,
+  });
+
   return (
     <BoardListWrapper>
       <>
-        {BOARD_DATA.map(({ id, title, image, date, writer, like }) => {
-          return (
-            <BoardCard
-              key={id}
-              id={id}
-              title={title}
-              image={image}
-              date={date}
-              writer={writer}
-              like={like}
-            />
-          );
-        })}
+        {boardListData.map(
+          ({
+            id,
+            subject,
+            image_url,
+            created_at,
+            user_nickname,
+            user_thumbnail,
+            post_likes_count,
+          }) => {
+            return (
+              <BoardCard
+                key={id}
+                id={id}
+                subject={subject}
+                image_url={image_url}
+                created_at={created_at}
+                user_nickname={user_nickname}
+                user_thumbnail={user_thumbnail}
+                post_likes_count={post_likes_count}
+              />
+            );
+          }
+        )}
       </>
+      <Loading ref={setTarget} />
     </BoardListWrapper>
   );
 };
@@ -31,7 +88,7 @@ const BoardListWrapper = styled.div`
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   width: 100%;
-  margin-top: 1.5rem;
+  margin-top: 3rem;
 
   @media screen and (min-width: 1920px) {
     grid-template-columns: repeat(4, 1fr);
@@ -45,5 +102,7 @@ const BoardListWrapper = styled.div`
     grid-template-columns: 1fr;
   }
 `;
+
+const Loading = styled.div<{ ref?: any }>``;
 
 export default BoardList;

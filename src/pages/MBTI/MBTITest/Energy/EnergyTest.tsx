@@ -44,13 +44,15 @@ const TestList = styled.ul`
 
 const TestListText = styled.span`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   text-align: center;
 `;
 
 const Questions = styled.li`
-  margin: 1.875rem 0;
-  font-size: 1.25rem;
+  margin: 3.7rem 0;
+  font-size: 1.2rem;
+  font-weight: 350;
+  color: #191919;
   text-align: center;
 `;
 

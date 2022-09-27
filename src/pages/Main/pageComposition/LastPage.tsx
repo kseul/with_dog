@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import ToMbtiButton from '../components/toMbtiButton/ToMbtiButton';
-import { LastPageProp } from 'types/type';
-import dogBlackPaw from 'assets/svg/dog-paws1.svg';
+import dogPaw from 'assets/svg/dog-paws2.svg';
 
-const LastPage = React.forwardRef<HTMLDivElement, LastPageProp>(
+interface LastPageProps {
+  title: string;
+  subTitle: string;
+  backGroundImage: string;
+}
+
+const LastPage = React.forwardRef<HTMLDivElement, LastPageProps>(
   ({ title, subTitle, backGroundImage }, ref) => {
     return (
       <LastPageContainer
@@ -17,9 +22,9 @@ const LastPage = React.forwardRef<HTMLDivElement, LastPageProp>(
           <ButtonWrapper>
             <ToMbtiButton
               title="검사하개"
-              icon={dogBlackPaw}
-              textColor="black"
-              buttonColor="#E3E3E3"
+              icon={dogPaw}
+              textColor="white"
+              buttonColor="#48c0b8"
               buttonSize={13}
               textSize={25}
             />
@@ -36,6 +41,7 @@ const LastPageContainer = styled.div`
   scroll-snap-align: center;
   scroll-snap-stop: always;
 `;
+
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -43,15 +49,18 @@ const TextContainer = styled.div`
   align-items: center;
   height: 100vh;
 `;
+
 const Title = styled.div`
   font-size: 6vmin;
   font-weight: 700;
   color: ${props => props.theme.colors.white};
 `;
+
 const SubTitle = styled.div`
   margin-top: 4rem;
   font-size: 4vmin;
 `;
+
 const ButtonWrapper = styled.div`
   margin-top: 4rem;
 `;

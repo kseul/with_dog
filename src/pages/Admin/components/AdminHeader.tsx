@@ -1,14 +1,53 @@
 import styled from 'styled-components';
+import { useState } from 'react';
+import useAxios from 'hooks/useAxios';
+import NoticeModal from 'pages/Admin/components/Modal/NoticeModal';
 import logo from 'assets/svg/with-dog-logo.svg';
+import { AiFillBell } from 'react-icons/ai';
 
-const AdminHeader = () => {
+const AdminHeader = ({ onCurrentModal, modalId }) => {
+  const { response } = useAxios({
+    method: 'GET',
+    url: `https://togedog-dj.herokuapp.com/admin/notices`,
+    headers: {
+      accept: '*/*',
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+    },
+  });
+
+  const [isNoticeModalOpen, setIsNoticeModalOpen] = useState<Boolean>(false);
+  const [isNoticeDetailModal, setIsNoticeDetailModal] =
+    useState<Boolean>(false);
+
+  const noticeModal = (): void => {
+    setIsNoticeModalOpen(prev => !prev);
+  };
+
+  const noticeDetailModal = (): void => {
+    setIsNoticeDetailModal(prev => !prev);
+  };
+
   return (
     <AdminHeaderContainer>
       <TitleBox>
         <Logo src={logo} />
         <AdminHeaderTitle>함께하개</AdminHeaderTitle>
       </TitleBox>
-      <AdminLoginBox>로그아웃</AdminLoginBox>
+      <AdminNoticeWrapper>
+        <AiFillBell className="noticeIcon" onClick={noticeModal} />
+        {response?.data.count !== 0 && (
+          <NoticeNum>{response?.data.count}</NoticeNum>
+        )}
+        {isNoticeModalOpen && (
+          <NoticeModal
+            data={response?.data}
+            noticeDetailModal={noticeDetailModal}
+            isNoticeDetailModal={isNoticeDetailModal}
+            onCurrentModal={onCurrentModal}
+            modalId={modalId}
+          />
+        )}
+      </AdminNoticeWrapper>
     </AdminHeaderContainer>
   );
 };
@@ -35,11 +74,27 @@ const AdminHeaderTitle = styled.p`
   color: ${props => props.theme.colors.white};
 `;
 
-const AdminLoginBox = styled.div`
-  margin-right: 1.25rem;
-  font-size: 1.563rem;
+const AdminNoticeWrapper = styled.div`
+  position: relative;
+  margin-right: 2rem;
   color: ${props => props.theme.colors.white};
-  cursor: pointer;
+
+  .noticeIcon {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+`;
+
+const NoticeNum = styled.span`
+  position: absolute;
+  left: 18px;
+  padding-top: 5px;
+  width: 1.3rem;
+  height: 1.3rem;
+  background-color: #00eeff;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  text-align: center;
 `;
 
 export default AdminHeader;

@@ -8,7 +8,7 @@ import ResultNotice from 'assets/svg/ResultNoticePositoin.svg';
 import { MBTI_RESULT } from './constants/Result';
 
 const MBTIResultInfo = ({ graphResult, mbtiResultText }) => {
-  const getMBTIResult: string = Object.values(mbtiResultText.mbti).toString();
+  const getMBTIResult: any = Object.values(mbtiResultText).toString();
   const resultMBTI = MBTI_RESULT.filter(item => {
     return item.MBTI === getMBTIResult;
   });
@@ -16,18 +16,19 @@ const MBTIResultInfo = ({ graphResult, mbtiResultText }) => {
   return (
     <MBTIResultInfoContainer>
       {resultMBTI.map(
-        ({ MBTI, MBTICharacter, MBTIImage, MBTIPosition, resultId }) => (
+        ({
+          MBTI,
+          MBTICharacter,
+          MBTIImage,
+          MBTIPosition,
+          resultId,
+          content,
+        }) => (
           <React.Fragment key={resultId}>
             <MBTIDOG src={MBTIImage} />
             <MBTIResult>{MBTI}</MBTIResult>
             <MBTICharacterText>{MBTICharacter}</MBTICharacterText>
-            <MBTIContent>
-              에너지가 넘치는 꾸러기 댕댕이군요! 에너지를 분출시켜주기 위해서
-              자주 산책을 시켜주는 것이 좋을 것 같아요! 다른 강아지한테 장난도
-              많고 나한테도 장난을 많이 치는 성격인데 확실히 교육과 놀이를
-              구분시켜 가르칠 필요가 있습니다! 흥분을 절제하는 방법을 교육
-              시키는 것 또한 좋아보입니다!
-            </MBTIContent>
+            <MBTIContent>{content}</MBTIContent>
             <NoticeImage src={ResultNotice} />
             <GraphInfo src={ResultInfo} />
             <MBTIGraph graphResult={graphResult} />
@@ -69,9 +70,9 @@ const MBTICharacterText = styled.span`
 `;
 
 const MBTIContent = styled.span`
-  margin: 3rem 15rem 0 15rem;
+  margin: 3rem 20rem 0 20rem;
   line-height: 2rem;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   ${BasicText}
 `;
 
@@ -87,7 +88,7 @@ const GraphInfo = styled.img`
 
 const GraphSummary = styled.img`
   width: 37.5rem;
-  margin-top: 9.375rem;
+  margin: 4.6rem 0;
 `;
 
 export default MBTIResultInfo;

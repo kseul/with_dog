@@ -1,11 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { BoardDataProp } from 'types/type';
 
-const BoardModalTyping = () => {
+const BoardModalTyping = ({ modalContent }: BoardDataProp) => {
+  const [comment, setComment] = useState('');
+  const navigate = useNavigate();
+
+  const onChangeComment = e => {
+    setComment(e.target.value);
+  };
+
+  const createComment = () => {
+    const formData = new FormData();
+    formData.append('content', comment);
+
+    fetch(
+      `https://togedog-dj.herokuapp.com/posts/${modalContent.id}/comments`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+        },
+        body: formData,
+      }
+    )
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'success') {
+          navigate('/noticeboard');
+        }
+      });
+  };
+
   return (
     <BoardModalTypingWrapper>
-      <BoardModalTypingInput placeholder="발도장 찍기..." />
-      <BoardModalTypingButton>발도장꾹</BoardModalTypingButton>
+      <BoardModalTypingInput
+        onChange={onChangeComment}
+        placeholder="발도장 찍기..."
+      />
+      <BoardModalTypingButton onClick={createComment}>
+        발도장꾹
+      </BoardModalTypingButton>
     </BoardModalTypingWrapper>
   );
 };

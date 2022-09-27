@@ -32,14 +32,17 @@ const ReactionAnswer = ({
 
 const AnswerList = styled.div`
   ${props => props.theme.flex.flexBox('row', '', 'center')};
-  margin-top: 0.625rem;
+  margin-top: 0.7rem;
 `;
 
 const AnswerLabel = styled.label`
-  ${props => props.theme.flex.flexBox('column', '', '')};
+  ${props => props.theme.flex.flexBox('column', 'center', '')};
   margin: 0 1.25rem;
-  font-size: 0.938rem;
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: #808080;
   text-align: center;
+  width: 5rem;
 `;
 
 const Answers = styled.input`
@@ -47,7 +50,7 @@ const Answers = styled.input`
 `;
 
 const AnswersText = styled.span`
-  width: 6.25rem;
+  width: 6.205rem;
   margin-top: 0.625rem;
 `;
 

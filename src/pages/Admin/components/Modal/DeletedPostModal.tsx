@@ -5,13 +5,13 @@ import UserInfoBox from 'pages/Admin/components/RightSection/UserInfoBox';
 import { AiOutlineClose } from 'react-icons/ai';
 import backgroundImage from 'assets/images/bg1.jpg';
 
-const DeletedPostModal = ({ closeModal, modalId }) => {
+const DeletedPostModal = ({ detailModalOpener, modalId }) => {
   const { response } = useAxios({
     method: 'GET',
     url: `https://togedog-dj.herokuapp.com/posts/deleted/${modalId}/`,
     headers: {
       accept: '*/*',
-      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
+      Authorization: `Bearer ${sessionStorage.getItem('token')}`,
     },
   });
 
@@ -21,7 +21,7 @@ const DeletedPostModal = ({ closeModal, modalId }) => {
         `https://togedog-dj.herokuapp.com/posts/${modalId}/delete/hard/`,
         {
           headers: {
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDQzMzI3OSwiaWF0IjoxNjYxODQxMjc5fQ.NLpkWBcxdD98g5XTAUTbzwKz5TmVGzwanhjTLeoiWwM`,
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
           },
         }
       );
@@ -31,12 +31,12 @@ const DeletedPostModal = ({ closeModal, modalId }) => {
   };
 
   return (
-    <ModalBackground onClick={closeModal}>
+    <ModalBackground onClick={detailModalOpener}>
       {response?.data && (
         <ModalContainer onClick={e => e.stopPropagation()}>
           <ModalTop>
             <ModalTitle>삭제된 게시글 관리</ModalTitle>
-            <DeleteIconButton onClick={closeModal}>
+            <DeleteIconButton onClick={detailModalOpener}>
               <AiOutlineClose />
             </DeleteIconButton>
           </ModalTop>
@@ -71,7 +71,7 @@ const DeletedPostModal = ({ closeModal, modalId }) => {
               <BtnWrapper>
                 <CancelBtn
                   onClick={() => {
-                    closeModal();
+                    detailModalOpener();
                     deletePost();
                   }}
                 >

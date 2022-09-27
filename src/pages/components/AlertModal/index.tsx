@@ -3,11 +3,7 @@ import { useEffect } from 'react';
 import { AlertModalProps } from 'types/type';
 import cancelImg from 'assets/svg/cancel.svg';
 
-const AlertModal = ({
-  title,
-  setShowAlertModal,
-  showAlertModal,
-}: AlertModalProps) => {
+const AlertModal = ({ title, setShowAlertModal }: AlertModalProps) => {
   const handleModal = () => {
     setShowAlertModal('');
   };
@@ -27,15 +23,11 @@ const AlertModal = ({
 
   return (
     <>
-      {showAlertModal && (
-        <>
-          <AlertModalContainer>
-            <Title>{title}</Title>
-            <CancelImg src={cancelImg} onClick={handleModal} />
-          </AlertModalContainer>
-          <BackGround onClick={handleModal} />
-        </>
-      )}
+      <AlertModalContainer>
+        <Title>{title}</Title>
+        <CancelImg src={cancelImg} onClick={handleModal} />
+      </AlertModalContainer>
+      <BackGround onClick={handleModal} />
     </>
   );
 };
@@ -43,6 +35,9 @@ const AlertModal = ({
 const AlertModalContainer = styled.div`
   ${props => props.theme.flex.flexBox('column')}
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 31.25rem;
   height: 9.375rem;
   background-color: white;
@@ -55,13 +50,13 @@ const Title = styled.div`
   position: relative;
   font-size: 1.5rem;
   font-weight: 500;
-  color: #ff3300;
+  color: ${props => props.theme.colors.gray};
 `;
 
 const CancelImg = styled.img`
   position: absolute;
-  top: 4%;
-  right: 3%;
+  top: 5.5%;
+  right: 2%;
   width: 1.875rem;
   cursor: pointer;
 `;

@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
-const ListPostContentsBox = ({ data, openModal, onCurrentModal }) => {
+const ListPostContentsBox = ({ data, detailModalOpener, onCurrentModal }) => {
   return (
     <div>
       {data.updated_at && (
         <ListContents
           onClick={() => {
-            openModal();
+            detailModalOpener();
             onCurrentModal(data.id);
           }}
         >
-          <UserName>{data.user_name}</UserName>
-          <PostContent>{data.content}</PostContent>
+          <UserNickName>{data.user_nickname}</UserNickName>
+          <PostContent>{data.subject}</PostContent>
           <UserMbti>{data.user_mbti}</UserMbti>
           <UserSignDate>
             {new Date(data.updated_at).toISOString().substring(0, 10)}
@@ -38,8 +38,8 @@ const ListContents = styled.div`
   }
 `;
 
-const UserName = styled.span`
-  width: 6.25rem;
+const UserNickName = styled.span`
+  width: 8rem;
   text-align: center;
   vertical-align: middle;
 `;

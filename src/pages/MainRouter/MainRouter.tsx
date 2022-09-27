@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import ChatList from 'pages/Chatting/ChatList';
-import Mypage from 'pages/Mypage/Mypage';
+import Mypage from 'pages/Mypage';
 import Nav from 'pages/components/Nav';
 import Footer from 'pages/components/Footer/Footer';
 import MBTITest from 'pages/MBTI/MBTITest/MBTITest';

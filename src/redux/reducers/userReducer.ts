@@ -1,6 +1,7 @@
 const initialState = {
   LoggedIn: false,
   userData: {
+    id: 0,
     account_type: '',
     email: '',
     mbti: '',
@@ -22,6 +23,16 @@ const userReducer = (prevState = initialState, action) => {
       return {
         ...prevState,
         userData: { ...prevState.userData, mbti: action.data },
+      };
+    case 'CHANGE_NICKNAME':
+      return {
+        ...prevState,
+        userData: { ...prevState.userData, nickname: action.data },
+      };
+    case 'SET_USER_IMAGE':
+      return {
+        ...prevState,
+        userData: { ...prevState.userData, thumbnail_url: action.data },
       };
     default:
       return prevState;
