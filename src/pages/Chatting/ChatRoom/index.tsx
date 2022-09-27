@@ -38,7 +38,6 @@ const ChatRoom = () => {
 
   const navigate = useNavigate();
 
-  // const ENDPOINT = 'localhost:3000';
   const ENDPOINT = 'http://54.180.89.143:8000';
 
   const [cookies] = useCookies(['userToken']);
