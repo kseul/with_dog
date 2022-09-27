@@ -1,22 +1,39 @@
 import styled from 'styled-components';
+import store from 'redux/store';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
-import { MessagesProps } from 'types/type';
+import chatReportActions from 'redux/actions/chatReport';
+import { MessagesProps } from 'pages/Chatting/type';
 import Siren from 'assets/svg/siren.svg';
 
 const Message = ({
-  message: { user, text, time, mbti },
+  message: {
+    user_nickname,
+    user_id,
+    user_mbti,
+    user_image,
+    text,
+    message_id,
+    time,
+  },
   nickname,
-}: MessagesProps) => {
+  setIsShowModal,
+}: MessagesProps | any) => {
   let isSentByCurrentUser = false;
-  if (user === nickname) {
+  if (user_nickname === nickname) {
     isSentByCurrentUser = true;
   }
 
   const storeData = useSelector((state: RootState) => state);
   const userImage = storeData.user.userData.thumbnail_url;
 
-  if (user === '함께하개 관리자') {
+  const ReportChatData = (id, messageId, text) => {
+    store.dispatch(chatReportActions.reportedUserId(id));
+    store.dispatch(chatReportActions.reportedMessageId(messageId));
+    store.dispatch(chatReportActions.reportedMessage(text));
+  };
+
+  if (user_nickname === '함께하개 관리자') {
     return (
       <AdminTextBox>
         <Text>{text}</Text>
@@ -40,18 +57,24 @@ const Message = ({
     </MessageContainer>
   ) : (
     <MessageContainer currentUser={isSentByCurrentUser}>
-      <ProfileImg src={userImage} />
+      <ProfileImg src={user_image} />
       <MessageBox>
         <UserBox>
-          <Nickname>{user}</Nickname>
-          <Mbti>{mbti}</Mbti>
+          <Nickname>{user_nickname}</Nickname>
+          <Mbti>{user_mbti}</Mbti>
         </UserBox>
         <TextContainer>
           <TextBox currentUser={isSentByCurrentUser}>
             <Text>{text}</Text>
           </TextBox>
           <TextData>
-            <ReportIcon src={Siren} />
+            <ReportIcon
+              src={Siren}
+              onClick={() => {
+                setIsShowModal(true);
+                ReportChatData(user_id, message_id, text);
+              }}
+            />
             <Time>{time}</Time>
           </TextData>
         </TextContainer>

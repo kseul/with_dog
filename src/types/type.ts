@@ -1,12 +1,3 @@
-export interface ChatListProp {
-  id?: number;
-  Image?: any;
-  title?: string;
-  description?: string;
-  modalDescription?: string;
-  type?: string;
-}
-
 export interface IdPwInputProp {
   placeholder: string;
   type: string;
@@ -34,15 +25,6 @@ export interface PageBoxProp {
   moveTo: string;
 }
 
-export interface ChatModalProp {
-  onClickToggleModal: () => void;
-  id?: number;
-  Image: any;
-  modalDescription: string | undefined;
-  type: string | undefined;
-  title: string | undefined;
-}
-
 export interface ToMbtiButtonProp {
   title: string;
   icon: string;
@@ -50,20 +32,6 @@ export interface ToMbtiButtonProp {
   buttonColor: string;
   buttonSize: number;
   textSize: number;
-}
-
-export interface MainPagesProp {
-  backGroundImage: string;
-}
-
-export interface LastPageProp extends MainPagesProp {
-  title: string;
-  subTitle: string;
-}
-
-export interface ContentPagesProp extends LastPageProp {
-  reverse: boolean;
-  id: number;
 }
 
 export interface ListData {
@@ -122,10 +90,6 @@ export interface AnswerType {
   answerValue?: string;
 }
 
-export interface CheckValidProps {
-  errorMessage: string;
-}
-
 export interface JoinMBTI {
   mbti?: string;
 }
@@ -153,24 +117,8 @@ export interface MBTIScoreProps {
   layout?: string;
 }
 
-export interface UserDataProps {
-  account_type?: string;
-  email?: string;
-  mbti?: string;
-  name?: string;
-  nickname?: string;
-  status?: string;
-  thumbnail_url?: string;
-  user_type?: string;
-}
-
 export interface MainRef<T> {
   current: T;
-}
-
-export interface AlertModalProps {
-  title: string;
-  setShowAlertModal: (string) => void;
 }
 
 export interface EditModalProps {
@@ -190,17 +138,4 @@ export interface UserDataProps {
   thumbnail_url?: string;
   user_type?: string;
   id?: number;
-}
-
-export interface ChatRoomProps {
-  room?: number;
-}
-
-export interface MessagesProps {
-  user?: string;
-  text?: string;
-  time?: string;
-  mbti?: string;
-  nickname?: string;
-  message;
 }

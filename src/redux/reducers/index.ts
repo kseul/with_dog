@@ -9,6 +9,7 @@ import mbtiTextReducer from './mbtiTextReducer';
 import userCounterReducer from './userCounterReducer';
 import boardReducer from './boardReducer';
 import chatReducer from './chatReducer';
+import chatReportReducer from './chatReportReducer';
 
 const persistConfig = {
   key: 'root',
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   counter: userCounterReducer,
   board: boardReducer,
   chat: chatReducer,
+  chatReport: chatReportReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

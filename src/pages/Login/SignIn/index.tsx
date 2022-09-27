@@ -43,6 +43,9 @@ const SignIn = () => {
   const isActive =
     email.includes('@') && email.includes('.') && password.length > 7 === true;
 
+  const expires = new Date();
+  expires.setMinutes(expires.getMinutes() + 60);
+
   const submitSigninInfo = () => {
     if (isActive) {
       axios
@@ -61,8 +64,7 @@ const SignIn = () => {
             store.dispatch(userActions.handleUserData(userData));
             setCookie('userToken', res.data.access_token, {
               path: '/',
-              secure: true,
-              // httpOnly: true,
+              expires,
             });
             navigate('/');
           }

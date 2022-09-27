@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import { AlertModalProps } from 'types/type';
 import cancelImg from 'assets/svg/cancel.svg';
 
-const AlertModal = ({ title, setShowAlertModal }: AlertModalProps) => {
+interface AlertModalProps2 {
+  title: string;
+  setShowAlertModal: (arg: string) => void;
+}
+
+const AlertModal = ({ title, setShowAlertModal }: AlertModalProps2) => {
   const handleModal = () => {
     setShowAlertModal('');
   };
@@ -35,6 +39,9 @@ const AlertModal = ({ title, setShowAlertModal }: AlertModalProps) => {
 const AlertModalContainer = styled.div`
   ${props => props.theme.flex.flexBox('column')}
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 31.25rem;
   height: 9.375rem;
   background-color: white;
