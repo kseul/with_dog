@@ -1,7 +1,10 @@
 import styled from 'styled-components';
-import { CheckValidProps } from 'types/type';
 
-const ConfirmText = ({ errorMessage }: CheckValidProps) => {
+interface ConfirmTextProps {
+  errorMessage: string;
+}
+
+const ConfirmText = ({ errorMessage }: ConfirmTextProps) => {
   return (
     <ConfirmTextContainer>
       <Title>{errorMessage}</Title>

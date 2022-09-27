@@ -92,11 +92,6 @@ export interface MainRef<T> {
   current: T;
 }
 
-export interface AlertModalProps {
-  title: string;
-  setShowAlertModal: (string) => void;
-}
-
 export interface EditModalProps {
   showAlertModal: string;
   setShowAlertModal: (string) => void;

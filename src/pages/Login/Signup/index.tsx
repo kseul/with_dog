@@ -1,21 +1,20 @@
+import axios from 'axios';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ConfirmText from './ConfirmText';
+import { useEffect, useMemo, useState } from 'react';
 import LoginButton from '../components/loginButton/LoginButton';
-import USER_LOCATION from '../DATA/USERLOCATION_DATA';
+import UserDataInputForm from './components/UserDataInputForm';
+import AlertModal from 'pages/components/AlertModal';
 import bgimg from 'assets/images/bg1.jpg';
 
 const Signup = () => {
   const navigate = useNavigate();
-
   const [userInputValue, setUserInputValue] = useState({
     name: '',
     email: '',
     password: '',
     nickname: '',
   });
-  const { name, email, password, nickname } = userInputValue;
   const [checkName, setCheckName] = useState(false);
   const [checkEmail, setCheckEmail] = useState(false);
   const [checkPassword, setCheckPassword] = useState(false);
@@ -23,14 +22,19 @@ const Signup = () => {
   const [checkNickName, setCheckNickName] = useState(false);
   const [checkUniqueEmail, setCheckUniqueEmail] = useState(false);
   const [userLocation, setUserLocation] = useState('');
+  const [showAlertModal, setShowAlertModal] = useState('');
+  const { name, email, password, nickname } = userInputValue;
 
   const allValidEmail = checkEmail && checkUniqueEmail;
-  const isActive =
-    checkName &&
-    allValidEmail &&
-    checkPassword &&
-    checkRePassword &&
-    checkNickName === true;
+  const isActive = useMemo(() => {
+    return (
+      checkName &&
+      allValidEmail &&
+      checkPassword &&
+      checkRePassword &&
+      checkNickName === true
+    );
+  }, [checkName, allValidEmail, checkPassword, checkRePassword, checkNickName]);
 
   const handleUserInput = e => {
     const { name, value } = e.target;
@@ -79,21 +83,20 @@ const Signup = () => {
 
   useEffect(() => {
     if (checkEmail) {
-      const handleUniqueEmail = () => {
-        fetch('https://togedog-dj.herokuapp.com/users/signup/emailcheck/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
-        })
-          .then(res => res.json())
-          .then(result => {
-            if (result.message === 'success') {
-              setCheckUniqueEmail(true);
-            } else {
-              alert('중복된 이메일 입니다.');
-              setCheckUniqueEmail(false);
+      const handleUniqueEmail = async () => {
+        try {
+          await axios.post(
+            'https://togedog-dj.herokuapp.com/users/signup/emailcheck/',
+            {
+              headers: { 'Content-Type': 'application/json' },
+              email,
             }
-          });
+          );
+          setCheckUniqueEmail(true);
+        } catch (error) {
+          setShowAlertModal('중복된 이메일입니다.');
+          setCheckEmail(false);
+        }
       };
 
       const timer = setTimeout(() => {
@@ -108,26 +111,26 @@ const Signup = () => {
     setUserLocation(e.target.value);
   };
 
-  const submitSignupInfo = () => {
+  const submitSignupInfo = async () => {
     if (isActive) {
-      fetch('https://togedog-dj.herokuapp.com/users/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      try {
+        await axios.post('https://togedog-dj.herokuapp.com/users/signup', {
+          headers: { 'Content-Type': 'application/json' },
           name: name,
           nickname: nickname,
           email: email,
           password: password,
           address: userLocation,
-        }),
-      })
-        .then(res => res.json())
-        .then(result => {
-          if (result.message === 'success') {
-            alert('회원가입이 완료되었습니다.');
-            navigate('/signin');
-          }
         });
+        setShowAlertModal('회원가입 완료');
+        setTimeout(() => {
+          navigate('/signin');
+        }, 1000);
+      } catch (error: any) {
+        if (error.response.status === 400) {
+          setShowAlertModal('부적절한 닉네임입니다.');
+        }
+      }
     }
   };
 
@@ -153,7 +156,7 @@ const Signup = () => {
       name: 'password',
       placeholder: '비밀번호 *',
       type: 'password',
-      errorMessage: '숫자와 특수기호를 포함시켜주세요.',
+      errorMessage: '숫자와 특수문자 포함 8~16자 내로 작성해주세요.',
       validCheck: checkPassword,
     },
     {
@@ -169,51 +172,27 @@ const Signup = () => {
       name: 'nickname',
       placeholder: '닉네임 *',
       type: 'text',
-      errorMessage: '닉네임을 입력하세요.',
+      errorMessage: '닉네임은 10글자 내로 작성해주세요.',
       validCheck: checkNickName,
     },
   ];
 
   return (
     <SignupContainer>
+      {showAlertModal && (
+        <AlertModal
+          title={showAlertModal}
+          setShowAlertModal={setShowAlertModal}
+        />
+      )}
       <SignupForm>
         <Title>회원가입</Title>
-        <UserDataInputContainer>
-          {USER_INPUT_FORM.map(
-            ({ id, placeholder, type, name, errorMessage, validCheck }) => {
-              return (
-                <UserDataInputWrapper key={id}>
-                  <UserDataInput
-                    placeholder={placeholder}
-                    type={type}
-                    name={name}
-                    onChange={handleUserInput}
-                  />
-                  {!validCheck && <ConfirmText errorMessage={errorMessage} />}
-                </UserDataInputWrapper>
-              );
-            }
-          )}
-          <UniqueEmailButton>
-            {checkUniqueEmail ? (
-              <PassText>확인 완료</PassText>
-            ) : (
-              <RequestText>중복 확인중</RequestText>
-            )}
-          </UniqueEmailButton>
-          <UserLocationContainer>
-            <ChooseText>지역을 선택해주세요 👉 </ChooseText>
-            <UserLocation onChange={handleUserLocation}>
-              {USER_LOCATION.map(({ id, location }) => {
-                return (
-                  <Location key={id} value={location} defaultValue="서울특별시">
-                    {location}
-                  </Location>
-                );
-              })}
-            </UserLocation>
-          </UserLocationContainer>
-        </UserDataInputContainer>
+        <UserDataInputForm
+          USER_INPUT_FORM={USER_INPUT_FORM}
+          handleUserInput={handleUserInput}
+          checkUniqueEmail={checkUniqueEmail}
+          handleUserLocation={handleUserLocation}
+        />
         <ButtonWrapper>
           <LoginButton
             title="회원가입"
@@ -253,68 +232,6 @@ const Title = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
 `;
-
-const UserDataInputContainer = styled.div`
-  position: relative;
-  margin-bottom: 2.5rem;
-`;
-
-const UserDataInputWrapper = styled.div``;
-
-const UserDataInput = styled.input`
-  width: 18rem;
-  padding-left: 0;
-  padding-bottom: 0.3rem;
-  margin-bottom: 2.7rem;
-  border: none;
-  border-bottom: 1px solid lightgray;
-  font-size: 0.9rem;
-`;
-
-const UniqueEmailButton = styled.button`
-  position: absolute;
-  top: 19%;
-  right: 0;
-  width: 4rem;
-  height: 1.25rem;
-  border: 1px solid gray;
-  border-radius: 1.875rem;
-  background-color: white;
-  font-size: 0.7rem;
-  font-weight: 600;
-`;
-
-const PassText = styled.div`
-  color: green;
-`;
-
-const RequestText = styled.div`
-  color: red;
-  font-size: 0.6rem;
-  opacity: 0.6;
-`;
-
-const UserLocationContainer = styled.div`
-  display: flex;
-  position: relative;
-`;
-
-const ChooseText = styled.div`
-  flex: 7;
-  font-size: 14.5px;
-  font-weight: 600;
-`;
-
-const UserLocation = styled.select`
-  position: absolute;
-  top: -25%;
-  right: 0%;
-  width: 6.25rem;
-  border-radius: 0.3rem;
-  border-color: darkgray;
-`;
-
-const Location = styled.option``;
 
 const ButtonWrapper = styled.div`
   margin-bottom: 1.25rem;

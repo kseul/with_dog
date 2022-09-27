@@ -1,37 +1,28 @@
 import styled from 'styled-components/macro';
-import { CountUp } from './CountUp';
-import TitlePaw from 'assets/svg/TitlePawPositoin.svg';
-import { useSelector } from 'react-redux';
-import { RootState } from 'redux/reducers';
-import { Counter } from './type';
 import { useEffect, useState } from 'react';
 import { CountUser } from './type';
+import TitlePaw from 'assets/svg/TitlePawPositoin.svg';
 
 const UserCounter = () => {
-  const [count, setCount] = useState<any>();
-  console.log(count);
+  const [count, setCount] = useState<CountUser>({ userNum: 0 });
 
-  const counterUser: string = Object.values(count)
+  const getNum = () => {
+    fetch(`https://togedog-dj.herokuapp.com/test-count`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(result => {
+        setCount(result);
+      });
+  };
+
+  useEffect(() => {
+    getNum();
+  }, []);
+
+  const userCount = Object.values(count)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-  // const getNum = () => {
-  //   fetch(`https://togedog-dj.herokuapp.com/test-count`, {
-  //     method: 'GET',
-  //   })
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       setCount(result);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   getNum();
-  // }, []);
-
-  const counterUserRedux: Counter = useSelector(
-    (state: RootState) => state.counter
-  );
 
   return (
     <UserCounterContainer>
@@ -41,7 +32,7 @@ const UserCounter = () => {
         <TitleIMG src={TitlePaw} />
       </TitleContainer>
       <UserCounterBox>
-        <UserCountNumber>{counterUser}</UserCountNumber>
+        {count !== undefined && <UserCountNumber>{userCount}</UserCountNumber>}
         <OfUser>명의 사용자</OfUser>
       </UserCounterBox>
     </UserCounterContainer>
