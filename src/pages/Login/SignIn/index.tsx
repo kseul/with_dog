@@ -112,4 +112,44 @@ const Character = styled.img`
   height: 34.375rem;
 `;
 
+<<<<<<< HEAD
+=======
+const LoginForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 40rem;
+  height: 40rem;
+  padding: 3.5rem;
+  border-radius: 1.25rem;
+  background-color: white;
+  box-shadow: 0.063rem 0.063rem 0.938rem 0.125rem rgba(0, 0, 0, 0.1);
+`;
+
+const LoginTitle = styled.div`
+  font-size: 3rem;
+  font-weight: 700;
+`;
+
+const LoginSubTitle = styled.div`
+  margin-top: 1.25rem;
+  font-size: 1.2rem;
+  color: ${props => props.theme.colors.darkGray};
+`;
+
+const IdPwInputContainer = styled.div`
+  margin-top: 4.6rem;
+`;
+
+const SnsLoginContainer = styled.div`
+  margin-top: 1.875rem;
+  text-align: center;
+`;
+
+const SnsTitle = styled.div`
+  margin-bottom: 2.188rem;
+  color: darkgray;
+`;
+
+>>>>>>> develop
 export default SignIn;

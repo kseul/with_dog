@@ -1,12 +1,3 @@
-export interface ChatListProp {
-  id?: number;
-  Image?: any;
-  title?: string;
-  description?: string;
-  modalDescription?: string;
-  type?: string;
-}
-
 export interface IdPwInputProp {
   placeholder: string;
   type: string;
@@ -32,15 +23,6 @@ export interface SNSButtonProp {
 export interface PageBoxProp {
   title: string;
   moveTo: string;
-}
-
-export interface ChatModalProp {
-  onClickToggleModal: () => void;
-  id?: number;
-  Image: any;
-  modalDescription: string | undefined;
-  type: string | undefined;
-  title: string | undefined;
 }
 
 export interface ToMbtiButtonProp {
@@ -73,77 +55,8 @@ export interface BoardDataProp {
   handleModal?: () => void;
 }
 
-export interface MBTIProps {
-  onClickCheck: () => void;
-  testId?: number;
-  labelName?: string;
-}
-
-export interface MBTIEnergyProps extends MBTIProps {
-  handleSetEnergyName: (value: string, id: number) => void;
-  energyLength?: number;
-  onEnergyCheck?: () => void;
-}
-
-export interface MBTIRelationProps extends MBTIProps {
-  handleSetRelationName: (value: string, id: number) => void;
-  relationLength?: number;
-  onRelationCheck?: () => void;
-}
-
-export interface MBTIReactionProps extends MBTIProps {
-  handleSetReactionName: (value: string, id: number) => void;
-  reactionLength?: number;
-  onReactionCheck?: () => void;
-}
-
-export interface MBTIJudgdemnetProps extends MBTIProps {
-  handleSetJudgementName: (value: string, id: number) => void;
-  judgementLength?: number;
-  onJudgementCheck?: () => void;
-}
-
-export interface AnswerType {
-  testId: number | null;
-  answerValue?: string;
-}
-
-export interface JoinMBTI {
-  mbti?: string;
-}
-
-export interface ResultData {
-  resultId: number;
-  MBTIImage: string;
-  MBTI: string;
-  MBTICharacter: string;
-  content: string;
-  MBTIPosition: string;
-}
-
-export interface MBTIResultProps {
-  id?: number;
-  mbti: string;
-  score: number;
-  layout: string;
-}
-
-export interface MBTIScoreProps {
-  id?: number | null;
-  mbti?: string;
-  score?: number | null;
-  layout?: string;
-}
-
-export interface UserDataProps {
-  account_type?: string;
-  email?: string;
-  mbti?: string;
-  name?: string;
-  nickname?: string;
-  status?: string;
-  thumbnail_url?: string;
-  user_type?: string;
+export interface CheckValidProps {
+  errorMessage: string;
 }
 
 export interface MainRef<T> {
@@ -167,17 +80,4 @@ export interface UserDataProps {
   thumbnail_url?: string;
   user_type?: string;
   id?: number;
-}
-
-export interface ChatRoomProps {
-  room?: number;
-}
-
-export interface MessagesProps {
-  user?: string;
-  text?: string;
-  time?: string;
-  mbti?: string;
-  nickname?: string;
-  message;
 }

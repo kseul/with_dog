@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 import RelationAnswer from './JudgementAnswer';
 import MBTIResultButton from '../MBTIResultButton';
 import { JUDEGEMENT_TEST_DB } from '../constants/Test';
-import { MBTIJudgdemnetProps } from 'types/type';
+import { MBTIJudgdemnetProps } from '../type';
 
 const JudgementTest = ({
   handleSetJudgementName,

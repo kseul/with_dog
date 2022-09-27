@@ -3,7 +3,7 @@ const initialState = {
   title: '',
 };
 
-const postsReducer = (prevState = initialState, action) => {
+const chatReducer = (prevState = initialState, action) => {
   switch (action.type) {
     case 'SET_ROOM':
       return { ...prevState, title: action.data };
@@ -16,4 +16,4 @@ const postsReducer = (prevState = initialState, action) => {
   }
 };
 
-export default postsReducer;
+export default chatReducer;

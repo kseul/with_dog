@@ -1,27 +1,11 @@
-import styled from 'styled-components';
-import { useEffect } from 'react';
+import styled from 'styled-components/macro';
+import { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import store from 'redux/store';
 import chatRoomActions from 'redux/actions/chat';
 import ArrowRight from 'assets/svg/arrow-right.svg';
 
-interface ChatModalProp {
-  onClickToggleModal: () => void;
-  id?: number;
-  Image: any;
-  modalDescription: string | undefined;
-  type: string | undefined;
-  title: string | undefined;
-}
-
-const ChatModal = ({
-  onClickToggleModal,
-  id,
-  Image,
-  modalDescription,
-  type,
-  title,
-}: ChatModalProp) => {
+const RecommendationModal = ({ onClickToggleModal, resultModal }) => {
   const currentRoom = (title, id) => {
     store.dispatch(chatRoomActions.setRoom(`${title} 방`));
     store.dispatch(chatRoomActions.setRoomId(id));
@@ -42,24 +26,30 @@ const ChatModal = ({
 
   return (
     <>
-      <ChatModalContainer>
-        <Image style={{ width: '12rem', marginRight: '1rem' }} />
-        <Title>{title}형</Title>
-        <Description>{modalDescription}</Description>
-        <Line />
-        <Type>{type}</Type>
-        <Link to={`/chat/${id}`}>
-          <EntryBtn
-            onClick={() => {
-              currentRoom(title, id);
-            }}
-          >
-            <Text>채팅방 입장하기</Text>
-            <GoChatEntryIcon src={ArrowRight} />
-          </EntryBtn>
-        </Link>
-      </ChatModalContainer>
-      <BackGround onClick={onClickToggleModal} />
+      {resultModal.map(({ id, Image, title, modalDescription, type }) => {
+        return (
+          <Fragment key={id}>
+            <ChatModalContainer>
+              <Image style={{ width: '12rem', marginRight: '1rem' }} />
+              <Title>{title}형</Title>
+              <Description>{modalDescription}</Description>
+              <Line />
+              <Type>{type}</Type>
+              <Link to={`/chat/${id}`}>
+                <EntryBtn
+                  onClick={() => {
+                    currentRoom(title, id);
+                  }}
+                >
+                  <Text>채팅방 입장하기</Text>
+                  <GoChatEntryIcon src={ArrowRight} />
+                </EntryBtn>
+              </Link>
+            </ChatModalContainer>
+            <BackGround onClick={onClickToggleModal} />
+          </Fragment>
+        );
+      })}
     </>
   );
 };
@@ -68,11 +58,12 @@ const ChatModalContainer = styled.div`
   ${props => props.theme.flex.flexBox('column')}
   position: fixed;
   top: 50%;
+  left: 38%;
   width: 30rem;
   height: 40rem;
   transform: translateY(-49%);
   background-color: white;
-  box-shadow: 1px 1px 15px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0.063rem 0.063rem 0.938rem 0.125rem rgba(0, 0, 0, 0.1);
   border-radius: 1.2rem;
   z-index: 2;
 `;
@@ -95,7 +86,7 @@ const Description = styled.div`
 const Line = styled.div`
   background-color: ${props => props.theme.colors.lineLightGray};
   width: 16rem;
-  height: 2px;
+  height: 0.125rem;
   margin-top: 3rem;
 `;
 
@@ -135,10 +126,11 @@ const GoChatEntryIcon = styled.img`
 const BackGround = styled.div`
   position: absolute;
   top: 0;
-  width: 100%;
-  height: 100%;
+  left: 0;
+  width: 100vw;
+  height: 240rem;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 `;
 
-export default ChatModal;
+export default RecommendationModal;

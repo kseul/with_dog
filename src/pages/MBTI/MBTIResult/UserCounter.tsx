@@ -1,10 +1,28 @@
 import styled from 'styled-components/macro';
+import { useEffect, useState } from 'react';
+import { CountUser } from './type';
 import TitlePaw from 'assets/svg/TitlePawPositoin.svg';
-import { useSelector } from 'react-redux';
-import { RootState } from 'redux/reducers';
 
 const UserCounter = () => {
-  const countUser = useSelector((state: RootState) => state.counter);
+  const [count, setCount] = useState<CountUser>({ userNum: 0 });
+
+  const getNum = () => {
+    fetch(`https://togedog-dj.herokuapp.com/test-count`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(result => {
+        setCount(result);
+      });
+  };
+
+  useEffect(() => {
+    getNum();
+  }, []);
+
+  const userCount = Object.values(count)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
   return (
     <UserCounterContainer>
@@ -13,7 +31,10 @@ const UserCounter = () => {
         <TitleText>함께하개와 함께한 사용자 수</TitleText>
         <TitleIMG src={TitlePaw} />
       </TitleContainer>
-      {/* <UserCounterBox>{countUser}</UserCounterBox> */}
+      <UserCounterBox>
+        {count !== undefined && <UserCountNumber>{userCount}</UserCountNumber>}
+        <OfUser>명의 사용자</OfUser>
+      </UserCounterBox>
     </UserCounterContainer>
   );
 };
@@ -32,10 +53,29 @@ const TitleIMG = styled.img`
 `;
 
 const TitleText = styled.span`
-  text-align: center;
   color: #333333;
   font-size: 1.563rem;
+  text-align: center;
 `;
 
-const UserCounterBox = styled.div``;
+const UserCounterBox = styled.div`
+  ${props => props.theme.flex.flexBox('row', 'center', 'center')};
+`;
+
+const UserCountNumber = styled.span`
+  margin-top: 2.5rem;
+  color: #333333;
+  font-size: 1.7rem;
+  font-weight: 500;
+  text-align: center;
+`;
+
+const OfUser = styled.span`
+  margin: 2.5rem 0 0 0.5rem;
+  color: #333333;
+  font-size: 1.3rem;
+  font-weight: 300;
+  text-align: center;
+`;
+
 export default UserCounter;
