@@ -5,6 +5,7 @@ import PageBox from './components/PageBox';
 import UserProfile from './components/UserProfile';
 import { RootState } from 'redux/reducers';
 import logo from 'assets/svg/with-dog-logo.svg';
+import withDogLogo from 'assets/svg/withDogLogo.svg';
 
 const Nav = () => {
   const navigate = useNavigate();
