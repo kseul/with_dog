@@ -6,7 +6,6 @@ import { useCookies } from 'react-cookie';
 import setMbtiResults from 'redux/actions/mbtiResult';
 import userActions from 'redux/actions/user';
 import setMbtiTexts from 'redux/actions/mbtiText';
-import setUserCounter from 'redux/actions/userCounterAction';
 import ProgressBar from './ProgressBar';
 import EnergyTest from './Energy/EnergyTest';
 import RelationTest from './Relation/RelationTest';
@@ -187,7 +186,6 @@ const MBTITest = () => {
       top: 0,
       behavior: 'smooth',
     });
-    dispatch(setUserCounter(0));
     fetch(`https://togedog-dj.herokuapp.com/test-count`, {
       method: 'POST',
     });
