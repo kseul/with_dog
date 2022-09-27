@@ -23,3 +23,7 @@ export interface CountTime {
   duration: number;
   step?: number;
 }
+
+export interface CountUser {
+  userNum: number;
+}

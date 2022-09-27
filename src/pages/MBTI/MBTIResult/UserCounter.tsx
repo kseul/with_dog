@@ -4,15 +4,34 @@ import TitlePaw from 'assets/svg/TitlePawPositoin.svg';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 import { Counter } from './type';
+import { useEffect, useState } from 'react';
+import { CountUser } from './type';
 
 const UserCounter = () => {
+  const [count, setCount] = useState<any>();
+  console.log(count);
+
+  const counterUser: string = Object.values(count)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  // const getNum = () => {
+  //   fetch(`https://togedog-dj.herokuapp.com/test-count`, {
+  //     method: 'GET',
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       setCount(result);
+  //     });
+  // };
+
+  // useEffect(() => {
+  //   getNum();
+  // }, []);
+
   const counterUserRedux: Counter = useSelector(
     (state: RootState) => state.counter
   );
-
-  const counterUser: string = Object.values(counterUserRedux)
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
   return (
     <UserCounterContainer>

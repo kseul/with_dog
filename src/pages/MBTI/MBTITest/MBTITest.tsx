@@ -188,6 +188,9 @@ const MBTITest = () => {
       behavior: 'smooth',
     });
     dispatch(setUserCounter(0));
+    fetch(`https://togedog-dj.herokuapp.com/test-count`, {
+      method: 'POST',
+    });
   };
 
   const handleSetEnergyName = (value, id) => {

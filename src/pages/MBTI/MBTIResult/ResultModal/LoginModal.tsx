@@ -24,10 +24,8 @@ const LoginModal = ({ onClickToggleModal }) => {
     <Fragment>
       <LoginContainer>
         <LoginText>로그인이 필요한 서비스입니다.</LoginText>
-        <LoginButton>
-          <LoginButtonText onClick={hadleClick}>
-            로그인 하러가개
-          </LoginButtonText>
+        <LoginButton onClick={hadleClick}>
+          <LoginButtonText>로그인 하러가개</LoginButtonText>
         </LoginButton>
       </LoginContainer>
       <BackGround onClick={onClickToggleModal} />
