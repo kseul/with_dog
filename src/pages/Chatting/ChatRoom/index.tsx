@@ -10,6 +10,7 @@ import Input from './components/Input';
 import ChatReportModal from '../ChatReportModal';
 import { MessagesProps } from 'pages/Chatting/type';
 import signInbg from 'assets/images/bg2.png';
+import { useNavigate } from 'react-router-dom';
 
 interface UserDataProps {
   account_type?: string;
@@ -35,6 +36,8 @@ const ChatRoom = () => {
   const [currentTime, SetCurrentTime] = useState('');
   const [isShowModal, setIsShowModal] = useState(false);
 
+  const navigate = useNavigate();
+
   // const ENDPOINT = 'localhost:3000';
   const ENDPOINT = 'http://54.180.89.143:8000';
 
@@ -58,6 +61,7 @@ const ChatRoom = () => {
     socket = io(ENDPOINT, {
       auth: {
         token: cookies.userToken,
+        userId: id,
       },
     });
     socket.emit('join', { nickname, room });
@@ -90,6 +94,12 @@ const ChatRoom = () => {
   };
 
   useEffect(() => {
+    socket.on('connect_error', data => {
+      if (data.message === 'invalid user') {
+        socket.close();
+        navigate('/');
+      }
+    });
     return () => {
       socket.close();
     };
