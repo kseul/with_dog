@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import { AlertModalProps } from 'types/type';
 import cancelImg from 'assets/svg/cancel.svg';
 
-const AlertModal = ({ title, setShowAlertModal }: AlertModalProps) => {
+interface AlertModalProps2 {
+  title: string;
+  setShowAlertModal: (arg: string) => void;
+}
+
+const AlertModal = ({ title, setShowAlertModal }: AlertModalProps2) => {
   const handleModal = () => {
     setShowAlertModal('');
   };
