@@ -90,10 +90,6 @@ export interface AnswerType {
   answerValue?: string;
 }
 
-export interface CheckValidProps {
-  errorMessage: string;
-}
-
 export interface JoinMBTI {
   mbti?: string;
 }
@@ -123,11 +119,6 @@ export interface MBTIScoreProps {
 
 export interface MainRef<T> {
   current: T;
-}
-
-export interface AlertModalProps {
-  title: string;
-  setShowAlertModal: (string) => void;
 }
 
 export interface EditModalProps {
