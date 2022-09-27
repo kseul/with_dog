@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import { ANSWER_DB } from '../constants/Test';
-import { MBTIJudgdemnetProps } from 'types/type';
+import { MBTIJudgdemnetProps } from '../type';
 
 const RelationAnswer = ({
   handleSetJudgementName,

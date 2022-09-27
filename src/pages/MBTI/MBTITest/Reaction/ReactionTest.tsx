@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 import ReactionAnswer from './ReactionAnswer';
 import MBTIButton from '../MBTIButton';
 import { REACTION_TEST_DB } from '../constants/Test';
-import { MBTIReactionProps } from 'types/type';
+import { MBTIReactionProps } from '../type';
 
 const ReactionTest = ({
   handleSetReactionName,

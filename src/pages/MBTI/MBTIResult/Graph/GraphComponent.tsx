@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components/macro';
-import { MBTIResultProps } from 'types/type';
+import styled from 'styled-components/macro';
+import { MBTIResultProps } from '../type';
 
 const GraphComponent = ({ mbti, score, layout }: MBTIResultProps) => {
   const titleProps = (mbti: string) => {
@@ -64,10 +64,6 @@ const GraphComponent = ({ mbti, score, layout }: MBTIResultProps) => {
   );
 };
 
-const BasicText = css`
-  text-align: center;
-`;
-
 const GraphComponentContainer = styled.div<{ layout: string }>`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')}
   left: ${props => (props.layout === 'lefttop' ? `24%` : '')};
@@ -80,10 +76,10 @@ const GraphComponentContainer = styled.div<{ layout: string }>`
 `;
 
 const PropensityText = styled.span`
-  ${BasicText}
   margin-bottom: 1.563rem;
   font-size: 1.25rem;
   font-weight: 500;
+  text-align: center;
 `;
 
 const GrapgComponentBox = styled.div`
@@ -118,13 +114,13 @@ const TextBox = styled.span`
 `;
 
 const GraphLeftText = styled.span<{ mbti: string }>`
-  text-align: center;
   color: ${props => (props.mbti === 'I' ? `white` : `#333333`)};
+  text-align: center;
 `;
 
 const GraphRightText = styled.span`
-  text-align: center;
   color: #333333;
+  text-align: center;
 `;
 
 export default GraphComponent;

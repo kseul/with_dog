@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 import RelationAnswer from './RelationAnswer';
 import MBTIButton from '../MBTIButton';
 import { RELATION_TEST_DB } from '../constants/Test';
-import { MBTIRelationProps } from 'types/type';
+import { MBTIRelationProps } from '../type';
 
 const RelationTest = ({
   handleSetRelationName,

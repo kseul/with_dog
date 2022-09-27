@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 import EnergyAnswer from './EnergyAnswer';
 import MBTIButton from '../MBTIButton';
 import { ENERGY_TEST_DB } from '../constants/Test';
-import { MBTIEnergyProps } from 'types/type';
+import { MBTIEnergyProps } from '../type';
 
 const EnergyTest = ({
   handleSetEnergyName,

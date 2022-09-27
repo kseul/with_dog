@@ -1,5 +1,3 @@
-import { ResultData } from 'types/type';
-import { MBTIResultProps } from 'types/type';
 import INTCPosition from '../../../../assets/images/INTCPosition.png';
 import INTPPosition from '../../../../assets/images/INTPPosition.png';
 import INFCPosition from '../../../../assets/images/INFCPosition.png';
@@ -32,6 +30,7 @@ import ESTCDog from 'assets/svg/ESTC_Character.svg';
 import ESTPDog from 'assets/svg/ESTP_Character.svg';
 import ESFCDog from 'assets/svg/ESFC_Character.svg';
 import ESFPDog from 'assets/svg/ESFP_Character.svg';
+import { MBTIResultProps, ResultData } from '../type';
 
 export const MBTI_RESULT: ResultData[] = [
   {
@@ -191,3 +190,8 @@ export const MBTI_RESULT_DATA: MBTIResultProps[] = [
   { id: 2, mbti: 'T', score: 10, layout: 'righttop' },
   { id: 3, mbti: 'P', score: -6, layout: 'rightbottom' },
 ];
+
+export const room1 = ['INTC', 'INFC', 'ISTC', 'ISFC'];
+export const room2 = ['ENFC', 'ESTC', 'ESFC', 'ESFP'];
+export const room3 = ['INTP', 'INFP', 'ENTP', 'ENFP'];
+export const room4 = ['ISTP', 'ISFP', 'ENTC', 'ESTP'];
