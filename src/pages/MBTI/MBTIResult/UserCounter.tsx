@@ -53,9 +53,9 @@ const TitleIMG = styled.img`
 `;
 
 const TitleText = styled.span`
-  text-align: center;
   color: #333333;
   font-size: 1.563rem;
+  text-align: center;
 `;
 
 const UserCounterBox = styled.div`
@@ -64,19 +64,18 @@ const UserCounterBox = styled.div`
 
 const UserCountNumber = styled.span`
   margin-top: 2.5rem;
-  text-align: center;
   color: #333333;
   font-size: 1.7rem;
   font-weight: 500;
+  text-align: center;
 `;
 
 const OfUser = styled.span`
   margin: 2.5rem 0 0 0.5rem;
-
-  text-align: center;
   color: #333333;
   font-size: 1.3rem;
   font-weight: 300;
+  text-align: center;
 `;
 
 export default UserCounter;

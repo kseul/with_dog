@@ -1,6 +1,6 @@
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
+import { Fragment, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Fragment, useEffect, useState } from 'react';
 
 const LoginModal = ({ onClickToggleModal }) => {
   const navigate = useNavigate();
@@ -33,6 +33,11 @@ const LoginModal = ({ onClickToggleModal }) => {
   );
 };
 
+const BasicText = css`
+  color: #333333;
+  font-weight: 400;
+`;
+
 const LoginContainer = styled.div`
   ${props => props.theme.flex.flexBox('column')}
   position: fixed;
@@ -42,15 +47,14 @@ const LoginContainer = styled.div`
   height: 15rem;
   transform: translateY(-49%);
   background-color: white;
-  box-shadow: 1px 1px 15px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0.063rem 0.063rem 0.938rem 0.125rem rgba(0, 0, 0, 0.1);
   border-radius: 1.2rem;
   z-index: 2;
 `;
 
 const LoginText = styled.span`
   font-size: 1.8rem;
-  font-weight: 400;
-  color: #333333;
+  ${BasicText}
 `;
 
 const LoginButton = styled.button`
@@ -70,8 +74,7 @@ const LoginButton = styled.button`
 
 const LoginButtonText = styled.span`
   font-size: 1rem;
-  font-weight: 400;
-  color: #333333;
+  ${BasicText}
 `;
 
 const BackGround = styled.div`
@@ -79,7 +82,7 @@ const BackGround = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 230rem;
+  height: 240rem;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 `;

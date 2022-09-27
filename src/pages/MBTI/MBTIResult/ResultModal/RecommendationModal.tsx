@@ -1,9 +1,9 @@
 import styled from 'styled-components/macro';
+import { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import ArrowRight from 'assets/svg/arrow-right.svg';
 import store from 'redux/store';
 import chatRoomActions from 'redux/actions/chat';
-import { Fragment, useEffect } from 'react';
+import ArrowRight from 'assets/svg/arrow-right.svg';
 
 const RecommendationModal = ({ onClickToggleModal, resultModal }) => {
   const currentRoom = (title, id) => {
@@ -63,7 +63,7 @@ const ChatModalContainer = styled.div`
   height: 40rem;
   transform: translateY(-49%);
   background-color: white;
-  box-shadow: 1px 1px 15px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0.063rem 0.063rem 0.938rem 0.125rem rgba(0, 0, 0, 0.1);
   border-radius: 1.2rem;
   z-index: 2;
 `;
@@ -86,7 +86,7 @@ const Description = styled.div`
 const Line = styled.div`
   background-color: ${props => props.theme.colors.lineLightGray};
   width: 16rem;
-  height: 2px;
+  height: 0.125rem;
   margin-top: 3rem;
 `;
 
@@ -128,7 +128,7 @@ const BackGround = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 230rem;
+  height: 240rem;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 `;

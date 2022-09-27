@@ -191,7 +191,7 @@ const LoginForm = styled.div`
   padding: 3.5rem;
   border-radius: 1.25rem;
   background-color: white;
-  box-shadow: 1px 1px 15px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0.063rem 0.063rem 0.938rem 0.125rem rgba(0, 0, 0, 0.1);
 `;
 
 const LoginTitle = styled.div`

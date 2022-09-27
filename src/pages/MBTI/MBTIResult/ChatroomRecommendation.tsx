@@ -1,13 +1,13 @@
+import styled, { css } from 'styled-components/macro';
 import { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
-import { useCookies } from 'react-cookie';
-import styled, { css } from 'styled-components/macro';
-import TitlePaw from '../../../assets/svg/TitlePawPositoin.svg';
-import { room1, room2, room3, room4 } from './constants/Result';
 import RecommendationModal from './ResultModal/RecommendationModal';
-import CHATLIST_DATA from 'pages/Chatting/DATA/CHATLIST_DATA';
 import LoginModal from './ResultModal/LoginModal';
+import CHATLIST_DATA from 'pages/Chatting/DATA/CHATLIST_DATA';
+import { room1, room2, room3, room4 } from './constants/Result';
+import TitlePaw from '../../../assets/svg/TitlePawPositoin.svg';
 
 const ChatroomRecommendation = () => {
   const mbtiResultText = useSelector((state: RootState) => state.mbtiText);
@@ -70,8 +70,8 @@ const ChatroomRecommendation = () => {
 };
 
 const BasicText = css`
-  text-align: center;
   color: #333333;
+  text-align: center;
 `;
 
 const ChatroomRecommendationContainer = styled.div`
@@ -89,15 +89,15 @@ const TitleIMG = styled.img`
 `;
 
 const TitleText = styled.span`
-  ${BasicText}
   font-size: 1.563rem;
+  ${BasicText}
 `;
 
 const ContentText = styled.span`
   margin-top: 2.5rem;
-  ${BasicText}
   font-size: 1.563rem;
   font-weight: 300;
+  ${BasicText}
 `;
 
 const JoinButton = styled.button`

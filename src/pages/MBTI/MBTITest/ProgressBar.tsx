@@ -14,9 +14,9 @@ const ProgressBar = ({ percentLength }: { percentLength: number }) => {
 const ProgressBarContainer = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', 'center')}
   position: fixed;
-  top: 77px;
+  top: 4.813rem;
   width: 100%;
-  height: 75px;
+  height: 4.688rem;
   background-color: #edeef0;
 `;
 

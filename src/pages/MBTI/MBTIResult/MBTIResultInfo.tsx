@@ -2,11 +2,11 @@ import React from 'react';
 import styled, { css } from 'styled-components/macro';
 import MBTIGraph from './Graph/MBTIGraph';
 import ChatroomRecommendation from './ChatroomRecommendation';
+import UserCounter from './UserCounter';
 import SNSshare from './SNSshare';
 import ResultInfo from 'assets/svg/ResultInfoPositoin2.svg';
 import ResultNotice from 'assets/svg/MBTINotice6.svg';
 import { MBTI_RESULT } from './constants/Result';
-import UserCounter from './UserCounter';
 
 const MBTIResultInfo = ({ graphResult, mbtiResultText }) => {
   const getMBTIResult: string = Object.values(mbtiResultText).toString();
@@ -47,8 +47,8 @@ const MBTIResultInfo = ({ graphResult, mbtiResultText }) => {
   );
 };
 const BasicText = css`
-  text-align: center;
   color: #333333;
+  text-align: center;
 `;
 
 const MBTIResultInfoContainer = styled.div`
@@ -82,7 +82,6 @@ const MBTIContentBackground = styled.div`
   height: 12rem;
   border-radius: 2rem;
   background-color: #a8e1dc;
-  /* background: linear-gradient(to bottom right, #8fefe6, #c3c8f3); */
 `;
 
 const MBTIContent = styled.span`

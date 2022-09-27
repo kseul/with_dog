@@ -54,9 +54,9 @@ const TitleIMG = styled.img`
 `;
 
 const TitleText = styled.span`
-  text-align: center;
   color: #333333;
   font-size: 1.563rem;
+  text-align: center;
 `;
 
 const HorizontalAlign = styled.div`

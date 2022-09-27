@@ -1,8 +1,8 @@
 import styled from 'styled-components/macro';
-import MBTIResultInfo from './MBTIResultInfo';
-import ResultBackground from 'assets/images/MBTIResult.jpg';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
+import MBTIResultInfo from './MBTIResultInfo';
+import ResultBackground from 'assets/images/MBTIResult.jpg';
 
 const MBTIResult = () => {
   const graphResult = useSelector((state: RootState) => state.graph);

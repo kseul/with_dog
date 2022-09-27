@@ -1,4 +1,3 @@
-import { MBTIResultProps, ResultData } from '../type';
 import INTCPosition from '../../../../assets/images/INTCPosition.png';
 import INTPPosition from '../../../../assets/images/INTPPosition.png';
 import INFCPosition from '../../../../assets/images/INFCPosition.png';
@@ -31,6 +30,7 @@ import ESTCDog from 'assets/svg/ESTC_Character.svg';
 import ESTPDog from 'assets/svg/ESTP_Character.svg';
 import ESFCDog from 'assets/svg/ESFC_Character.svg';
 import ESFPDog from 'assets/svg/ESFP_Character.svg';
+import { MBTIResultProps, ResultData } from '../type';
 
 export const MBTI_RESULT: ResultData[] = [
   {

@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import setMbtiResults from 'redux/actions/mbtiResult';
-import setMbtiTexts from 'redux/actions/mbtiText';
 import userActions from 'redux/actions/user';
+import setMbtiTexts from 'redux/actions/mbtiText';
+import setUserCounter from 'redux/actions/userCounterAction';
 import ProgressBar from './ProgressBar';
 import EnergyTest from './Energy/EnergyTest';
 import RelationTest from './Relation/RelationTest';
 import ReactionTest from './Reaction/ReactionTest';
 import JudgementTest from './Judgement/JudgementTest';
-import setUserCounter from 'redux/actions/userCounterAction';
 import { AnswerType, JoinMBTI, MBTIScoreProps } from './type';
 
 const MBTITest = () => {
@@ -318,7 +318,7 @@ const MBTITestContainer = styled.div`
   width: 100%;
   height: auto;
   margin: 0 auto;
-  padding-top: 150px;
+  padding-top: 9.375rem;
   background-color: #edeef0;
 `;
 
