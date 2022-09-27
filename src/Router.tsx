@@ -11,6 +11,7 @@ import GoogleLogin from 'pages/Login/SignIn/googleLogin/GoogleRedirect';
 import NoticeBoardWrite from 'pages/NoticeBoard/NoticeBoardWrite/NoticeBoardWrite';
 import AdminSignIn from 'pages/Admin/components/AdminLogin/AdminLogin';
 import NoticeBoardModify from 'pages/NoticeBoard/NoticeBoardWrite/NoticeBoardModify';
+import ForBanUser from 'pages/Login/SignIn/components/ForBanUser';
 
 const Router = () => {
   return (
@@ -28,6 +29,7 @@ const Router = () => {
         <Route path="/chat/:id" element={<ChatRoom />} />
         <Route path="/kakaoLogin" element={<KakaoLogin />} />
         <Route path="/googleLogin" element={<GoogleLogin />} />
+        <Route path="/banned" element={<ForBanUser />} />
       </Routes>
     </BrowserRouter>
   );

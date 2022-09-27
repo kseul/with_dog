@@ -1,6 +1,9 @@
 import axios from 'axios';
 import styled from 'styled-components';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
 import store from 'redux/store';
 import userActions from 'redux/actions/user';
 import { useEffect, useState } from 'react';
@@ -10,15 +13,18 @@ import MbtiSection from './components/MbtiSection';
 import UserEmailSection from './components/UserEmailSection';
 import NickNameEditModal from './components/NickNameEditModal';
 import AlertModal from 'pages/components/AlertModal';
-import { RootState } from 'redux/reducers';
+import SecedeButton from 'pages/Login/SignIn/components/SecedeButton';
 import bgimg from 'assets/images/bg1.jpg';
 
 const Mypage = () => {
+  const navigate = useNavigate();
   const [showEditMoal, setShowEditModal] = useState(false);
   const [showAlertModal, setShowAlertModal] = useState('');
   const [lengthLimit, setLengthLimit] = useState(false);
   const [validkNickname, setValidNickname] = useState(false);
   const [changedNickname, setChangedNickname] = useState('');
+  const [showButton, setShowButton] = useState(false);
+  const [cookies, , removeCookie] = useCookies(['userToken']);
 
   const formData = new FormData();
 
@@ -34,7 +40,7 @@ const Mypage = () => {
     method: 'PATCH',
     headers: {
       'Content-Type': 'multipart/form-data',
-      Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
+      Authorization: `Bearer ${cookies.userToken}`,
     },
     data: formData,
   };
@@ -63,6 +69,10 @@ const Mypage = () => {
     }
   };
 
+  const closeModal = () => {
+    setShowButton(!showButton);
+  };
+
   const submitChangedNickname = async () => {
     try {
       if (validkNickname) {
@@ -79,6 +89,28 @@ const Mypage = () => {
       }
     } finally {
       setShowEditModal(false);
+    }
+  };
+
+  const submitSecede = async () => {
+    const response = await fetch(
+      `https://togedog-dj.herokuapp.com/users/${userData.id}`,
+      {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${cookies.userToken}` },
+      }
+    );
+    if (response.status === 200) {
+      setShowButton(false);
+      sessionStorage.clear();
+      removeCookie('userToken', { path: '/' });
+      setShowAlertModal('회원탈퇴가 정상적으로 처리되었습니다.');
+      setTimeout(() => {
+        navigate('/signin');
+      }, 1000);
+    } else {
+      setShowButton(false);
+      setShowAlertModal('회원탈퇴에 실패하였습니다.');
     }
   };
 
@@ -121,6 +153,10 @@ const Mypage = () => {
         <MbtiSection mbti={mbti} submitChangedMbti={submitChangedMbti} />
         <UserEmailSection email={email} />
       </MypageForm>
+      <ButtonContainer onClick={closeModal}>회원 탈퇴하기</ButtonContainer>
+      {showButton && (
+        <SecedeButton closeModal={closeModal} submitSecede={submitSecede} />
+      )}
     </MypageContainer>
   );
 };
@@ -141,6 +177,19 @@ const MypageForm = styled.form`
   border-radius: 1.25rem;
   box-shadow: 1px 1px 15px 2px rgba(0, 0, 0, 0.1);
   text-align: center;
+`;
+
+const ButtonContainer = styled.button`
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+  width: 10rem;
+  height: 3rem;
+  border-radius: 1rem;
+  border: none;
+  background-color: ${props => props.theme.colors.purple};
+  font-size: 1.2rem;
+  color: white;
 `;
 
 export default Mypage;
