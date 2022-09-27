@@ -73,6 +73,12 @@ const CardContainer = styled.div`
   height: 22rem;
   border-radius: 10%;
   box-shadow: rgb(0, 0, 0, 10%) 0px 4px 16px 0px;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.02);
+    transition: transform 0.5s;
+  }
 `;
 
 const CardImageWrapper = styled.div`
@@ -84,7 +90,7 @@ const CardImage = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 10%;
-  object-fit: fit;
+  object-fit: cover;
 `;
 
 const CardDate = styled.div`

@@ -1,13 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import CommentProfile from './components/CommentProfile';
 import CommentText from './components/CommentText';
 
-const BoardModalComment = ({ comments }) => {
+const BoardModalComment = ({ data }) => {
+  console.log('this is comments', data);
+
   return (
     <Comment>
-      {comments &&
-        comments.map(({ id, content, user_nickname, user_thumbnail_url }) => {
+      {data &&
+        data.map(({ id, content, user_nickname, user_thumbnail_url }) => {
           return (
             <CommentContainer key={id}>
               <CommentProfile thumbnail={user_thumbnail_url} />

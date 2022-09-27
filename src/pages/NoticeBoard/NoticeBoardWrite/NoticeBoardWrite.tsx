@@ -55,6 +55,10 @@ const QuillEditor = () => {
     setTitle(e.target.value);
   };
 
+  const cancelHandler = () => {
+    navigate('/noticeboard');
+  };
+
   const modules = useMemo(
     () => ({
       toolbar: {
@@ -114,7 +118,10 @@ const QuillEditor = () => {
         formats={formats}
         placeholder="내용을 입력해 주세요."
       />
-      <SubmitHandler onClick={writeHandler}>작성하기</SubmitHandler>
+      <WriterButton>
+        <CancelHandler onClick={cancelHandler}>취소하기</CancelHandler>
+        <SubmitHandler onClick={writeHandler}>작성하기</SubmitHandler>
+      </WriterButton>
     </QuillContainer>
   );
 };
@@ -140,15 +147,34 @@ const Quill = styled(ReactQuill)`
   margin-top: 3rem;
 `;
 
+const WriterButton = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 15%;
+`;
+
+const CancelHandler = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 2.5rem;
+  border-radius: 1rem;
+  margin-top: 3rem;
+  background-color: ${props => props.theme.colors.lineLightGray};
+  cursor: pointer;
+`;
+
 const SubmitHandler = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 4.5rem;
+  width: 5rem;
   height: 2.5rem;
   border-radius: 1rem;
   margin-top: 3rem;
   background-color: ${props => props.theme.colors.mint};
+  cursor: pointer;
 `;
 
 export default QuillEditor;

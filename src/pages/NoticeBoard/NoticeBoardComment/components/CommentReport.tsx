@@ -34,6 +34,7 @@ const CommentReportElement = styled.img`
   width: 0.8rem;
   height: 0.8rem;
   margin-left: 0.3rem;
+  cursor: pointer;
 `;
 
 export default CommentReport;
