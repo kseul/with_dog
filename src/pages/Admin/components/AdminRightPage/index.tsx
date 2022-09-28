@@ -1,16 +1,16 @@
-import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import ListHeaderBox from 'pages/Admin/components/RightSection/ListHeaderBox';
-import ListContentsBox from 'pages/Admin/components/RightSection/ListContentsBox';
-import PostHeaderBox from 'pages/Admin/components/RightSection/PostHeaderBox';
-import ListPostContentsBox from 'pages/Admin/components/RightSection/ListPostContentBox';
+import styled from 'styled-components';
+import ListHeaderBox from 'pages/Admin/components/AdminRightPage/components/ListHeaderBox';
+import ListContentsBox from 'pages/Admin/components/AdminRightPage/components/ListContentsBox';
+import PostHeaderBox from 'pages/Admin/components/AdminRightPage/components/PostHeaderBox';
+import ListPostContentsBox from 'pages/Admin/components/AdminRightPage/components/ListPostContentBox';
 import UserModal from 'pages/Admin/components/Modal/UserModal';
 import PostModal from 'pages/Admin/components/Modal/PostModal';
 import DeletedPostModal from 'pages/Admin/components/Modal/DeletedPostModal';
-import DatePickerComponent from 'pages/Admin/components/DatePickerComponent';
-import PageNation from 'pages/Admin/components/PageNation';
-import AdminSpinner from 'pages/Admin/components/AdminSpinner/AdminSpinner';
+import DatePickerComponent from 'pages/Admin/components/AdminContainer/components/DatePickerComponent';
+import PageNation from 'pages/Admin/components/AdminContainer/components/PageNation';
+import AdminSpinner from 'pages/Admin/components/AdminSpinner';
 import selectedImg from 'assets/svg/dog-paws2.svg';
 
 const AdminRightPageUser = ({
