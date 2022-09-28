@@ -1,10 +1,11 @@
-import styled from 'styled-components';
-import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import styled from 'styled-components';
 import Spinner from 'pages/Login/components/spinner/Spinner';
+import AdminLoginButton from 'pages/Admin/components/AdminSignin/components/AdminLoginButton';
+import API from 'config';
 import signInbg from 'assets/images/bg1.jpg';
-import AdminLoginButton from 'pages/Admin/components/AdminLogin/AdminLoginButton';
 import character from 'assets/images/LoginBgCharacter.png';
 
 const AdminSignIn = () => {
@@ -16,7 +17,7 @@ const AdminSignIn = () => {
   const submitSigninInfo = () => {
     setLoading(true);
     axios
-      .post('https://togedog-dj.herokuapp.com/users/login/email', {
+      .post(`${API.ADMINUSER}/login/email`, {
         email: adminId,
         password: adminPassword,
       })

@@ -1,7 +1,8 @@
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
 import useAxios from 'hooks/useAxios';
+import API from 'config';
 import { AiOutlineClose } from 'react-icons/ai';
 import backgroundImage from 'assets/images/bg1.jpg';
 
@@ -10,7 +11,7 @@ const UserModal = ({ modalId, detailModalOpener }) => {
 
   const { response } = useAxios({
     method: 'GET',
-    url: `https://togedog-dj.herokuapp.com/users/${modalId}`,
+    url: `${API.ADMINUSER}/${modalId}`,
     headers: {
       accept: '*/*',
       Authorization: `Bearer ${sessionStorage.getItem('token')}`,
@@ -20,7 +21,7 @@ const UserModal = ({ modalId, detailModalOpener }) => {
   const banUser = () => {
     if (window.confirm('계정을 차단하시겠습니까?')) {
       axios.patch(
-        `https://togedog-dj.herokuapp.com/users/${modalId}/ban`,
+        `${API.ADMINUSER}/${modalId}/ban`,
         {},
         {
           headers: {
@@ -35,7 +36,7 @@ const UserModal = ({ modalId, detailModalOpener }) => {
 
   const deleteUser = () => {
     if (window.confirm('계정을 삭제하시겠습니까?')) {
-      axios.delete(`https://togedog-dj.herokuapp.com/users/${modalId}/ban`, {
+      axios.delete(`${API.ADMINUSER}/${modalId}/ban`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
