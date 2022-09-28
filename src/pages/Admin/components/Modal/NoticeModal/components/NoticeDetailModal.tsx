@@ -1,18 +1,19 @@
+import { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { useState } from 'react';
 import useAxios from 'hooks/useAxios';
-import UserInfoBox from 'pages/Admin/components/RightSection/UserInfoBox';
+import UserInfoBox from 'pages/Admin/components/AdminRightPage/components/UserInfoBox';
 import CommentBox from 'pages/Admin/components/Modal/CommentBox';
+import API from 'config';
 import { AiOutlineClose } from 'react-icons/ai';
 import backgroundImage from 'assets/images/bg1.jpg';
 
-const PostModal = ({ detailModalOpener, modalId }) => {
+const NoticeDetailModal = ({ noticeDetailModal, modalId }) => {
   const [reason, setReason] = useState<string>('');
 
   const { response } = useAxios({
     method: 'GET',
-    url: `https://togedog-dj.herokuapp.com/posts/${modalId}/admin/`,
+    url: `${API.ADMINPOST}/${modalId}/admin/`,
     headers: {
       accept: '*/*',
       Authorization: `Bearer ${sessionStorage.getItem('token')}`,
@@ -27,7 +28,7 @@ const PostModal = ({ detailModalOpener, modalId }) => {
   const deletePost = () => {
     if (window.confirm('게시글을 삭제하시겠습니까?')) {
       axios.post(
-        `https://togedog-dj.herokuapp.com/posts/${modalId}/delete/`,
+        `${API.ADMINPOST}/${modalId}/delete/`,
         new URLSearchParams({
           delete_reason: reason,
         }),
@@ -44,12 +45,12 @@ const PostModal = ({ detailModalOpener, modalId }) => {
   };
 
   return (
-    <ModalBackground onClick={detailModalOpener}>
+    <ModalBackground onClick={noticeDetailModal}>
       {response?.data && (
         <ModalContainer onClick={e => e.stopPropagation()}>
           <ModalTop>
             <ModalTitle>게시글 관리</ModalTitle>
-            <DeleteIconButton onClick={detailModalOpener}>
+            <DeleteIconButton onClick={noticeDetailModal}>
               <AiOutlineClose />
             </DeleteIconButton>
           </ModalTop>
@@ -87,7 +88,7 @@ const PostModal = ({ detailModalOpener, modalId }) => {
                 <BtnWrapper>
                   <CancelBtn
                     onClick={() => {
-                      detailModalOpener();
+                      noticeDetailModal();
                       deletePost();
                     }}
                   >
@@ -113,6 +114,7 @@ const ModalBackground = styled.div`
   height: 100vh;
   background-color: rgba(68, 68, 68, 0.9);
   z-index: 5;
+  color: black;
 `;
 
 const ModalContainer = styled.div`
@@ -257,4 +259,4 @@ const CancelBtn = styled.button`
   cursor: pointer;
 `;
 
-export default PostModal;
+export default NoticeDetailModal;

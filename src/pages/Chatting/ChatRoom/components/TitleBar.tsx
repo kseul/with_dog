@@ -1,7 +1,7 @@
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
+import styled from 'styled-components';
 import ArrowLeft from 'assets/svg/arrow-left2.svg';
 
 const TitleBar = () => {

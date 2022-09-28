@@ -1,11 +1,12 @@
-import styled from 'styled-components';
-import { useCookies } from 'react-cookie';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
-import { useState } from 'react';
+import styled from 'styled-components';
 import SecedeButton from './SecedeButton';
 import AlertModal from 'pages/components/AlertModal';
+import API from 'config';
 import background from 'assets/images/bg1.jpg';
 
 const ForBanUser = () => {
@@ -20,13 +21,10 @@ const ForBanUser = () => {
   };
 
   const submitSecede = async () => {
-    const response = await fetch(
-      `https://togedog-dj.herokuapp.com/users/${userData.id}`,
-      {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${cookies.userToken}` },
-      }
-    );
+    const response = await fetch(`${API.USERS}${userData.id}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${cookies.userToken}` },
+    });
     if (response.status === 200) {
       setShowButton(false);
       sessionStorage.clear();

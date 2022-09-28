@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { useEffect } from 'react';
+import styled from 'styled-components';
 import cancelImg from 'assets/svg/cancel.svg';
 
 interface AlertModalProps2 {
@@ -67,8 +67,8 @@ const CancelImg = styled.img`
 
 const BackGround = styled.div`
   position: absolute;
-  width: 100vw;
-  height: 126vh;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 3;
 `;

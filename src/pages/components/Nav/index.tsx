@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import styled from 'styled-components';
 import AlertModal from '../AlertModal';
 import PageBox from './components/PageBox';
 import UserProfile from './components/UserProfile';
@@ -100,9 +100,9 @@ const ProfileContainer = styled.div`
 const RequireLogin = styled.div`
   position: relative;
   background-color: #7cccc7;
-  border-radius: 1rem;
+  border-radius: 2rem;
   padding: 0.6rem 1.2rem 0.6rem 2.5rem;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 400;
   color: white;
   cursor: pointer;
@@ -110,8 +110,8 @@ const RequireLogin = styled.div`
 
 const Icon = styled.img`
   position: absolute;
-  top: 15%;
-  left: 8%;
+  top: 19%;
+  left: 7%;
   height: 1.25rem;
 `;
 

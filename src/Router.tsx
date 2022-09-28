@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Admin from 'pages/Admin/Admin';
+import Admin from 'pages/Admin';
 import SignIn from 'pages/Login/SignIn';
 import Signup from './pages/Login/Signup';
 import NoticeBoard from 'pages/NoticeBoard/NoticeBoard';
@@ -9,7 +9,7 @@ import ChatRoom from 'pages/Chatting/ChatRoom';
 import KakaoLogin from 'pages/Login/SignIn/kakaoLogin/KakaoLoginRedirect';
 import GoogleLogin from 'pages/Login/SignIn/googleLogin/GoogleRedirect';
 import NoticeBoardWrite from 'pages/NoticeBoard/NoticeBoardWrite/NoticeBoardWrite';
-import AdminSignIn from 'pages/Admin/components/AdminLogin/AdminLogin';
+import AdminSignIn from 'pages/Admin/components/AdminSignin';
 import NoticeBoardModify from 'pages/NoticeBoard/NoticeBoardWrite/NoticeBoardModify';
 import ForBanUser from 'pages/Login/SignIn/components/ForBanUser';
 import PrivateRouter from 'PrivateRouter';
