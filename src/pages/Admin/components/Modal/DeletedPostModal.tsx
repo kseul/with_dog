@@ -29,7 +29,6 @@ const DeletedPostModal = ({ detailModalOpener, modalId }) => {
       alert('취소되었습니다.');
     }
   };
-
   return (
     <ModalBackground onClick={detailModalOpener}>
       {response?.data && (
@@ -41,44 +40,35 @@ const DeletedPostModal = ({ detailModalOpener, modalId }) => {
             </DeleteIconButton>
           </ModalTop>
           <ModalContentsWrapper>
-            <UserInfo>
-              <UserInfoTitle>사용자 정보</UserInfoTitle>
-              <UserInfoBox data={response.data} />
-            </UserInfo>
-            <PostContent>
-              <PostContentTitle>
-                <PostTitleIndex>게시글 제목</PostTitleIndex>
-                <PostTitleBox>{response.data.subject}</PostTitleBox>
-              </PostContentTitle>
-              <PostText>
-                <PostTextIndex>게시글 내용</PostTextIndex>
-                <PostTextBox>{response.data.content}</PostTextBox>
-              </PostText>
-            </PostContent>
-            <PostImage>
-              <PostBackground>
-                <PostImageTitle>게시글 사진</PostImageTitle>
-                <PostImageContent>
-                  <PostImg src={response.data.image_url} alt="게시글 이미지" />
-                </PostImageContent>
-              </PostBackground>
-            </PostImage>
-            <ReasonToBan>
-              <ReasonToBanTitle>사유</ReasonToBanTitle>
-              <ReasonToBanContent>
-                {response.data.delete_reason}
-              </ReasonToBanContent>
-              <BtnWrapper>
-                <CancelBtn
-                  onClick={() => {
-                    detailModalOpener();
-                    deletePost();
-                  }}
-                >
-                  게시글 삭제
-                </CancelBtn>
-              </BtnWrapper>
-            </ReasonToBan>
+            <ModalLeftSection>
+              <LeftBackground>
+                <PostImg src={response.data.image_url} alt="게시글 이미지" />
+                <UserInfoBox data={response.data} />
+              </LeftBackground>
+            </ModalLeftSection>
+            <ModalRightSection>
+              <PostContent>
+                <PostContentTitle>
+                  <PostTitle>{response.data.subject}</PostTitle>
+                  <PostText>{response.data.content}</PostText>
+                </PostContentTitle>
+              </PostContent>
+              <ReasonToBan>
+                <ReasonToBanContent>
+                  {response?.data.delete_reason}
+                </ReasonToBanContent>
+                <BtnWrapper>
+                  <CancelBtn
+                    onClick={() => {
+                      detailModalOpener();
+                      deletePost();
+                    }}
+                  >
+                    게시글 삭제
+                  </CancelBtn>
+                </BtnWrapper>
+              </ReasonToBan>
+            </ModalRightSection>
           </ModalContentsWrapper>
         </ModalContainer>
       )}
@@ -103,12 +93,13 @@ const ModalContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 45rem;
+  width: 60rem;
   height: 80%;
-  max-height: 80%;
   min-height: 40rem;
   background: url(${backgroundImage}) center no-repeat;
   background-size: cover;
+  border-radius: 3px;
+  z-index: 7;
 `;
 
 const ModalTop = styled.div`
@@ -116,7 +107,7 @@ const ModalTop = styled.div`
   width: 100%;
   height: 3rem;
   background-color: ${props => props.theme.colors.gray};
-  border: 2px solid ${props => props.theme.colors.gray};
+  border: 1px solid ${props => props.theme.colors.gray};
 `;
 
 const ModalTitle = styled.p`
@@ -128,7 +119,7 @@ const ModalTitle = styled.p`
 
 const DeleteIconButton = styled.button`
   ${props => props.theme.flex.flexBox('row', 'center', '')}
-  margin-left : auto;
+  width: 5%;
   height: 100%;
   border-style: none;
   background: transparent;
@@ -139,84 +130,93 @@ const DeleteIconButton = styled.button`
 const ModalContentsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: calc(100% - 4.5rem);
+  width: 100%;
+  height: calc(100% - 3rem);
 `;
 
-const UserInfoTitle = styled.p``;
+const ModalLeftSection = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
 
-const UserInfo = styled.div`
-  margin-top: 1rem;
-  margin-left: 1rem;
+const LeftBackground = styled.div`
+  position: absolute;
+  ${props => props.theme.flex.flexBox('column', 'center', 'space-evenly')}
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to left, #bdbbbe 0%, #9d9ea3 100%),
+    radial-gradient(
+      88% 271%,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(254, 254, 254, 0.25) 1%,
+      rgba(0, 0, 0, 0.25) 100%
+    ),
+    radial-gradient(
+      50% 100%,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+  background-blend-mode: normal, lighten, soft-light;
+  border-top-right-radius: 1.875rem;
+  border-bottom-right-radius: 1.875rem;
+`;
+
+const PostImg = styled.img`
+  width: 90%;
+  height: 50%;
+  max-height: 60%;
+`;
+
+const ModalRightSection = styled.div`
+  ${props => props.theme.flex.flexBox('column', '', 'space-evenly')}
+  width: 100%;
+  height: 100%;
 `;
 
 const PostContent = styled.div`
   margin-top: 2rem;
   width: 90%;
+  height: 40%;
 `;
 
 const PostContentTitle = styled.div`
-  ${props => props.theme.flex.flexBox('row', 'center', '')}
+  ${props => props.theme.flex.flexBox('column', '', '')}
+  margin-left: 1rem;
   width: 100%;
-  height: 1.5rem;
-  border: 1px solid black;
-  margin-bottom: -1px;
+  height: 30%;
 `;
 
-const PostTitleIndex = styled.div`
-  padding-top: 0.2rem;
-  width: 30%;
-  height: 100%;
-  background-color: ${props => props.theme.colors.lightGray};
-  border-right: 1px solid black;
-  text-align: center;
-`;
-
-const PostTitleBox = styled.div`
+const PostTitle = styled.div`
   width: 70%;
-  padding-left: 0.5rem;
+  font-size: 1.5rem;
 `;
 
 const PostText = styled.div`
-  ${props => props.theme.flex.flexBox('row', 'center', '')}
-  margin-bottom: -1px;
-  width: 100%;
-  height: 50%;
-  border: 1px solid black;
-`;
-
-const PostTextIndex = styled.div`
-  ${props => props.theme.flex.flexBox('row', 'center', 'center')}
-  width: 30%;
-  height: 100%;
-  background-color: ${props => props.theme.colors.lightGray};
-  border-right: 1px solid black;
-`;
-
-const PostTextBox = styled.div`
+  padding-top: 0.5rem;
   width: 70%;
-  padding-left: 0.5rem;
+  height: 3.5rem;
 `;
 
 const ReasonToBan = styled.div`
+  margin-top: 2rem;
   ${props => props.theme.flex.flexBox('column', '', 'space-evenly')}
 `;
 
-const ReasonToBanTitle = styled.p`
-  padding-top: 1rem;
-`;
-
 const ReasonToBanContent = styled.div`
+  margin-left: auto;
+  margin-right: auto;
   padding-top: 0.5rem;
   padding-left: 0.5rem;
   width: 90%;
-  height: 50%;
+  height: 8rem;
   border: 1px solid black;
+  border-radius: 3px;
+  font-family: 'Noto Sans KR', sans-serif;
 `;
 
 const BtnWrapper = styled.div`
-  margin-left: auto;
-  margin-right: auto;
-  width: rem;
+  margin: 1rem auto;
 `;
 
 const CancelBtn = styled.button`
@@ -227,35 +227,6 @@ const CancelBtn = styled.button`
   background-color: black;
   color: #ffff;
   cursor: pointer;
-`;
-
-const PostImage = styled.div`
-  ${props => props.theme.flex.flexBox('row', 'center', 'center')}
-`;
-
-const PostBackground = styled.div`
-  ${props => props.theme.flex.flexBox('column', 'center', 'space-evenly')}
-  width: 90%;
-  height: 90%;
-  background-color: ${props => props.theme.colors.lightGray};
-  border-radius: 3px;
-`;
-
-const PostImageTitle = styled.p``;
-
-const PostImageContent = styled.div`
-  position: relative;
-  width: 13rem;
-  height: 13rem;
-`;
-
-const PostImg = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 3px;
 `;
 
 export default DeletedPostModal;

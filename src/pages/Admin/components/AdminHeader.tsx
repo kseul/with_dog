@@ -1,11 +1,21 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useAxios from 'hooks/useAxios';
 import NoticeModal from 'pages/Admin/components/Modal/NoticeModal';
 import logo from 'assets/svg/with-dog-logo.svg';
-import { AiFillBell } from 'react-icons/ai';
+import { BsFilePost } from 'react-icons/bs';
+import { FaCommentDots } from 'react-icons/fa';
 
 const AdminHeader = ({ onCurrentModal, modalId }) => {
+  const postClassName = 'post_report';
+  const commentClassName = 'comment_report';
+  const [getClassName, setGetClassName] = useState<string>('');
+  const [dataSort, setDataSort] = useState([]);
+
+  const [isNoticeModalOpen, setIsNoticeModalOpen] = useState<Boolean>(false);
+  const [isNoticeDetailModal, setIsNoticeDetailModal] =
+    useState<Boolean>(false);
+
   const { response } = useAxios({
     method: 'GET',
     url: `https://togedog-dj.herokuapp.com/admin/notices`,
@@ -15,10 +25,6 @@ const AdminHeader = ({ onCurrentModal, modalId }) => {
     },
   });
 
-  const [isNoticeModalOpen, setIsNoticeModalOpen] = useState<Boolean>(false);
-  const [isNoticeDetailModal, setIsNoticeDetailModal] =
-    useState<Boolean>(false);
-
   const noticeModal = (): void => {
     setIsNoticeModalOpen(prev => !prev);
   };
@@ -27,6 +33,18 @@ const AdminHeader = ({ onCurrentModal, modalId }) => {
     setIsNoticeDetailModal(prev => !prev);
   };
 
+  const setTarget = (target: string): void => {
+    setGetClassName(target);
+  };
+
+  useEffect(() => {
+    if (getClassName === postClassName) {
+      setDataSort(response?.data.post_reports);
+    } else if (getClassName === commentClassName) {
+      setDataSort(response?.data.comment_reports);
+    }
+  }, [setTarget]);
+
   return (
     <AdminHeaderContainer>
       <TitleBox>
@@ -34,17 +52,36 @@ const AdminHeader = ({ onCurrentModal, modalId }) => {
         <AdminHeaderTitle>함께하개</AdminHeaderTitle>
       </TitleBox>
       <AdminNoticeWrapper>
-        <AiFillBell className="noticeIcon" onClick={noticeModal} />
-        {response?.data.count !== 0 && (
-          <NoticeNum>{response?.data.count}</NoticeNum>
+        <BsFilePost
+          className={postClassName}
+          onClick={() => {
+            noticeModal();
+            setTarget(postClassName);
+          }}
+        />
+        {response?.data.post_reports.length !== 0 && (
+          <PostNoticeNum>{response?.data.post_reports.length}</PostNoticeNum>
+        )}
+        <FaCommentDots
+          className={commentClassName}
+          onClick={() => {
+            noticeModal();
+            setTarget(commentClassName);
+          }}
+        />
+        {response?.data.comment_reports.length !== 0 && (
+          <CommentNoticeNum>
+            {response?.data.comment_reports.length}
+          </CommentNoticeNum>
         )}
         {isNoticeModalOpen && (
           <NoticeModal
-            data={response?.data}
+            data={dataSort}
             noticeDetailModal={noticeDetailModal}
             isNoticeDetailModal={isNoticeDetailModal}
             onCurrentModal={onCurrentModal}
             modalId={modalId}
+            getClassName={getClassName}
           />
         )}
       </AdminNoticeWrapper>
@@ -79,15 +116,21 @@ const AdminNoticeWrapper = styled.div`
   margin-right: 2rem;
   color: ${props => props.theme.colors.white};
 
-  .noticeIcon {
-    font-size: 2rem;
+  .post_report {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .comment_report {
+    font-size: 1.5rem;
     cursor: pointer;
   }
 `;
 
-const NoticeNum = styled.span`
+const PostNoticeNum = styled.span`
   position: absolute;
-  left: 18px;
+  left: 13px;
   padding-top: 5px;
   width: 1.3rem;
   height: 1.3rem;
@@ -97,4 +140,15 @@ const NoticeNum = styled.span`
   text-align: center;
 `;
 
+const CommentNoticeNum = styled.span`
+  position: absolute;
+  left: 57px;
+  padding-top: 5px;
+  width: 1.3rem;
+  height: 1.3rem;
+  background-color: #00eeff;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  text-align: center;
+`;
 export default AdminHeader;

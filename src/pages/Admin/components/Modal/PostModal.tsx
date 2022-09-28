@@ -65,16 +65,16 @@ const PostModal = ({ detailModalOpener, modalId }) => {
                 <PostContentTitle>
                   <PostTitle>{response.data.subject}</PostTitle>
                   <PostUpload>
-                    {response.data.updated_at.substring(0, 10)}
+                    {response.data.created_at.substring(0, 10)}
                   </PostUpload>
                   <PostText>{response.data.content}</PostText>
                 </PostContentTitle>
               </PostContent>
               <CommentList>
-                {response?.data.comments.length === 0 ? (
+                {response?.data.comments_list.length === 0 ? (
                   <p>등록된 댓글이 없습니다.</p>
                 ) : (
-                  response?.data.comments.map(comment => (
+                  response?.data.comments_list.map(comment => (
                     <CommentBox key={comment.id} comment={comment} />
                   ))
                 )}
@@ -180,6 +180,7 @@ const LeftBackground = styled.div`
 
 const PostImg = styled.img`
   width: 90%;
+  height: 50%;
   max-height: 60%;
 `;
 
@@ -192,8 +193,7 @@ const ModalRightSection = styled.div`
 const PostContent = styled.div`
   margin-top: 2rem;
   width: 90%;
-  height: 20%;
-  overflow-y: auto;
+  height: 8%;
 `;
 
 const PostContentTitle = styled.div`
@@ -221,12 +221,12 @@ const PostText = styled.div`
 `;
 
 const CommentList = styled.div`
-  margin-top: 1rem;
+  margin-top: 2rem;
   margin-left: auto;
   margin-right: auto;
   width: 90%;
-  height: 30%;
-  overflow-y: scroll;
+  height: 13rem;
+  overflow-y: auto;
 `;
 
 const ReasonToBan = styled.div`

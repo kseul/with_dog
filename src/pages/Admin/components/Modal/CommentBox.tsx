@@ -23,7 +23,6 @@ const ProfileImage = styled.img`
   margin-left: 0.5rem;
   width: 2rem;
   height: 2rem;
-  border: 1px solid;
   border-radius: 50%;
 `;
 
@@ -42,6 +41,7 @@ const UserNickName = styled.p`
 const Comment = styled.p`
   width: 100%;
   height: 50%;
+  font-size: 0.8rem;
 `;
 
 export default CommentBox;

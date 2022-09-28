@@ -36,10 +36,10 @@ const AdminRightPageUser = ({
   const [banNum, setBanNum] = useState<number>(0);
   let date = new Date();
   const [startDate, setStartDate] = useState(
-    new Date(date.setDate(date.getDate() - 7))
+    new Date(date.setDate(date.getDate() - 14))
   );
   const [endDate, setEndDate] = useState(
-    new Date(date.setDate(date.getDate() + 7))
+    new Date(date.setDate(date.getDate() + 14))
   );
 
   const filterValue = {
@@ -56,6 +56,9 @@ const AdminRightPageUser = ({
   };
 
   const updateUrl = filterValue => {
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    }
     const result = Object.keys(filterValue)
       .map(filter => `${filter}=${filterValue[filter]}`)
       .join('&');
@@ -83,7 +86,7 @@ const AdminRightPageUser = ({
     }, 600);
 
     return () => clearTimeout(timer);
-  }, [banNum, search, startDate, endDate]);
+  }, [banNum, search, startDate, endDate, location.pathname]);
 
   const rightSectionOpener = () => {
     switch (params.value) {
