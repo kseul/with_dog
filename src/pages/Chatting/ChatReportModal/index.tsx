@@ -1,9 +1,9 @@
-import axios from 'axios';
-import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
-import { useCookies } from 'react-cookie';
+import styled from 'styled-components';
 
 const ChatReportModal = ({ setIsShowModal }) => {
   const [validReport, setValidReport] = useState(false);

@@ -1,8 +1,8 @@
-import styled from 'styled-components';
 import store from 'redux/store';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 import chatReportActions from 'redux/actions/chatReport';
+import styled from 'styled-components';
 import { MessagesProps } from 'pages/Chatting/type';
 import Siren from 'assets/svg/siren.svg';
 
