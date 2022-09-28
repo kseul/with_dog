@@ -1,13 +1,32 @@
-import io from 'socket.io-client';
 import styled from 'styled-components';
+import io from 'socket.io-client';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
+import { useCookies } from 'react-cookie';
 import TitleBar from './components/TitleBar';
 import Messages from './components/Messages';
 import Input from './components/Input';
-import { UserDataProps, ChatRoomProps, MessagesProps } from 'types/type';
+import ChatReportModal from '../ChatReportModal';
+import { MessagesProps } from 'pages/Chatting/type';
 import signInbg from 'assets/images/bg2.png';
+import { useNavigate } from 'react-router-dom';
+
+interface UserDataProps {
+  account_type?: string;
+  email?: string;
+  mbti?: string;
+  name?: string;
+  nickname?: string;
+  status?: string;
+  thumbnail_url?: string;
+  user_type?: string;
+  id?: number;
+}
+
+interface ChatRoomProps {
+  room?: number;
+}
 
 let socket;
 
@@ -15,14 +34,18 @@ const ChatRoom = () => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<MessagesProps[]>([]);
   const [currentTime, SetCurrentTime] = useState('');
+  const [isShowModal, setIsShowModal] = useState(false);
 
-  const ENDPOINT = 'localhost:3000';
-  // const ENDPOINT = 'http://54.180.89.143:8000';
+  const navigate = useNavigate();
+
+  const ENDPOINT = 'http://54.180.89.143:8000';
+
+  const [cookies] = useCookies(['userToken']);
 
   const storeData = useSelector((state: RootState) => state);
-  const { nickname }: UserDataProps = storeData.user.userData;
+  const { nickname, mbti, thumbnail_url, id }: UserDataProps =
+    storeData.user.userData;
   const room: ChatRoomProps = storeData.chat.id;
-  const userMbti = storeData.user.userData.mbti;
 
   useEffect(() => {
     const date = new Date();
@@ -34,7 +57,12 @@ const ChatRoom = () => {
   }, [message]);
 
   useEffect(() => {
-    socket = io(ENDPOINT);
+    socket = io(ENDPOINT, {
+      auth: {
+        token: cookies.userToken,
+        userId: id,
+      },
+    });
     socket.emit('join', { nickname, room });
   }, [ENDPOINT]);
 
@@ -54,7 +82,9 @@ const ChatRoom = () => {
         nickname,
         room,
         currentTime,
-        userMbti,
+        mbti,
+        thumbnail_url,
+        id,
         () => {
           setMessage('');
         }
@@ -63,6 +93,12 @@ const ChatRoom = () => {
   };
 
   useEffect(() => {
+    socket.on('connect_error', data => {
+      if (data.message === 'invalid user') {
+        socket.close();
+        navigate('/');
+      }
+    });
     return () => {
       socket.close();
     };
@@ -71,12 +107,17 @@ const ChatRoom = () => {
   return (
     <ChatRoomContainer>
       <TitleBar />
-      <Messages messages={messages} nickname={nickname} />
+      <Messages
+        messages={messages}
+        nickname={nickname}
+        setIsShowModal={setIsShowModal}
+      />
       <Input
         message={message}
         setMessage={setMessage}
         sendMessage={sendMessage}
       />
+      {isShowModal && <ChatReportModal setIsShowModal={setIsShowModal} />}
     </ChatRoomContainer>
   );
 };

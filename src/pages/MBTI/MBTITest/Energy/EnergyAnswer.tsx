@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import { ANSWER_DB } from '../constants/Test';
-import { MBTIEnergyProps } from 'types/type';
+import { MBTIEnergyProps } from '../type';
 
 const EnergyAnswer = ({
   handleSetEnergyName,

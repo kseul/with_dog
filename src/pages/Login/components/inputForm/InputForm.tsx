@@ -1,5 +1,12 @@
 import styled from 'styled-components';
-import { IdPwInputProp } from 'types/type';
+
+interface InpurFormProps {
+  placeholder: string;
+  type: string;
+  name: string;
+  handleUserInput: (e) => void;
+  submitSigninInfo: () => void;
+}
 
 const InputForm = ({
   placeholder,
@@ -7,7 +14,7 @@ const InputForm = ({
   name,
   handleUserInput,
   submitSigninInfo,
-}: IdPwInputProp) => {
+}: InpurFormProps) => {
   return (
     <UserInputForm
       onChange={handleUserInput}

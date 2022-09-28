@@ -1,19 +1,46 @@
+import axios from 'axios';
 import styled from 'styled-components';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
+import store from 'redux/store';
+import userActions from 'redux/actions/user';
 import { useEffect, useRef, useState } from 'react';
 import Nav from 'pages/components/Nav';
 import FirstPage from './pageComposition/FirstPage';
 import ContentPages from './pageComposition/ContentPages';
 import LastPage from './pageComposition/LastPage';
+import AlertModal from 'pages/components/AlertModal';
 import PAGES_DATA from './DATA/PAGES_DATA';
-import Page1Bg from 'assets/images/mainPage1.jpeg';
-import Page5Bg from 'assets/images/mainPage5.jpeg';
+import Page1Bg from 'assets/svg/1page.svg';
+import Page5Bg from 'assets/svg/5page.svg';
 
 const Main = () => {
   const pageRef = useRef<HTMLDivElement[]>([]);
-
+  const [cookies] = useCookies(['userToken']);
   const [currentPage, setCurrentPage] = useState<unknown>();
+  const [showAlertModal, setShowAlertModal] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
+    axios
+      .post('https://togedog-dj.herokuapp.com/users/login/check', '', {
+        headers: {
+          Authorization: `Bearer ${cookies.userToken}`,
+        },
+      })
+      .then(res => {
+        if (res.status === 200) {
+          store.dispatch(userActions.userAccess(true));
+          store.dispatch(userActions.handleUserData(res.data));
+        }
+      })
+      .catch(error => {
+        if (error.response.status === 400) {
+          setShowAlertModal('로그아웃 되었습니다');
+          navigate('/');
+        }
+      });
+
     const pageObserver = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
@@ -34,6 +61,12 @@ const Main = () => {
     <>
       <Nav />
       <MainContainer>
+        {showAlertModal && (
+          <AlertModal
+            title={showAlertModal}
+            setShowAlertModal={setShowAlertModal}
+          />
+        )}
         <FirstPage
           backGroundImage={Page1Bg}
           ref={(el: HTMLDivElement) => (pageRef.current[0] = el)}
@@ -82,11 +115,13 @@ const MainContainer = styled.div`
     display: none;
   }
 `;
+
 const DotsWrapper = styled.div`
   position: absolute;
   top: 50%;
   right: 2.5%;
 `;
+
 const Dots = styled.div<{
   selected: unknown;
 }>`

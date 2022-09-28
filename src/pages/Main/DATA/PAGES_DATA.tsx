@@ -1,6 +1,6 @@
-import Page2Bg from 'assets/images/mainPage2.jpeg';
-import Page3Bg from 'assets/images/mainPage3.jpeg';
-import Page4Bg from 'assets/images/mainPage4.jpeg';
+import Page2Bg from 'assets/svg/2page.svg';
+import Page3Bg from 'assets/svg/3page.svg';
+import Page4Bg from 'assets/svg/4page.svg';
 
 const PAGES_DATA = [
   {
