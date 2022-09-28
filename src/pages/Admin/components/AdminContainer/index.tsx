@@ -1,13 +1,14 @@
-import axios from 'axios';
-import styled from 'styled-components';
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import LeftSideList from 'pages/Admin/components/LeftSideMenu/LeftSideList';
-import AdminHeader from 'pages/Admin/components/AdminHeader';
-import AdminRightPage from 'pages/Admin/components/RightSection/AdminRightPage';
+import axios from 'axios';
+import styled from 'styled-components';
+import LeftSideList from 'pages/Admin/components/LeftSideMenu';
+import AdminHeader from 'pages/Admin/components/AdminContainer/components/AdminHeader';
+import AdminRightPage from 'pages/Admin/components/AdminRightPage';
+import { BASE_URL } from 'config';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
-import backGroundImg from 'assets/images/bg1.jpg';
 import { ListData } from 'types/type';
+import backGroundImg from 'assets/images/bg1.jpg';
 
 const AdminContainer = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const AdminContainer = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://togedog-dj.herokuapp.com/${location.pathname.slice(7)}${
+        `${BASE_URL}/${location.pathname.slice(7)}${
           location.search ? location.search + '&' : '?'
         }page=${currentPage}`,
         {

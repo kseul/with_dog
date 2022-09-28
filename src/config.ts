@@ -1,6 +1,7 @@
-export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'https://togedog-dj.herokuapp.com';
 const API = {
-  signUp: `${BASE_URL}/users/signup`,
-  signIn: `${BASE_URL}/users/login`,
+  ADMINUSER: `${BASE_URL}/users`,
+  ADMINNOTICE: `${BASE_URL}/admin/notices`,
+  ADMINPOST: `${BASE_URL}/posts`,
 };
 export default API;
