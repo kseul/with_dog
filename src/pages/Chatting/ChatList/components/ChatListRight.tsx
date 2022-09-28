@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
 import ChatModal from 'pages/Chatting/ChatModal';
 import { ChatListProp } from 'pages/Chatting/type';
 import ArrowRight from 'assets/svg/arrow-right.svg';

@@ -1,7 +1,7 @@
-import styled from 'styled-components';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import store from 'redux/store';
+import styled from 'styled-components';
 import chatRoomActions from 'redux/actions/chat';
 import ArrowRight from 'assets/svg/arrow-right.svg';
 
