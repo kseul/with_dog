@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from 'react-router-dom';
@@ -10,10 +11,12 @@ const QuillEditor = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [file, setFile] = useState('');
+  const [filePath, setFilePath] = useState('');
+  const [cookies] = useCookies(['userToken']);
 
   const FILE_SIZE_LIMIT = 50 * 1024 * 1024;
 
-  const imageSizeHandler = e => {
+  const imageUploadHandler = e => {
     const target = e.currentTarget;
     const files = target.files[0];
 
@@ -28,6 +31,7 @@ const QuillEditor = () => {
     }
 
     setFile(files);
+    setFilePath(e.target.value);
   };
 
   const writeHandler = () => {
@@ -39,7 +43,7 @@ const QuillEditor = () => {
     fetch(`https://togedog-dj.herokuapp.com/posts`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+        Authorization: `Bearer ${cookies.userToken}`,
       },
       body: formData,
     })
@@ -53,6 +57,10 @@ const QuillEditor = () => {
 
   const onChangeTitle = e => {
     setTitle(e.target.value);
+  };
+
+  const cancelHandler = () => {
+    navigate('/noticeboard');
   };
 
   const modules = useMemo(
@@ -73,7 +81,7 @@ const QuillEditor = () => {
             // { color: [] },
             // { background: [] }
           ],
-          ['image'],
+          // ['image'],
         ],
       },
     }),
@@ -90,9 +98,9 @@ const QuillEditor = () => {
     'blockquote',
     'list',
     'bullet',
-    'indent',
+    // 'indent',
     'link',
-    'image',
+    // 'image',
     'align',
     // 'color',
     // 'background',
@@ -105,7 +113,10 @@ const QuillEditor = () => {
         onChange={onChangeTitle}
         value={title}
       />
-      <NoticeBoardImageUpload imageSizeHandler={imageSizeHandler} />
+      <NoticeBoardImageUpload
+        filePath={filePath}
+        imageUploadHandler={imageUploadHandler}
+      />
       <Quill
         theme="snow"
         value={content}
@@ -114,7 +125,10 @@ const QuillEditor = () => {
         formats={formats}
         placeholder="내용을 입력해 주세요."
       />
-      <SubmitHandler onClick={writeHandler}>작성하기</SubmitHandler>
+      <WriterButton>
+        <CancelHandler onClick={cancelHandler}>취소하기</CancelHandler>
+        <SubmitHandler onClick={writeHandler}>작성하기</SubmitHandler>
+      </WriterButton>
     </QuillContainer>
   );
 };
@@ -140,15 +154,34 @@ const Quill = styled(ReactQuill)`
   margin-top: 3rem;
 `;
 
+const WriterButton = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 15%;
+`;
+
+const CancelHandler = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  margin-top: 3rem;
+  background-color: ${props => props.theme.colors.lineLightGray};
+  cursor: pointer;
+`;
+
 const SubmitHandler = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 4.5rem;
+  width: 5rem;
   height: 2.5rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   margin-top: 3rem;
   background-color: ${props => props.theme.colors.mint};
+  cursor: pointer;
 `;
 
 export default QuillEditor;

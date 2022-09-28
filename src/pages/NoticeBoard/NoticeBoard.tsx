@@ -17,6 +17,7 @@ const NoticeBoard = () => {
 };
 
 const NoticeBoardContainer = styled.div`
+  margin-top: 5rem;
   padding: 2.5rem 15rem;
 `;
 

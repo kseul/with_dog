@@ -3,14 +3,15 @@ import styled from 'styled-components/macro';
 import BoardModalComment from '../NoticeBoardComment/BoardModalComment';
 import BoardModalButton from './components/BoardModalButton';
 import BoardModalTyping from './components/BoardModalTyping';
+import BoardModalWriting from './components/BoardModalWriting';
 import leftArrow from 'assets/svg/arrow-left.svg';
 import rightArrow from 'assets/svg/arrow-right.svg';
 import cancelButton from 'assets/svg/cancel.svg';
 import { BoardDataProp } from 'types/type';
-import BoardWriter from './components/UI/BoardWriter';
 import store from 'redux/store';
 import boardActions from 'redux/actions/board';
 import { useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie';
 
 interface BoardModalProps {
   modalContent: any;
@@ -25,6 +26,9 @@ const BoardModal = ({
 }: BoardModalProps) => {
   const boardData = useSelector((state: any) => state.board.boardData);
   const boardListData = useSelector((state: any) => state.board.boardList);
+  const [cookies] = useCookies(['userToken']);
+
+  const date = boardData.created_at.substring(0, 10);
 
   useEffect(() => {
     document.body.style.cssText = `
@@ -52,7 +56,7 @@ const BoardModal = ({
     fetch(`https://togedog-dj.herokuapp.com/posts/${boardId[idIndex]}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+        Authorization: `Bearer ${cookies.userToken}`,
       },
     })
       .then(response => response.json())
@@ -75,7 +79,7 @@ const BoardModal = ({
     fetch(`https://togedog-dj.herokuapp.com/posts/${boardId[idIndex]}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+        Authorization: `Bearer ${cookies.userToken}`,
       },
     })
       .then(response => response.json())
@@ -97,17 +101,10 @@ const BoardModal = ({
         </ModalImageWrapper>
         <ModalContentWrapper>
           <BoardModalTitle> {modalContent.subject} </BoardModalTitle>
-          <BoardModalDate> {modalContent.created_at} </BoardModalDate>
+          <BoardModalDate> {date} </BoardModalDate>
           <BoardModalMainText>
-            {/* REFACTORING : 작성자 부분 Comment 작성 부분을 재사용할 수 있지 않을까? */}
-            <BoardWriter
-              thumbnail={modalContent.user_thumbnail}
-              nickName={modalContent.user_nickname}
-            />
-            <BoardModalText
-              dangerouslySetInnerHTML={{ __html: modalContent.content }}
-            />
-            <BoardModalComment comments={modalContent.comments} />
+            <BoardModalWriting data={boardData} />
+            <BoardModalComment data={boardData.comments_list} />
           </BoardModalMainText>
           <BoardModalButton modalContent={modalContent} />
           <BoardModalTyping modalContent={modalContent} />

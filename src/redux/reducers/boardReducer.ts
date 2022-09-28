@@ -27,6 +27,14 @@ const boardReducer = (state = initialState, action) => {
         ...state,
         boardData: action.boardData,
       };
+    case 'SET_COMMENTS':
+      return {
+        ...state,
+        boardData: {
+          ...state.boardData,
+          comments: [...state.boardData.comments, action.boardData],
+        },
+      };
     case 'LIKE_PLUS':
       return {
         ...state,

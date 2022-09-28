@@ -8,10 +8,14 @@ import BoardEditModal from './BoardEditModal';
 import { useSelector } from 'react-redux';
 import store from 'redux/store';
 import boardActions from 'redux/actions/board';
+import { useCookies } from 'react-cookie';
 
 const BoardModalButton = ({ modalContent }: BoardDataProp) => {
   const boardData = useSelector((state: any) => state.board.boardData);
   const [activateEditModal, setActivateEditModal] = useState(false);
+  const loginId = useSelector((state: any) => state.user.userData.id);
+  const userId = boardData.user_id;
+  const [cookies] = useCookies(['userToken']);
 
   const handleEditModal = () => {
     setActivateEditModal(!activateEditModal);
@@ -27,7 +31,7 @@ const BoardModalButton = ({ modalContent }: BoardDataProp) => {
       {
         method: 'POST',
         headers: {
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+          Authorization: `Bearer ${cookies.userToken}`,
         },
       }
     );
@@ -42,7 +46,7 @@ const BoardModalButton = ({ modalContent }: BoardDataProp) => {
       {
         method: 'POST',
         headers: {
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
+          Authorization: `Bearer ${cookies.userToken}`,
         },
         body: formData,
       }
@@ -57,18 +61,22 @@ const BoardModalButton = ({ modalContent }: BoardDataProp) => {
         <BoardModalText>{boardData.post_likes_count}</BoardModalText>
       </BoardModalButtonElement>
 
-      <BoardModalButtonElement>
-        <BoardModalImg src={pencilBtn} />
-        <BoardModalText onClick={handleEditModal}>수정하기</BoardModalText>
-        {activateEditModal && (
-          <BoardEditModal handleEditModal={handleEditModal} />
-        )}
-      </BoardModalButtonElement>
+      {userId === loginId && (
+        <BoardModalButtonElement>
+          <BoardModalImg src={pencilBtn} />
+          <BoardModalText onClick={handleEditModal}>수정하기</BoardModalText>
+          {activateEditModal && (
+            <BoardEditModal handleEditModal={handleEditModal} />
+          )}
+        </BoardModalButtonElement>
+      )}
 
-      <BoardModalButtonElement>
-        <BoardModalImg src={siren} />
-        <BoardModalText onClick={handleReport}>신고하기</BoardModalText>
-      </BoardModalButtonElement>
+      {userId !== loginId && (
+        <BoardModalButtonElement>
+          <BoardModalImg src={siren} />
+          <BoardModalText onClick={handleReport}>신고하기</BoardModalText>
+        </BoardModalButtonElement>
+      )}
     </BoardModalButtonWrapper>
   );
 };

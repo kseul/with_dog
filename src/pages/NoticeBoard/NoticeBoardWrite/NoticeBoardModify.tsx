@@ -11,6 +11,7 @@ const NoticeBoardModify = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [file, setFile] = useState('');
+  const [filePath, setFilePath] = useState('파일 선택');
   const navigate = useNavigate();
 
   const getBoardData = async () => {
@@ -36,7 +37,7 @@ const NoticeBoardModify = () => {
 
   const FILE_SIZE_LIMIT = 50 * 1024 * 1024;
 
-  const imageSizeHandler = e => {
+  const imageUploadHandler = e => {
     const target = e.currentTarget;
     const files = target.files[0];
 
@@ -51,6 +52,7 @@ const NoticeBoardModify = () => {
     }
 
     setFile(files);
+    setFilePath(e.target.value);
   };
 
   const modifyHandler = () => {
@@ -128,7 +130,10 @@ const NoticeBoardModify = () => {
         onChange={onChangeTitle}
         value={title}
       />
-      <NoticeBoardImageUpload imageSizeHandler={imageSizeHandler} />
+      <NoticeBoardImageUpload
+        filePath={filePath}
+        imageUploadHandler={imageUploadHandler}
+      />
       <Quill
         theme="snow"
         value={content}
