@@ -1,10 +1,11 @@
-import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import useAxios from 'hooks/useAxios';
 import NoticeModal from 'pages/Admin/components/Modal/NoticeModal';
-import logo from 'assets/svg/with-dog-logo.svg';
+import API from 'config';
 import { BsFilePost } from 'react-icons/bs';
 import { FaCommentDots } from 'react-icons/fa';
+import logo from 'assets/svg/with-dog-logo.svg';
 
 const AdminHeader = ({ onCurrentModal, modalId }) => {
   const postClassName = 'post_report';
@@ -18,7 +19,7 @@ const AdminHeader = ({ onCurrentModal, modalId }) => {
 
   const { response } = useAxios({
     method: 'GET',
-    url: `https://togedog-dj.herokuapp.com/admin/notices`,
+    url: `${API.ADMINNOTICE}`,
     headers: {
       accept: '*/*',
       Authorization: `Bearer ${sessionStorage.getItem('token')}`,

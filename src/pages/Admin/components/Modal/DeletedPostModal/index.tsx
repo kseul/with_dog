@@ -1,55 +1,39 @@
 import axios from 'axios';
 import styled from 'styled-components';
-import { useState } from 'react';
 import useAxios from 'hooks/useAxios';
-import UserInfoBox from 'pages/Admin/components/RightSection/UserInfoBox';
-import CommentBox from 'pages/Admin/components/Modal/CommentBox';
+import UserInfoBox from 'pages/Admin/components/AdminRightPage/components/UserInfoBox';
+import API from 'config';
 import { AiOutlineClose } from 'react-icons/ai';
 import backgroundImage from 'assets/images/bg1.jpg';
 
-const NoticeDetailModal = ({ noticeDetailModal, modalId }) => {
-  const [reason, setReason] = useState<string>('');
-
+const DeletedPostModal = ({ detailModalOpener, modalId }) => {
   const { response } = useAxios({
     method: 'GET',
-    url: `https://togedog-dj.herokuapp.com/posts/${modalId}/admin/`,
+    url: `${API.ADMINPOST}/deleted/${modalId}/`,
     headers: {
       accept: '*/*',
       Authorization: `Bearer ${sessionStorage.getItem('token')}`,
     },
   });
 
-  const getReason = e => {
-    e.preventDefault();
-    setReason(e.target.value);
-  };
-
   const deletePost = () => {
-    if (window.confirm('게시글을 삭제하시겠습니까?')) {
-      axios.post(
-        `https://togedog-dj.herokuapp.com/posts/${modalId}/delete/`,
-        new URLSearchParams({
-          delete_reason: reason,
-        }),
-        {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-        }
-      );
+    if (window.confirm('게시글을 완전히 삭제하시겠습니까?')) {
+      axios.post(`${API.ADMINPOST}/${modalId}/delete/hard/`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
+      });
     } else {
       alert('취소되었습니다.');
     }
   };
-
   return (
-    <ModalBackground onClick={noticeDetailModal}>
+    <ModalBackground onClick={detailModalOpener}>
       {response?.data && (
         <ModalContainer onClick={e => e.stopPropagation()}>
           <ModalTop>
-            <ModalTitle>게시글 관리</ModalTitle>
-            <DeleteIconButton onClick={noticeDetailModal}>
+            <ModalTitle>삭제된 게시글 관리</ModalTitle>
+            <DeleteIconButton onClick={detailModalOpener}>
               <AiOutlineClose />
             </DeleteIconButton>
           </ModalTop>
@@ -64,30 +48,17 @@ const NoticeDetailModal = ({ noticeDetailModal, modalId }) => {
               <PostContent>
                 <PostContentTitle>
                   <PostTitle>{response.data.subject}</PostTitle>
-                  <PostUpload>
-                    {response.data.created_at.substring(0, 10)}
-                  </PostUpload>
                   <PostText>{response.data.content}</PostText>
                 </PostContentTitle>
               </PostContent>
-              <CommentList>
-                {response?.data.comments_list.length === 0 ? (
-                  <p>등록된 댓글이 없습니다.</p>
-                ) : (
-                  response?.data.comments_list.map(comment => (
-                    <CommentBox key={comment.id} comment={comment} />
-                  ))
-                )}
-              </CommentList>
               <ReasonToBan>
-                <ReasonToBanContent
-                  placeholder="삭제 사유를 입력하여 주세요."
-                  onChange={getReason}
-                />
+                <ReasonToBanContent>
+                  {response?.data.delete_reason}
+                </ReasonToBanContent>
                 <BtnWrapper>
                   <CancelBtn
                     onClick={() => {
-                      noticeDetailModal();
+                      detailModalOpener();
                       deletePost();
                     }}
                   >
@@ -113,7 +84,6 @@ const ModalBackground = styled.div`
   height: 100vh;
   background-color: rgba(68, 68, 68, 0.9);
   z-index: 5;
-  color: black;
 `;
 
 const ModalContainer = styled.div`
@@ -173,10 +143,21 @@ const LeftBackground = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'space-evenly')}
   width: 100%;
   height: 100%;
-  background-color: ${props => props.theme.colors.lightGray};
+  background-image: linear-gradient(to left, #bdbbbe 0%, #9d9ea3 100%),
+    radial-gradient(
+      88% 271%,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(254, 254, 254, 0.25) 1%,
+      rgba(0, 0, 0, 0.25) 100%
+    ),
+    radial-gradient(
+      50% 100%,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+  background-blend-mode: normal, lighten, soft-light;
   border-top-right-radius: 1.875rem;
   border-bottom-right-radius: 1.875rem;
-  box-shadow: 5px 0px 5px lightGray;
 `;
 
 const PostImg = styled.img`
@@ -194,7 +175,7 @@ const ModalRightSection = styled.div`
 const PostContent = styled.div`
   margin-top: 2rem;
   width: 90%;
-  height: 8%;
+  height: 40%;
 `;
 
 const PostContentTitle = styled.div`
@@ -209,25 +190,10 @@ const PostTitle = styled.div`
   font-size: 1.5rem;
 `;
 
-const PostUpload = styled.div`
-  color: rgb(124, 124, 124);
-  font-size: 0.7rem;
-  border-bottom: 1px solid gray;
-`;
-
 const PostText = styled.div`
   padding-top: 0.5rem;
   width: 70%;
   height: 3.5rem;
-`;
-
-const CommentList = styled.div`
-  margin-top: 2rem;
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
-  height: 13rem;
-  overflow-y: auto;
 `;
 
 const ReasonToBan = styled.div`
@@ -235,12 +201,15 @@ const ReasonToBan = styled.div`
   ${props => props.theme.flex.flexBox('column', '', 'space-evenly')}
 `;
 
-const ReasonToBanContent = styled.textarea`
+const ReasonToBanContent = styled.div`
   margin-left: auto;
   margin-right: auto;
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
   width: 90%;
   height: 8rem;
-  resize: none;
+  border: 1px solid black;
+  border-radius: 3px;
   font-family: 'Noto Sans KR', sans-serif;
 `;
 
@@ -258,4 +227,4 @@ const CancelBtn = styled.button`
   cursor: pointer;
 `;
 
-export default NoticeDetailModal;
+export default DeletedPostModal;

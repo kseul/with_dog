@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import AdminSpinner from 'pages/Admin/components/AdminSpinner/AdminSpinner';
-import NoticeDetailModal from 'pages/Admin/components/Modal/NoticeDetailModal';
-import NoticeBox from 'pages/Admin/components/Notice/NoticeBox';
+import AdminSpinner from 'pages/Admin/components/AdminSpinner';
+import NoticeDetailModal from 'pages/Admin/components/Modal/NoticeModal/components/NoticeDetailModal';
+import NoticeBox from 'pages/Admin/components/Modal/NoticeModal/components/NoticeBox';
+import API from 'config';
 
 const NoticeModal = ({
   data,
@@ -24,7 +25,7 @@ const NoticeModal = ({
   const clickAndRead = () => {
     axios
       .post(
-        `https://togedog-dj.herokuapp.com/admin/notices?id=${readId}&type=${getClassName}`,
+        `${API.ADMINNOTICE}?id=${readId}&type=${getClassName}`,
         {},
         {
           headers: {
@@ -40,7 +41,7 @@ const NoticeModal = ({
     try {
       setLoading(true);
       await axios.post(
-        `https://togedog-dj.herokuapp.com/admin/notices?id=all&type=${getClassName}`,
+        `${API.ADMINNOTICE}?id=all&type=${getClassName}`,
         {},
         {
           headers: {
