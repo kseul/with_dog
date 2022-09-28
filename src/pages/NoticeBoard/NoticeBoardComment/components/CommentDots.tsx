@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import dots from 'assets/svg/dots.svg';
 import { useCookies } from 'react-cookie';
+import styled from 'styled-components';
+import dots from 'assets/svg/dots.svg';
 
 interface commentReportProps {
   id: number;
@@ -33,6 +33,8 @@ const CommentReport = ({ id, userId, loginId }: commentReportProps) => {
         body: formData,
       }
     );
+
+    alert('신고가 완료 되었습니다.');
   };
 
   const handleCommentDelete = async () => {
@@ -46,7 +48,8 @@ const CommentReport = ({ id, userId, loginId }: commentReportProps) => {
       }
     );
 
-    const data = await response.json();
+    handleModal();
+    alert('댓글이 삭제 되었습니다.');
   };
 
   return (
@@ -73,8 +76,8 @@ const CommentReport = ({ id, userId, loginId }: commentReportProps) => {
 };
 
 const CommentDotsElement = styled.img`
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.65rem;
+  height: 0.65rem;
   margin-left: 0.3rem;
   cursor: pointer;
 `;
@@ -118,6 +121,14 @@ const DotsElement = styled.div`
   &:last-child {
     border-bottom: none;
   }
+`;
+
+const ReportInput = styled.div`
+  display: fixed;
+  top: 50%;
+  left: 50%;
+  width: 5rem;
+  height: 5rem;
 `;
 
 export default CommentReport;

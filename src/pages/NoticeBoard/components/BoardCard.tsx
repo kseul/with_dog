@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import boardActions from 'redux/actions/board';
 import store from 'redux/store';
 import styled from 'styled-components';
-import { BoardDataProp } from 'types/type';
 import BoardModal from '../NoticeBoardModal/BoardModal';
 
 interface BoardCardProps {
@@ -26,7 +25,6 @@ const BoardCard = ({
   post_likes_count,
 }: BoardCardProps) => {
   const [activateModal, setActivateModal] = useState(false);
-  const [modalContent, setModalContent] = useState([]);
   const [cookies] = useCookies(['userToken']);
 
   const date = created_at.substring(0, 10);
@@ -45,7 +43,6 @@ const BoardCard = ({
       })
         .then(response => response.json())
         .then(data => {
-          setModalContent(data);
           store.dispatch(boardActions.getBoard(data));
         });
     }
@@ -67,13 +64,7 @@ const BoardCard = ({
           <CardViews>{post_likes_count}</CardViews>
         </CardBottom>
       </CardContainer>
-      {activateModal && (
-        <BoardModal
-          modalContent={modalContent}
-          setModalContent={setModalContent}
-          handleModal={handleModal}
-        />
-      )}
+      {activateModal && <BoardModal handleModal={handleModal} />}
     </>
   );
 };
