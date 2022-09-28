@@ -1,6 +1,5 @@
-import Nav from 'pages/components/Nav';
-import React from 'react';
 import styled from 'styled-components';
+import Nav from 'pages/components/Nav';
 import BoardButton from './components/BoardButton';
 import BoardList from './components/BoardList';
 

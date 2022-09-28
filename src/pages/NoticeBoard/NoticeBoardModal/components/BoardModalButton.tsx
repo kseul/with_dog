@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie';
+import boardActions from 'redux/actions/board';
+import store from 'redux/store';
 import styled from 'styled-components';
+import BoardEditModal from './BoardEditModal';
 import dogPaws from 'assets/svg/dog-paws1.svg';
 import pencilBtn from 'assets/svg/pencil.svg';
 import siren from 'assets/svg/siren.svg';
-import { BoardDataProp } from 'types/type';
-import BoardEditModal from './BoardEditModal';
-import { useSelector } from 'react-redux';
-import store from 'redux/store';
-import boardActions from 'redux/actions/board';
-import { useCookies } from 'react-cookie';
 
-const BoardModalButton = ({ modalContent }: BoardDataProp) => {
-  const boardData = useSelector((state: any) => state.board.boardData);
+interface BoardModalButtonProps {
+  boardData: any;
+}
+
+const BoardModalButton = ({ boardData }: BoardModalButtonProps) => {
   const [activateEditModal, setActivateEditModal] = useState(false);
   const loginId = useSelector((state: any) => state.user.userData.id);
   const userId = boardData.user_id;
