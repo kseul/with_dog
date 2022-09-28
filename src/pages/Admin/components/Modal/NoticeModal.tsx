@@ -35,11 +35,12 @@ const NoticeModal = ({
       .then(res => res)
       .catch(error => error);
   };
+
   const readAllNotice = async () => {
     try {
       setLoading(true);
       await axios.post(
-        `https://togedog-dj.herokuapp.com/admin/notices?id=${readId}&type=${getClassName}`,
+        `https://togedog-dj.herokuapp.com/admin/notices?id=all&type=${getClassName}`,
         {},
         {
           headers: {

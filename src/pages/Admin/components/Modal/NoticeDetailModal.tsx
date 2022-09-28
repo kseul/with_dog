@@ -65,16 +65,16 @@ const NoticeDetailModal = ({ noticeDetailModal, modalId }) => {
                 <PostContentTitle>
                   <PostTitle>{response.data.subject}</PostTitle>
                   <PostUpload>
-                    {response.data.updated_at.substring(0, 10)}
+                    {response.data.created_at.substring(0, 10)}
                   </PostUpload>
                   <PostText>{response.data.content}</PostText>
                 </PostContentTitle>
               </PostContent>
               <CommentList>
-                {response?.data.comments.length === 0 ? (
+                {response?.data.comments_list.length === 0 ? (
                   <p>등록된 댓글이 없습니다.</p>
                 ) : (
-                  response?.data.comments.map(comment => (
+                  response?.data.comments_list.map(comment => (
                     <CommentBox key={comment.id} comment={comment} />
                   ))
                 )}
