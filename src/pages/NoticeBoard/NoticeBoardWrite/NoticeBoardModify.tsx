@@ -12,6 +12,7 @@ const NoticeBoardModify = () => {
   const [content, setContent] = useState('');
   const [file, setFile] = useState('');
   const [filePath, setFilePath] = useState('파일 선택');
+  const [cookies] = useCookies(['userToken']);
   const navigate = useNavigate();
 
   const getBoardData = async () => {
@@ -20,7 +21,7 @@ const NoticeBoardModify = () => {
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+          Authorization: `Bearer ${cookies.userToken}`,
         },
       }
     );
