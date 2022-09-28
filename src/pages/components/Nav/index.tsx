@@ -1,14 +1,20 @@
 import styled from 'styled-components';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import AlertModal from '../AlertModal';
 import PageBox from './components/PageBox';
 import UserProfile from './components/UserProfile';
-import { RootState } from 'redux/reducers';
-import logo from 'assets/svg/with-dog-logo.svg';
 import withDogLogo from 'assets/svg/withDogLogo.svg';
+import dogPaw from 'assets/svg/dog-paws2.svg';
 
 const Nav = () => {
   const navigate = useNavigate();
+  const [cookies] = useCookies(['userToken']);
+  const [showAlertModal, setShowAlertModal] = useState('');
+
+  const checkLoggedIn = cookies.userToken && true;
+
   const goToMain = () => {
     navigate('/');
   };
@@ -16,27 +22,43 @@ const Nav = () => {
     navigate('/signin');
   };
 
-  const isLoggedIn = useSelector((state: RootState) => state.user.LoggedIn);
-
   return (
-    <NavContainer>
-      <PageContainer>
-        {PAGE_LIST.map(({ id, title, moveTo }) => {
-          return <PageBox key={id} title={title} moveTo={moveTo} />;
-        })}
-      </PageContainer>
-      <LogoContainer onClick={goToMain}>
-        <Logo src={logo} />
-        <LogoText>함께하개</LogoText>
-      </LogoContainer>
-      <ProfileContainer>
-        {isLoggedIn ? (
-          <UserProfile />
-        ) : (
-          <RequireLogin onClick={goToSignIn}>✋ 로그인하시개</RequireLogin>
-        )}
-      </ProfileContainer>
-    </NavContainer>
+    <>
+      {showAlertModal && (
+        <AlertModal
+          title={showAlertModal}
+          setShowAlertModal={setShowAlertModal}
+        />
+      )}
+      <NavContainer>
+        <PageContainer>
+          {PAGE_LIST.map(({ id, title, moveTo }) => {
+            return (
+              <PageBox
+                key={id}
+                title={title}
+                moveTo={moveTo}
+                checkLoggedIn={checkLoggedIn}
+                setShowAlertModal={setShowAlertModal}
+              />
+            );
+          })}
+        </PageContainer>
+        <LogoContainer onClick={goToMain}>
+          <Logo src={withDogLogo} />
+        </LogoContainer>
+        <ProfileContainer>
+          {checkLoggedIn ? (
+            <UserProfile />
+          ) : (
+            <RequireLogin onClick={goToSignIn}>
+              <Icon src={dogPaw} />
+              로그인하시개
+            </RequireLogin>
+          )}
+        </ProfileContainer>
+      </NavContainer>
+    </>
   );
 };
 
@@ -56,37 +78,41 @@ const NavContainer = styled.div`
 
 const PageContainer = styled.div`
   display: flex;
-  padding-left: 1.7rem;
+  padding-left: 3rem;
 `;
 
 const LogoContainer = styled.div`
   position: relative;
-  padding-right: 8.5rem;
+  padding-right: 11rem;
   cursor: pointer;
 `;
 
 const Logo = styled.img`
-  position: absolute;
-  top: -40%;
-  left: -28%;
-  width: 3.75rem;
-`;
-
-const LogoText = styled.div`
-  font-size: 1.69rem;
-  font-weight: 600;
+  width: 9rem;
 `;
 
 const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 4.2rem;
+  margin-right: 4rem;
 `;
 
 const RequireLogin = styled.div`
-  font-size: 1.188rem;
-  font-weight: 600;
+  position: relative;
+  background-color: #7cccc7;
+  border-radius: 1rem;
+  padding: 0.6rem 1.2rem 0.6rem 2.5rem;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: white;
   cursor: pointer;
+`;
+
+const Icon = styled.img`
+  position: absolute;
+  top: 15%;
+  left: 8%;
+  height: 1.25rem;
 `;
 
 export default Nav;

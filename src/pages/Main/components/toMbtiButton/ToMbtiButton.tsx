@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { ToMbtiButtonProp } from 'types/type';
+
+interface ToMbtiButtonProps {
+  title: string;
+  icon: string;
+  textColor: string;
+  buttonColor: string;
+  buttonSize: number;
+  textSize: number;
+}
 
 const ToMbtiButton = ({
   title,
@@ -9,7 +17,7 @@ const ToMbtiButton = ({
   buttonColor,
   buttonSize,
   textSize,
-}: ToMbtiButtonProp) => {
+}: ToMbtiButtonProps) => {
   const navigate = useNavigate();
   const goToMbtiTest = () => {
     navigate('/mbti');

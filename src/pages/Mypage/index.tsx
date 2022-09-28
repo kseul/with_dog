@@ -181,8 +181,8 @@ const MypageForm = styled.form`
 
 const ButtonContainer = styled.button`
   position: absolute;
-  bottom: 10%;
-  right: 5%;
+  bottom: 5%;
+  right: 4%;
   width: 10rem;
   height: 3rem;
   border-radius: 1rem;

@@ -1,5 +1,12 @@
 import styled from 'styled-components';
-import { LoginButtonProp } from 'types/type';
+
+interface LoginBUttonProps {
+  title: string;
+  color: string;
+  size: number;
+  isActive: boolean;
+  func: () => void;
+}
 
 const LoginButton = ({
   title,
@@ -7,7 +14,7 @@ const LoginButton = ({
   size,
   isActive,
   func,
-}: LoginButtonProp) => {
+}: LoginBUttonProps) => {
   return (
     <Button
       color={color}
