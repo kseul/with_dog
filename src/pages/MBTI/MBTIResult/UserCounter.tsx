@@ -1,5 +1,6 @@
-import styled from 'styled-components/macro';
 import { useEffect, useState } from 'react';
+import styled from 'styled-components/macro';
+import { BASE_URL } from 'config';
 import { CountUser } from './type';
 import TitlePaw from 'assets/svg/TitlePawPositoin.svg';
 
@@ -7,7 +8,7 @@ const UserCounter = () => {
   const [count, setCount] = useState<CountUser>({ userNum: 0 });
 
   const getNum = () => {
-    fetch(`https://togedog-dj.herokuapp.com/test-count`, {
+    fetch(`${BASE_URL}/test-count`, {
       method: 'GET',
     })
       .then(response => response.json())

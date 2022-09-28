@@ -1,8 +1,9 @@
-import styled from 'styled-components/macro';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components/macro';
+import { BASE_URL } from 'config';
 import setMbtiResults from 'redux/actions/mbtiResult';
 import userActions from 'redux/actions/user';
 import setMbtiTexts from 'redux/actions/mbtiText';
@@ -153,6 +154,12 @@ const MBTITest = () => {
     });
   };
 
+  const handleOnKeyPress = e => {
+    if (e.key === 'Enter') {
+      onEnergyCheck();
+    }
+  };
+
   const onRelationCheck = (): void => {
     setNextRelationPage(!nextRelationPage);
     window.scrollTo({
@@ -186,7 +193,7 @@ const MBTITest = () => {
       top: 0,
       behavior: 'smooth',
     });
-    fetch(`https://togedog-dj.herokuapp.com/test-count`, {
+    fetch(`${BASE_URL}/test-count`, {
       method: 'POST',
     });
   };

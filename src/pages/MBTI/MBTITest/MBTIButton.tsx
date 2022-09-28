@@ -1,14 +1,27 @@
 import styled from 'styled-components/macro';
 
 const MBTIButton = ({ onCheck }) => {
+  const handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      onCheck();
+    }
+  };
   return (
     <MBTIButtonContainer>
+      <KeyEvent onKeyPress={handleKeyPress} autoFocus />
       <NextButton onClick={onCheck}>넘어가기</NextButton>
     </MBTIButtonContainer>
   );
 };
 const MBTIButtonContainer = styled.div`
-  margin: 0.625rem 0;
+  margin: 0 0 0.625rem 0;
+`;
+
+const KeyEvent = styled.input`
+  margin-top: -30%;
+  border: none;
+  color: transparent;
+  text-shadow: 0 0 0 black;
 `;
 
 const NextButton = styled.button`

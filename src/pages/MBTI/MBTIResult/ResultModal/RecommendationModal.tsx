@@ -1,8 +1,8 @@
-import styled from 'styled-components/macro';
 import { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import store from 'redux/store';
 import chatRoomActions from 'redux/actions/chat';
+import styled from 'styled-components/macro';
 import ArrowRight from 'assets/svg/arrow-right.svg';
 
 const RecommendationModal = ({ onClickToggleModal, resultModal }) => {
