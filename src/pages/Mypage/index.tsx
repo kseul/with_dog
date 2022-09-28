@@ -14,6 +14,7 @@ import UserEmailSection from './components/UserEmailSection';
 import NickNameEditModal from './components/NickNameEditModal';
 import AlertModal from 'pages/components/AlertModal';
 import SecedeButton from 'pages/Login/SignIn/components/SecedeButton';
+import API from 'config';
 import bgimg from 'assets/images/bg1.jpg';
 
 const Mypage = () => {
@@ -93,13 +94,10 @@ const Mypage = () => {
   };
 
   const submitSecede = async () => {
-    const response = await fetch(
-      `https://togedog-dj.herokuapp.com/users/${userData.id}`,
-      {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${cookies.userToken}` },
-      }
-    );
+    const response = await fetch(`${API.USERS}${userData.id}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${cookies.userToken}` },
+    });
     if (response.status === 200) {
       setShowButton(false);
       sessionStorage.clear();
