@@ -1,12 +1,12 @@
-import axios from 'axios';
-import styled from 'styled-components';
-import { useCookies } from 'react-cookie';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 import store from 'redux/store';
 import userActions from 'redux/actions/user';
-import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import UserImgSection from './components/UserImgSection';
 import UserNamingSection from './components/UserNamingSection';
 import MbtiSection from './components/MbtiSection';

@@ -1,10 +1,11 @@
-import styled from 'styled-components';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { RootState } from 'redux/reducers';
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
+
+import styled from 'styled-components';
 
 const UserProfile = () => {
   const navigate = useNavigate();

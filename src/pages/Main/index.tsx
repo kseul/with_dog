@@ -1,10 +1,10 @@
-import axios from 'axios';
-import styled from 'styled-components';
-import { useCookies } from 'react-cookie';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 import store from 'redux/store';
 import userActions from 'redux/actions/user';
-import { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 import Nav from 'pages/components/Nav';
 import FirstPage from './pageComposition/FirstPage';
 import ContentPages from './pageComposition/ContentPages';
@@ -36,7 +36,6 @@ const Main = () => {
       })
       .catch(error => {
         if (error.response.status === 400) {
-          setShowAlertModal('로그아웃 되었습니다');
           navigate('/');
         }
       });

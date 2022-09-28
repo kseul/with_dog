@@ -1,7 +1,7 @@
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useMemo, useState } from 'react';
 import LoginButton from '../components/loginButton/LoginButton';
 import UserDataInputForm from './components/UserDataInputForm';
 import AlertModal from 'pages/components/AlertModal';

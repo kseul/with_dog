@@ -1,6 +1,6 @@
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import store from 'redux/store';
 import userActions from 'redux/actions/user';
 import Spinner from 'pages/Login/components/spinner/Spinner';

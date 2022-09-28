@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { useCookies } from 'react-cookie';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
-import { useState } from 'react';
+import styled from 'styled-components';
 import SecedeButton from './SecedeButton';
 import AlertModal from 'pages/components/AlertModal';
 import background from 'assets/images/bg1.jpg';
