@@ -1,7 +1,12 @@
 import styled from 'styled-components';
-import { SNSButtonProp } from 'types/type';
 
-const SNSButton = ({ title, icon, handleSNSLogin }: SNSButtonProp) => {
+interface SNSButtonProps {
+  title: string;
+  icon: string;
+  handleSNSLogin: () => void;
+}
+
+const SNSButton = ({ title, icon, handleSNSLogin }: SNSButtonProps) => {
   return (
     <SnsButton onClick={handleSNSLogin}>
       <SnsIcon src={icon} />

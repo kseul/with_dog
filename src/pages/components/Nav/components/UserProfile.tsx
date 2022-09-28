@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { RootState } from 'redux/reducers';
+import axios from 'axios';
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const UserProfile = () => {
   const userData = useSelector((state: RootState) => state.user.userData);
   const { nickname, thumbnail_url } = userData;
   const [profileModal, setProfileModal] = useState(false);
-  const [, , removeCookie] = useCookies(['userToken']);
+  const [cookies, , removeCookie] = useCookies(['userToken']);
 
   const goToMyPage = () => {
     navigate('/mypage');
@@ -26,10 +27,17 @@ const UserProfile = () => {
     [profileModal]
   );
 
-  const handleLogOut = () => {
-    sessionStorage.clear();
-    removeCookie('userToken', { path: '/' });
-    window.location.replace('/');
+  const handleLogOut = async () => {
+    try {
+      await axios.get('https://togedog-dj.herokuapp.com/users/logout', {
+        headers: { Authorization: `Bearer ${cookies.userToken}` },
+      });
+      sessionStorage.clear();
+      removeCookie('userToken', { path: '/' });
+      window.location.replace('/');
+    } catch (error) {
+      alert('로그아웃 실패하였습니다.');
+    }
   };
 
   useEffect(() => {
@@ -69,6 +77,7 @@ const UserProfileContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  margin-right: 4rem;
 `;
 
 const UserImgWrapper = styled.div`
@@ -86,6 +95,9 @@ const UserImg = styled.img`
 
 const UserNickName = styled.div`
   padding-left: 0.625rem;
+  border-radius: 1rem;
+  font-size: 1.15rem;
+  font-weight: 400;
   cursor: pointer;
 `;
 
