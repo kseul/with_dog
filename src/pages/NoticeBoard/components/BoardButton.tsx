@@ -4,7 +4,7 @@ import pawsIcon from 'assets/svg/dog-paws2.svg';
 
 const BoardButton = () => {
   const alertFilter = () => {
-    alert('준비중 입니다.');
+    alert('준비중이개');
   };
 
   return (
