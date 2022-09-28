@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 import styled from 'styled-components/macro';
+import { BASE_URL } from 'config';
 import { SendMBTI } from './type';
 
 const MBTIResultButton = ({ onCheck }) => {
@@ -21,15 +22,11 @@ const MBTIResultButton = ({ onCheck }) => {
   const getUserId = useSelector((state: RootState) => state.user.userData.id);
   const sendMBTI = () => {
     if (cookies.userToken && true) {
-      axios.patch(
-        `https://togedog-dj.herokuapp.com/users/${getUserId}`,
-        sendMbti,
-        {
-          headers: {
-            Authorization: `Bearer ${cookies.userToken}`,
-          },
-        }
-      );
+      axios.patch(`${BASE_URL}/users/${getUserId}`, sendMbti, {
+        headers: {
+          Authorization: `Bearer ${cookies.userToken}`,
+        },
+      });
     }
   };
 
