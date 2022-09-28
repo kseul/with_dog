@@ -1,16 +1,17 @@
-import axios from 'axios';
-import styled from 'styled-components';
-import { useCookies } from 'react-cookie';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 import store from 'redux/store';
 import userActions from 'redux/actions/user';
+import styled from 'styled-components';
 import LoginInputForm from './components/LoginInputForm';
 import AlertModal from 'pages/components/AlertModal';
 import { KAKAO_AUTH_PATH } from './kakaoLogin/KakaoLoginData';
 import { GOOGLE_AUTH_PATH } from './googleLogin/GoogleloginData';
 import signInbg from 'assets/images/bg1.jpg';
 import character from 'assets/images/LoginBgCharacter.png';
+import API from 'config';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const SignIn = () => {
     if (isActive) {
       try {
         const response = await axios.post(
-          'https://togedog-dj.herokuapp.com/users/login/email',
+          `${API.LOGIN}`,
           {
             email: email,
             password: password,

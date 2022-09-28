@@ -1,16 +1,17 @@
-import axios from 'axios';
-import styled from 'styled-components';
-import { useCookies } from 'react-cookie';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 import store from 'redux/store';
 import userActions from 'redux/actions/user';
-import { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 import Nav from 'pages/components/Nav';
 import FirstPage from './pageComposition/FirstPage';
 import ContentPages from './pageComposition/ContentPages';
 import LastPage from './pageComposition/LastPage';
 import AlertModal from 'pages/components/AlertModal';
 import PAGES_DATA from './DATA/PAGES_DATA';
+import API from 'config';
 import Page1Bg from 'assets/svg/1page.svg';
 import Page5Bg from 'assets/svg/5page.svg';
 
@@ -23,7 +24,7 @@ const Main = () => {
 
   useEffect(() => {
     axios
-      .post('https://togedog-dj.herokuapp.com/users/login/check', '', {
+      .post(`${API.LOGINCHECK}`, '', {
         headers: {
           Authorization: `Bearer ${cookies.userToken}`,
         },
@@ -36,7 +37,6 @@ const Main = () => {
       })
       .catch(error => {
         if (error.response.status === 400) {
-          setShowAlertModal('로그아웃 되었습니다');
           navigate('/');
         }
       });

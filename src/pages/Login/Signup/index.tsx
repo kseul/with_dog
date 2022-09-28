@@ -1,10 +1,11 @@
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useMemo, useState } from 'react';
 import LoginButton from '../components/loginButton/LoginButton';
 import UserDataInputForm from './components/UserDataInputForm';
 import AlertModal from 'pages/components/AlertModal';
+import API from 'config';
 import bgimg from 'assets/images/bg1.jpg';
 
 const Signup = () => {
@@ -85,13 +86,10 @@ const Signup = () => {
     if (checkEmail) {
       const handleUniqueEmail = async () => {
         try {
-          await axios.post(
-            'https://togedog-dj.herokuapp.com/users/signup/emailcheck/',
-            {
-              headers: { 'Content-Type': 'application/json' },
-              email,
-            }
-          );
+          await axios.post(`${API.EMAILCHECK}`, {
+            headers: { 'Content-Type': 'application/json' },
+            email,
+          });
           setCheckUniqueEmail(true);
         } catch (error) {
           setShowAlertModal('중복된 이메일입니다.');
@@ -114,7 +112,7 @@ const Signup = () => {
   const submitSignupInfo = async () => {
     if (isActive) {
       try {
-        await axios.post('https://togedog-dj.herokuapp.com/users/signup', {
+        await axios.post(`${API.SIGNUP}`, {
           headers: { 'Content-Type': 'application/json' },
           name: name,
           nickname: nickname,
@@ -122,7 +120,7 @@ const Signup = () => {
           password: password,
           address: userLocation,
         });
-        setShowAlertModal('회원가입 완료');
+        setShowAlertModal('회원가입이 완료되었습니다.');
         setTimeout(() => {
           navigate('/signin');
         }, 1000);

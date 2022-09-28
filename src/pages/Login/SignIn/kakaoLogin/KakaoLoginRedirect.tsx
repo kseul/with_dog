@@ -1,9 +1,10 @@
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import store from 'redux/store';
 import userActions from 'redux/actions/user';
 import Spinner from '../../components/spinner/Spinner';
+import API from 'config';
 
 const KakaoLoginRedirect = () => {
   const navigate = useNavigate();
@@ -26,16 +27,13 @@ const KakaoLoginRedirect = () => {
       const googleData = await googleResponse.json();
       const ACCESS_TOKEN = googleData.access_token;
 
-      const serverResponse = await fetch(
-        'https://togedog-dj.herokuapp.com/users/test/kakaotoken/',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            token: ACCESS_TOKEN,
-          }),
-        }
-      );
+      const serverResponse = await fetch(`${API.KAKAOTOKEN}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          token: ACCESS_TOKEN,
+        }),
+      });
       const serverData = await serverResponse.json();
       const userData = serverData.user;
       const accessToken = serverData.access_token;

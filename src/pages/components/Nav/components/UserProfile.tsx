@@ -1,10 +1,11 @@
-import styled from 'styled-components';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { RootState } from 'redux/reducers';
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
+import styled from 'styled-components';
+import API from 'config';
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const UserProfile = () => {
 
   const handleLogOut = async () => {
     try {
-      await axios.get('https://togedog-dj.herokuapp.com/users/logout', {
+      await axios.get(`${API.LOGOUT}`, {
         headers: { Authorization: `Bearer ${cookies.userToken}` },
       });
       sessionStorage.clear();
