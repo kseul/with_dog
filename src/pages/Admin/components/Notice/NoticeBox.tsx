@@ -1,17 +1,23 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 
 const NoticeBox = ({
   data,
   onCurrentModal,
   noticeDetailModal,
-  clickAndRead,
+  onReadId,
+  allSelected,
 }) => {
+  const [isClicked, setIsClicked] = useState(false);
+
   return (
     <NoticeBoxWrapper
+      className={isClicked === true || allSelected === true ? 'selected' : ''}
       onClick={() => {
         noticeDetailModal();
-        onCurrentModal(data.post);
-        clickAndRead();
+        onCurrentModal(data.post_id);
+        onReadId(data.id);
+        setIsClicked(true);
       }}
     >
       {data.content}이(가) 신고 되었습니다.
@@ -26,11 +32,15 @@ const NoticeBoxWrapper = styled.div`
   padding-left: 0.5rem;
   width: 100%;
   height: 3rem;
-  background-color: rgb(154, 154, 154, 0.3);
+  background-color: rgb(85, 85, 85, 0.5);
   border: 0.1px solid rgb(154, 154, 154, 0.3);
   border-radius: 3px;
   font-size: 0.7rem;
   cursor: pointer;
+
+  &.selected {
+    background-color: rgb(179, 179, 179, 0.2);
+  }
 
   :hover {
     background-color: rgb(179, 179, 179, 0.2);
