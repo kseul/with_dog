@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { useSelector } from 'react-redux';
 import boardActions from 'redux/actions/board';
 import store from 'redux/store';
 import styled from 'styled-components';
-import { BoardDataProp } from 'types/type';
 
-const BoardModalTyping = ({ modalContent }: BoardDataProp) => {
+interface BoardModalTypingProps {
+  boardData: any;
+}
+
+const BoardModalTyping = ({ boardData }: BoardModalTypingProps) => {
   const [comment, setComment] = useState('');
   const [cookies] = useCookies(['userToken']);
-
-  const boardData = useSelector((state: any) => state.board.boardData);
 
   const onChangeComment = e => {
     setComment(e.target.value);
@@ -26,20 +26,25 @@ const BoardModalTyping = ({ modalContent }: BoardDataProp) => {
     const formData = new FormData();
     formData.append('content', comment);
 
-    fetch(
-      `https://togedog-dj.herokuapp.com/posts/${modalContent.id}/comments`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${cookies.userToken}`,
-        },
-        body: formData,
-      }
-    )
+    fetch(`https://togedog-dj.herokuapp.com/posts/${boardData.id}/comments`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${cookies.userToken}`,
+      },
+      body: formData,
+    });
+
+    setComment('');
+
+    fetch(`https://togedog-dj.herokuapp.com/posts/${boardData.id}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${cookies.userToken}`,
+      },
+    })
       .then(response => response.json())
-      .then(result => {
-        store.dispatch(boardActions.setComments(result));
-        setComment('');
+      .then(data => {
+        store.dispatch(boardActions.getBoard(data));
       });
   };
 

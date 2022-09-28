@@ -1,15 +1,18 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import pawsIcon from 'assets/svg/dog-paws2.svg';
-import { Link } from 'react-router-dom';
 
 const BoardButton = () => {
+  const alertFilter = () => {
+    alert('준비중 입니다.');
+  };
+
   return (
     <BoardButtonContainer>
       <BoardButtonWrapper>
         {BOARD_FILTERING.map(({ id, filter }) => {
           return (
-            <BoardFilterButton key={id}>
+            <BoardFilterButton key={id} onClick={alertFilter}>
               <BoardBtnIcon src={pawsIcon} />
               {filter}
             </BoardFilterButton>

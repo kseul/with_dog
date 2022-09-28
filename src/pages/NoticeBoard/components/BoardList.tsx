@@ -1,6 +1,6 @@
-import useIntersectionObserver from 'hooks/useIntersectionObserver';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useCookies } from 'react-cookie';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import boardActions from 'redux/actions/board';
 import store from 'redux/store';
 import styled from 'styled-components/macro';

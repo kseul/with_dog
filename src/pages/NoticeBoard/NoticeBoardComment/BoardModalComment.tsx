@@ -1,12 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import CommentProfile from './components/CommentProfile';
 import CommentText from './components/CommentText';
 
 const BoardModalComment = ({ data }) => {
-  console.log('this is comments', data);
-
   return (
     <Comment>
       {data &&

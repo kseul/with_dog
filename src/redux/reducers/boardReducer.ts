@@ -1,7 +1,7 @@
 const initialState = {
   boardList: [],
   boardData: {
-    comments: [],
+    comments_list: [],
     content: '',
     created_at: '',
     id: 0,
@@ -32,7 +32,7 @@ const boardReducer = (state = initialState, action) => {
         ...state,
         boardData: {
           ...state.boardData,
-          comments: [...state.boardData.comments, action.boardData],
+          comments_list: [...state.boardData.comments_list, action.boardData],
         },
       };
     case 'LIKE_PLUS':

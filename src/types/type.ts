@@ -6,19 +6,6 @@ export interface ListData {
 
 export type idProp = number | undefined;
 
-export interface BoardDataProp {
-  id?: number;
-  subject?: string;
-  image_url?: string;
-  created_at?: string;
-  user_nickname?: string;
-  user_thumbnail?: string;
-  post_likes_count?: number;
-  comments?: any;
-  modalContent?: any;
-  handleModal?: () => void;
-}
-
 export interface EditModalProps {
   showAlertModal: string;
   setShowAlertModal: (string) => void;

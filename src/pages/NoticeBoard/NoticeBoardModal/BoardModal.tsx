@@ -1,4 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie';
+import store from 'redux/store';
+import boardActions from 'redux/actions/board';
 import styled from 'styled-components/macro';
 import BoardModalComment from '../NoticeBoardComment/BoardModalComment';
 import BoardModalButton from './components/BoardModalButton';
@@ -7,23 +11,12 @@ import BoardModalWriting from './components/BoardModalWriting';
 import leftArrow from 'assets/svg/arrow-left.svg';
 import rightArrow from 'assets/svg/arrow-right.svg';
 import cancelButton from 'assets/svg/cancel.svg';
-import { BoardDataProp } from 'types/type';
-import store from 'redux/store';
-import boardActions from 'redux/actions/board';
-import { useSelector } from 'react-redux';
-import { useCookies } from 'react-cookie';
 
 interface BoardModalProps {
-  modalContent: any;
-  setModalContent: any;
   handleModal?: () => void;
 }
 
-const BoardModal = ({
-  modalContent,
-  setModalContent,
-  handleModal,
-}: BoardModalProps) => {
+const BoardModal = ({ handleModal }: BoardModalProps) => {
   const boardData = useSelector((state: any) => state.board.boardData);
   const boardListData = useSelector((state: any) => state.board.boardList);
   const [cookies] = useCookies(['userToken']);
@@ -61,7 +54,6 @@ const BoardModal = ({
     })
       .then(response => response.json())
       .then(data => {
-        setModalContent(data);
         store.dispatch(boardActions.getBoard(data));
       });
   };
@@ -84,7 +76,6 @@ const BoardModal = ({
     })
       .then(response => response.json())
       .then(data => {
-        setModalContent(data);
         store.dispatch(boardActions.getBoard(data));
       });
   };
@@ -97,17 +88,17 @@ const BoardModal = ({
         }}
       >
         <ModalImageWrapper>
-          <BoardImageBox src={modalContent.image_url} />
+          <BoardImageBox src={boardData.image_url} />
         </ModalImageWrapper>
         <ModalContentWrapper>
-          <BoardModalTitle> {modalContent.subject} </BoardModalTitle>
+          <BoardModalTitle> {boardData.subject} </BoardModalTitle>
           <BoardModalDate> {date} </BoardModalDate>
           <BoardModalMainText>
             <BoardModalWriting data={boardData} />
             <BoardModalComment data={boardData.comments_list} />
           </BoardModalMainText>
-          <BoardModalButton modalContent={modalContent} />
-          <BoardModalTyping modalContent={modalContent} />
+          <BoardModalButton boardData={boardData} />
+          <BoardModalTyping boardData={boardData} />
         </ModalContentWrapper>
       </Modal>
 
@@ -205,11 +196,6 @@ const BoardModalMainText = styled.div`
     border-radius: 1rem;
     background: ${props => props.theme.colors.mint};
   }
-`;
-
-const BoardModalText = styled.div`
-  font-size: 0.9rem;
-  line-height: 1.2rem;
 `;
 
 const BoardModalConvenience = styled.img`
