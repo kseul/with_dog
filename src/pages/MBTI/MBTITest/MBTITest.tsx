@@ -153,6 +153,12 @@ const MBTITest = () => {
     });
   };
 
+  const handleOnKeyPress = e => {
+    if (e.key === 'Enter') {
+      onEnergyCheck();
+    }
+  };
+
   const onRelationCheck = (): void => {
     setNextRelationPage(!nextRelationPage);
     window.scrollTo({

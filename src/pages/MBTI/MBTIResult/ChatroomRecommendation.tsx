@@ -1,8 +1,8 @@
-import styled, { css } from 'styled-components/macro';
 import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
+import styled, { css } from 'styled-components/macro';
 import RecommendationModal from './ResultModal/RecommendationModal';
 import LoginModal from './ResultModal/LoginModal';
 import CHATLIST_DATA from 'pages/Chatting/DATA/CHATLIST_DATA';

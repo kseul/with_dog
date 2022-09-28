@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components/macro';
 import { Fragment, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled, { css } from 'styled-components/macro';
 
 const LoginModal = ({ onClickToggleModal }) => {
   const navigate = useNavigate();

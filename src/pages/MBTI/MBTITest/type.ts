@@ -54,3 +54,7 @@ export interface AnswerType {
   testId: number | null;
   answerValue?: string;
 }
+
+export interface SendMBTI {
+  mbti?: string;
+}
