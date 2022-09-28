@@ -11,6 +11,7 @@ import ContentPages from './pageComposition/ContentPages';
 import LastPage from './pageComposition/LastPage';
 import AlertModal from 'pages/components/AlertModal';
 import PAGES_DATA from './DATA/PAGES_DATA';
+import API from 'config';
 import Page1Bg from 'assets/svg/1page.svg';
 import Page5Bg from 'assets/svg/5page.svg';
 
@@ -23,7 +24,7 @@ const Main = () => {
 
   useEffect(() => {
     axios
-      .post('https://togedog-dj.herokuapp.com/users/login/check', '', {
+      .post(`${API.LOGINCHECK}`, '', {
         headers: {
           Authorization: `Bearer ${cookies.userToken}`,
         },

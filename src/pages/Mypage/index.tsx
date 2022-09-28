@@ -107,7 +107,7 @@ const Mypage = () => {
       setShowAlertModal('회원탈퇴가 정상적으로 처리되었습니다.');
       setTimeout(() => {
         navigate('/signin');
-      }, 1000);
+      }, 10000);
     } else {
       setShowButton(false);
       setShowAlertModal('회원탈퇴에 실패하였습니다.');

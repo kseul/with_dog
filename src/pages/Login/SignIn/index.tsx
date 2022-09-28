@@ -11,6 +11,7 @@ import { KAKAO_AUTH_PATH } from './kakaoLogin/KakaoLoginData';
 import { GOOGLE_AUTH_PATH } from './googleLogin/GoogleloginData';
 import signInbg from 'assets/images/bg1.jpg';
 import character from 'assets/images/LoginBgCharacter.png';
+import API from 'config';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const SignIn = () => {
     if (isActive) {
       try {
         const response = await axios.post(
-          'https://togedog-dj.herokuapp.com/users/login/email',
+          `${API.LOGIN}`,
           {
             email: email,
             password: password,
