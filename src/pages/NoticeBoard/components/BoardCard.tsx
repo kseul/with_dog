@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import boardActions from 'redux/actions/board';
 import store from 'redux/store';
 import styled from 'styled-components';
 import { BoardDataProp } from 'types/type';
 import BoardModal from '../NoticeBoardModal/BoardModal';
+
+interface BoardCardProps {
+  id: number;
+  subject: string;
+  image_url: string;
+  created_at: string;
+  user_nickname: string;
+  user_thumbnail: string;
+  post_likes_count: number;
+}
 
 const BoardCard = ({
   id,
@@ -13,9 +24,12 @@ const BoardCard = ({
   user_nickname,
   user_thumbnail,
   post_likes_count,
-}: BoardDataProp) => {
+}: BoardCardProps) => {
   const [activateModal, setActivateModal] = useState(false);
   const [modalContent, setModalContent] = useState([]);
+  const [cookies] = useCookies(['userToken']);
+
+  const date = created_at.substring(0, 10);
 
   const handleModal = () => {
     setActivateModal(!activateModal);
@@ -26,7 +40,7 @@ const BoardCard = ({
       fetch(`https://togedog-dj.herokuapp.com/posts/${id}`, {
         method: 'GET',
         headers: {
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+          Authorization: `Bearer ${cookies.userToken}`,
         },
       })
         .then(response => response.json())
@@ -43,7 +57,7 @@ const BoardCard = ({
         <CardImageWrapper>
           <CardImage src={image_url} />
         </CardImageWrapper>
-        <CardDate>{created_at}</CardDate>
+        <CardDate>{date}</CardDate>
         <CardTitle>{subject}</CardTitle>
         <CardBottom>
           <WriterProfile>

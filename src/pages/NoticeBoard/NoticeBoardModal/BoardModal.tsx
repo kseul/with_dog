@@ -11,6 +11,7 @@ import { BoardDataProp } from 'types/type';
 import store from 'redux/store';
 import boardActions from 'redux/actions/board';
 import { useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie';
 
 interface BoardModalProps {
   modalContent: any;
@@ -25,6 +26,9 @@ const BoardModal = ({
 }: BoardModalProps) => {
   const boardData = useSelector((state: any) => state.board.boardData);
   const boardListData = useSelector((state: any) => state.board.boardList);
+  const [cookies] = useCookies(['userToken']);
+
+  const date = boardData.created_at.substring(0, 10);
 
   useEffect(() => {
     document.body.style.cssText = `
@@ -52,7 +56,7 @@ const BoardModal = ({
     fetch(`https://togedog-dj.herokuapp.com/posts/${boardId[idIndex]}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+        Authorization: `Bearer ${cookies.userToken}`,
       },
     })
       .then(response => response.json())
@@ -75,7 +79,7 @@ const BoardModal = ({
     fetch(`https://togedog-dj.herokuapp.com/posts/${boardId[idIndex]}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+        Authorization: `Bearer ${cookies.userToken}`,
       },
     })
       .then(response => response.json())
@@ -97,7 +101,7 @@ const BoardModal = ({
         </ModalImageWrapper>
         <ModalContentWrapper>
           <BoardModalTitle> {modalContent.subject} </BoardModalTitle>
-          <BoardModalDate> {modalContent.created_at} </BoardModalDate>
+          <BoardModalDate> {date} </BoardModalDate>
           <BoardModalMainText>
             <BoardModalWriting data={boardData} />
             <BoardModalComment data={boardData.comments_list} />

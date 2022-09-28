@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import boardActions from 'redux/actions/board';
 import store from 'redux/store';
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ import { BoardDataProp } from 'types/type';
 
 const BoardModalTyping = ({ modalContent }: BoardDataProp) => {
   const [comment, setComment] = useState('');
-  const navigate = useNavigate();
+  const [cookies] = useCookies(['userToken']);
 
   const boardData = useSelector((state: any) => state.board.boardData);
 
@@ -31,7 +31,7 @@ const BoardModalTyping = ({ modalContent }: BoardDataProp) => {
       {
         method: 'POST',
         headers: {
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+          Authorization: `Bearer ${cookies.userToken}`,
         },
         body: formData,
       }

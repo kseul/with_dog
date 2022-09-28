@@ -10,11 +10,16 @@ const BoardModalComment = ({ data }) => {
   return (
     <Comment>
       {data &&
-        data.map(({ id, content, user_nickname, user_thumbnail_url }) => {
+        data.map(({ id, user_id, content, user_nickname, user_thumbnail }) => {
           return (
             <CommentContainer key={id}>
-              <CommentProfile thumbnail={user_thumbnail_url} />
-              <CommentText id={id} nickName={user_nickname} content={content} />
+              <CommentProfile thumbnail={user_thumbnail} />
+              <CommentText
+                id={id}
+                user_id={user_id}
+                nickName={user_nickname}
+                content={content}
+              />
             </CommentContainer>
           );
         })}

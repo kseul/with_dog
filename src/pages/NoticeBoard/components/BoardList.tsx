@@ -1,5 +1,6 @@
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import boardActions from 'redux/actions/board';
 import store from 'redux/store';
 import styled from 'styled-components/macro';
@@ -9,6 +10,7 @@ const BoardList = () => {
   const [boardListData, setBoardListData] = useState([]);
   const [boardOffset, setBoardOffset] = useState(0);
   const [boardLimit, setBoardLimit] = useState(9);
+  const [cookies] = useCookies(['userToken']);
 
   const fetchBoardList = async () => {
     const response = await fetch(
@@ -16,7 +18,7 @@ const BoardList = () => {
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyMywidXNlcl90eXBlIjoibm9ybWFsIiwiZXhwIjoxNjY0Njg1NDQ1LCJpYXQiOjE2NjIwOTM0NDV9.Vew7ZXyxZWOiSjoBLyZSwtTDaMK3sHzNZyjXlHyUbGE`,
+          Authorization: `Bearer ${cookies.userToken}`,
         },
       }
     );

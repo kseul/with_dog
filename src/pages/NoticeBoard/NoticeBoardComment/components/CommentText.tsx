@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import CommentReport from './CommentReport';
+import CommentDots from './CommentDots';
 
 interface commentTextProps {
   id: number;
+  user_id: number;
   nickName: string;
   content: string;
 }
 
-const CommentText = ({ id, nickName, content }: commentTextProps) => {
+const CommentText = ({ id, user_id, nickName, content }: commentTextProps) => {
+  const loginId = useSelector((state: any) => state.user.userData.id);
+
+  const [showDots, setShowDots] = useState(false);
+
   return (
-    <CommentTextWrapper>
+    <CommentTextWrapper
+      onMouseEnter={() => setShowDots(true)}
+      onMouseLeave={() => setShowDots(false)}
+    >
       <CommentWriter>
         {nickName}
-        <CommentReport id={id} />
+        {showDots && <CommentDots id={id} userId={user_id} loginId={loginId} />}
       </CommentWriter>
       <CommentContent dangerouslySetInnerHTML={{ __html: content }} />
     </CommentTextWrapper>
