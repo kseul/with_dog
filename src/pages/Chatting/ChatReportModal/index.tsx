@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 import styled from 'styled-components';
+import { BASE_URL } from 'config';
 
 const ChatReportModal = ({ setIsShowModal }) => {
   const [validReport, setValidReport] = useState(false);
@@ -34,7 +35,7 @@ const ChatReportModal = ({ setIsShowModal }) => {
   const handleReportSubmit = async () => {
     try {
       await axios.post(
-        'http://54.180.89.143:8000/chat/report',
+        BASE_URL,
         {
           reported_user_id: id,
           message_id: messageId,
