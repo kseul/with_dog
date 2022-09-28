@@ -223,7 +223,7 @@ const SignupForm = styled.div`
   padding: 0 3.125rem;
   background-color: white;
   border-radius: 1.25rem;
-  box-shadow: 1px 1px 15px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0.063rem 0.063rem 0.938rem 0.125rem rgba(0, 0, 0, 0.1);
 `;
 
 const Title = styled.div`

@@ -1,10 +1,13 @@
 import axios from 'axios';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import useAxios from 'hooks/useAxios';
 import { AiOutlineClose } from 'react-icons/ai';
 import backgroundImage from 'assets/images/bg1.jpg';
 
 const UserModal = ({ modalId, detailModalOpener }) => {
+  const location = useLocation();
+
   const { response } = useAxios({
     method: 'GET',
     url: `https://togedog-dj.herokuapp.com/users/${modalId}`,
@@ -14,9 +17,25 @@ const UserModal = ({ modalId, detailModalOpener }) => {
     },
   });
 
+  const banUser = () => {
+    if (window.confirm('계정을 차단하시겠습니까?')) {
+      axios.patch(
+        `https://togedog-dj.herokuapp.com/users/${modalId}/ban`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+          },
+        }
+      );
+    } else {
+      alert('취소되었습니다.');
+    }
+  };
+
   const deleteUser = () => {
     if (window.confirm('계정을 삭제하시겠습니까?')) {
-      axios.delete(`https://togedog-dj.herokuapp.com/users/${modalId}`, {
+      axios.delete(`https://togedog-dj.herokuapp.com/users/${modalId}/ban`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
@@ -25,6 +44,34 @@ const UserModal = ({ modalId, detailModalOpener }) => {
       alert('취소되었습니다.');
     }
   };
+
+  const cancelBtn = () => {
+    switch (location.pathname) {
+      case '/admin/users':
+        return (
+          <CancelBtn
+            onClick={() => {
+              banUser();
+              detailModalOpener();
+            }}
+          >
+            계정 차단
+          </CancelBtn>
+        );
+      case '/admin/users/banned/all':
+        return (
+          <CancelBtn
+            onClick={() => {
+              deleteUser();
+              detailModalOpener();
+            }}
+          >
+            계정 삭제
+          </CancelBtn>
+        );
+    }
+  };
+
   return (
     <ModalBackground onClick={detailModalOpener}>
       {response?.data && (
@@ -41,16 +88,7 @@ const UserModal = ({ modalId, detailModalOpener }) => {
             <Mbti>{response.data.mbti}</Mbti>
             <MbtiText>{response.data.mbti}</MbtiText>
             <UserEmail>{response.data.email}</UserEmail>
-            <BtnContainer>
-              <CancelBtn
-                onClick={() => {
-                  deleteUser();
-                  detailModalOpener();
-                }}
-              >
-                계정 삭제
-              </CancelBtn>
-            </BtnContainer>
+            <BtnContainer>{cancelBtn()}</BtnContainer>
           </ModalContents>
         </ModalContainer>
       )}

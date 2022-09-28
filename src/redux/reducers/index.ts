@@ -6,7 +6,6 @@ import userReducer from './userReducer';
 import postsReducer from './postsReducer';
 import mbtiGraphReducer from './mbtiGraphReducer';
 import mbtiTextReducer from './mbtiTextReducer';
-import userCounterReducer from './userCounterReducer';
 import boardReducer from './boardReducer';
 import chatReducer from './chatReducer';
 import chatReportReducer from './chatReportReducer';
@@ -27,7 +26,6 @@ const rootReducer = combineReducers({
   posts: postsReducer,
   graph: mbtiGraphReducer,
   mbtiText: mbtiTextReducer,
-  counter: userCounterReducer,
   board: boardReducer,
   chat: chatReducer,
   chatReport: chatReportReducer,

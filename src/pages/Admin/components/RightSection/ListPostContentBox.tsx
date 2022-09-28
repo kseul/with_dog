@@ -31,6 +31,7 @@ const ListContents = styled.div`
   width: 90%;
   height: 2.5rem;
   border: 1px solid #cac8c8;
+  background-color: white;
   cursor: pointer;
 
   :hover {

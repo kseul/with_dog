@@ -1,3 +1,4 @@
+import axios from 'axios';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -8,6 +9,7 @@ const ChatReportModal = ({ setIsShowModal }) => {
   const [validReport, setValidReport] = useState(false);
   const [reportInput, setReportInput] = useState('');
   const [reportModalSubmit, setReportModalSubmit] = useState(false);
+  const [reportAlert, setReportAlert] = useState('');
 
   const [cookies] = useCookies(['userToken']);
 
@@ -29,20 +31,22 @@ const ChatReportModal = ({ setIsShowModal }) => {
     setIsShowModal(false);
   };
 
-  const handleReportSubmit = () => {
-    fetch('http://54.180.89.143:8000/chat/report', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${cookies.userToken}`,
-      },
-
-      body: JSON.stringify({
-        reported_user_id: id,
-        message_id: messageId,
-        message_text: text,
-        content: reportInput,
-      }),
-    });
+  const handleReportSubmit = async () => {
+    try {
+      await axios.post(
+        'http://54.180.89.143:8000/chat/report',
+        {
+          reported_user_id: id,
+          message_id: messageId,
+          message_text: text,
+          content: reportInput,
+        },
+        { headers: { Authorization: `Bearer ${cookies.userToken}` } }
+      );
+      setReportAlert('신고가 완료 되었습니다.');
+    } catch (error) {
+      setReportAlert('신고하기에 실패 하였습니다.');
+    }
   };
 
   useEffect(() => {
@@ -67,7 +71,7 @@ const ChatReportModal = ({ setIsShowModal }) => {
     <>
       <ChatReportModalContainer>
         {reportModalSubmit ? (
-          <Title>신고가 완료 되었습니다.</Title>
+          <Title>{reportAlert}</Title>
         ) : (
           <>
             <Title>신고 이유를 입력하세요.</Title>

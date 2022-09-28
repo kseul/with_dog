@@ -2,19 +2,16 @@ import styled from 'styled-components/macro';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { RootState } from 'redux/reducers';
+import { useCookies } from 'react-cookie';
 import setMbtiResults from 'redux/actions/mbtiResult';
-import setMbtiTexts from 'redux/actions/mbtiText';
 import userActions from 'redux/actions/user';
+import setMbtiTexts from 'redux/actions/mbtiText';
 import ProgressBar from './ProgressBar';
 import EnergyTest from './Energy/EnergyTest';
 import RelationTest from './Relation/RelationTest';
 import ReactionTest from './Reaction/ReactionTest';
 import JudgementTest from './Judgement/JudgementTest';
-import { AnswerType } from 'types/type';
-import { MBTIScoreProps } from 'types/type';
-import { JoinMBTI } from 'types/type';
+import { AnswerType, JoinMBTI, MBTIScoreProps } from './type';
 
 const MBTITest = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -171,7 +168,9 @@ const MBTITest = () => {
       behavior: 'smooth',
     });
   };
-  const checkLogin = useSelector((state: RootState) => state.user);
+
+  const [cookies] = useCookies(['userToken']);
+  const checkLogin = cookies.userToken && true;
 
   const onJudgementCheck = (): void => {
     setNextJudgementPage(!nextJudgementPage);
@@ -179,13 +178,16 @@ const MBTITest = () => {
     dispatch(setMbtiResults(setMBTIResult));
     dispatch(setMbtiTexts(mbtiUserData));
     {
-      checkLogin.LoggedIn === true
+      checkLogin === true
         ? dispatch(userActions.setMBTI(mbtiUserData))
         : dispatch(userActions.setMBTI(mbtiUserData));
     }
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
+    });
+    fetch(`https://togedog-dj.herokuapp.com/test-count`, {
+      method: 'POST',
     });
   };
 
@@ -314,7 +316,7 @@ const MBTITestContainer = styled.div`
   width: 100%;
   height: auto;
   margin: 0 auto;
-  padding-top: 150px;
+  padding-top: 9.375rem;
   background-color: #edeef0;
 `;
 

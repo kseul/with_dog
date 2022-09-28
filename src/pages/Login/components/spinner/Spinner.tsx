@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SpinnerImg from 'assets/images/Spinner.gif';
+import SpinnerImg from 'assets/images/loadingSpinner.gif';
 
 const Spinner = () => {
   return (
