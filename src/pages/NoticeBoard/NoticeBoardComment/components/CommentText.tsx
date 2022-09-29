@@ -22,7 +22,14 @@ const CommentText = ({ id, user_id, nickName, content }: commentTextProps) => {
     >
       <CommentWriter>
         {nickName}
-        {showDots && <CommentDots id={id} userId={user_id} loginId={loginId} />}
+        {showDots && (
+          <CommentDots
+            id={id}
+            userId={user_id}
+            loginId={loginId}
+            content={content}
+          />
+        )}
       </CommentWriter>
       <CommentContent dangerouslySetInnerHTML={{ __html: content }} />
     </CommentTextWrapper>

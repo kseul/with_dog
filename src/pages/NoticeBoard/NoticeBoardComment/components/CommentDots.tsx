@@ -8,9 +8,15 @@ interface commentReportProps {
   id: number;
   userId: number;
   loginId: number;
+  content: string;
 }
 
-const CommentReport = ({ id, userId, loginId }: commentReportProps) => {
+const CommentReport = ({
+  id,
+  userId,
+  loginId,
+  content,
+}: commentReportProps) => {
   const boardData = useSelector((state: any) => state.board.boardData);
   const [showModal, setShowModal] = useState(false);
   const [cookies] = useCookies(['userToken']);
@@ -21,7 +27,7 @@ const CommentReport = ({ id, userId, loginId }: commentReportProps) => {
 
   const handleCommentReport = async () => {
     const formData = new FormData();
-    formData.append('content', '임시');
+    formData.append('content', content);
 
     await fetch(
       `https://togedog-dj.herokuapp.com/posts/${boardData.id}/comments/${id}/report/`,
@@ -38,7 +44,7 @@ const CommentReport = ({ id, userId, loginId }: commentReportProps) => {
   };
 
   const handleCommentDelete = async () => {
-    const response = await fetch(
+    await fetch(
       `https://togedog-dj.herokuapp.com/posts/${boardData.id}/comments/${id}`,
       {
         method: 'DELETE',
@@ -121,14 +127,6 @@ const DotsElement = styled.div`
   &:last-child {
     border-bottom: none;
   }
-`;
-
-const ReportInput = styled.div`
-  display: fixed;
-  top: 50%;
-  left: 50%;
-  width: 5rem;
-  height: 5rem;
 `;
 
 export default CommentReport;
