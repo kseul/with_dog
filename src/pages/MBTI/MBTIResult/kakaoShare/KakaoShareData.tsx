@@ -1,7 +1,11 @@
-const { Kakao, location }: any = window;
+import { BASE_URL } from 'config';
+import { mbtiUrl } from '../MBTIResult';
+const { Kakao }: any = window;
 
 export const sendKakaoLink = () => {
-  const sharedUrl = location.href;
+  const getMBTIResult: string = Object.values(mbtiUrl).toString();
+  const sharedUrl = `${BASE_URL}/mbti-share/${getMBTIResult}`;
+  console.log(sharedUrl);
 
   try {
     if (Kakao) {

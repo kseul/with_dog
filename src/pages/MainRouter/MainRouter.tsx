@@ -6,6 +6,7 @@ import Footer from 'pages/components/Footer/Footer';
 import MBTITest from 'pages/MBTI/MBTITest/MBTITest';
 import MBTIResult from 'pages/MBTI/MBTIResult/MBTIResult';
 import PrivateRouter from 'PrivateRouter';
+import MBTIResultShare from 'pages/MBTI/MBTIResult/MBTIResultShare';
 
 const MainRouter = () => {
   return (
@@ -18,6 +19,7 @@ const MainRouter = () => {
         </Route>
         <Route path="/mbti" element={<MBTITest />} />
         <Route path="/mbti-result" element={<MBTIResult />} />
+        <Route path="/mbti-share/:mbti" element={<MBTIResultShare />} />
       </Routes>
       <Footer />
     </>

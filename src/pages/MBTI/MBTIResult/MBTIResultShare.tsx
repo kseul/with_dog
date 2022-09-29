@@ -1,31 +1,16 @@
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 import styled from 'styled-components/macro';
-import MBTIResultInfo from './MBTIResultInfo';
 import ResultBackground from 'assets/images/MBTIResult.jpg';
-import { useEffect } from 'react';
+import MBTIResultInfoShare from './MBTIResultInfoShare';
 
-export let mbtiUrl = '';
-
-const MBTIResult = () => {
-  const graphResult = useSelector((state: RootState) => state.graph);
+const MBTIResultShare = () => {
   const mbtiResultText = useSelector((state: RootState) => state.mbtiText);
-
-  const sendUrl = mbtiResultText => {
-    mbtiUrl = mbtiResultText;
-  };
-
-  useEffect(() => {
-    sendUrl(mbtiResultText);
-  }, []);
 
   return (
     <MBTIResultContainer>
       <MBTIResultBox>
-        <MBTIResultInfo
-          graphResult={graphResult}
-          mbtiResultText={mbtiResultText}
-        />
+        <MBTIResultInfoShare mbtiResultText={mbtiResultText} />
       </MBTIResultBox>
     </MBTIResultContainer>
   );
@@ -34,7 +19,7 @@ const MBTIResult = () => {
 const MBTIResultContainer = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
   width: 100vw;
-  height: 240rem;
+  height: 220rem;
   background-image: url(${ResultBackground});
   background-size: cover;
 `;
@@ -49,4 +34,4 @@ const MBTIResultBox = styled.div`
   border-radius: 1.25rem;
 `;
 
-export default MBTIResult;
+export default MBTIResultShare;

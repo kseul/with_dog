@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components/macro';
-import MBTIGraph from './Graph/MBTIGraph';
 import ChatroomRecommendation from './ChatroomRecommendation';
 import UserCounter from './UserCounter';
 import SNSshare from './SNSshare';
@@ -8,7 +7,7 @@ import ResultInfo from 'assets/svg/ResultInfoPositoin2.svg';
 import ResultNotice from 'assets/svg/MBTINotice6.svg';
 import { MBTI_RESULT } from './constants/Result';
 
-const MBTIResultInfo = ({ graphResult, mbtiResultText }) => {
+const MBTIResultInfoShare = ({ mbtiResultText }) => {
   const getMBTIResult: string = Object.values(mbtiResultText).toString();
   const resultMBTI = MBTI_RESULT.filter(item => {
     return item.MBTI === getMBTIResult;
@@ -34,7 +33,6 @@ const MBTIResultInfo = ({ graphResult, mbtiResultText }) => {
             </MBTIContentBackground>
             <NoticeImage src={ResultNotice} />
             <GraphInfo src={ResultInfo} />
-            <MBTIGraph graphResult={graphResult} />
             <GraphSummary src={MBTIPosition} />
           </React.Fragment>
         )
@@ -104,4 +102,4 @@ const GraphSummary = styled.img`
   margin: 4.6rem 0;
 `;
 
-export default MBTIResultInfo;
+export default MBTIResultInfoShare;
