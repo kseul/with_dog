@@ -5,7 +5,6 @@ const { Kakao }: any = window;
 export const sendKakaoLink = () => {
   const getMBTIResult: string = Object.values(mbtiUrl).toString();
   const sharedUrl = `${BASE_URL}/mbti-share/${getMBTIResult}`;
-  console.log(sharedUrl);
 
   try {
     if (Kakao) {
