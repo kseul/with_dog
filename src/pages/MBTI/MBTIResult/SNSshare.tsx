@@ -1,23 +1,27 @@
 import styled from 'styled-components/macro';
-import { sendKakaoLink } from './kakaoShare/KakaoShareData';
+import { useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
 import TitlePaw from 'assets/svg/TitlePawPositoin.svg';
 import Kakao from 'assets/svg/kakao-logo2.svg';
 import Twitter from 'assets/svg/twitter.svg';
 import FaceBook from 'assets/svg/Facebook_2.svg';
+import { sendKakaoLink } from './kakaoShare/KakaoShareData';
+import { BASE_URL } from 'config';
 
 const SNSshare = () => {
-  const { location } = window;
+  const mbtiResultText = useSelector((state: RootState) => state.mbtiText);
+  const getMBTIResult: string = Object.values(mbtiResultText).toString();
   const kakaoShare = () => {
     sendKakaoLink();
   };
 
   const facebookShare = () => {
-    const sharedUrl = location.href;
+    const sharedUrl = `${BASE_URL}/mbti-share/${getMBTIResult}`;
     window.open('http://www.facebook.com/sharer/sharer.php?u=' + sharedUrl);
   };
 
   const twiiterShare = () => {
-    const sharedUrl = location.href;
+    const sharedUrl = `${BASE_URL}/mbti-share/${getMBTIResult}`;
     const sendText = '함께하개';
     window.open(
       'https://twitter.com/intent/tweet?text=' + sendText + '&url=' + sharedUrl
