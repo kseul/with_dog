@@ -8,8 +8,8 @@ const API = {
   EMAILCHECK: `${BASE_URL}/users/signup/emailcheck/`,
   SIGNUP: `${BASE_URL}/users/signup`,
   LOGINCHECK: `${BASE_URL}/users/login/check`,
-  ADMINUSER: `${BASE_URL}/users`,
   ADMINNOTICE: `${BASE_URL}/admin/notices`,
   ADMINPOST: `${BASE_URL}/posts`,
+  CHATREPORT: `${BASE_URL}/chat/report`,
 };
 export default API;

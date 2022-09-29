@@ -17,7 +17,7 @@ const AdminSignIn = () => {
   const submitSigninInfo = () => {
     setLoading(true);
     axios
-      .post(`${API.ADMINUSER}/login/email`, {
+      .post(`${API.USERS}login/email`, {
         email: adminId,
         password: adminPassword,
       })

@@ -11,7 +11,7 @@ const ListContentsBox = ({ data, detailModalOpener, onCurrentModal }) => {
       <UserNickName>{data.nickname}</UserNickName>
       <UserEmail>{data.email}</UserEmail>
       <UserMbti>{data.mbti}</UserMbti>
-      <UserSignDate>{data.email}</UserSignDate>
+      <UserSignDate>{data.created_at.substring(0, 10)}</UserSignDate>
       <UserReported>{data.reported_count}</UserReported>
     </ListContents>
   );
