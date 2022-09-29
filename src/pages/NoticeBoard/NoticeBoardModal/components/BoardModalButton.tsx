@@ -8,6 +8,7 @@ import BoardEditModal from './BoardEditModal';
 import dogPaws from 'assets/svg/dog-paws1.svg';
 import pencilBtn from 'assets/svg/pencil.svg';
 import siren from 'assets/svg/siren.svg';
+import API from 'config';
 
 interface BoardModalButtonProps {
   boardData: any;
@@ -28,31 +29,25 @@ const BoardModalButton = ({ boardData }: BoardModalButtonProps) => {
       ? store.dispatch(boardActions.likeMinus())
       : store.dispatch(boardActions.likePlus());
 
-    await fetch(
-      `https://togedog-dj.herokuapp.com/posts/${boardData.id}/likes`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${cookies.userToken}`,
-        },
-      }
-    );
+    await fetch(`${API.BOARDDETAIL}${boardData.id}/likes`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${cookies.userToken}`,
+      },
+    });
   };
 
   const handleReport = async () => {
     const formData = new FormData();
     formData.append('content', boardData.content);
 
-    await fetch(
-      `https://togedog-dj.herokuapp.com/posts/${boardData.id}/report/`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${cookies.userToken}`,
-        },
-        body: formData,
-      }
-    );
+    await fetch(`${API.BOARDDETAIL}${boardData.id}/report/`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${cookies.userToken}`,
+      },
+      body: formData,
+    });
     return alert('신고가 완료되었습니다.');
   };
 

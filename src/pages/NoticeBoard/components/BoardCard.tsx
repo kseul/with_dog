@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie';
 import boardActions from 'redux/actions/board';
 import store from 'redux/store';
 import styled from 'styled-components';
+import API from 'config';
 import BoardModal from '../NoticeBoardModal/BoardModal';
 
 interface BoardCardProps {
@@ -35,7 +36,7 @@ const BoardCard = ({
 
   useEffect(() => {
     if (activateModal) {
-      fetch(`https://togedog-dj.herokuapp.com/posts/${id}`, {
+      fetch(`${API.BOARDDETAIL}${id}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${cookies.userToken}`,

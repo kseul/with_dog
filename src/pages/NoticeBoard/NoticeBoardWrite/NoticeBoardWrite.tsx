@@ -5,6 +5,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import styled from 'styled-components';
 import NoticeBoardImageUpload from './components/NoticeBoardImageUpload';
+import API from 'config';
 
 const QuillEditor = () => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const QuillEditor = () => {
     formData.append('content', content);
     formData.append('file', file);
 
-    fetch(`https://togedog-dj.herokuapp.com/posts`, {
+    fetch(`${API.BOARDWRITE}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${cookies.userToken}`,

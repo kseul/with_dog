@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import styled from 'styled-components';
 import dots from 'assets/svg/dots.svg';
+import API from 'config';
 
 interface commentReportProps {
   id: number;
@@ -29,30 +30,24 @@ const CommentReport = ({
     const formData = new FormData();
     formData.append('content', content);
 
-    await fetch(
-      `https://togedog-dj.herokuapp.com/posts/${boardData.id}/comments/${id}/report/`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${cookies.userToken}`,
-        },
-        body: formData,
-      }
-    );
+    await fetch(`${API.COMMENTREPORT}${boardData.id}/comments/${id}/report/`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${cookies.userToken}`,
+      },
+      body: formData,
+    });
 
     alert('신고가 완료 되었습니다.');
   };
 
   const handleCommentDelete = async () => {
-    await fetch(
-      `https://togedog-dj.herokuapp.com/posts/${boardData.id}/comments/${id}`,
-      {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${cookies.userToken}`,
-        },
-      }
-    );
+    await fetch(`${API.COMMENTDELETE}${boardData.id}/comments/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${cookies.userToken}`,
+      },
+    });
 
     handleModal();
     alert('댓글이 삭제 되었습니다.');

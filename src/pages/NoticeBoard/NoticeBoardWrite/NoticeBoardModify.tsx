@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie';
 import ReactQuill from 'react-quill';
 import styled from 'styled-components';
 import NoticeBoardImageUpload from './components/NoticeBoardImageUpload';
+import API from 'config';
 
 const NoticeBoardModify = () => {
   const boardData = useSelector((state: any) => state.board.boardData);
@@ -17,15 +18,12 @@ const NoticeBoardModify = () => {
   const navigate = useNavigate();
 
   const getBoardData = async () => {
-    const response = await fetch(
-      `https://togedog-dj.herokuapp.com/posts/${boardData.id}`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${cookies.userToken}`,
-        },
-      }
-    );
+    const response = await fetch(`${API.BOARDDETAIL}${boardData.id}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${cookies.userToken}`,
+      },
+    });
 
     const data = await response.json();
     setTitle(data.subject);
@@ -63,7 +61,7 @@ const NoticeBoardModify = () => {
     formData.append('content', content);
     formData.append('file', file);
 
-    fetch(`https://togedog-dj.herokuapp.com/posts/${boardData.id}`, {
+    fetch(`${API.BOARDDETAIL}${boardData.id}`, {
       method: 'PATCH',
       headers: {
         Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,

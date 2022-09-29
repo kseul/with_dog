@@ -5,6 +5,7 @@ import boardActions from 'redux/actions/board';
 import store from 'redux/store';
 import styled from 'styled-components/macro';
 import BoardCard from './BoardCard';
+import API from 'config';
 
 const BoardList = () => {
   const [boardListData, setBoardListData] = useState([]);
@@ -14,7 +15,7 @@ const BoardList = () => {
 
   const fetchBoardList = async () => {
     const response = await fetch(
-      `https://togedog-dj.herokuapp.com/posts?offset=${boardOffset}&limit=${boardLimit}`,
+      `${API.BOARDLIST}offset=${boardOffset}&limit=${boardLimit}`,
       {
         method: 'GET',
         headers: {

@@ -1,3 +1,4 @@
+import API from 'config';
 import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import boardActions from 'redux/actions/board';
@@ -26,7 +27,7 @@ const BoardModalTyping = ({ boardData }: BoardModalTypingProps) => {
     const formData = new FormData();
     formData.append('content', comment);
 
-    fetch(`https://togedog-dj.herokuapp.com/posts/${boardData.id}/comments`, {
+    fetch(`${API.BOARDDETAIL}${boardData.id}/comments`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${cookies.userToken}`,
@@ -36,7 +37,7 @@ const BoardModalTyping = ({ boardData }: BoardModalTypingProps) => {
 
     setComment('');
 
-    fetch(`https://togedog-dj.herokuapp.com/posts/${boardData.id}`, {
+    fetch(`${API.BOARDDETAIL}${boardData.id}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${cookies.userToken}`,
