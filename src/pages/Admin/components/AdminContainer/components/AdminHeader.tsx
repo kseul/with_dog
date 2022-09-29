@@ -5,7 +5,7 @@ import NoticeModal from 'pages/Admin/components/Modal/NoticeModal';
 import API from 'config';
 import { BsFilePost } from 'react-icons/bs';
 import { FaCommentDots } from 'react-icons/fa';
-import logo from 'assets/svg/with-dog-logo.svg';
+import logo from 'assets/svg/withDogLogo.svg';
 
 const AdminHeader = ({ onCurrentModal, modalId }) => {
   const postClassName = 'post_report';
@@ -50,7 +50,6 @@ const AdminHeader = ({ onCurrentModal, modalId }) => {
     <AdminHeaderContainer>
       <TitleBox>
         <Logo src={logo} />
-        <AdminHeaderTitle>함께하개</AdminHeaderTitle>
       </TitleBox>
       <AdminNoticeWrapper>
         <BsFilePost
@@ -104,12 +103,7 @@ const TitleBox = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 5rem;
-`;
-
-const AdminHeaderTitle = styled.p`
-  font-size: 1.563rem;
-  color: ${props => props.theme.colors.white};
+  width: 15rem;
 `;
 
 const AdminNoticeWrapper = styled.div`

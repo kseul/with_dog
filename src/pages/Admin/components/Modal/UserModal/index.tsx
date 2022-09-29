@@ -11,7 +11,7 @@ const UserModal = ({ modalId, detailModalOpener }) => {
 
   const { response } = useAxios({
     method: 'GET',
-    url: `${API.ADMINUSER}/${modalId}`,
+    url: `${API.USERS}${modalId}`,
     headers: {
       accept: '*/*',
       Authorization: `Bearer ${sessionStorage.getItem('token')}`,
@@ -21,7 +21,7 @@ const UserModal = ({ modalId, detailModalOpener }) => {
   const banUser = () => {
     if (window.confirm('계정을 차단하시겠습니까?')) {
       axios.patch(
-        `${API.ADMINUSER}/${modalId}/ban`,
+        `${API.USERS}${modalId}/ban`,
         {},
         {
           headers: {
@@ -36,7 +36,7 @@ const UserModal = ({ modalId, detailModalOpener }) => {
 
   const deleteUser = () => {
     if (window.confirm('계정을 삭제하시겠습니까?')) {
-      axios.delete(`${API.ADMINUSER}/${modalId}/ban`, {
+      axios.delete(`${API.USERS}${modalId}/ban`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
