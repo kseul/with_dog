@@ -1,3 +1,4 @@
+import API from 'config';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -18,16 +19,13 @@ const BoardEditModal = ({ handleEditModal }: editModalProps) => {
     const formData = new FormData();
     formData.append('delete_reason', 'test');
 
-    await fetch(
-      `https://togedog-dj.herokuapp.com/posts/${boardData.id}/delete/`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
-        },
-        body: formData,
-      }
-    );
+    await fetch(`${API.BOARDDETAIL}${boardData.id}/delete/`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
+      },
+      body: formData,
+    });
     return window.location.reload();
   };
 

@@ -11,6 +11,7 @@ import BoardModalWriting from './components/BoardModalWriting';
 import leftArrow from 'assets/svg/arrow-left.svg';
 import rightArrow from 'assets/svg/arrow-right.svg';
 import cancelButton from 'assets/svg/cancel.svg';
+import API from 'config';
 
 interface BoardModalProps {
   handleModal?: () => void;
@@ -46,7 +47,7 @@ const BoardModal = ({ handleModal }: BoardModalProps) => {
 
     let idIndex = boardId.indexOf(boardData.id) - 1;
 
-    fetch(`https://togedog-dj.herokuapp.com/posts/${boardId[idIndex]}`, {
+    fetch(`${API.BOARDDETAIL}${boardId[idIndex]}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${cookies.userToken}`,
@@ -68,7 +69,7 @@ const BoardModal = ({ handleModal }: BoardModalProps) => {
 
     let idIndex = boardId.indexOf(boardData.id) + 1;
 
-    fetch(`https://togedog-dj.herokuapp.com/posts/${boardId[idIndex]}`, {
+    fetch(`${API.BOARDDETAIL}${boardId[idIndex]}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${cookies.userToken}`,

@@ -11,5 +11,10 @@ const API = {
   ADMINNOTICE: `${BASE_URL}/admin/notices`,
   ADMINPOST: `${BASE_URL}/posts`,
   CHATREPORT: `${BASE_URL}/chat/report`,
+  BOARDLIST: `${BASE_URL}/posts?`,
+  BOARDWRITE: `${BASE_URL}/posts`,
+  BOARDDETAIL: `${BASE_URL}/posts/`,
+  COMMENTREPORT: `${BASE_URL}/posts/`,
+  COMMENTDELETE: `${BASE_URL}/posts/`,
 };
 export default API;

@@ -38,9 +38,8 @@ const Mypage = () => {
   const openEditModal = () => {
     setShowEditModal(true);
   };
-
   const option = {
-    url: `https://togedog-dj.herokuapp.com/users/${id}`,
+    url: `${API.USERS}${id}`,
     method: 'PATCH',
     headers: {
       'Content-Type': 'multipart/form-data',
