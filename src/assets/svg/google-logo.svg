@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_레이어_2" data-name="레이어 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 176.5 180.1">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-2 {
+        fill: #f9bb00;
+      }
+
+      .cls-3 {
+        fill: #e74133;
+      }
+
+      .cls-4 {
+        fill: #32a753;
+      }
+
+      .cls-5 {
+        fill: #3e82f1;
+      }
+
+      .cls-6 {
+        clip-rule: evenodd;
+        fill: none;
+      }
+
+      .cls-7 {
+        clip-path: url(#clippath-1);
+      }
+
+      .cls-8 {
+        clip-path: url(#clippath-3);
+      }
+
+      .cls-9 {
+        clip-path: url(#clippath-2);
+      }
+    </style>
+    <clipPath id="clippath">
+      <path class="cls-6" d="M176.5,92.1c0-6.39-.57-12.53-1.64-18.42H90.05v34.83h48.46c-2.09,11.26-8.43,20.79-17.97,27.18v22.59h29.1c17.03-15.68,26.85-38.76,26.85-66.19h0Z"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <path class="cls-6" d="M90.05,180.1c24.31,0,44.7-8.06,59.6-21.82l-29.1-22.59c-8.06,5.4-18.38,8.6-30.49,8.6-23.45,0-43.31-15.84-50.39-37.13H9.58v23.33c14.82,29.43,45.27,49.61,80.47,49.61h0Z"/>
+    </clipPath>
+    <clipPath id="clippath-2">
+      <path class="cls-6" d="M39.66,107.16c-1.8-5.4-2.82-11.17-2.82-17.11s1.02-11.71,2.82-17.11v-23.33H9.58C3.48,61.77,0,75.52,0,90.05s3.48,28.28,9.58,40.44l30.09-23.33h0Z"/>
+    </clipPath>
+    <clipPath id="clippath-3">
+      <path class="cls-6" d="M90.05,35.82c13.22,0,25.09,4.54,34.42,13.47l25.83-25.83C134.71,8.92,114.32,0,90.05,0,54.85,0,24.4,20.18,9.58,49.61l30.09,23.33c7.08-21.28,26.93-37.13,50.39-37.13h0Z"/>
+    </clipPath>
+  </defs>
+  <g id="Layer_1" data-name="Layer 1">
+    <g>
+      <g class="cls-1">
+        <rect class="cls-5" x="40.02" y="23.65" width="186.51" height="184.66"/>
+      </g>
+      <g class="cls-7">
+        <rect class="cls-4" x="-40.45" y="57.13" width="240.13" height="173"/>
+      </g>
+      <g class="cls-9">
+        <rect class="cls-2" x="-50.03" y="-.42" width="139.72" height="180.94"/>
+      </g>
+      <g class="cls-8">
+        <rect class="cls-3" x="-40.45" y="-50.03" width="240.78" height="173"/>
+      </g>
+    </g>
+  </g>
+</svg>

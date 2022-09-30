@@ -1,24 +1,25 @@
 import { Routes, Route } from 'react-router-dom';
-import Chatting from 'pages/Chatting/Chatting';
-import Main from 'pages/Main/Main';
-import MBTI from 'pages/MBTI/MBTI';
-import Mypage from 'pages/Mypage/Mypage';
-import NoticeBoard from 'pages/NoticeBoard/NoticeBoard';
-import Nav from 'pages/components/Nav/Nav';
+import ChatList from 'pages/Chatting/ChatList';
+import Mypage from 'pages/Mypage';
+import Nav from 'pages/components/Nav';
 import Footer from 'pages/components/Footer/Footer';
-import SignIn from 'pages/Login/SignIn/SignIn';
+import MBTITest from 'pages/MBTI/MBTITest/MBTITest';
+import MBTIResult from 'pages/MBTI/MBTIResult/MBTIResult';
+import PrivateRouter from 'PrivateRouter';
+import MBTIResultShare from 'pages/MBTI/MBTIResult/MBTIResultShare';
 
 const MainRouter = () => {
   return (
     <>
       <Nav />
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/chatting" element={<Chatting />} />
-        <Route path="/mbti" element={<MBTI />} />
-        <Route path="/mypage" element={<Mypage />} />
-        <Route path="/noticeboard" element={<NoticeBoard />} />
+        <Route element={<PrivateRouter authentication={true} />}>
+          <Route path="/chatting-list" element={<ChatList />} />
+          <Route path="/mypage" element={<Mypage />} />
+        </Route>
+        <Route path="/mbti" element={<MBTITest />} />
+        <Route path="/mbti-result" element={<MBTIResult />} />
+        <Route path="/mbti-share/:mbti" element={<MBTIResultShare />} />
       </Routes>
       <Footer />
     </>
