@@ -6,6 +6,7 @@ const Input = ({ message, setMessage, sendMessage }) => {
       <InputBox>
         <ChatInput
           type="text"
+          maxLength={45}
           value={message}
           placeholder="메세지 입력"
           onChange={e => setMessage(e.target.value)}

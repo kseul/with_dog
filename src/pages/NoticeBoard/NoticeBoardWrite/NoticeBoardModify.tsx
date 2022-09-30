@@ -64,7 +64,7 @@ const NoticeBoardModify = () => {
     fetch(`${API.BOARDDETAIL}${boardData.id}`, {
       method: 'PATCH',
       headers: {
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo5LCJ1c2VyX3R5cGUiOiJhZG1pbiIsImV4cCI6MTY2NDY4NTQ5MiwiaWF0IjoxNjYyMDkzNDkyfQ.AQAciBT2VhdUDY-rQuoRiJCXE3BfIQJd95KgCXk0eKU`,
+        Authorization: `Bearer ${cookies.userToken}`,
       },
       body: formData,
     })

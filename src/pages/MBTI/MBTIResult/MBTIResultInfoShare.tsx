@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { css } from 'styled-components/macro';
 import ChatroomRecommendation from './ChatroomRecommendation';
 import UserCounter from './UserCounter';
-import SNSshare from './SNSshare';
 import ResultInfo from 'assets/svg/ResultInfoPositoin2.svg';
 import ResultNotice from 'assets/svg/MBTINotice6.svg';
 import { MBTI_RESULT } from './constants/Result';
@@ -39,7 +38,6 @@ const MBTIResultInfoShare = ({ mbtiResultText }) => {
       )}
       <ChatroomRecommendation />
       <UserCounter />
-      <SNSshare />
     </MBTIResultInfoContainer>
   );
 };

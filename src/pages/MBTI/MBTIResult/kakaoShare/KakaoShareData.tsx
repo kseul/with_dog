@@ -1,10 +1,11 @@
-import { BASE_URL } from 'config';
+import { MAIN_URL } from 'config';
 import { mbtiUrl } from '../MBTIResult';
 const { Kakao }: any = window;
 
 export const sendKakaoLink = () => {
   const getMBTIResult: string = Object.values(mbtiUrl).toString();
-  const sharedUrl = `${BASE_URL}/mbti-share/${getMBTIResult}`;
+  const sharedUrl = `${MAIN_URL}/mbti-share/${getMBTIResult}`;
+  const mainUrl = `${MAIN_URL}`;
 
   try {
     if (Kakao) {
@@ -19,16 +20,16 @@ export const sendKakaoLink = () => {
       description: '댕댕이 MBTI 검사결과 보러가기',
       imageUrl: 'https://ifh.cc/g/bp4jV4.png',
       link: {
-        webUrl: sharedUrl,
-        mobileWebUrl: sharedUrl,
+        webUrl: mainUrl,
+        mobileWebUrl: mainUrl,
       },
     },
     buttons: [
       {
         title: '자세히 보기',
         link: {
-          webUrl: sharedUrl,
-          mobileWebUrl: sharedUrl,
+          webUrl: mainUrl,
+          mobileWebUrl: mainUrl,
         },
       },
     ],
