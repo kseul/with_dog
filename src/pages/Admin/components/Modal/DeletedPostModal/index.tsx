@@ -18,7 +18,7 @@ const DeletedPostModal = ({ detailModalOpener, modalId }) => {
 
   const deletePost = () => {
     if (window.confirm('게시글을 완전히 삭제하시겠습니까?')) {
-      axios.post(`${API.ADMINPOST}/${modalId}/delete/hard/`, {
+      axios.delete(`${API.ADMINPOST}/${modalId}/delete/hard`, {
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
