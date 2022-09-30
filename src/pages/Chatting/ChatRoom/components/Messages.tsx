@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Message from './Message';
 
-const Messages = ({ messages, nickname, setIsShowModal }) => {
+const Messages = ({ messages, setIsShowModal }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -16,11 +16,7 @@ const Messages = ({ messages, nickname, setIsShowModal }) => {
     <MessagesContainer ref={messagesEndRef}>
       {messages.map((message, i: number) => (
         <div key={i}>
-          <Message
-            message={message}
-            nickname={nickname}
-            setIsShowModal={setIsShowModal}
-          />
+          <Message message={message} setIsShowModal={setIsShowModal} />
         </div>
       ))}
     </MessagesContainer>

@@ -1,4 +1,5 @@
-export const BASE_URL = 'https://togedog-dj.herokuapp.com';
+export const BASE_URL = 'http://54.180.89.143:8000';
+export const MAIN_URL = 'http://54.180.89.143:3000';
 const API = {
   LOGOUT: `${BASE_URL}/users/logout`,
   USERS: `${BASE_URL}/users/`,

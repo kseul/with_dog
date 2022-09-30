@@ -107,11 +107,7 @@ const ChatRoom = () => {
   return (
     <ChatRoomContainer>
       <TitleBar />
-      <Messages
-        messages={messages}
-        nickname={nickname}
-        setIsShowModal={setIsShowModal}
-      />
+      <Messages messages={messages} setIsShowModal={setIsShowModal} />
       <Input
         message={message}
         setMessage={setMessage}

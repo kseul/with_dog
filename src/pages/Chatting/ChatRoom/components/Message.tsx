@@ -16,16 +16,15 @@ const Message = ({
     message_id,
     time,
   },
-  nickname,
   setIsShowModal,
 }: MessagesProps | any) => {
+  const storeData = useSelector((state: RootState) => state);
+  const { thumbnail_url, id } = storeData.user.userData;
+
   let isSentByCurrentUser = false;
-  if (user_nickname === nickname) {
+  if (user_id === id) {
     isSentByCurrentUser = true;
   }
-
-  const storeData = useSelector((state: RootState) => state);
-  const userImage = storeData.user.userData.thumbnail_url;
 
   const ReportChatData = (id, messageId, text) => {
     store.dispatch(chatReportActions.reportedUserId(id));
@@ -53,7 +52,7 @@ const Message = ({
           </TextBox>
         </TextContainer>
       </MessageBox>
-      <ProfileImg src={userImage} />
+      <ProfileImg src={thumbnail_url} />
     </MessageContainer>
   ) : (
     <MessageContainer currentUser={isSentByCurrentUser}>
@@ -137,6 +136,7 @@ const TextBox = styled.div<{ currentUser: boolean }>`
   background: white;
   background-color: ${({ currentUser }) => (currentUser ? 'gray' : 'white')};
   color: ${({ currentUser }) => (currentUser ? 'white' : 'black')};
+  word-wrap: break-word;
 `;
 
 const Text = styled.div`

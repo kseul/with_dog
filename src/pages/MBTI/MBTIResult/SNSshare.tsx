@@ -6,25 +6,25 @@ import Kakao from 'assets/svg/kakao-logo2.svg';
 import Twitter from 'assets/svg/twitter.svg';
 import FaceBook from 'assets/svg/Facebook_2.svg';
 import { sendKakaoLink } from './kakaoShare/KakaoShareData';
-import { BASE_URL } from 'config';
+import { MAIN_URL } from 'config';
 
 const SNSshare = () => {
   const mbtiResultText = useSelector((state: RootState) => state.mbtiText);
   const getMBTIResult: string = Object.values(mbtiResultText).toString();
+  const mainUrl = `${MAIN_URL}`;
+  const sharedUrl = `${MAIN_URL}/mbti-share/${getMBTIResult}`;
   const kakaoShare = () => {
     sendKakaoLink();
   };
 
   const facebookShare = () => {
-    const sharedUrl = `${BASE_URL}/mbti-share/${getMBTIResult}`;
-    window.open('http://www.facebook.com/sharer/sharer.php?u=' + sharedUrl);
+    window.open('http://www.facebook.com/sharer/sharer.php?u=' + mainUrl);
   };
 
   const twiiterShare = () => {
-    const sharedUrl = `${BASE_URL}/mbti-share/${getMBTIResult}`;
     const sendText = '함께하개';
     window.open(
-      'https://twitter.com/intent/tweet?text=' + sendText + '&url=' + sharedUrl
+      'https://twitter.com/intent/tweet?text=' + sendText + '&url=' + mainUrl
     );
   };
   return (
