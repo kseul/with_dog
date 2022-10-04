@@ -30,6 +30,9 @@ const Mypage = () => {
   const formData = new FormData();
 
   const userData = useSelector((state: RootState) => state.user.userData);
+  const localStorageMbti = useSelector(
+    (state: RootState) => state.mbtiText.mbti
+  );
   const { name, nickname, email, mbti, thumbnail_url, id } = userData;
 
   const openEditModal = () => {
@@ -117,7 +120,13 @@ const Mypage = () => {
     } else {
       setLengthLimit(false);
     }
-  }, [nickname]);
+
+    if (mbti === 'none' && localStorageMbti) {
+      store.dispatch(userActions.setMBTI(localStorageMbti));
+    } else {
+      return;
+    }
+  }, [nickname, mbti]);
 
   return (
     <MypageContainer>
