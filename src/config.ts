@@ -1,5 +1,5 @@
-export const BASE_URL = 'http://54.180.89.143:8000';
-export const MAIN_URL = 'http://54.180.89.143:3000';
+export const BASE_URL = 'https://withdog.me/api';
+export const MAIN_URL = 'https://withdog.me';
 const API = {
   LOGOUT: `${BASE_URL}/users/logout`,
   USERS: `${BASE_URL}/users/`,
@@ -10,6 +10,7 @@ const API = {
   SIGNUP: `${BASE_URL}/users/signup`,
   LOGINCHECK: `${BASE_URL}/users/login/check`,
   ADMINNOTICE: `${BASE_URL}/admin/notices`,
+  CHAT: `${MAIN_URL}`,
   ADMINPOST: `${BASE_URL}/posts`,
   CHATREPORT: `${BASE_URL}/chat/report`,
   BOARDLIST: `${BASE_URL}/posts?`,
@@ -18,4 +19,5 @@ const API = {
   COMMENTREPORT: `${BASE_URL}/posts/`,
   COMMENTDELETE: `${BASE_URL}/posts/`,
 };
+
 export default API;
