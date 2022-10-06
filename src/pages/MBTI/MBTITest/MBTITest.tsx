@@ -268,57 +268,64 @@ const MBTITest = () => {
 
   return (
     <MBTITestContainer>
-      <ProgressBar percentLength={percentLength} />
-      <TestBox>
-        {nextPage === false && (
-          <EnergyTest
-            handleSetEnergyName={handleSetEnergyName}
-            onClickCheck={onClickCheck}
-            energyLength={energyLength}
-            onEnergyCheck={onEnergyCheck}
-          />
-        )}
+      <MBTIWrapper>
+        <ProgressBar percentLength={percentLength} />
+        <TestBox>
+          {nextPage === false && (
+            <EnergyTest
+              handleSetEnergyName={handleSetEnergyName}
+              onClickCheck={onClickCheck}
+              energyLength={energyLength}
+              onEnergyCheck={onEnergyCheck}
+            />
+          )}
 
-        {nextPage === true && nextRelationPage === false && (
-          <RelationTest
-            handleSetRelationName={handleSetRelationName}
-            onClickCheck={onClickCheck}
-            relationLength={relationLength}
-            onRelationCheck={onRelationCheck}
-          />
-        )}
-        {nextPage === true &&
-          nextRelationPage === true &&
-          nextReactionPage === false && (
-            <ReactionTest
-              handleSetReactionName={handleSetReactionName}
+          {nextPage === true && nextRelationPage === false && (
+            <RelationTest
+              handleSetRelationName={handleSetRelationName}
               onClickCheck={onClickCheck}
-              reactionLength={reactionLength}
-              onReactionCheck={onReactionCheck}
+              relationLength={relationLength}
+              onRelationCheck={onRelationCheck}
             />
           )}
-        {nextPage === true &&
-          nextRelationPage === true &&
-          nextReactionPage === true && (
-            <JudgementTest
-              handleSetJudgementName={handleSetJudgementName}
-              onClickCheck={onClickCheck}
-              judgementLength={judgementLength}
-              onJudgementCheck={onJudgementCheck}
-            />
-          )}
-      </TestBox>
+          {nextPage === true &&
+            nextRelationPage === true &&
+            nextReactionPage === false && (
+              <ReactionTest
+                handleSetReactionName={handleSetReactionName}
+                onClickCheck={onClickCheck}
+                reactionLength={reactionLength}
+                onReactionCheck={onReactionCheck}
+              />
+            )}
+          {nextPage === true &&
+            nextRelationPage === true &&
+            nextReactionPage === true && (
+              <JudgementTest
+                handleSetJudgementName={handleSetJudgementName}
+                onClickCheck={onClickCheck}
+                judgementLength={judgementLength}
+                onJudgementCheck={onJudgementCheck}
+              />
+            )}
+        </TestBox>
+      </MBTIWrapper>
     </MBTITestContainer>
   );
 };
 
 const MBTITestContainer = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
-  width: 100%;
+  width: 100vw;
   height: auto;
   margin: 0 auto;
   padding-top: 9.375rem;
   background-color: #edeef0;
+`;
+
+const MBTIWrapper = styled.div`
+  ${props => props.theme.flex.flexBox('', 'center', 'center')};
+  width: 100%;
 `;
 
 const TestBox = styled.div`

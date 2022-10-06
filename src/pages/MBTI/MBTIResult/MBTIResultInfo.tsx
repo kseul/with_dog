@@ -16,32 +16,34 @@ const MBTIResultInfo = ({ graphResult, mbtiResultText }) => {
 
   return (
     <MBTIResultInfoContainer>
-      {resultMBTI.map(
-        ({
-          MBTI,
-          MBTICharacter,
-          MBTIImage,
-          MBTIPosition,
-          resultId,
-          content,
-        }) => (
-          <React.Fragment key={resultId}>
-            <MBTIDOG src={MBTIImage} />
-            <MBTIResult>{MBTI}</MBTIResult>
-            <MBTICharacterText>{MBTICharacter}</MBTICharacterText>
-            <MBTIContentBackground>
-              <MBTIContent>{content}</MBTIContent>
-            </MBTIContentBackground>
-            <NoticeImage src={ResultNotice} />
-            <GraphInfo src={ResultInfo} />
-            <MBTIGraph graphResult={graphResult} />
-            <GraphSummary src={MBTIPosition} />
-          </React.Fragment>
-        )
-      )}
-      <ChatroomRecommendation />
-      <UserCounter />
-      <SNSshare />
+      <MBTIResultInfoWrapper>
+        {resultMBTI.map(
+          ({
+            MBTI,
+            MBTICharacter,
+            MBTIImage,
+            MBTIPosition,
+            resultId,
+            content,
+          }) => (
+            <React.Fragment key={resultId}>
+              <MBTIDOG src={MBTIImage} />
+              <MBTIResult>{MBTI}</MBTIResult>
+              <MBTICharacterText>{MBTICharacter}</MBTICharacterText>
+              <MBTIContentBackground>
+                <MBTIContent>{content}</MBTIContent>
+              </MBTIContentBackground>
+              <NoticeImage src={ResultNotice} />
+              <GraphInfo src={ResultInfo} />
+              <MBTIGraph graphResult={graphResult} />
+              <GraphSummary src={MBTIPosition} />
+            </React.Fragment>
+          )
+        )}
+        <ChatroomRecommendation />
+        <UserCounter />
+        <SNSshare />
+      </MBTIResultInfoWrapper>
     </MBTIResultInfoContainer>
   );
 };
@@ -51,9 +53,15 @@ const BasicText = css`
 `;
 
 const MBTIResultInfoContainer = styled.div`
-  ${props => props.theme.flex.flexBox('column', 'center', 'center')};
-  margin: 0 auto;
+  ${props => props.theme.flex.flexBox('', 'center', 'center')};
   width: 100%;
+  height: 100%;
+`;
+
+const MBTIResultInfoWrapper = styled.div`
+  ${props => props.theme.flex.flexBox('column', 'center', 'center')};
+  width: 100vw;
+  height: 100vh;
 `;
 
 const MBTIDOG = styled.img`
@@ -75,7 +83,7 @@ const MBTICharacterText = styled.span`
 
 const MBTIContentBackground = styled.div`
   ${props => props.theme.flex.flexBox('row', 'center', 'center')};
-  margin: 3rem 18rem 3rem 18rem;
+  margin: 3rem 0;
   padding: 3rem;
   width: 60.625rem;
   height: 12rem;
@@ -90,18 +98,18 @@ const MBTIContent = styled.span`
 `;
 
 const NoticeImage = styled.img`
-  width: 60rem;
+  width: 58rem;
   margin: 5rem 0;
 `;
 
 const GraphInfo = styled.img`
   width: 60.625rem;
-  margin: 5rem 0;
+  margin: 3rem 0 7rem 0;
 `;
 
 const GraphSummary = styled.img`
   width: 37.5rem;
-  margin: 4.6rem 0;
+  margin: 4.6rem 0 4.6rem 0;
 `;
 
 export default MBTIResultInfo;

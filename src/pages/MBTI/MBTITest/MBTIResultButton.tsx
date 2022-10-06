@@ -7,11 +7,6 @@ import { BASE_URL } from 'config';
 import { SendMBTI } from './type';
 
 const MBTIResultButton = ({ onCheck }) => {
-  const handleKeyPress = e => {
-    if (e.key === 'Enter') {
-      onCheck();
-    }
-  };
   const sendMbti = new FormData();
   const [cookies] = useCookies(['userToken']);
   const mbtiResultText: SendMBTI = useSelector(
@@ -32,7 +27,6 @@ const MBTIResultButton = ({ onCheck }) => {
 
   return (
     <MBTIResultButtonContainer>
-      <KeyEvent onKeyPress={handleKeyPress} autoFocus />
       <ResultButton
         onClick={() => {
           onCheck();
@@ -48,17 +42,10 @@ const MBTIResultButtonContainer = styled.div`
   margin: 0 0 0.625rem 0;
 `;
 
-const KeyEvent = styled.input`
-  margin-top: -30%;
-  border: none;
-  color: transparent;
-  text-shadow: 0 0 0 black;
-`;
-
 const ResultButton = styled.button`
   width: 9.375rem;
   height: 2.5rem;
-  margin-bottom: 0.625rem;
+  margin-bottom: 0.4rem;
   background-color: #edeef0;
   &:hover {
     cursor: pointer;

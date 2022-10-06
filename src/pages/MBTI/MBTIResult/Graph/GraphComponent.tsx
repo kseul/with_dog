@@ -73,6 +73,7 @@ const GraphComponentContainer = styled.div<{ layout: string }>`
   bottom: ${props => (props.layout === 'leftbottom' ? `-95%` : '')};
   bottom: ${props => (props.layout === 'rightbottom' ? `-95%` : '')};
   width: 25rem;
+  margin-bottom: 3rem;
 `;
 
 const PropensityText = styled.span`
