@@ -83,7 +83,7 @@ const PageContainer = styled.div`
 
 const LogoContainer = styled.div`
   position: relative;
-  padding-right: 11rem;
+  padding-right: 10rem;
   cursor: pointer;
 `;
 
@@ -99,6 +99,7 @@ const ProfileContainer = styled.div`
 
 const RequireLogin = styled.div`
   position: relative;
+  margin-right: 3rem;
   background-color: #7cccc7;
   border-radius: 2rem;
   padding: 0.6rem 1.2rem 0.6rem 2.5rem;

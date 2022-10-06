@@ -29,11 +29,11 @@ const Mypage = () => {
 
   const formData = new FormData();
 
-  const mbtiText = useSelector((state: RootState) => state.mbtiText.mbti);
   const userData = useSelector((state: RootState) => state.user.userData);
+  const localStorageMbti = useSelector(
+    (state: RootState) => state.mbtiText.mbti
+  );
   const { name, nickname, email, mbti, thumbnail_url, id } = userData;
-
-  const getMbtiText = localStorage.getItem('mbtiText');
 
   const openEditModal = () => {
     setShowEditModal(true);
@@ -121,12 +121,12 @@ const Mypage = () => {
       setLengthLimit(false);
     }
 
-    if (getMbtiText) {
-      store.dispatch(userActions.setMBTI(mbtiText));
+    if (mbti === 'none' && localStorageMbti) {
+      store.dispatch(userActions.setMBTI(localStorageMbti));
     } else {
-      store.dispatch(userActions.setMBTI('none'));
+      return;
     }
-  }, [nickname, getMbtiText, mbtiText]);
+  }, [nickname, mbti]);
 
   return (
     <MypageContainer>
