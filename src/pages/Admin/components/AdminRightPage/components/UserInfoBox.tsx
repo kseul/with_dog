@@ -1,11 +1,15 @@
 import styled from 'styled-components';
-import React from 'react';
+import { ModalDataTypes } from 'pages/Admin/type';
 
-const UserInfoBox = ({ data }) => {
+interface UserInfoBoxProps {
+  data: ModalDataTypes;
+}
+
+const UserInfoBox = ({ data }: UserInfoBoxProps) => {
   return (
     <UserInfoContainer>
       {data && (
-        <React.Fragment>
+        <>
           <UserInfoProfileBox>
             <UserThumbnailImg src={data.user_thumbnail} />
             <UserNickname>{data.user_nickname}</UserNickname>
@@ -18,7 +22,7 @@ const UserInfoBox = ({ data }) => {
               {data.user_created_at.substring(0, 10)}
             </UserSignUpDate>
           </UserContentsBox>
-        </React.Fragment>
+        </>
       )}
     </UserInfoContainer>
   );

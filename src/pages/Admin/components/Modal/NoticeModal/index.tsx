@@ -5,6 +5,20 @@ import AdminSpinner from 'pages/Admin/components/AdminSpinner';
 import NoticeDetailModal from 'pages/Admin/components/Modal/NoticeModal/components/NoticeDetailModal';
 import NoticeBox from 'pages/Admin/components/Modal/NoticeModal/components/NoticeBox';
 import API from 'config';
+import {
+  PostReports,
+  CommentReports,
+  NoticeBoxDataTypes,
+} from 'pages/Admin/type';
+
+interface NoticeModalProps {
+  data?: PostReports[] | CommentReports[];
+  onCurrentModal: (id: number) => void;
+  modalId?: number;
+  noticeDetailModal: () => void;
+  isNoticeDetailModal: boolean;
+  getClassName: string;
+}
 
 const NoticeModal = ({
   data,
@@ -13,16 +27,16 @@ const NoticeModal = ({
   noticeDetailModal,
   isNoticeDetailModal,
   getClassName,
-}) => {
+}: NoticeModalProps) => {
   const [readId, setReadId] = useState<number>();
   const [loading, setLoading] = useState<Boolean>(false);
-  const [allSelected, setAllSelected] = useState<Boolean>(false);
+  const [allSelected, setAllSelected] = useState<boolean>(false);
 
   const onReadId = (id: number): void => {
     setReadId(id);
   };
 
-  const clickAndRead = () => {
+  const clickAndRead = (): void => {
     axios
       .post(
         `${API.ADMINNOTICE}?id=${readId}&type=${getClassName}`,
@@ -71,7 +85,7 @@ const NoticeModal = ({
       ) : (
         data && (
           <NoticeList>
-            {data.map(data => (
+            {data.map((data: NoticeBoxDataTypes) => (
               <NoticeBox
                 key={data.id}
                 data={data}

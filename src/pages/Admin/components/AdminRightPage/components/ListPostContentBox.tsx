@@ -1,6 +1,17 @@
 import styled from 'styled-components';
+import { PostDataTypes } from 'pages/Admin/type';
 
-const ListPostContentsBox = ({ data, detailModalOpener, onCurrentModal }) => {
+interface ListPostContentsBoxProps {
+  data: PostDataTypes;
+  detailModalOpener: () => void;
+  onCurrentModal: (id: number) => void;
+}
+
+const ListPostContentsBox = ({
+  data,
+  detailModalOpener,
+  onCurrentModal,
+}: ListPostContentsBoxProps) => {
   return (
     <div>
       {data.updated_at && (

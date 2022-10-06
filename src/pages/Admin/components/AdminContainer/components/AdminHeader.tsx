@@ -3,19 +3,27 @@ import styled from 'styled-components';
 import useAxios from 'hooks/useAxios';
 import NoticeModal from 'pages/Admin/components/Modal/NoticeModal';
 import API from 'config';
+import { PostReports, CommentReports } from 'pages/Admin/type';
 import { BsFilePost } from 'react-icons/bs';
 import { FaCommentDots } from 'react-icons/fa';
 import logo from 'assets/svg/withDogLogo.svg';
 
-const AdminHeader = ({ onCurrentModal, modalId }) => {
-  const postClassName = 'post_report';
-  const commentClassName = 'comment_report';
-  const [getClassName, setGetClassName] = useState<string>('');
-  const [dataSort, setDataSort] = useState([]);
+interface AdminHeaderProps {
+  onCurrentModal: (id: number) => void;
+  modalId?: number;
+}
 
-  const [isNoticeModalOpen, setIsNoticeModalOpen] = useState<Boolean>(false);
+const AdminHeader = ({ onCurrentModal, modalId }: AdminHeaderProps) => {
+  const postClassName: string = 'post_report';
+  const commentClassName: string = 'comment_report';
+  const [getClassName, setGetClassName] = useState<string>('');
+  const [dataSort, setDataSort] = useState<PostReports[] | CommentReports[]>(
+    []
+  );
+
+  const [isNoticeModalOpen, setIsNoticeModalOpen] = useState<boolean>(false);
   const [isNoticeDetailModal, setIsNoticeDetailModal] =
-    useState<Boolean>(false);
+    useState<boolean>(false);
 
   const { response } = useAxios({
     method: 'GET',

@@ -1,6 +1,11 @@
 import styled from 'styled-components';
+import { CommentTypes } from 'pages/Admin/type';
 
-const CommentBox = ({ comment }) => {
+interface CommentProps {
+  comment: CommentTypes;
+}
+
+const CommentBox = ({ comment }: CommentProps) => {
   return (
     <CommentBoxWrapper>
       <ProfileImage src={comment.user_thumbnail} />
@@ -34,7 +39,7 @@ const CommentContent = styled.div`
 `;
 
 const UserNickName = styled.p`
-  width: 3rem;
+  width: 100%;
   height: 50%;
 `;
 

@@ -10,11 +10,11 @@ import character from 'assets/images/LoginBgCharacter.png';
 
 const AdminSignIn = () => {
   const navigate = useNavigate();
-  const [adminId, setAdminId] = useState('');
-  const [adminPassword, setAdminPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [adminId, setAdminId] = useState<string>('');
+  const [adminPassword, setAdminPassword] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const submitSigninInfo = () => {
+  const submitSigninInfo = (): void => {
     setLoading(true);
     axios
       .post(`${API.USERS}login/email`, {

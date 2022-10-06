@@ -1,9 +1,3 @@
-export interface ListData {
-  id: number;
-  listName: string;
-  value: string;
-}
-
 export type idProp = number | undefined;
 
 export interface EditModalProps {

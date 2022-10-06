@@ -1,5 +1,14 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { NoticeBoxDataTypes } from 'pages/Admin/type';
+
+interface NoticeBoxProps {
+  data: NoticeBoxDataTypes;
+  onCurrentModal: (id: number) => void;
+  noticeDetailModal: () => void;
+  onReadId: (id: number) => void;
+  allSelected: boolean;
+}
 
 const NoticeBox = ({
   data,
@@ -7,8 +16,8 @@ const NoticeBox = ({
   noticeDetailModal,
   onReadId,
   allSelected,
-}) => {
-  const [isClicked, setIsClicked] = useState(false);
+}: NoticeBoxProps) => {
+  const [isClicked, setIsClicked] = useState<boolean>(false);
 
   return (
     <NoticeBoxWrapper
@@ -20,7 +29,7 @@ const NoticeBox = ({
         setIsClicked(true);
       }}
     >
-      {data.content}이(가) 신고 되었습니다.
+      {data?.content}이(가) 신고 되었습니다.
     </NoticeBoxWrapper>
   );
 };
