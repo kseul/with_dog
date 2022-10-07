@@ -42,8 +42,10 @@
 </br>
 
 ## 🖥 웹 사이트 
-https://home.withdog.me/
-
+https://withdog.me
+</br>
+## 💻 백앤드 저장소
+https://github.com/stresszero/togedog-backend
 </br>
 
 ## 📃 담당 페이지 
