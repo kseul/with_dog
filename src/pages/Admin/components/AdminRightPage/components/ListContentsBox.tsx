@@ -1,6 +1,17 @@
 import styled from 'styled-components';
+import { PostDataTypes } from 'pages/Admin/type';
 
-const ListContentsBox = ({ data, detailModalOpener, onCurrentModal }) => {
+interface ListContentsBoxProps {
+  data: PostDataTypes;
+  detailModalOpener: () => void;
+  onCurrentModal: (id: number) => void;
+}
+
+const ListContentsBox = ({
+  data,
+  detailModalOpener,
+  onCurrentModal,
+}: ListContentsBoxProps) => {
   return (
     <ListContents
       onClick={() => {

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
+import store from 'redux/store';
+import userActions from 'redux/actions/user';
 import Spinner from 'pages/Login/components/spinner/Spinner';
 import AdminLoginButton from 'pages/Admin/components/AdminSignin/components/AdminLoginButton';
 import API from 'config';
@@ -10,11 +12,11 @@ import character from 'assets/images/LoginBgCharacter.png';
 
 const AdminSignIn = () => {
   const navigate = useNavigate();
-  const [adminId, setAdminId] = useState('');
-  const [adminPassword, setAdminPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [adminId, setAdminId] = useState<string>('');
+  const [adminPassword, setAdminPassword] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const submitSigninInfo = () => {
+  const submitSigninInfo = (): void => {
     setLoading(true);
     axios
       .post(`${API.USERS}login/email`, {
@@ -25,6 +27,7 @@ const AdminSignIn = () => {
         if (res.status === 200 && res.data.user.user_type === 'admin') {
           navigate('/admin/users');
           sessionStorage.setItem('token', res.data.access_token);
+          store.dispatch(userActions.handleUserData(res.data.user));
         }
       })
       .catch(error => {

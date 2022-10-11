@@ -5,6 +5,16 @@ import {
   BiLeftArrowAlt,
   BiRightArrowAlt,
 } from 'react-icons/bi';
+import { Dispatch, SetStateAction } from 'react';
+
+interface PageNationProps {
+  perPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+  currentPage: number;
+  blockNum: number;
+  setBlockNum: Dispatch<SetStateAction<number>>;
+  counts: number | undefined;
+}
 
 const PageNation = ({
   perPage,
@@ -13,7 +23,7 @@ const PageNation = ({
   blockNum,
   setBlockNum,
   counts,
-}: any) => {
+}: PageNationProps) => {
   const createArr = (n: number) => {
     const iArr: number[] = new Array(n);
     for (let i = 0; i < n; i++) iArr[i] = i + 1;
@@ -21,22 +31,22 @@ const PageNation = ({
   };
 
   const pageLimit = 10;
-  const totalPage: number = Math.ceil(counts / perPage);
+  const totalPage: number = Math.ceil((counts as number) / perPage);
   const blockArea: number = Number(blockNum * pageLimit);
   const nArr = createArr(Number(totalPage));
   let pArr = nArr?.slice(blockArea, Number(pageLimit) + blockArea);
 
-  const firstPage = () => {
+  const firstPage = (): void => {
     setCurrentPage(1);
     setBlockNum(0);
   };
 
-  const lastPage = () => {
+  const lastPage = (): void => {
     setCurrentPage(totalPage);
     setBlockNum(Math.ceil(totalPage / pageLimit) - 1);
   };
 
-  const prevPage = () => {
+  const prevPage = (): void => {
     if (currentPage <= 1) {
       return;
     }
@@ -46,7 +56,7 @@ const PageNation = ({
     setCurrentPage((n: number) => n - 1);
   };
 
-  const nextPage = () => {
+  const nextPage = (): void => {
     if (currentPage >= totalPage) {
       return;
     }

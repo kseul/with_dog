@@ -1,4 +1,4 @@
-import { ListData } from 'types/type';
+import { ListData } from 'pages/Admin/type';
 
 const LEFTSIDE_DB: ListData[] = [
   {

@@ -3,10 +3,11 @@ import axios from 'axios';
 import styled from 'styled-components';
 import useAxios from 'hooks/useAxios';
 import API from 'config';
+import { ModalProps } from 'pages/Admin/type';
 import { AiOutlineClose } from 'react-icons/ai';
 import backgroundImage from 'assets/images/bg1.jpg';
 
-const UserModal = ({ modalId, detailModalOpener }) => {
+const UserModal = ({ modalId, detailModalOpener }: ModalProps) => {
   const location = useLocation();
 
   const { response } = useAxios({
@@ -18,7 +19,7 @@ const UserModal = ({ modalId, detailModalOpener }) => {
     },
   });
 
-  const banUser = () => {
+  const banUser = (): void => {
     if (window.confirm('계정을 차단하시겠습니까?')) {
       axios.patch(
         `${API.USERS}${modalId}/ban`,
@@ -34,7 +35,7 @@ const UserModal = ({ modalId, detailModalOpener }) => {
     }
   };
 
-  const deleteUser = () => {
+  const deleteUser = (): void => {
     if (window.confirm('계정을 삭제하시겠습니까?')) {
       axios.delete(`${API.USERS}${modalId}/ban`, {
         headers: {

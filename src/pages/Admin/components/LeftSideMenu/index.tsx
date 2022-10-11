@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ListData } from 'types/type';
+import { ListData } from 'pages/Admin/type';
 import { NavigateFunction } from 'react-router-dom';
 import selectedImg from 'assets/svg/dog-paws2.svg';
 

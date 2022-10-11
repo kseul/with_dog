@@ -5,10 +5,19 @@ import useAxios from 'hooks/useAxios';
 import UserInfoBox from 'pages/Admin/components/AdminRightPage/components/UserInfoBox';
 import CommentBox from 'pages/Admin/components/Modal/CommentBox';
 import API from 'config';
+import { CommentListTypes } from 'pages/Admin/type';
 import { AiOutlineClose } from 'react-icons/ai';
 import backgroundImage from 'assets/images/bg1.jpg';
 
-const NoticeDetailModal = ({ noticeDetailModal, modalId }) => {
+interface NoticeDetailModalProps {
+  noticeDetailModal: () => void;
+  modalId?: number;
+}
+
+const NoticeDetailModal = ({
+  noticeDetailModal,
+  modalId,
+}: NoticeDetailModalProps) => {
   const [reason, setReason] = useState<string>('');
 
   const { response } = useAxios({
@@ -20,12 +29,12 @@ const NoticeDetailModal = ({ noticeDetailModal, modalId }) => {
     },
   });
 
-  const getReason = e => {
+  const getReason = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     e.preventDefault();
     setReason(e.target.value);
   };
 
-  const deletePost = () => {
+  const deletePost = (): void => {
     if (window.confirm('게시글을 삭제하시겠습니까?')) {
       axios.post(
         `${API.ADMINPOST}/${modalId}/delete/`,
@@ -75,15 +84,17 @@ const NoticeDetailModal = ({ noticeDetailModal, modalId }) => {
                 {response?.data.comments_list.length === 0 ? (
                   <p>등록된 댓글이 없습니다.</p>
                 ) : (
-                  response?.data.comments_list.map(comment => (
-                    <CommentBox key={comment.id} comment={comment} />
-                  ))
+                  response?.data.comments_list.map(
+                    (comment: CommentListTypes) => (
+                      <CommentBox key={comment.id} comment={comment} />
+                    )
+                  )
                 )}
               </CommentList>
               <ReasonToBan>
                 <ReasonToBanContent
                   placeholder="삭제 사유를 입력하여 주세요."
-                  onChange={getReason}
+                  onChange={e => getReason(e)}
                 />
                 <BtnWrapper>
                   <CancelBtn

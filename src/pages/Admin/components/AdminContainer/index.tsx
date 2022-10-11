@@ -7,7 +7,8 @@ import AdminHeader from 'pages/Admin/components/AdminContainer/components/AdminH
 import AdminRightPage from 'pages/Admin/components/AdminRightPage';
 import { BASE_URL } from 'config';
 import LEFTSIDE_DB from 'pages/Admin/DATA/LEFTSIDE_LIST';
-import { ListData } from 'types/type';
+import { ListData } from 'pages/Admin/type';
+import { PostDataTypes } from 'pages/Admin/type';
 import backGroundImg from 'assets/images/bg1.jpg';
 
 const AdminContainer = () => {
@@ -15,14 +16,14 @@ const AdminContainer = () => {
   const location = useLocation();
 
   const [clicked, setClicked] = useState<string>(location.pathname.slice(7));
-  const [postData, setPostData] = useState();
-  const [loading, setLoading] = useState<Boolean>(false);
+  const [postData, setPostData] = useState<PostDataTypes[]>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [counts, setCounts] = useState<number>();
 
   //모달
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalId, setModalId] = useState<number | undefined>();
 
   const detailModalOpener = (): void => {

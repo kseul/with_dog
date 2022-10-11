@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import ListHeaderBox from 'pages/Admin/components/AdminRightPage/components/ListHeaderBox';
@@ -11,9 +11,22 @@ import DeletedPostModal from 'pages/Admin/components/Modal/DeletedPostModal';
 import DatePickerComponent from 'pages/Admin/components/AdminContainer/components/DatePickerComponent';
 import PageNation from 'pages/Admin/components/AdminContainer/components/PageNation';
 import AdminSpinner from 'pages/Admin/components/AdminSpinner';
+import { PostDataTypes, FilterValueTypes } from 'pages/Admin/type';
 import selectedImg from 'assets/svg/dog-paws2.svg';
 
-const AdminRightPageUser = ({
+interface AdminRightPageProps {
+  postData: PostDataTypes[] | undefined;
+  loading: boolean;
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+  counts: number | undefined;
+  isModalOpen: boolean;
+  modalId?: number;
+  detailModalOpener: () => void;
+  onCurrentModal: (id: number) => void;
+}
+
+const AdminRightPage = ({
   postData,
   loading,
   currentPage,
@@ -23,16 +36,16 @@ const AdminRightPageUser = ({
   modalId,
   detailModalOpener,
   onCurrentModal,
-}) => {
+}: AdminRightPageProps) => {
   const navigate = useNavigate();
   const params = useParams();
   const location = useLocation();
 
   const [blockNum, setBlockNum] = useState<number>(0);
-  const perPage = 10;
+  const perPage: number = 10;
 
   // 필터
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState<string>('');
   const [banNum, setBanNum] = useState<number>(0);
   let date = new Date();
   const [startDate, setStartDate] = useState(
@@ -42,7 +55,7 @@ const AdminRightPageUser = ({
     new Date(date.setDate(date.getDate() + 14))
   );
 
-  const filterValue = {
+  const filterValue: FilterValueTypes = {
     search: search,
     reported: banNum,
     date: `${startDate.toISOString().substring(0, 10)}~${endDate
@@ -50,12 +63,12 @@ const AdminRightPageUser = ({
       .substring(0, 10)}`,
   };
 
-  const onSearch = e => {
+  const onSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault();
     setSearch(e.target.value);
   };
 
-  const updateUrl = filterValue => {
+  const updateUrl = (filterValue: FilterValueTypes): void => {
     if (currentPage !== 1) {
       setCurrentPage(1);
     }
@@ -65,14 +78,14 @@ const AdminRightPageUser = ({
     navigate(`?${result}`);
   };
 
-  const allFilter = () => {
+  const allFilter = (): void => {
     setBanNum(0);
     setSearch('');
     setStartDate(new Date(date.setDate(date.getDate() - 7)));
     setEndDate(new Date(date.setDate(date.getDate() + 7)));
   };
 
-  const reportFilter = e => {
+  const reportFilter = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.checked) {
       setBanNum(3);
     } else {
@@ -95,7 +108,7 @@ const AdminRightPageUser = ({
           <>
             <ListHeaderBox />
             <ListContentsSection>
-              {postData.map(data => (
+              {postData?.map((data: PostDataTypes) => (
                 <ListContentsBox
                   data={data}
                   key={data.id}
@@ -119,7 +132,7 @@ const AdminRightPageUser = ({
           <>
             <PostHeaderBox />
             <ListContentsSection>
-              {postData.map(data => (
+              {postData?.map((data: PostDataTypes) => (
                 <ListPostContentsBox
                   data={data}
                   key={data.id}
@@ -174,7 +187,7 @@ const AdminRightPageUser = ({
         </CheckAll>
         <CheckAllText>전체</CheckAllText>
         <InputLabel>
-          <ThreeBanned type="checkbox" onClick={e => reportFilter(e)} />
+          <ThreeBanned type="checkbox" onChange={e => reportFilter(e)} />
         </InputLabel>
         <ThreeBannedText>신고 3회 이상</ThreeBannedText>
       </FilterBox>
@@ -332,4 +345,4 @@ const UserListContainer = styled.div`
 
 const ListContentsSection = styled.div``;
 
-export default AdminRightPageUser;
+export default AdminRightPage;

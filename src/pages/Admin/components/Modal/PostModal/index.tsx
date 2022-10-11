@@ -5,10 +5,11 @@ import useAxios from 'hooks/useAxios';
 import UserInfoBox from 'pages/Admin/components/AdminRightPage/components/UserInfoBox';
 import CommentBox from 'pages/Admin/components/Modal/CommentBox';
 import API from 'config';
+import { ModalProps, CommentTypes } from 'pages/Admin/type';
 import { AiOutlineClose } from 'react-icons/ai';
 import backgroundImage from 'assets/images/bg1.jpg';
 
-const PostModal = ({ detailModalOpener, modalId }) => {
+const PostModal = ({ detailModalOpener, modalId }: ModalProps) => {
   const [reason, setReason] = useState<string>('');
 
   const { response } = useAxios({
@@ -75,7 +76,7 @@ const PostModal = ({ detailModalOpener, modalId }) => {
                 {response?.data.comments_list.length === 0 ? (
                   <p>등록된 댓글이 없습니다.</p>
                 ) : (
-                  response?.data.comments_list.map(comment => (
+                  response?.data.comments_list.map((comment: CommentTypes) => (
                     <CommentBox key={comment.id} comment={comment} />
                   ))
                 )}

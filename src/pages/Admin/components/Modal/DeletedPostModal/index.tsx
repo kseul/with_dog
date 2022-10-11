@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import useAxios from 'hooks/useAxios';
 import UserInfoBox from 'pages/Admin/components/AdminRightPage/components/UserInfoBox';
 import API from 'config';
+import { ModalProps } from 'pages/Admin/type';
 import { AiOutlineClose } from 'react-icons/ai';
 import backgroundImage from 'assets/images/bg1.jpg';
 
-const DeletedPostModal = ({ detailModalOpener, modalId }) => {
+const DeletedPostModal = ({ detailModalOpener, modalId }: ModalProps) => {
   const { response } = useAxios({
     method: 'GET',
     url: `${API.ADMINPOST}/deleted/${modalId}/`,
@@ -16,7 +17,7 @@ const DeletedPostModal = ({ detailModalOpener, modalId }) => {
     },
   });
 
-  const deletePost = () => {
+  const deletePost = (): void => {
     if (window.confirm('게시글을 완전히 삭제하시겠습니까?')) {
       axios.delete(`${API.ADMINPOST}/${modalId}/delete/hard`, {
         headers: {
