@@ -11,6 +11,7 @@ import Input from './components/Input';
 import ChatReportModal from '../ChatReportModal';
 import { MessagesProps } from 'pages/Chatting/type';
 import signInbg from 'assets/images/bg2.png';
+import API from 'config';
 
 interface UserDataProps {
   account_type?: string;
@@ -38,7 +39,7 @@ const ChatRoom = () => {
 
   const navigate = useNavigate();
 
-  const ENDPOINT = 'http://54.180.89.143:8000';
+  const ENDPOINT = API.CHAT;
 
   const [cookies] = useCookies(['userToken']);
 

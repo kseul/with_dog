@@ -10,6 +10,7 @@ const API = {
   SIGNUP: `${BASE_URL}/users/signup`,
   LOGINCHECK: `${BASE_URL}/users/login/check`,
   ADMINNOTICE: `${BASE_URL}/admin/notices`,
+  CHAT: `${MAIN_URL}`,
   ADMINPOST: `${BASE_URL}/posts`,
   CHATREPORT: `${BASE_URL}/chat/report`,
   BOARDLIST: `${BASE_URL}/posts?`,
@@ -18,4 +19,5 @@ const API = {
   COMMENTREPORT: `${BASE_URL}/posts/`,
   COMMENTDELETE: `${BASE_URL}/posts/`,
 };
+
 export default API;

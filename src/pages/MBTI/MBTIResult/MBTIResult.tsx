@@ -21,12 +21,14 @@ const MBTIResult = () => {
 
   return (
     <MBTIResultContainer>
-      <MBTIResultBox>
-        <MBTIResultInfo
-          graphResult={graphResult}
-          mbtiResultText={mbtiResultText}
-        />
-      </MBTIResultBox>
+      <MBTIResultWrapper>
+        <MBTIResultBox>
+          <MBTIResultInfo
+            graphResult={graphResult}
+            mbtiResultText={mbtiResultText}
+          />
+        </MBTIResultBox>
+      </MBTIResultWrapper>
     </MBTIResultContainer>
   );
 };
@@ -34,17 +36,22 @@ const MBTIResult = () => {
 const MBTIResultContainer = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
   width: 100vw;
-  height: 240rem;
+  height: auto;
+  margin: 0 auto;
   background-image: url(${ResultBackground});
   background-size: cover;
+`;
+
+const MBTIResultWrapper = styled.div`
+  ${props => props.theme.flex.flexBox('', 'center', 'center')};
+  width: 100%;
 `;
 
 const MBTIResultBox = styled.div`
   ${props => props.theme.flex.flexBox('column', 'center', 'center')};
   width: 87.5rem;
-  height: 100%;
+  height: 240rem;
   margin: 8rem 0 3rem 0;
-  padding: 5rem 0;
   background-color: white;
   border-radius: 1.25rem;
 `;
