@@ -1,5 +1,5 @@
-export const BASE_URL = 'http://54.180.89.143:8000';
-export const MAIN_URL = 'http://54.180.89.143:3000';
+export const BASE_URL = 'https://withdog.me/api';
+export const MAIN_URL = 'https://withdog.me';
 const API = {
   LOGOUT: `${BASE_URL}/users/logout`,
   USERS: `${BASE_URL}/users/`,

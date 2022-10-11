@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import useAxios from 'hooks/useAxios';
 import NoticeModal from 'pages/Admin/components/Modal/NoticeModal';
 import API from 'config';
+import { RootState } from 'redux/reducers';
 import { PostReports, CommentReports } from 'pages/Admin/type';
 import { BsFilePost } from 'react-icons/bs';
 import { FaCommentDots } from 'react-icons/fa';
@@ -14,6 +17,9 @@ interface AdminHeaderProps {
 }
 
 const AdminHeader = ({ onCurrentModal, modalId }: AdminHeaderProps) => {
+  const navigate = useNavigate();
+  const userData = useSelector((state: RootState) => state.user.userData);
+  const { nickname, thumbnail_url } = userData;
   const postClassName: string = 'post_report';
   const commentClassName: string = 'comment_report';
   const [getClassName, setGetClassName] = useState<string>('');
@@ -44,6 +50,10 @@ const AdminHeader = ({ onCurrentModal, modalId }: AdminHeaderProps) => {
 
   const setTarget = (target: string): void => {
     setGetClassName(target);
+  };
+
+  const moveToMypage = () => {
+    navigate(`/mypage`);
   };
 
   useEffect(() => {
@@ -92,6 +102,10 @@ const AdminHeader = ({ onCurrentModal, modalId }: AdminHeaderProps) => {
             getClassName={getClassName}
           />
         )}
+        <AdminUserManageWrapper>
+          <AdminUserImg src={thumbnail_url} onClick={moveToMypage} />
+          <AdminUserName>{nickname}</AdminUserName>
+        </AdminUserManageWrapper>
       </AdminNoticeWrapper>
     </AdminHeaderContainer>
   );
@@ -115,6 +129,7 @@ const Logo = styled.img`
 `;
 
 const AdminNoticeWrapper = styled.div`
+  ${props => props.theme.flex.flexBox('', 'center', 'space-between')};
   position: relative;
   margin-right: 2rem;
   color: ${props => props.theme.colors.white};
@@ -154,4 +169,28 @@ const CommentNoticeNum = styled.span`
   font-size: 0.8rem;
   text-align: center;
 `;
+
+const AdminUserManageWrapper = styled.div`
+  ${props => props.theme.flex.flexBox('', 'center', '')};
+  margin-left: 1rem;
+  width: 7rem;
+`;
+
+const AdminUserImg = styled.img`
+  margin-left: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+
+  :hover {
+    border: 3px solid white;
+  }
+`;
+
+const AdminUserName = styled.p`
+  margin-left: 0.5rem;
+  height: 100%;
+`;
+
 export default AdminHeader;

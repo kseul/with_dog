@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
+import store from 'redux/store';
+import userActions from 'redux/actions/user';
 import Spinner from 'pages/Login/components/spinner/Spinner';
 import AdminLoginButton from 'pages/Admin/components/AdminSignin/components/AdminLoginButton';
 import API from 'config';
@@ -25,6 +27,7 @@ const AdminSignIn = () => {
         if (res.status === 200 && res.data.user.user_type === 'admin') {
           navigate('/admin/users');
           sessionStorage.setItem('token', res.data.access_token);
+          store.dispatch(userActions.handleUserData(res.data.user));
         }
       })
       .catch(error => {
