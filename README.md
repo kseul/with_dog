@@ -43,9 +43,12 @@
 
 ## 🖥 웹 사이트 
 https://withdog.me
+
 </br>
+
 ## 💻 백앤드 저장소
 https://github.com/stresszero/togedog-backend
+
 </br>
 
 ## 📃 담당 페이지 
@@ -62,30 +65,69 @@ https://github.com/stresszero/togedog-backend
 
 </br>
 
-## ✅ 구현 영상
+## ✍️ 프로젝트 회고 
+> **프로젝트 채팅 UI** </br>
+- 셋팅 및 UI 구성하기 👉 [**자체 프로젝트 with-dog UI**](https://velog.io/@seul06/with-dog-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-socket.io-fvnwblk1)
 
-- 채팅 기능 
+</br>
+
+> **프로젝트 채팅 기능 구현에 앞서 Websocket과 Socket.IO 개념 알고 익히기. 실습 프로젝트 !** </br>
+- JavaScript + Websocket 👉 [**WebSocket 으로 채팅기능 구현 해보기**](https://velog.io/@seul06/with-dog-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0) </br>
+- JavaScript + Socket.IO 👉 [**Socket.IO로 채팅기능 구현 해보기**](https://velog.io/@seul06/Socket.IO%EB%A1%9C-%EC%B1%84%ED%8C%85%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84-%ED%95%B4%EB%B3%B4%EA%B8%B0) </br>
+- React + Socket.IO 👉 [**Socket.IO로 채팅기능 구현 해보기**](https://velog.io/@seul06/Socket.IO%EB%A1%9C-%EC%B1%84%ED%8C%85%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84-%ED%95%B4%EB%B3%B4%EA%B8%B0) </br> 
+- ✨ **with-dog 프로젝트 채팅 기능 구현** 👉 [**채팅기능 구현하기**](https://velog.io/@seul06/with-dog-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-2)
+
+</br>
+
+
+## ✅ 구현 영상
+>📌 유튜브  </br>
+1부 - [메인 & 회원가입, 로그인 & MBTI검사](https://www.youtube.com/watch?v=DjAvQLK1eZk&t=3s) </br> 
+2부 - [👉 채팅 ✅](https://www.youtube.com/watch?v=qHLwvGP19eg) </br>
+3부 - [게시글 작성](https://www.youtube.com/watch?v=z6j6mBSzUzM) </br>
+
+
+#### ✅ 채팅 기능 
+
 ![68747470733a2f2f76656c6f672e76656c63646e2e636f6d2f696d616765732f7374726573737a65726f2f706f73742f35663632636662342d623632332d346232342d623230372d6364346432306163343466612f696d6167652e676966](https://user-images.githubusercontent.com/93895746/223915388-45b66eb4-0c2f-4ce7-8acd-fa3dfccb55c8.gif)
 
 <br>
 
-- 로그인 후 사용자 정보 수정
+---
+
+<br>
+
+#### 로그인 후 사용자 정보 수정
 ![68747470733a2f2f76656c6f672e76656c63646e2e636f6d2f696d616765732f7374726573737a65726f2f706f73742f38653735366362612d363139362d346162612d616130652d3235613636343935306662302f696d6167652e676966](https://user-images.githubusercontent.com/93895746/223914738-72d7c126-5830-4059-8de6-8f47f64d3256.gif)
 
 </br>
 
-- 게시판 글 쓰기 & 댓글 입력, 좋아요
+#### 게시판 글 쓰기 & 댓글 입력, 좋아요
 ![68747470733a2f2f76656c6f672e76656c63646e2e636f6d2f696d616765732f7374726573737a65726f2f706f73742f65346333623464342d616237642d346131312d383833632d6238353237646136613063372f696d6167652e676966](https://user-images.githubusercontent.com/93895746/223915035-7088d55a-9266-4f6f-b0a9-2885f62ef120.gif)
 ![68747470733a2f2f76656c6f672e76656c63646e2e636f6d2f696d616765732f7374726573737a65726f2f706f73742f35393331636664612d613865372d343166302d383835352d6534613138613634326438312f696d6167652e676966](https://user-images.githubusercontent.com/93895746/223915083-7d7e48b7-187f-47b1-a783-cdb7556e4e74.gif)
 
 
 </br>
 
-- 관리자 페이지
+#### 관리자 페이지
 ![68747470733a2f2f76656c6f672e76656c63646e2e636f6d2f696d616765732f7374726573737a65726f2f706f73742f38333563363965362d633062332d343430382d383636382d3862666636383135373934612f696d6167652e676966](https://user-images.githubusercontent.com/93895746/223915138-faad45b1-e5e5-417c-960e-88c2dbd8bc40.gif)
 
 
 </br>
+
+
+
+## 🌈 함께하개 BI
+
+</br>
+
+![image](https://user-images.githubusercontent.com/93895746/223917547-494549e0-be53-4b6e-b348-d15d1c8e38ae.png)
+![image](https://user-images.githubusercontent.com/93895746/223917748-84f5aca7-9a3d-4387-bfc9-0158f09e4e45.png)
+![image](https://user-images.githubusercontent.com/93895746/223917813-f1d22ed6-4b83-428c-b82d-e2258f398804.png)
+![image](https://user-images.githubusercontent.com/93895746/223917831-6ddb9146-436a-4e58-a5e0-0b4f3dbc22ed.png)
+![image](https://user-images.githubusercontent.com/93895746/223917841-e526cab9-6028-4397-955b-f7471be7129b.png)
+![image](https://user-images.githubusercontent.com/93895746/223917856-8a8a648c-820a-42ac-a061-bc0dd179f94a.png)
+![스크린샷 2023-03-09 오후 1 35 40](https://user-images.githubusercontent.com/93895746/223918089-441fd62b-0cb9-45a4-a7c8-61805503a13c.png)
 
 
 
